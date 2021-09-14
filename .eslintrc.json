@@ -1,8 +1,9 @@
 {
-    "extends": "airbnb",
-    "rules": {
-        "max-len": [2, 120],
-        "max-params": [2, 3],
-        "object-curly-spacing": [2, "always"]
-    }
+  "extends": "airbnb",
+  "rules": {
+    "max-len": [2, 120],
+    "max-params": [2, 3],
+    "object-curly-spacing": [2, "always"],
+    "indent": ["error", 4]
+  }
 }

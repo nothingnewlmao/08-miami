@@ -1,21 +1,22 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
     },
     module: {
         rules: [
+            {},
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
-                }
+                    loader: 'babel-loader',
+                },
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -25,13 +26,13 @@ module.exports = {
                     'sass-loader',
                 ],
             },
-        ]
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./www/index.html",
-            title: 'Bounce Game :)'
-        })
+            template: './www/index.html',
+            title: 'Bounce Game :)',
+        }),
     ],
     devServer: {
         static: {
@@ -40,11 +41,11 @@ module.exports = {
         watchFiles: [
             'src/**/*.ts*',
             'src/**/*.js*',
-            'src/**/*.scss'
+            'src/**/*.scss',
         ],
         compress: true,
-        hot: true,
         port: 3000,
+        hot: true,
     },
-    watch: true
+    watch: true,
 };
