@@ -29,7 +29,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./www/index.html"
+            template: "./www/index.html",
+            title: 'Bounce Game :)'
         })
     ],
     devServer: {
