@@ -1,0 +1,4 @@
+/dist
+.idea/
+**/*.min.js
+/node_modules
