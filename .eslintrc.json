@@ -4,6 +4,8 @@
     "max-len": [2, 120],
     "max-params": [2, 3],
     "object-curly-spacing": [2, "always"],
-    "indent": ["error", 4]
+    "indent": ["error", 4],
+    "react/prefer-stateless-function": "off",
+    "react/jsx-indent": "off"
   }
 }
