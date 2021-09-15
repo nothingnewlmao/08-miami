@@ -8,18 +8,19 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.js',
     },
-    resolve: {
-        extensions: ['.js', '.jsx'],
-    },
     module: {
         rules: [
-            {},
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                 },
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -30,6 +31,9 @@ module.exports = {
                 ],
             },
         ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts'],
     },
     plugins: [
         new HtmlWebpackPlugin({
