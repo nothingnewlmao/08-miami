@@ -7,7 +7,10 @@
     "indent": ["error", 4],
     "react/prefer-stateless-function": "off",
     "react/jsx-indent": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".ts", ".tsx"] }]
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".jsx", ".ts", ".tsx"] }
+    ]
   },
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
