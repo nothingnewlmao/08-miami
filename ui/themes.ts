@@ -3,18 +3,7 @@ import { buttonViews } from "./components/Button/buttonViews";
 import { inputViews } from "./components/Input/inputViews";
 
 export interface ITheme {
-    theme: IThemeType;
-}
-
-interface IThemeType {
-    colors: IElement;
-}
-
-interface IElement {
-    body: string;
-    text: string;
-    buttons: any;
-    inputs: any;
+    theme: typeof themes.light & typeof themes.sea;
 }
 
 export const themes = {

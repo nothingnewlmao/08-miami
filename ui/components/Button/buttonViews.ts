@@ -38,3 +38,18 @@ export const buttonViews = {
         },
     },
 };
+
+export const sizes = {
+    l: {
+        padding: "20px",
+        fontSize: "20px",
+    },
+    m: {
+        padding: "15px",
+        fontSize: "15px",
+    },
+    s: {
+        padding: "10px",
+        fontSize: "12px",
+    },
+};

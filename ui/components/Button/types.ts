@@ -1,6 +1,5 @@
 import React from "react";
-import { sizes } from "./Button";
-import { buttonViews } from "./buttonViews";
+import { buttonViews, sizes } from "./buttonViews";
 
 interface LinkProps {
     as?: string;
