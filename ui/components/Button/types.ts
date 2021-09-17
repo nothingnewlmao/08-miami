@@ -1,25 +1,25 @@
 import React from "react";
 import { buttonViews, sizes } from "./buttonViews";
 
-interface LinkProps {
+interface ILinkProps {
     as?: string;
     href?: string;
 }
 
-export interface AllContentProps extends CustomProps {
+export interface IAllContentProps extends ICustomProps {
     children?: React.ReactNode;
 }
 
-interface CustomProps extends SizeProps, ViewProps {}
+interface ICustomProps extends ISizeProps, IViewProps {}
 
-export interface ButtonProps
-    extends LinkProps,
-        CustomProps,
+export interface IButtonProps
+    extends ILinkProps,
+        ICustomProps,
         React.ButtonHTMLAttributes<HTMLElement> {}
 
-export interface ViewProps<V = keyof typeof buttonViews.light> {
+export interface IViewProps<V = keyof typeof buttonViews.light> {
     view?: V;
 }
-export interface SizeProps<S = keyof typeof sizes> {
+export interface ISizeProps<S = keyof typeof sizes> {
     size?: S;
 }

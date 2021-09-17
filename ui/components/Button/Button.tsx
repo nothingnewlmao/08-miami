@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { AllContentProps, ButtonProps, SizeProps, ViewProps } from "./types";
+import {
+    IAllContentProps,
+    IButtonProps,
+    ISizeProps,
+    IViewProps,
+} from "./types";
 import { ITheme } from "../../themes";
 import { sizes } from "./buttonViews";
 
-export const StyledButton = styled.button<ITheme & ViewProps & SizeProps>`
+export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -27,9 +32,9 @@ export const StyledButton = styled.button<ITheme & ViewProps & SizeProps>`
 
 export const Button = React.forwardRef<
     HTMLButtonElement | HTMLAnchorElement,
-    ButtonProps
+    IButtonProps
 >(function Button({ ...props }, ref) {
-    const { children, ...rest } = props as AllContentProps;
+    const { children, ...rest } = props as IAllContentProps;
 
     return (
         <StyledButton
