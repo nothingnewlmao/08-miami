@@ -1,8 +1,8 @@
-import { colors } from "../../colors";
+import { colors } from '../../colors';
 
 export const inputViews = {
     light: {
-        border: "none",
+        border: 'none',
     },
     sea: {
         border: `3px solid ${colors.primary}`,

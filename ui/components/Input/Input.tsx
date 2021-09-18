@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import React from "react";
-import { ITheme } from "../../themes";
+import styled from 'styled-components';
+import React from 'react';
+import { ITheme } from '../../themes';
 
 export const StyledInput = styled.input<ITheme>`
     padding: 10px;
@@ -10,18 +10,14 @@ export const StyledInput = styled.input<ITheme>`
     outline: none;
 `;
 
-export const Input = React.forwardRef<
-    HTMLInputElement,
-    React.InputHTMLAttributes<HTMLElement>
->(({ ...props }, ref) => {
-    const { children, ...rest } = props;
+export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLElement>>(
+    ({ ...props }, ref) => {
+        const { children, ...rest } = props;
 
-    return (
-        <StyledInput
-            ref={ref as React.MutableRefObject<HTMLInputElement>}
-            {...rest}
-        >
-            {children}
-        </StyledInput>
-    );
-});
+        return (
+            <StyledInput ref={ref as React.MutableRefObject<HTMLInputElement>} {...rest}>
+                {children}
+            </StyledInput>
+        );
+    },
+);

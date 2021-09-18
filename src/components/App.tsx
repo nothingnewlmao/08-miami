@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../../ui/global";
-import { themes } from "../../ui/themes";
-import { Example } from "./Example/Example";
+import React, { FC, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from '../../ui/global';
+import { themes } from '../../ui/themes';
+import { Example } from './Example/Example';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);

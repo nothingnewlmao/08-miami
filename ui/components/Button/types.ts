@@ -1,5 +1,5 @@
-import React from "react";
-import { buttonViews, sizes } from "./buttonViews";
+import React from 'react';
+import { buttonViews, sizes } from './buttonViews';
 
 interface ILinkProps {
     as?: string;

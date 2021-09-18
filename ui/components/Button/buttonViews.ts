@@ -1,4 +1,4 @@
-import { colors } from "../../colors";
+import { colors } from '../../colors';
 
 export const buttonViews = {
     light: {
@@ -41,15 +41,15 @@ export const buttonViews = {
 
 export const sizes = {
     l: {
-        padding: "20px",
-        fontSize: "20px",
+        padding: '20px',
+        fontSize: '20px',
     },
     m: {
-        padding: "15px",
-        fontSize: "15px",
+        padding: '15px',
+        fontSize: '15px',
     },
     s: {
-        padding: "10px",
-        fontSize: "12px",
+        padding: '10px',
+        fontSize: '12px',
     },
 };
