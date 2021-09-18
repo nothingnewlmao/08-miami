@@ -11,14 +11,14 @@ export const StyledInput = styled.input<ITheme>`
 `;
 
 export const Input = React.forwardRef<
-    HTMLButtonElement | HTMLAnchorElement,
-    any
->(function Input({ ...props }, ref) {
+    HTMLInputElement,
+    React.InputHTMLAttributes<HTMLElement>
+>(({ ...props }, ref) => {
     const { children, ...rest } = props;
 
     return (
         <StyledInput
-            ref={ref as React.MutableRefObject<HTMLButtonElement>}
+            ref={ref as React.MutableRefObject<HTMLInputElement>}
             {...rest}
         >
             {children}

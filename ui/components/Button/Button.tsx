@@ -33,7 +33,7 @@ export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
 export const Button = React.forwardRef<
     HTMLButtonElement | HTMLAnchorElement,
     IButtonProps
->(function Button({ ...props }, ref) {
+>(({ ...props }, ref) => {
     const { children, ...rest } = props as IAllContentProps;
 
     return (

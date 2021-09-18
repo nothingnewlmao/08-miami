@@ -6,20 +6,20 @@ interface ILinkProps {
     href?: string;
 }
 
-export interface IAllContentProps extends ICustomProps {
-    children?: React.ReactNode;
-}
-
-interface ICustomProps extends ISizeProps, IViewProps {}
-
-export interface IButtonProps
-    extends ILinkProps,
-        ICustomProps,
-        React.ButtonHTMLAttributes<HTMLElement> {}
-
 export interface IViewProps<V = keyof typeof buttonViews.light> {
     view?: V;
 }
 export interface ISizeProps<S = keyof typeof sizes> {
     size?: S;
 }
+
+interface ICustomProps extends ISizeProps, IViewProps {}
+
+export interface IAllContentProps extends ICustomProps {
+    children?: React.ReactNode;
+}
+
+export interface IButtonProps
+    extends ILinkProps,
+        ICustomProps,
+        React.ButtonHTMLAttributes<HTMLElement> {}

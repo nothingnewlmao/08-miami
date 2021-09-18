@@ -1,19 +1,50 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "airbnb-typescript", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "max-len": [2, 120],
     "max-params": [2, 3],
     "object-curly-spacing": [2, "always"],
     "indent": ["error", 4],
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": false
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": ["enum", "enumMember"],
+        "format": ["StrictPascalCase"]
+      },
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      },
+      {
+        "selector": ["typeAlias"],
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^T[A-Z]",
+          "match": true
+        }
+      }
+    ],
     "react/prefer-stateless-function": "off",
     "react/jsx-indent": "off",
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".jsx", ".ts", ".tsx"] }
-    ]
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off"
   },
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "env": {
     "browser": true,
     "node": true,
