@@ -3,14 +3,36 @@
     "outDir": "./dist",
     "target": "es2019",
     "declaration": false,
-    "module": "commonjs",
+    "module": "esnext",
     "strictNullChecks": true,
-    "sourceMap": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"]
+    },
+    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
-  "include": ["./src/**/*.tsx"]
+  "include": [
+    "src",
+    "typings/**/*.d.ts",
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "**/*.js"
+  ]
 }
