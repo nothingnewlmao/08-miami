@@ -10,10 +10,7 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "moduleResolution": "node",
     "importHelpers": true,
     "strict": true,
@@ -28,7 +25,5 @@
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
   "include": ["./src/**/*.ts*", "./ui/**/*.ts*", "./webpack.config.js", "./prettier.config.js"],
-  "exclude": [
-    "**/*.js"
-  ]
+  "exclude": ["**/*.js"]
 }
