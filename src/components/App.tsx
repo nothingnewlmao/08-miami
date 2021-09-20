@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React, { FC, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from '../../ui/global';
+import { themes } from '../../ui/themes';
+import { Example } from './Example/Example';
 
-class App extends Component {
-    render() {
-        return (
-            <div>React App</div>
-        );
-    }
-}
+const App: FC = () => {
+    const [selectedTheme, setSelectedTheme] = useState(themes.light);
+
+    return (
+        <ThemeProvider theme={selectedTheme}>
+            <GlobalStyles />
+            <Example setTheme={setSelectedTheme} />
+        </ThemeProvider>
+    );
+};
 
 export default App;
