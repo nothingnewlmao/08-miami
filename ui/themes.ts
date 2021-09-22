@@ -9,8 +9,9 @@ export interface ITheme {
 export const themes = {
     light: {
         colors: {
-            body: colors.gray,
-            text: colors.white,
+            body: colors.white,
+            text: colors.black,
+            textInversion: colors.white,
             buttons: buttonViews.light,
             inputs: inputViews.light,
         },
@@ -19,6 +20,7 @@ export const themes = {
         colors: {
             body: colors.lightPrimary,
             text: colors.primary,
+            textInversion: colors.white,
             buttons: buttonViews.sea,
             inputs: inputViews.sea,
         },
