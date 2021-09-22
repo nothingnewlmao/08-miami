@@ -23,10 +23,10 @@ const App: FC = () => {
                     </li>
                 </ul>
                 <Switch>
-                    <Route exact path='/'>
+                    <Route exact path="/">
                         <Example setTheme={setSelectedTheme} />
                     </Route>
-                    <Route path='/about'>
+                    <Route path="/about">
                         <div className="about">
                             <h2>About</h2>
                         </div>
