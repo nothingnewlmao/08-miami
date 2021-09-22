@@ -17,9 +17,7 @@ const App: FC = () => {
                         <Link to="/">root</Link>
                     </li>
                     <li>
-                        <Link to="/about">
-                            about
-                        </Link>
+                        <Link to="/about">about</Link>
                     </li>
                 </ul>
                 <Switch>
