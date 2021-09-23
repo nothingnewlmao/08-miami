@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import * as Styled from './styled';
 import { TableHead } from './TableHead/TableHead';
 import { TableBody } from './TableBody/TableBody';
@@ -11,5 +12,8 @@ export const Leaderboard: FC = () => (
             <TableHead />
             <TableBody elements={fakeElements} />
         </Styled.Table>
+        <Styled.BackButton size="l">
+            <Link to="/">Домой</Link>
+        </Styled.BackButton>
     </Styled.Wrapper>
 );

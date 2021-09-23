@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { GlobalStyles } from '../../ui/global';
 import { themes } from '../../ui/themes';
 import { Example } from './Example/Example';
@@ -18,9 +18,10 @@ const App: FC = () => {
                         <Route exact path="/">
                             <Example setTheme={setSelectedTheme} />
                         </Route>
-                        <Route exact path="/leaderboard">
+                        <Route path="/leaderboard">
                             <Leaderboard />
                         </Route>
+                        <Redirect to="/" />
                     </Switch>
                 </ThemeProvider>
             </div>
