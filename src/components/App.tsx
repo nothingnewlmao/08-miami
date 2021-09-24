@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { GlobalStyles } from '../../ui/global';
 import { themes } from '../../ui/themes';
 import { Example } from './Example/Example';
-import { Leaderboard } from './Leaderboard/Leaderboard';
+import { Leaderboard } from './Leaderboard';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
