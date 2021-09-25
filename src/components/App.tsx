@@ -1,10 +1,11 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { GlobalStyles } from '../../ui/global';
-import { themes } from '../../ui/themes';
+import { GlobalStyles } from 'UI/global';
+import { themes } from 'UI/themes';
 import { Example } from './Example/Example';
 import { Leaderboard } from './Leaderboard';
+import { SignUp } from '@/pages/SignUp/SignUp';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
@@ -20,6 +21,9 @@ const App: FC = () => {
                         </Route>
                         <Route path="/leaderboard">
                             <Leaderboard />
+                        </Route>
+                        <Route path="/sign-up">
+                            <SignUp />
                         </Route>
                         <Redirect to="/" />
                     </Switch>
