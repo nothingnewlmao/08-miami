@@ -3,7 +3,7 @@ import { buttonViews } from './components/Button/buttonViews';
 import { inputViews } from './components/Input/inputViews';
 
 export interface ITheme {
-    theme: typeof themes.light & typeof themes.sea;
+  theme: typeof themes.light & typeof themes.sea;
 }
 
 export const themes = {

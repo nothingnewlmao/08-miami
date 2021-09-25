@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IStyledInput extends React.InputHTMLAttributes<HTMLElement> {
-    label?: string;
+  label?: string;
 }
 
 export type TStyledInput = IStyledInput;

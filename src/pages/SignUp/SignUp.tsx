@@ -6,13 +6,36 @@ export const SignUp: FC = () => {
 
     return (
         <div className="sign-up">
-            <Input ref={ref} label="Почта" name="email" />
-            <Input label="Логин" name="login" />
-            <Input label="Имя" name="first_name" />
-            <Input label="Фамилия" name="last_name" />
-            <Input label="Телефон" name="phone" />
-            <Input label="Пароль" type="password" name="password" />
-            <Input label="Пароль (ещё раз)" type="password" />
+            <Input
+                ref={ref}
+                label="Почта"
+                name="email"
+            />
+            <Input
+                label="Логин"
+                name="login"
+            />
+            <Input
+                label="Имя"
+                name="first_name"
+            />
+            <Input
+                label="Фамилия"
+                name="last_name"
+            />
+            <Input
+                label="Телефон"
+                name="phone"
+            />
+            <Input
+                label="Пароль"
+                type="password"
+                name="password"
+            />
+            <Input
+                label="Пароль (ещё раз)"
+                type="password"
+            />
         </div>
     );
 };
