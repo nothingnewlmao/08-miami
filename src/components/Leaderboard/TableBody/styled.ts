@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../../ui/colors';
+import { colors } from 'UI/colors';
 
 export const BodyTr = styled.tr`
     background: ${colors.primary};

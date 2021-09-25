@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { ITheme } from '../../themes';
+import { ITheme } from 'UI/themes';
 
 export const StyledInput = styled.input<ITheme>`
     padding: 10px;
