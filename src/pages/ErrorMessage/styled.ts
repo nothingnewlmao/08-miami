@@ -4,7 +4,7 @@ import { colors } from '../../../ui/colors';
 export const Wrapper = styled.div`
     display: flex;
     height: 100vh;
-    font-size: 70px;
+    font-size: 75px;
     font-weight: bold;
     justify-content: center;
     align-items: center;
