@@ -1,10 +1,16 @@
-import { colors } from '../../colors';
+import { colors } from 'UI/colors';
 
 export const inputViews = {
     light: {
-        border: 'none',
+        borderColor: colors.primary,
+        borderHoverColor: colors.lightPrimary,
+        label: colors.gray,
+        placeholderColor: colors.gray,
     },
     sea: {
-        border: `3px solid ${colors.primary}`,
+        borderColor: colors.primary,
+        borderHoverColor: colors.lightPrimary,
+        label: colors.lightPrimary,
+        placeholderColor: colors.lightGray,
     },
 };

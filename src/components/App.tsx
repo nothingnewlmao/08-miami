@@ -3,9 +3,9 @@ import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { GlobalStyles } from 'UI/global';
 import { themes } from 'UI/themes';
+import { SignUp } from 'Pages/SignUp/SignUp';
 import { Example } from './Example/Example';
 import { Leaderboard } from './Leaderboard';
-import { SignUp } from '@/pages/SignUp/SignUp';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
