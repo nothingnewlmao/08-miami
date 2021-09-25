@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Button } from '../../../ui/components/Button';
-import { themes } from '../../../ui/themes';
-import { Input } from '../../../ui/components/Input';
+import { Button } from 'UIComponents/Button';
+import { themes } from 'UI/themes';
+import { Input } from 'UIComponents/Input';
 
 export const Example: FC<{ setTheme: (val: typeof themes.light) => void }> = ({ setTheme }) => {
     const changeThemeToLight = () => {
