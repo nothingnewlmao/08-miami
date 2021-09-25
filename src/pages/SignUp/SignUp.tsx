@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Input } from 'UIComponents/Input';
 import { Form } from 'UIComponents/Form';
-import { Button } from 'UI/components';
+import { Button } from 'UIComponents/Button';
 
 export const SignUp: FC = () => {
     const ref = React.createRef<HTMLInputElement>();
