@@ -1,23 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ITheme } from 'UI/themes';
 import {
     IAllContentProps,
     IButtonProps,
     ISizeProps,
     IViewProps,
 } from './types';
-import { ITheme } from '../../themes';
 import { sizes } from './buttonViews';
 
 export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
     position: relative;
     display: inline-flex;
+    width: 100%;
     align-items: center;
     box-sizing: border-box;
     justify-content: center;
     border: none;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 8px;
     color: ${({ theme, view = 'primary' }) => theme.colors.buttons[view].color};
     background: ${({ theme, view = 'primary' }) =>
         theme.colors.buttons[view].backgroundColor};
