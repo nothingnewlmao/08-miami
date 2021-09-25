@@ -9,7 +9,7 @@ export const SignUp: FC = () => {
             <Input
                 ref={ref}
                 label="Почта"
-                name="email"
+                name="email!"
             />
             <Input
                 label="Логин"
