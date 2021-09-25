@@ -4,7 +4,8 @@ import { ITheme } from 'UI/themes';
 import { TStyledInput } from 'UIComponents/Input/types';
 
 export const StyledInputWrapper = styled.div<ITheme>`
-    margin: 32px 10px;
+    position: relative;
+    margin: 32px 0;
 
     & label,
     & input {
@@ -13,9 +14,14 @@ export const StyledInputWrapper = styled.div<ITheme>`
     }
 
     & label {
+        position: absolute;
+        top: -10px;
+        left: 0;
         color: ${({ theme }) => theme.colors.inputs.label};
-        font-size: 11px;
         margin-bottom: 5px;
+        transition: all 0.3s ease;
+        font-size: 9px;
+        z-index: -1;
     }
 `;
 
@@ -39,34 +45,27 @@ export const StyledInput = styled.input<ITheme>`
     &:focus {
         border-bottom-color: ${({ theme }) =>
             theme.colors.inputs.borderHoverColor};
-    }
 
-    &::placeholder {
-        font-weight: 300;
-        color: ${({ theme }) => theme.colors.inputs.placeholderColor};
+        & + label {
+            font-size: 9px;
+            top: -10px;
+        }
     }
 `;
 
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
-        const {
-            children,
-            placeholder = 'Введите значение...',
-            label = '',
-            name,
-            ...rest
-        } = props;
+        const { children, label = '', name, ...rest } = props;
 
         return (
             <StyledInputWrapper>
-                <label htmlFor={name}>{label}</label>
                 <StyledInput
                     ref={ref as React.MutableRefObject<HTMLInputElement>}
-                    placeholder={placeholder}
                     {...rest}
                 >
                     {children}
                 </StyledInput>
+                <label htmlFor={name}>{label}</label>
             </StyledInputWrapper>
         );
     },

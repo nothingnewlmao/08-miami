@@ -4,7 +4,7 @@ import { ITheme } from 'UI/themes';
 import { TStyledForm } from 'UIComponents/Form/types';
 
 export const StyledForm = styled.form<ITheme>`
-    padding: 30px 50px;
+    padding: 50px 30px 20px;
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;
     border-radius: 12px;
@@ -17,7 +17,7 @@ export const StyledForm = styled.form<ITheme>`
         text-align: center;
         font-size: 20px;
     }
-    
+
     & button {
         width: 100%;
     }
