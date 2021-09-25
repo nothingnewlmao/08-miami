@@ -9,9 +9,11 @@ export const StyledForm = styled.form<ITheme>`
     -moz-border-radius: 12px;
     border-radius: 12px;
     box-sizing: border-box;
+    width: 100%;
     max-width: 340px;
     margin: 30px auto auto;
     box-shadow: 0 0 6px #ccc;
+    text-align: left;
 
     & .title {
         text-align: center;
