@@ -7,7 +7,7 @@
     "start": "webpack serve",
     "build": "webpack",
     "lint:eslint": "eslint . --fix",
-    "lint": "npm-run-all lint:* prettier",
+    "lint": "npm-run-all lint:*",
     "prettier": "prettier --write .",
     "prepare": "husky install"
   },
