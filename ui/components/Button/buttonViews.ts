@@ -1,4 +1,4 @@
-import { colors } from '../../colors';
+import { colors } from 'UI/colors';
 
 export const buttonViews = {
     light: {
