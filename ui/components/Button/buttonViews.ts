@@ -7,64 +7,64 @@ export const buttonViews = {
             color: colors.white,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         primary: {
             backgroundColor: colors.primary,
             color: colors.white,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.lightPrimary
-            }
+                backgroundColor: colors.lightPrimary,
+            },
         },
         success: {
             backgroundColor: colors.success,
             color: colors.white,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         warning: {
             backgroundColor: colors.warning,
             color: colors.white,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         dangerFlat: {
             backgroundColor: 'transparent',
             color: colors.danger,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         primaryFlat: {
             backgroundColor: 'transparent',
             color: colors.primary,
             hover: {
                 color: colors.lightPrimary,
-                backgroundColor: 'transparent'
-            }
+                backgroundColor: 'transparent',
+            },
         },
         successFlat: {
             backgroundColor: 'transparent',
             color: colors.success,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         warningFlat: {
             backgroundColor: 'transparent',
             color: colors.warning,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
     },
     sea: {
@@ -73,64 +73,64 @@ export const buttonViews = {
             color: colors.black,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         primary: {
             backgroundColor: colors.primary,
             color: colors.black,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         success: {
             backgroundColor: colors.success,
             color: colors.black,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         warning: {
             backgroundColor: colors.warning,
             color: colors.black,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         dangerFlat: {
             backgroundColor: 'transparent',
             color: colors.danger,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         primaryFlat: {
             backgroundColor: 'transparent',
             color: colors.primary,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         successFlat: {
             backgroundColor: 'transparent',
             color: colors.success,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
         warningFlat: {
             backgroundColor: 'transparent',
             color: colors.warning,
             hover: {
                 color: colors.white,
-                backgroundColor: colors.danger
-            }
+                backgroundColor: colors.danger,
+            },
         },
     },
 };
