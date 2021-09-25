@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { Input } from 'UIComponents/Input';
 import { Form } from 'UIComponents/Form';
 import { Button } from 'UIComponents/Button';
+import { Wrapper } from 'Pages/Leaderboard/styled';
+import { Link } from 'react-router-dom';
 
 export const SignUp: FC = () => {
     const ref = React.createRef<HTMLInputElement>();
@@ -9,7 +11,7 @@ export const SignUp: FC = () => {
     const title = 'Регистрация';
 
     return (
-        <div className="sign-up">
+        <Wrapper className="sign-up">
             <Form ref={formRef} title={title}>
                 <Input ref={ref} label="Почта" name="ema!il" />
                 <Input label="Логин" name="login" />
@@ -22,9 +24,11 @@ export const SignUp: FC = () => {
                     <Button type="submit">Регистрация</Button>
                 </div>
                 <div>
-                    <Button view="primaryFlat">Уже есть аккаунт</Button>
+                    <Button view="primaryFlat">
+                        <Link to="/">Уже есть аккаунт</Link>
+                    </Button>
                 </div>
             </Form>
-        </div>
+        </Wrapper>
     );
 };
