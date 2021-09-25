@@ -1,7 +1,7 @@
 {
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": [ "prettier", "airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [ "prettier", "@typescript-eslint"],
   "rules": {
     "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
     "max-len": [2, 120],
