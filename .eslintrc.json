@@ -1,5 +1,9 @@
 {
-  "extends": ["airbnb", "airbnb-typescript", "prettier"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
@@ -42,7 +46,17 @@
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "react/jsx-no-useless-fragment": ["error", { "allowExpressions": true }],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-max-props-per-line": [
+      2,
+      {
+        "maximum": 1,
+        "when": "multiline"
+      }
+    ],
+    "react/jsx-indent-props": [2, 2],
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"]
   },
   "parserOptions": {
     "project": "./tsconfig.json"
