@@ -1,4 +1,4 @@
-import { ILeadersProps } from 'components/Leaderboard/types';
+import { ILeadersProps } from 'pages/Leaderboard/types';
 
 export interface ITableBodyProps {
     elements: ILeadersProps[];

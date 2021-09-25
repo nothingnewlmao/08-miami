@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ITheme } from 'UI/themes';
-import { Button } from 'UI/components/Button';
+import { Button } from 'UIComponents/Button';
 import { colors } from 'UI/colors';
 
 export const Wrapper = styled.div`
