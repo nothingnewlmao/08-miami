@@ -37,7 +37,8 @@ export const StyledInput = styled.input<ITheme>`
     }
 
     &:focus {
-        border-bottom-color: ${({ theme }) => theme.colors.inputs.borderHoverColor};
+        border-bottom-color: ${({ theme }) =>
+            theme.colors.inputs.borderHoverColor};
     }
 
     &::placeholder {
@@ -46,21 +47,27 @@ export const StyledInput = styled.input<ITheme>`
     }
 `;
 
-export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(({ ...props }, ref) => {
-    const {
-        children, placeholder = 'Введите значение...', label = '', name, ...rest
-    } = props;
+export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
+    ({ ...props }, ref) => {
+        const {
+            children,
+            placeholder = 'Введите значение...',
+            label = '',
+            name,
+            ...rest
+        } = props;
 
-    return (
-        <StyledInputWrapper>
-            <label htmlFor={name}>{label}</label>
-            <StyledInput
-                ref={ref as React.MutableRefObject<HTMLInputElement>}
-                placeholder={placeholder}
-                {...rest}
-            >
-                {children}
-            </StyledInput>
-        </StyledInputWrapper>
-    );
-});
+        return (
+            <StyledInputWrapper>
+                <label htmlFor={name}>{label}</label>
+                <StyledInput
+                    ref={ref as React.MutableRefObject<HTMLInputElement>}
+                    placeholder={placeholder}
+                    {...rest}
+                >
+                    {children}
+                </StyledInput>
+            </StyledInputWrapper>
+        );
+    },
+);

@@ -3,7 +3,9 @@ import { Button } from 'UIComponents/Button';
 import { themes } from 'UI/themes';
 import { Input } from 'UIComponents/Input';
 
-export const Example: FC<{ setTheme: (val: typeof themes.light) => void }> = ({ setTheme }) => {
+export const Example: FC<{ setTheme: (val: typeof themes.light) => void }> = ({
+    setTheme,
+}) => {
     const changeThemeToLight = () => {
         setTheme(themes.light);
     };

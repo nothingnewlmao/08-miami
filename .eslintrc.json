@@ -1,9 +1,13 @@
 {
-  "extends": [ "prettier", "airbnb", "airbnb-typescript"],
+  "extends": ["prettier", "airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
-  "plugins": [ "prettier", "@typescript-eslint"],
+  "plugins": ["prettier", "@typescript-eslint"],
   "rules": {
-    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
+    "quotes": [
+      "error",
+      "single",
+      { "avoidEscape": true, "allowTemplateLiterals": false }
+    ],
     "max-len": [2, 120],
     "max-params": [2, 3],
     "object-curly-spacing": [2, "always"],

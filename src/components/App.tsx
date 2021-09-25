@@ -1,7 +1,10 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {
-    BrowserRouter as Router, Route, Switch, Redirect,
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
 } from 'react-router-dom';
 import { GlobalStyles } from 'UI/global';
 import { themes } from 'UI/themes';

@@ -28,6 +28,11 @@
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
-  "include": ["./src/**/*.ts*", "./ui/**/*.ts*", "./webpack.config.js", "./prettier.config.js"],
+  "include": [
+    "./src/**/*.ts*",
+    "./ui/**/*.ts*",
+    "./webpack.config.js",
+    "./prettier.config.js"
+  ],
   "exclude": ["**/*.js"]
 }
