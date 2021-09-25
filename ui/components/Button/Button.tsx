@@ -12,7 +12,6 @@ import { sizes } from './buttonViews';
 export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
     position: relative;
     display: inline-flex;
-    width: 100%;
     align-items: center;
     box-sizing: border-box;
     justify-content: center;

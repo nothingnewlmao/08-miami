@@ -17,6 +17,10 @@ export const StyledForm = styled.form<ITheme>`
         text-align: center;
         font-size: 20px;
     }
+    
+    & button {
+        width: 100%;
+    }
 `;
 
 export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
