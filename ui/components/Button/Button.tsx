@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ITheme } from 'UI/themes';
+import { ITheme } from 'ui/themes';
 import { IAllContentProps, IButtonProps, ISizeProps, IViewProps } from './types';
 import { sizes } from './buttonViews';
 
