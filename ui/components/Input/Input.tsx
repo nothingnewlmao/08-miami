@@ -44,7 +44,8 @@ export const StyledInput = styled.input<ITheme>`
     }
 
     &:focus {
-        border-bottom-color: ${({ theme }) => theme.colors.inputs.borderHoverColor};
+        border-bottom-color: ${({ theme }) =>
+            theme.colors.inputs.borderHoverColor};
 
         & + label {
             font-size: 9px;
@@ -65,14 +66,13 @@ export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
 
         const handleChange = (event: React.SyntheticEvent) => {
             const { target } = event;
-            const {
-                value,
-            } = target as HTMLInputElement;
+            const { value } = target as HTMLInputElement;
 
             if (setInputsValue) {
-                setInputsValue((prevValue: TObjectLiteral) => (
-                    { ...prevValue, [name]: value }
-                ));
+                setInputsValue((prevValue: TObjectLiteral) => ({
+                    ...prevValue,
+                    [name]: value,
+                }));
             }
         };
 

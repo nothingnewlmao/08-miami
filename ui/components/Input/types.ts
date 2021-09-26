@@ -3,7 +3,7 @@ import TObjectLiteral from 'types/ObjectLiteral';
 
 interface IStyledInput extends React.InputHTMLAttributes<HTMLElement> {
     label?: string;
-    setInputsValue?: Dispatch<SetStateAction<TObjectLiteral>>
+    setInputsValue?: Dispatch<SetStateAction<TObjectLiteral>>;
 }
 
 export type TStyledInput = IStyledInput;

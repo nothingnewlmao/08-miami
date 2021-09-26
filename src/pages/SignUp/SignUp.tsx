@@ -40,27 +40,24 @@ export const SignUp: FC = () => {
         },
     };
 
-    const formData = Object.fromEntries(Object.entries(inputs)
-        .map(([key, { value }]) => [key, value]));
+    const formData = Object.fromEntries(
+        Object.entries(inputs).map(([key, { value }]) => [key, value]),
+    );
 
     const [inputsValues, setInputsValue] = useState(formData);
 
-    const renderInputs = Object.entries(inputsValues)
-        .map(([key, value]) => {
-            const {
-                label,
-                type,
-            } = inputs[key];
-            return (
-                <Input
-                    label={label}
-                    value={value}
-                    name={key}
-                    type={type}
-                    setInputsValue={setInputsValue}
-                />
-            );
-        });
+    const renderInputs = Object.entries(inputsValues).map(([key, value]) => {
+        const { label, type } = inputs[key];
+        return (
+            <Input
+                label={label}
+                value={value}
+                name={key}
+                type={type}
+                setInputsValue={setInputsValue}
+            />
+        );
+    });
 
     const handleSubmit = () => {
         AuthApi.signup(inputsValues);
@@ -68,11 +65,7 @@ export const SignUp: FC = () => {
 
     return (
         <Wrapper className="sign-up">
-            <Form
-                ref={formRef}
-                title={title}
-                handleSubmit={handleSubmit}
-            >
+            <Form ref={formRef} title={title} handleSubmit={handleSubmit}>
                 {renderInputs}
                 <div>
                     <Button type="submit">Регистрация</Button>

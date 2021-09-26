@@ -27,12 +27,7 @@ export const StyledForm = styled.form<ITheme>`
 
 export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
     (props, ref) => {
-        const {
-            children,
-            title = '',
-            handleSubmit,
-            ...rest
-        } = props;
+        const { children, title = '', handleSubmit, ...rest } = props;
 
         const onSubmit = (event: React.SyntheticEvent & { target: any }) => {
             event.preventDefault();
@@ -42,11 +37,7 @@ export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
         };
 
         return (
-            <StyledForm
-                ref={ref}
-                {...rest}
-                onSubmit={onSubmit}
-            >
+            <StyledForm ref={ref} {...rest} onSubmit={onSubmit}>
                 <div className="title">{title}</div>
                 {children}
             </StyledForm>
