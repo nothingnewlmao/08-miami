@@ -20,13 +20,13 @@ module.exports = {
                         options: {
                             configFile: path.resolve(__dirname, 'tsconfig.json'),
                         },
-                    }
+                    },
                 ],
             },
             {
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-            }
+                use: ['style-loader', 'css-loader'],
+            },
         ],
     },
     resolve: {
