@@ -5,10 +5,17 @@ export default class BaseApi {
         return fetch(`${this.URL}/${path}`);
     }
 
-    public static post(path: string, body: FormData | string) {
+    public static post(
+        path: string,
+        body: string,
+        headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        },
+    ) {
         return fetch(`${this.URL}/${path}`, {
             method: 'POST',
             body,
+            headers,
         });
     }
 }

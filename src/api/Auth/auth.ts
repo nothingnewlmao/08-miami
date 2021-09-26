@@ -1,14 +1,16 @@
-import { TSignUp } from 'api/Auth/types';
 import BaseApi from 'api/BaseApi';
+import TObjectLiteral from 'types/ObjectLiteral';
 
-export default class AuthApi {
-    public signup(user: TSignUp) {
-        const body = user instanceof FormData ? user : JSON.stringify(user);
+const AuthApi = {
+    signup: (user: TObjectLiteral) => {
+        const body = JSON.stringify(user);
 
         return BaseApi.post('auth/signup', body)
-            .then((res) => res.json())
-            .then((res) => {
+            .then(res => res.json())
+            .then(res => {
                 console.log(res);
             });
-    }
-}
+    },
+};
+
+export default AuthApi;
