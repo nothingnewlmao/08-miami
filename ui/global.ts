@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { ITheme } from './themes';
 import { colors } from 'ui/colors';
+import { ITheme } from './themes';
 
 export const GlobalStyles = createGlobalStyle<ITheme>`
   body {

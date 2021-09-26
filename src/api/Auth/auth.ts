@@ -7,14 +7,10 @@ const AuthApi = {
 
         return BaseApi.post('auth/signup', body)
             .then(res => res.json())
-            .then((res) => {
-                const {
-                    error,
-                    reason,
-                    id
-                } = res;
+            .then(res => {
+                const { error, reason, id } = res;
 
-                if(id === undefined) {
+                if (id === undefined) {
                     throw new Error(`${error}: ${reason}`);
                 }
 
