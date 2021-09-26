@@ -16,12 +16,12 @@ export const StyledInputWrapper = styled.div<ITheme>`
 
     & label {
         position: absolute;
-        top: -10px;
+        top: -15px;
         left: 0;
         color: ${({ theme }) => theme.colors.inputs.label};
         margin-bottom: 5px;
         transition: all 0.3s ease;
-        font-size: 9px;
+        font-size: 12px;
         z-index: -1;
     }
 `;
@@ -48,8 +48,8 @@ export const StyledInput = styled.input<ITheme>`
             theme.colors.inputs.borderHoverColor};
 
         & + label {
-            font-size: 9px;
-            top: -10px;
+            font-size: 12px;
+            top: -15px;
         }
     }
 `;

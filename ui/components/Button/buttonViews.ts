@@ -146,6 +146,6 @@ export const sizes = {
     },
     s: {
         padding: '12px',
-        fontSize: '13px',
+        fontSize: '14px',
     },
 };
