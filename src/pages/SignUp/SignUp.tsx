@@ -3,13 +3,14 @@ import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
 import { Wrapper } from 'pages/Leaderboard/styled';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AuthApi from 'api/Auth/auth';
 import TObjectLiteral from 'types/ObjectLiteral';
 
 export const SignUp: FC = () => {
     const formRef = React.createRef<HTMLFormElement>();
     const title = 'Регистрация';
+    const error = '';
 
     const inputs: TObjectLiteral = {
         email: {
@@ -25,7 +26,7 @@ export const SignUp: FC = () => {
             label: 'Имя',
             value: '',
         },
-        last_name: {
+        second_name: {
             label: 'Фамилия',
             value: '',
         },
@@ -45,6 +46,7 @@ export const SignUp: FC = () => {
     );
 
     const [inputsValues, setInputsValue] = useState(formData);
+    const [errorMsg, setErrorMsg] = useState(error);
 
     const renderInputs = Object.entries(inputsValues).map(([key, value]) => {
         const { label, type } = inputs[key];
@@ -59,14 +61,20 @@ export const SignUp: FC = () => {
         );
     });
 
-    const handleSubmit = () => {
-        AuthApi.signup(inputsValues);
-    };
+    const errorBlock = <div className="-error">{errorMsg}</div>;
 
+    const history = useHistory();
+
+    const handleSubmit = () => {
+        AuthApi.signup(inputsValues)
+            .then(() => history.push('/'))
+            .catch(err => setErrorMsg(err.message));
+    };
     return (
         <Wrapper className="sign-up">
             <Form ref={formRef} title={title} handleSubmit={handleSubmit}>
                 {renderInputs}
+                {errorMsg ? errorBlock : ''}
                 <div>
                     <Button type="submit">Регистрация</Button>
                 </div>

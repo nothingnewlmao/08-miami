@@ -7,8 +7,18 @@ const AuthApi = {
 
         return BaseApi.post('auth/signup', body)
             .then(res => res.json())
-            .then(res => {
-                console.log(res);
+            .then((res) => {
+                const {
+                    error,
+                    reason,
+                    id
+                } = res;
+
+                if(id === undefined) {
+                    throw new Error(`${error}: ${reason}`);
+                }
+
+                return id;
             });
     },
 };

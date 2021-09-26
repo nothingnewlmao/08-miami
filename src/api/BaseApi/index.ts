@@ -1,5 +1,5 @@
 export default class BaseApi {
-    static URL = 'ya-praktikum.tech/api/v2';
+    static URL = 'https://ya-praktikum.tech/api/v2';
 
     public static get(path: string) {
         return fetch(`${this.URL}/${path}`);
@@ -13,6 +13,7 @@ export default class BaseApi {
         },
     ) {
         return fetch(`${this.URL}/${path}`, {
+            credentials: 'include',
             method: 'POST',
             body,
             headers,
