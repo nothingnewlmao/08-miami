@@ -1,4 +1,4 @@
-export default class GameMap {
+export class GameMap {
     ctx: CanvasRenderingContext2D;
 
     static blockHeight = 25;

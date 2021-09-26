@@ -1,52 +1,59 @@
-import GameMap from './GameMap';
+import { GameMap } from './GameMap';
+import { IPoint, ISides, IGameProps } from './types';
 
-export interface IGameProps {
-    initX: number;
-    initY: number;
-    canvasRef: HTMLCanvasElement;
-}
-
-export interface ISides {
-    left: number;
-    right: number;
-    top: number;
-    bottom: number;
-}
-
+// movement
 const FALLING_COEF = 0.72;
 const FADING_COEF = 0.95;
 const GAMER_SPEED = 4;
 const MAX_JUMP_HEIGHT = 100;
 
+// ball sizes
 const GAMER_RAD = 15;
 const GAMER_INNER_COEF = [3.5714285714285716, -8.33333333, 1.666];
 const GAMER_BLICK_COEF = [1.6666, -3.125, 0.2];
 
-export default class Game {
-    ctx: CanvasRenderingContext2D;
+// game over portal sizes
+const PORTAL_RAD_X = 10;
+const PORTAL_RAD_Y = 22;
 
-    x: number;
+export class Game {
+    private ctx: CanvasRenderingContext2D;
 
-    y: number;
+    private ballPosition: IPoint;
 
-    velY: number = 0;
+    private gameOverPoint: IPoint;
 
-    velX: number = 0;
+    private velY: number = 0;
 
-    keys = new Map<string, boolean>();
+    private velX: number = 0;
 
-    map: GameMap;
+    private keys = new Map<string, boolean>();
 
-    canvasSides: ISides;
+    private map: GameMap;
 
-    constructor({ initX = 0, initY = 0, canvasRef }: IGameProps) {
+    private canvasSides: ISides;
+
+    gameOverCallback: (points?: number) => void;
+
+    unsubscribeKeysCallback: () => void = () => {};
+
+    constructor({
+        initPoint = { x: 100, y: 100 },
+        gameOverPoint,
+        canvasRef,
+        gameOverCallback,
+    }: IGameProps) {
         const context = canvasRef.getContext('2d');
+        this.gameOverCallback = gameOverCallback;
+
         if (!context) {
             throw new Error("Отсутствует контекст Canvas'а");
         }
+
         this.ctx = context;
-        this.x = initX;
-        this.y = initY;
+        this.ballPosition = { ...initPoint };
+        this.gameOverPoint = { ...gameOverPoint };
+
         this.canvasSides = {
             top: canvasRef.offsetTop,
             bottom: canvasRef.height + canvasRef.offsetTop,
@@ -54,13 +61,17 @@ export default class Game {
             right: canvasRef.width + canvasRef.offsetLeft,
         };
 
-        document.body.addEventListener('keydown', (e: KeyboardEvent) => {
+        const keydownCallback = (e: KeyboardEvent) =>
             this.keys.set(e.key, true);
-        });
+        const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
-        document.body.addEventListener('keyup', e => {
-            this.keys.set(e.key, false);
-        });
+        document.body.addEventListener('keydown', keydownCallback);
+        document.body.addEventListener('keyup', keyupCallback);
+
+        this.unsubscribeKeysCallback = () => {
+            document.body.removeEventListener('keydown', keydownCallback);
+            document.body.removeEventListener('keyup', keyupCallback);
+        };
 
         this.map = new GameMap(this.ctx);
     }
@@ -74,13 +85,11 @@ export default class Game {
 
         const { top, right, bottom, left } = this.canvasSides;
 
-        const closestFloor = this.map.closestFloor(
-            this.x,
-            this.y,
-            bottom - top,
-        );
+        const { x: ballX, y: ballY } = this.ballPosition;
 
-        if (this.velY < GAMER_SPEED && this.y < closestFloor - GAMER_RAD) {
+        const closestFloor = this.map.closestFloor(ballX, ballY, bottom - top);
+
+        if (this.velY < GAMER_SPEED && ballY < closestFloor - GAMER_RAD) {
             this.velY += 2;
         }
 
@@ -94,7 +103,7 @@ export default class Game {
             if (
                 this.velY < 0.0001 &&
                 this.velY > -GAMER_SPEED &&
-                closestFloor - this.y < MAX_JUMP_HEIGHT
+                closestFloor - ballY < MAX_JUMP_HEIGHT
             ) {
                 this.velY -= 6;
             }
@@ -107,27 +116,93 @@ export default class Game {
         }
 
         this.velY *= FALLING_COEF;
-        this.y += this.velY;
+        this.ballPosition.y += this.velY;
         this.velX *= FADING_COEF;
-        this.x += this.velX;
+        this.ballPosition.x += this.velX;
 
-        if (this.x >= right - GAMER_RAD) {
-            this.x = right - GAMER_RAD;
-        } else if (this.x <= left + GAMER_RAD) {
-            this.x = left + GAMER_RAD;
+        if (this.ballPosition.x >= right - GAMER_RAD) {
+            this.ballPosition.x = right - GAMER_RAD;
+        } else if (this.ballPosition.x <= left + GAMER_RAD) {
+            this.ballPosition.x = left + GAMER_RAD;
         }
 
-        if (this.y >= closestFloor - GAMER_RAD) {
-            this.y = closestFloor - GAMER_RAD;
-        } else if (this.y <= top + GAMER_RAD) {
-            this.y = top + GAMER_RAD;
+        if (this.ballPosition.y >= closestFloor - GAMER_RAD) {
+            this.ballPosition.y = closestFloor - GAMER_RAD;
+        } else if (this.ballPosition.y <= top + GAMER_RAD) {
+            this.ballPosition.y = top + GAMER_RAD;
         }
+
+        this.checkWin();
 
         this.ctx.clearRect(left, top, right - left, bottom - top);
         this.drawBackground();
 
+        this.drawPortal();
+
         this.map.drawMap(bottom, right - left);
         this.drawBall();
+    }
+
+    private checkWin(): void {
+        const { x, y } = this.ballPosition;
+        if (
+            x - GAMER_RAD < this.gameOverPoint.x &&
+            x + GAMER_RAD > this.gameOverPoint.x &&
+            y - GAMER_RAD < this.gameOverPoint.y &&
+            y + GAMER_RAD > this.gameOverPoint.y
+        ) {
+            this.gameOverCallback();
+        }
+    }
+
+    private drawBall = () => {
+        const { x, y } = this.ballPosition;
+
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, GAMER_RAD, 0, 2 * Math.PI);
+        this.ctx.fillStyle = '#5f96b3';
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this.ctx.beginPath();
+        this.ctx.fillStyle = '#487288';
+        this.ctx.arc(
+            x + GAMER_RAD / GAMER_INNER_COEF[0],
+            y + GAMER_RAD / GAMER_INNER_COEF[1],
+            GAMER_RAD / GAMER_INNER_COEF[2],
+            0,
+            2 * Math.PI,
+        );
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this.ctx.beginPath();
+        this.ctx.fillStyle = '#ead5db';
+        this.ctx.arc(
+            x + GAMER_RAD / GAMER_BLICK_COEF[0],
+            y + GAMER_RAD / GAMER_BLICK_COEF[1],
+            GAMER_RAD * GAMER_BLICK_COEF[2],
+            -2,
+            1,
+        );
+        this.ctx.fill();
+        this.ctx.closePath();
+    };
+
+    private drawPortal(): void {
+        const { x, y } = this.gameOverPoint;
+
+        this.ctx.beginPath();
+        this.ctx.ellipse(x, y, PORTAL_RAD_X, PORTAL_RAD_Y, 0, 0, 2 * Math.PI);
+        this.ctx.fillStyle = '#7FFF00';
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this.ctx.beginPath();
+        this.ctx.ellipse(x, y, PORTAL_RAD_X, PORTAL_RAD_Y, 0, 0, 2 * Math.PI);
+        this.ctx.strokeStyle = 'gray';
+        this.ctx.stroke();
+        this.ctx.closePath();
     }
 
     private drawBackground(): void {
@@ -138,34 +213,4 @@ export default class Game {
         this.ctx.fillStyle = 'white';
         this.ctx.fillRect(left, top, width, height);
     }
-
-    private drawBall = () => {
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, GAMER_RAD, 0, 2 * Math.PI);
-        this.ctx.fillStyle = '#5f96b3';
-        this.ctx.fill();
-        this.ctx.closePath();
-        this.ctx.beginPath();
-        this.ctx.fillStyle = '#487288';
-        this.ctx.arc(
-            this.x + GAMER_RAD / GAMER_INNER_COEF[0],
-            this.y + GAMER_RAD / GAMER_INNER_COEF[1],
-            GAMER_RAD / GAMER_INNER_COEF[2],
-            0,
-            2 * Math.PI,
-        );
-        this.ctx.fill();
-        this.ctx.closePath();
-        this.ctx.beginPath();
-        this.ctx.fillStyle = '#ead5db';
-        this.ctx.arc(
-            this.x + GAMER_RAD / GAMER_BLICK_COEF[0],
-            this.y + GAMER_RAD / GAMER_BLICK_COEF[1],
-            GAMER_RAD * GAMER_BLICK_COEF[2],
-            -2,
-            1,
-        );
-        this.ctx.fill();
-        this.ctx.closePath();
-    };
 }

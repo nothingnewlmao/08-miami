@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Game from 'services/Game/Game';
+import { Game } from 'services/Game/Game';
 
 export interface IGameFieldProps {
     fieldHeight?: number;
@@ -16,13 +16,28 @@ export const GameField: React.FC<IGameFieldProps> = ({
         const canvasElem = canvasRef.current;
 
         if (canvasElem) {
+            const gameOverCallback = () => console.log('Game Over');
+
             const game = new Game({
                 canvasRef: canvasElem,
-                initX: 100,
-                initY: 100,
+                initPoint: {
+                    x: 100,
+                    y: 100,
+                },
+                gameOverPoint: {
+                    x: fieldWidth - 50,
+                    y: fieldHeight - 50,
+                },
+                gameOverCallback,
             });
             game.start();
+
+            return () => {
+                game.unsubscribeKeysCallback();
+            };
         }
+
+        return () => {};
     }, [canvasRef]);
 
     return <canvas ref={canvasRef} height={fieldHeight} width={fieldWidth} />;
