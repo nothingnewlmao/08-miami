@@ -6,7 +6,7 @@ export default class BaseApi {
     public static post(path: string, body: string) {
         return fetch(`${process.env.API_URL}/${path}`, {
             method: 'POST',
-            body
+            body,
         });
     }
 }
