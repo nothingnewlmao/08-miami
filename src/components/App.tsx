@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Forum } from '../pages/Forum/Forum';
 import { GlobalStyles } from '../../ui/global';
 import { themes } from '../../ui/themes';
 import { Example } from './Example/Example';
@@ -20,6 +21,9 @@ const App: FC = () => {
                         </Route>
                         <Route path="/leaderboard">
                             <Leaderboard />
+                        </Route>
+                        <Route path="/forum">
+                            <Forum />
                         </Route>
                         <Redirect to="/" />
                     </Switch>
