@@ -11,30 +11,33 @@ import { themes } from 'UI/themes';
 import { SignUp } from 'Pages/SignUp';
 import { Example } from 'Pages/Example/Example';
 import { Leaderboard } from 'Pages/Leaderboard';
+import ErrorBoundary from 'Components/ErrorBoundary/ErrorBoundary';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
 
     return (
-        <Router>
-            <div className="app">
-                <ThemeProvider theme={selectedTheme}>
-                    <GlobalStyles />
-                    <Switch>
-                        <Route exact path="/">
-                            <Example setTheme={setSelectedTheme} />
-                        </Route>
-                        <Route path="/leaderboard">
-                            <Leaderboard />
-                        </Route>
-                        <Route path="/sign-up">
-                            <SignUp />
-                        </Route>
-                        <Redirect to="/" />
-                    </Switch>
-                </ThemeProvider>
-            </div>
-        </Router>
+        <ErrorBoundary>
+            <Router>
+                <div className="app">
+                    <ThemeProvider theme={selectedTheme}>
+                        <GlobalStyles />
+                        <Switch>
+                            <Route exact path="/">
+                                <Example setTheme={setSelectedTheme} />
+                            </Route>
+                            <Route path="/leaderboard">
+                                <Leaderboard />
+                            </Route>
+                            <Route path="/sign-up">
+                                <SignUp />
+                            </Route>
+                            <Redirect to="/" />
+                        </Switch>
+                    </ThemeProvider>
+                </div>
+            </Router>
+        </ErrorBoundary>
     );
 };
 
