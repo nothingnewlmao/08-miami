@@ -2,28 +2,10 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Styled from './styled';
 
-interface ILoadingPageProps {
-    promise?: Promise<any>;
-}
-
-const LoadingPageDefaultProps: Required<ILoadingPageProps> = {
-    promise: new Promise<void>(res => {
-        setTimeout(() => res(), 30000);
-    }),
-};
-
-export const LoadingPage: FC<ILoadingPageProps> = ({
-    promise = LoadingPageDefaultProps.promise,
-}: ILoadingPageProps) => {
+export const LoadingPage: FC = () => {
     const history = useHistory();
 
-    promise
-        .then(() => {
-            history.push('/game');
-        })
-        .catch(() => {
-            history.push('/error');
-        });
+    setTimeout(() => history.push('/game'), 2500);
 
     return (
         <Styled.Wrapper>
@@ -33,5 +15,3 @@ export const LoadingPage: FC<ILoadingPageProps> = ({
         </Styled.Wrapper>
     );
 };
-
-LoadingPage.defaultProps = LoadingPageDefaultProps;
