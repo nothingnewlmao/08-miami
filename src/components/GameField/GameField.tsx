@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Game } from 'services/Game/Game';
+import { Game } from 'services/Game';
+import { useHistory } from 'react-router-dom';
 
 export interface IGameFieldProps {
     fieldHeight?: number;
@@ -11,12 +12,13 @@ export const GameField: React.FC<IGameFieldProps> = ({
     fieldWidth = window.innerWidth,
 }: IGameFieldProps) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+    const history = useHistory();
 
     React.useEffect(() => {
         const canvasElem = canvasRef.current;
 
         if (canvasElem) {
-            const gameOverCallback = () => console.log('Game Over');
+            const gameOverCallback = () => history.push('/leaderboard');
 
             const game = new Game({
                 canvasRef: canvasElem,
