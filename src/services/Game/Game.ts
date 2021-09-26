@@ -33,8 +33,6 @@ export default class Game {
 
     velX: number = 0;
 
-    floorY: number;
-
     keys = new Map<string, boolean>();
 
     map: GameMap;
@@ -82,13 +80,13 @@ export default class Game {
             this.velY += 2;
         }
 
-        if (this.keys.get('ArrowRight')) {
+        if (this.keys.get('ArrowRight') || this.keys.get('d')) {
             if (this.velX < GAMER_SPEED) {
                 this.velX += +1;
             }
         }
 
-        if (this.keys.get('ArrowUp')) {
+        if (this.keys.get('ArrowUp') || this.keys.get('w')) {
             if (
                 this.velY < 0.0001 &&
                 this.velY > -GAMER_SPEED &&
@@ -98,7 +96,7 @@ export default class Game {
             }
         }
 
-        if (this.keys.get('ArrowLeft')) {
+        if (this.keys.get('ArrowLeft') || this.keys.get('a')) {
             if (this.velX > -GAMER_SPEED) {
                 this.velX -= 1;
             }

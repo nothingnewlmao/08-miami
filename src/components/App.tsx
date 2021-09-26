@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { GamePage } from '../pages/GamePage';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import { GlobalStyles } from '../../ui/global';
 import { themes } from '../../ui/themes';
@@ -23,6 +24,10 @@ const App: FC = () => {
                             <Route path="/leaderboard">
                                 <Leaderboard />
                             </Route>
+                            <Route path="/game">
+                                <GamePage />
+                            </Route>
+
                             <Redirect to="/" />
                         </Switch>
                     </ThemeProvider>
