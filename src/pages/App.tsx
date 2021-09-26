@@ -6,12 +6,12 @@ import {
     Switch,
     Redirect,
 } from 'react-router-dom';
-import { GlobalStyles } from 'UI/global';
-import { themes } from 'UI/themes';
-import { SignUp } from 'Pages/SignUp';
-import { Example } from 'Pages/Example/Example';
-import { Leaderboard } from 'Pages/Leaderboard';
-import ErrorBoundary from 'Components/ErrorBoundary/ErrorBoundary';
+import { GlobalStyles } from 'ui/global';
+import { themes } from 'ui/themes';
+import { SignUp } from 'pages/SignUp';
+import { Example } from 'pages/Example/Example';
+import { Leaderboard } from 'pages/Leaderboard';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);

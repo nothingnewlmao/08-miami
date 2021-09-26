@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { TableHead } from 'Components/TableHead/TableHead';
-import { TableBody } from 'Components/TableBody/TableBody';
+import { TableHead } from 'components/TableHead/TableHead';
+import { TableBody } from 'components/TableBody/TableBody';
 import * as Styled from './styled';
 import { fakeElements } from './fakeData';
 

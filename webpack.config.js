@@ -32,11 +32,11 @@ module.exports = {
         extensions: ['.js', '.ts', '.tsx'],
         alias: {
             '@': path.resolve(__dirname, 'src/'),
-            UI: path.resolve(__dirname, 'ui/'),
-            UIComponents: path.resolve(__dirname, 'ui/components/'),
-            Components: path.resolve(__dirname, 'src/components/'),
-            Pages: path.resolve(__dirname, 'src/pages/'),
-            API: path.resolve(__dirname, 'src/api'),
+            ui: path.resolve(__dirname, 'ui/'),
+            uicomponents: path.resolve(__dirname, 'ui/components/'),
+            components: path.resolve(__dirname, 'src/components/'),
+            pages: path.resolve(__dirname, 'src/pages/'),
+            api: path.resolve(__dirname, 'src/api'),
         },
     },
     plugins: [

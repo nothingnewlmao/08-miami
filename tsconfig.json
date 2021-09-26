@@ -21,11 +21,11 @@
     "baseUrl": ".",
     "paths": {
       "*": ["./src/*"],
-      "UI/*": ["./ui/*"],
-      "UIComponents/*": ["./ui/components/*"],
-      "Components/*": ["./src/components/*"],
-      "Pages/*": ["./src/pages/*"],
-      "API/*": ["./src/api/*"]
+      "ui/*": ["./ui/*"],
+      "uicomponents/*": ["./ui/components/*"],
+      "components/*": ["./src/components/*"],
+      "pages/*": ["./src/pages/*"],
+      "api/*": ["./src/api/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },

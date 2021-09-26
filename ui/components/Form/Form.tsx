@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import React from 'react';
-import { ITheme } from 'UI/themes';
-import { TStyledForm } from 'UIComponents/Form/types';
+import React  from 'react';
+import { ITheme } from 'ui/themes';
+import { TStyledForm } from 'uicomponents/Form/types';
 
 export const StyledForm = styled.form<ITheme>`
     padding: 50px 30px 20px;

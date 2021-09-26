@@ -1,18 +1,30 @@
 import React, { FC } from 'react';
-import { Input } from 'UIComponents/Input';
-import { Form } from 'UIComponents/Form';
-import { Button } from 'UIComponents/Button';
-import { Wrapper } from 'Pages/Leaderboard/styled';
+import { Input } from 'uicomponents/Input';
+import { Form } from 'uicomponents/Form';
+import { Button } from 'uicomponents/Button';
+import { Wrapper } from 'pages/Leaderboard/styled';
 import { Link } from 'react-router-dom';
+import AuthApi from 'api/Auth/auth';
+
+const AuthApiInstance = new AuthApi();
 
 export const SignUp: FC = () => {
     const ref = React.createRef<HTMLInputElement>();
     const formRef = React.createRef<HTMLFormElement>();
     const title = 'Регистрация';
 
+    const handleSubmit = (val: any) => {
+        const formData = new FormData(val);
+        AuthApiInstance.signup(formData);
+    }
+
     return (
         <Wrapper className="sign-up">
-            <Form ref={formRef} title={title}>
+            <Form
+                ref={formRef}
+                title={title}
+                handleSubmit={handleSubmit}
+            >
                 <Input ref={ref} label="Почта" name="ema!il" />
                 <Input label="Логин" name="login" />
                 <Input label="Имя" name="first_name" />
