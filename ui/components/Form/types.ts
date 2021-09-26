@@ -1,3 +1,5 @@
-import { FormHTMLAttributes } from 'react';
+import React, { FormHTMLAttributes } from 'react';
 
-export type TStyledForm = FormHTMLAttributes<HTMLElement>;
+export type TStyledForm = FormHTMLAttributes<HTMLElement> & {
+    handleSubmit?: (event: React.SyntheticEvent) => void
+};

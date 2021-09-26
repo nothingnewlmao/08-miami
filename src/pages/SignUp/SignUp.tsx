@@ -16,7 +16,7 @@ export const SignUp: FC = () => {
     const handleSubmit = (val: any) => {
         const formData = new FormData(val);
         AuthApiInstance.signup(formData);
-    }
+    };
 
     return (
         <Wrapper className="sign-up">

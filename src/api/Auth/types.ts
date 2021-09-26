@@ -3,7 +3,7 @@ interface IAuth {
     password: string;
 }
 
-export type TSignUp = IAuth & {
+export type TSignUp = FormData | IAuth & {
     first_name: string;
     second_name: string;
     email: string;

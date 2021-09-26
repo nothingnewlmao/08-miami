@@ -3,7 +3,7 @@ export default class BaseApi {
         return fetch(`${process.env.API_URL}/${path}`);
     }
 
-    public static post(path: string, body: string) {
+    public static post(path: string, body: FormData | string) {
         return fetch(`${process.env.API_URL}/${path}`, {
             method: 'POST',
             body,

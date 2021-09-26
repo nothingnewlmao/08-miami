@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React  from 'react';
+import React from 'react';
 import { ITheme } from 'ui/themes';
 import { TStyledForm } from 'uicomponents/Form/types';
 
@@ -27,10 +27,26 @@ export const StyledForm = styled.form<ITheme>`
 
 export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
     (props, ref) => {
-        const { children, title = '', ...rest } = props;
+        const {
+            children,
+            title = '',
+            handleSubmit,
+            ...rest
+        } = props;
+
+        const onSubmit = (event: React.SyntheticEvent & { target: any }) => {
+            event.preventDefault();
+            if (handleSubmit) {
+                handleSubmit(event.target);
+            }
+        };
 
         return (
-            <StyledForm ref={ref} {...rest}>
+            <StyledForm
+                ref={ref}
+                {...rest}
+                onSubmit={onSubmit}
+            >
                 <div className="title">{title}</div>
                 {children}
             </StyledForm>
