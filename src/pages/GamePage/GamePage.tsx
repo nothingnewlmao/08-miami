@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { GameField } from '../../components/GameField/GameField';
+import { GameField } from 'components/GameField/GameField';
 import * as Styled from './styled';
 
 export const GamePage: FC = () => {

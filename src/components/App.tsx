@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { LoadingPage } from '../pages/LoadingPage';
-import { ErrorMessage } from '../pages/ErrorMessage';
-import { GamePage } from '../pages/GamePage';
+import { GlobalStyles } from 'ui/global';
+import { themes } from 'ui/themes';
+import { LoadingPage } from 'pages/LoadingPage';
+import { ErrorMessage } from 'pages/ErrorMessage';
+import { GamePage } from 'pages/GamePage';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
-import { GlobalStyles } from '../../ui/global';
-import { themes } from '../../ui/themes';
 import { Example } from './Example/Example';
 import { Leaderboard } from './Leaderboard';
 

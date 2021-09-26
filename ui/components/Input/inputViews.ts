@@ -1,4 +1,4 @@
-import { colors } from '../../colors';
+import { colors } from 'ui/colors';
 
 export const inputViews = {
     light: {

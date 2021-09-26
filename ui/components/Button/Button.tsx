@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ITheme } from 'ui/themes';
 import { IAllContentProps, IButtonProps, ISizeProps, IViewProps } from './types';
-import { ITheme } from '../../themes';
 import { sizes } from './buttonViews';
 
 export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
