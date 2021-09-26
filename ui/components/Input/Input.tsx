@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { ITheme } from 'ui/themes';
 import { TStyledInput } from 'uicomponents/Input/types';
+import TObjectLiteral from 'types/ObjectLiteral';
 
 export const StyledInputWrapper = styled.div<ITheme>`
     position: relative;
@@ -55,13 +56,32 @@ export const StyledInput = styled.input<ITheme>`
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
         const {
-            children, label = '', name, ...rest
+            children,
+            label = '',
+            name = '',
+            setInputsValue,
+            ...rest
         } = props;
+
+        const handleChange = (event: React.SyntheticEvent) => {
+            const { target } = event;
+            const {
+                value,
+            } = target as HTMLInputElement;
+
+            if (setInputsValue) {
+                setInputsValue((prevValue: TObjectLiteral) => (
+                    { ...prevValue, [name]: value }
+                ));
+            }
+        };
 
         return (
             <StyledInputWrapper>
                 <StyledInput
                     ref={ref as React.MutableRefObject<HTMLInputElement>}
+                    onChange={handleChange}
+                    name={name}
                     {...rest}
                 >
                     {children}

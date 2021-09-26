@@ -1,21 +1,69 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
 import { Wrapper } from 'pages/Leaderboard/styled';
 import { Link } from 'react-router-dom';
 import AuthApi from 'api/Auth/auth';
-
-const AuthApiInstance = new AuthApi();
+import TObjectLiteral from 'types/ObjectLiteral';
 
 export const SignUp: FC = () => {
-    const ref = React.createRef<HTMLInputElement>();
     const formRef = React.createRef<HTMLFormElement>();
     const title = 'Регистрация';
 
-    const handleSubmit = (val: any) => {
-        const formData = new FormData(val);
-        AuthApiInstance.signup(formData);
+    const inputs: TObjectLiteral = {
+        email: {
+            label: 'Почта',
+            value: '',
+            type: 'email',
+        },
+        login: {
+            label: 'Логин',
+            value: '',
+        },
+        first_name: {
+            label: 'Имя',
+            value: '',
+        },
+        last_name: {
+            label: 'Фамилия',
+            value: '',
+        },
+        phone: {
+            label: 'Телефон',
+            value: '',
+        },
+        password: {
+            label: 'Пароль',
+            value: '',
+            type: 'password',
+        },
+    };
+
+    const formData = Object.fromEntries(Object.entries(inputs)
+        .map(([key, { value }]) => [key, value]));
+
+    const [inputsValues, setInputsValue] = useState(formData);
+
+    const renderInputs = Object.entries(inputsValues)
+        .map(([key, value]) => {
+            const {
+                label,
+                type,
+            } = inputs[key];
+            return (
+                <Input
+                    label={label}
+                    value={value}
+                    name={key}
+                    type={type}
+                    setInputsValue={setInputsValue}
+                />
+            );
+        });
+
+    const handleSubmit = () => {
+        AuthApi.signup(inputsValues);
     };
 
     return (
@@ -25,13 +73,7 @@ export const SignUp: FC = () => {
                 title={title}
                 handleSubmit={handleSubmit}
             >
-                <Input ref={ref} label="Почта" name="ema!il" />
-                <Input label="Логин" name="login" />
-                <Input label="Имя" name="first_name" />
-                <Input label="Фамилия" name="last_name" />
-                <Input label="Телефон" name="phone" />
-                <Input label="Пароль" type="password" name="password" />
-                <Input label="Пароль (ещё раз)" type="password" />
+                {renderInputs}
                 <div>
                     <Button type="submit">Регистрация</Button>
                 </div>
