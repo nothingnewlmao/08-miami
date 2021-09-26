@@ -1,11 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Styled from './styled';
 
 export const LoadingPage: FC = () => {
     const history = useHistory();
 
-    setTimeout(() => history.push('/game'), 2500);
+    useEffect(() => {
+        setTimeout(() => history.push('/game'), 2500);
+    }, []);
 
     return (
         <Styled.Wrapper>
