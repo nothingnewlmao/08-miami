@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Game from '../../services/Game/Game';
+import Game from 'services/Game/Game';
 
 export interface IGameFieldProps {
     fieldHeight?: number;

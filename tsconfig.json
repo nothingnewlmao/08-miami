@@ -25,7 +25,8 @@
       "ui/*": ["./ui/*"],
       "uicomponents/*": ["./ui/components/*"],
       "components/*": ["./src/components/*"],
-      "pages/*": ["./src/pages/*"]
+      "pages/*": ["./src/pages/*"],
+      "services/*": ["./src/services/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
