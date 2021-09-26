@@ -1,6 +1,6 @@
-import { colors } from './colors';
 import { buttonViews } from 'uicomponents/Button/buttonViews';
 import { inputViews } from 'uicomponents/Input/inputViews';
+import { colors } from './colors';
 
 export interface ITheme {
     theme: typeof themes.light & typeof themes.sea;
