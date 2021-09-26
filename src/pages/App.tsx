@@ -6,12 +6,15 @@ import {
     Switch,
     Redirect,
 } from 'react-router-dom';
-import { GlobalStyles } from 'UI/global';
-import { themes } from 'UI/themes';
-import { SignUp } from 'Pages/SignUp';
-import { Example } from 'Pages/Example/Example';
-import { Leaderboard } from 'Pages/Leaderboard';
-import ErrorBoundary from 'Components/ErrorBoundary/ErrorBoundary';
+import { GlobalStyles } from 'ui/global';
+import { themes } from 'ui/themes';
+import { SignUp } from 'pages/SignUp';
+import { Example } from 'pages/Example/Example';
+import { Leaderboard } from 'pages/Leaderboard';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import { LoadingPage } from 'pages/LoadingPage';
+import { ErrorMessage } from 'pages/ErrorMessage';
+import { GamePage } from 'pages/GamePage';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
@@ -31,6 +34,15 @@ const App: FC = () => {
                             </Route>
                             <Route path="/sign-up">
                                 <SignUp />
+                            </Route>
+                            <Route path="/game">
+                                <GamePage />
+                            </Route>
+                            <Route path="/loading">
+                                <LoadingPage />
+                            </Route>
+                            <Route path="/error">
+                                <ErrorMessage />
                             </Route>
                             <Redirect to="/" />
                         </Switch>

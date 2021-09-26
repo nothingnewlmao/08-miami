@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import { ITheme } from 'UI/themes';
-import { TStyledInput } from 'UIComponents/Input/types';
+import { ITheme } from 'ui/themes';
+import { TStyledInput } from 'uicomponents/Input/types';
 
 export const StyledInputWrapper = styled.div<ITheme>`
     position: relative;
