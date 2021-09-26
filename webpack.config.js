@@ -36,6 +36,7 @@ module.exports = {
             UIComponents: path.resolve(__dirname, 'ui/components/'),
             Components: path.resolve(__dirname, 'src/components/'),
             Pages: path.resolve(__dirname, 'src/pages/'),
+            API: path.resolve(__dirname, 'src/api'),
         },
     },
     plugins: [
