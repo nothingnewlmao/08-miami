@@ -9,15 +9,15 @@ import {
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 import { SignUp } from 'pages/SignUp';
-import { Example } from 'pages/Example/Example';
 import { Leaderboard } from 'pages/Leaderboard';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { LoadingPage } from 'pages/LoadingPage';
 import { ErrorMessage } from 'pages/ErrorMessage';
 import { GamePage } from 'pages/GamePage';
+import { HomePage } from 'pages/HomePage';
 
 const App: FC = () => {
-    const [selectedTheme, setSelectedTheme] = useState(themes.light);
+    const [selectedTheme] = useState(themes.light);
 
     return (
         <ErrorBoundary>
@@ -27,7 +27,7 @@ const App: FC = () => {
                         <GlobalStyles />
                         <Switch>
                             <Route exact path="/">
-                                <Example setTheme={setSelectedTheme} />
+                                <HomePage />
                             </Route>
                             <Route path="/leaderboard">
                                 <Leaderboard />
