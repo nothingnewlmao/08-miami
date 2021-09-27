@@ -1,24 +1,24 @@
 import styled from 'styled-components';
-import { ITheme } from 'ui/themes';
 import { Button } from 'uicomponents/Button';
 import { colors } from 'ui/colors';
-import { Table } from 'uicomponents/Table/Table';
 
 export const Wrapper = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh;
+    font-size: 75px;
+    font-weight: bold;
     flex-direction: column;
-    text-align: center;
+    background: ${colors.lightPrimary};
 `;
 
-export const Title = styled.h2<ITheme>`
-    margin-bottom: 10px;
-    color: ${({ theme }) => theme.colors.text};
-`;
-
-export const LeaderTable = styled(Table)`
-    border-spacing: 0 10px;
+export const GamePanel = styled.div`
+    width: 100%;
+    height: 60px;
+    background: ${colors.primary};
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 `;
 
 export const BackButton = styled(Button)`

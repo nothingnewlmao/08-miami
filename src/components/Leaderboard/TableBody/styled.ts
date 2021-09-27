@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { StyledTd, StyledTr } from '../../../../ui/components/Table/TableElements/TableElements';
-import { colors } from '../../../../ui/colors';
+import { colors } from 'ui/colors';
+import { StyledTd, StyledTr } from 'uicomponents/Table/TableElements/TableElements';
 
 export const BodyTr = styled(StyledTr)`
     background: ${colors.primary};

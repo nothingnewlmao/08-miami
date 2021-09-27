@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StyledTh } from '../../../../ui/components/Table/TableElements/TableElements';
+import { StyledTh } from 'uicomponents/Table/TableElements/TableElements';
 
 export const HeadTh = styled(StyledTh)`
     height: 50px;
