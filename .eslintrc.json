@@ -1,9 +1,13 @@
 {
-  "extends": ["airbnb", "airbnb-typescript", "prettier"],
+  "extends": ["prettier", "airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
   "rules": {
-    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
+    "quotes": [
+      "error",
+      "single",
+      { "avoidEscape": true, "allowTemplateLiterals": false }
+    ],
     "max-len": [2, 120],
     "max-params": [2, 3],
     "object-curly-spacing": [2, "always"],
@@ -14,6 +18,7 @@
         "allowSingleExtends": false
       }
     ],
+    "@typescript-eslint/indent": ["off"],
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -42,7 +47,17 @@
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "react/jsx-no-useless-fragment": ["error", { "allowExpressions": true }],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-max-props-per-line": [
+      2,
+      {
+        "maximum": 1,
+        "when": "multiline"
+      }
+    ],
+    "react/jsx-indent-props": [2, 4],
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"]
   },
   "parserOptions": {
     "project": "./tsconfig.json"

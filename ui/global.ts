@@ -7,5 +7,10 @@ export const GlobalStyles = createGlobalStyle<ITheme>`
     color: ${({ theme }) => theme.colors.text};
     background: ${({ theme }) => theme.colors.body};
     margin: 0;
+    font-family: 'Roboto', sans-serif;
+    
+    html, #root, .app, body {
+        height: 100%;
+    }
   }
 `;

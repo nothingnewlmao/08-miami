@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { TableHead } from 'components/TableHead/TableHead';
+import { TableBody } from 'components/TableBody/TableBody';
 import * as Styled from './styled';
-import { TableHead } from './TableHead/TableHead';
-import { TableBody } from './TableBody/TableBody';
 import { fakeElements } from './fakeData';
 
 export const Leaderboard: FC = () => (

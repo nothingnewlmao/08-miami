@@ -1,14 +1,20 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+} from 'react-router-dom';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
+import { SignUp } from 'pages/SignUp';
+import { Example } from 'pages/Example/Example';
+import { Leaderboard } from 'pages/Leaderboard';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { LoadingPage } from 'pages/LoadingPage';
 import { ErrorMessage } from 'pages/ErrorMessage';
 import { GamePage } from 'pages/GamePage';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
-import { Example } from './Example/Example';
-import { Leaderboard } from './Leaderboard';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
@@ -26,6 +32,9 @@ const App: FC = () => {
                             <Route path="/leaderboard">
                                 <Leaderboard />
                             </Route>
+                            <Route path="/sign-up">
+                                <SignUp />
+                            </Route>
                             <Route path="/game">
                                 <GamePage />
                             </Route>
@@ -35,7 +44,6 @@ const App: FC = () => {
                             <Route path="/error">
                                 <ErrorMessage />
                             </Route>
-
                             <Redirect to="/" />
                         </Switch>
                     </ThemeProvider>
