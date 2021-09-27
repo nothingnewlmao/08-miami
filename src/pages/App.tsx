@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {
     BrowserRouter as Router,
@@ -16,41 +16,38 @@ import { ErrorMessage } from 'pages/ErrorMessage';
 import { GamePage } from 'pages/GamePage';
 import { HomePage } from 'pages/HomePage';
 
-const App: FC = () => {
-    const [selectedTheme] = useState(themes.light);
+const App: FC = () => (
+    <ErrorBoundary>
+        <Router>
+            <div className="app">
+                <ThemeProvider theme={themes.light}>
+                    <GlobalStyles />
+                    <Switch>
+                        <Route exact path="/">
+                            <HomePage />
+                        </Route>
+                        <Route path="/leaderboard">
+                            <Leaderboard />
+                        </Route>
+                        <Route path="/sign-up">
+                            <SignUp />
+                        </Route>
+                        <Route path="/game">
+                            <GamePage />
+                        </Route>
+                        <Route path="/loading">
+                            <LoadingPage />
+                        </Route>
+                        <Route path="/error">
+                            <ErrorMessage />
+                        </Route>
 
-    return (
-        <ErrorBoundary>
-            <Router>
-                <div className="app">
-                    <ThemeProvider theme={selectedTheme}>
-                        <GlobalStyles />
-                        <Switch>
-                            <Route exact path="/">
-                                <HomePage />
-                            </Route>
-                            <Route path="/leaderboard">
-                                <Leaderboard />
-                            </Route>
-                            <Route path="/sign-up">
-                                <SignUp />
-                            </Route>
-                            <Route path="/game">
-                                <GamePage />
-                            </Route>
-                            <Route path="/loading">
-                                <LoadingPage />
-                            </Route>
-                            <Route path="/error">
-                                <ErrorMessage />
-                            </Route>
-                            <Redirect to="/" />
-                        </Switch>
-                    </ThemeProvider>
-                </div>
-            </Router>
-        </ErrorBoundary>
-    );
-};
+                        <Redirect to="/" />
+                    </Switch>
+                </ThemeProvider>
+            </div>
+        </Router>
+    </ErrorBoundary>
+);
 
 export default App;
