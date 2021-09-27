@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 import { LoadingPage } from 'pages/LoadingPage';
-import { ErrorMessage } from 'pages/ErrorMessage';
 import { GamePage } from 'pages/GamePage';
 import { Leaderboard } from 'pages/LeaderBoard';
 import { Forum } from 'pages/Forum';
@@ -35,9 +34,6 @@ const App: FC = () => {
                             </Route>
                             <Route path="/forum">
                                 <Forum />
-                            </Route>
-                            <Route path="/error">
-                                <ErrorMessage />
                             </Route>
 
                             <Redirect to="/" />
