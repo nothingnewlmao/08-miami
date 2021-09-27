@@ -74,7 +74,11 @@ export default class Game {
 
         const { top, right, bottom, left } = this.canvasSides;
 
-        const closestFloor = this.map.closestFloor(this.x, this.y, bottom - top);
+        const closestFloor = this.map.closestFloor(
+            this.x,
+            this.y,
+            bottom - top,
+        );
 
         if (this.velY < GAMER_SPEED && this.y < closestFloor - GAMER_RAD) {
             this.velY += 2;

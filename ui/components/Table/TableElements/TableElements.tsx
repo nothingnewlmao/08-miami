@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../colors';
+import { colors } from 'ui/colors';
 
 export const StyledTr = styled.tr`
     background: ${colors.black};

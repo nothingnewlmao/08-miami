@@ -1,4 +1,4 @@
-import { ILeadersProps } from '../../pages/LeaderBoard/types';
+import { ILeadersProps } from 'pages/LeaderBoard/types';
 
 export const fakeElements: ILeadersProps[] = [
     {

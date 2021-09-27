@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { TableHead } from '../../components/Leaderboard/TableHead/TableHead';
-import { TableBody } from '../../components/Leaderboard/TableBody/TableBody';
-import { fakeElements } from '../../components/Leaderboard/fakeData';
+import { fakeElements } from 'pages/LeaderBoard/fakeData';
+import { Wrapper } from 'uicomponents/Wrapper/styled';
+import { TableHead } from 'components/Leaderboard/TableHead/TableHead';
+import { TableBody } from 'components/Leaderboard/TableBody/TableBody';
 import * as Styled from './styled';
 
 export const Leaderboard: FC = () => (
-    <Styled.Wrapper>
+    <Wrapper>
         <Styled.Title>LeaderBoard</Styled.Title>
         <Styled.LeaderTable>
             <TableHead />
@@ -15,5 +16,5 @@ export const Leaderboard: FC = () => (
         <Styled.BackButton size="l">
             <Link to="/">Домой</Link>
         </Styled.BackButton>
-    </Styled.Wrapper>
+    </Wrapper>
 );

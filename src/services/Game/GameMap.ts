@@ -17,7 +17,11 @@ export default class GameMap {
         this.ctx = ctx;
     }
 
-    closestFloor(ballX: number, ballY: number, containerHeight: number): number {
+    closestFloor(
+        ballX: number,
+        ballY: number,
+        containerHeight: number,
+    ): number {
         for (let i = this.mapField.length - 1; i >= 0; i -= 1) {
             if (
                 ballY < containerHeight - (i + 1) * this.blockHeight &&
@@ -60,11 +64,18 @@ export default class GameMap {
                 // eslint-disable-next-line no-continue
                 continue;
             }
-            const [leftestBlockNum, rightestBlockInSchemesNum] = this.mapField[i];
-            const rightestBlockNum = Math.min(rightestBlockInSchemesNum, fullBlocksCount);
+            const [leftestBlockNum, rightestBlockInSchemesNum] =
+                this.mapField[i];
+            const rightestBlockNum = Math.min(
+                rightestBlockInSchemesNum,
+                fullBlocksCount,
+            );
 
             for (let j = leftestBlockNum; j < rightestBlockNum; j += 1) {
-                this.drawBlock(j * this.blockWidth, bottom - (i + 1) * this.blockHeight);
+                this.drawBlock(
+                    j * this.blockWidth,
+                    bottom - (i + 1) * this.blockHeight,
+                );
             }
         }
     }
