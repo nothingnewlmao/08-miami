@@ -1,5 +1,5 @@
-import { IForumProps } from 'components/Forum/types';
+import { IDataProps } from 'components/Forum/types';
 
 export interface ITableBodyProps {
-    elements: IForumProps[];
+    elements: IDataProps[];
 }

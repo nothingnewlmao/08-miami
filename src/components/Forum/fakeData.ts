@@ -2,21 +2,37 @@ import { IForumProps } from './types';
 
 export const fakeElements: IForumProps[] = [
     {
-        id: 1,
-        name: 'Алла',
-        title: 'Пингвины',
-        date: Date.now().toLocaleString(),
+        title: 'Животные',
+        data: [
+            {
+                id: 1,
+                name: 'Алла',
+                title: 'Пингвины',
+                date: new Date(Date.now()).toLocaleString(),
+            },
+            {
+                id: 2,
+                name: 'Данна',
+                title: 'Грифон',
+                date: new Date(Date.now()).toLocaleString(),
+            },
+            {
+                id: 3,
+                name: 'Малафей',
+                title: 'Выдры',
+                date: new Date(Date.now()).toLocaleString(),
+            },
+        ],
     },
     {
-        id: 2,
-        name: 'Данна',
-        title: 'Грифон',
-        date: Date.now().toLocaleString(),
-    },
-    {
-        id: 3,
-        name: 'Малафей',
-        title: 'Выдры',
-        date: Date.now().toLocaleString(),
+        title: 'Насекомые',
+        data: [
+            {
+                id: 4,
+                name: 'Данил',
+                title: 'Жук',
+                date: new Date(Date.now()).toLocaleString(),
+            },
+        ],
     },
 ];

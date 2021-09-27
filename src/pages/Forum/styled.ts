@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { ITheme } from '../../../ui/themes';
 import { Button } from '../../../ui/components/Button';
+import { Table } from '../../../ui/components/Table/Table';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -10,14 +11,17 @@ export const Wrapper = styled.div`
     text-align: center;
 `;
 
-export const Title = styled.h2<ITheme>`
+export const Title = styled.h1<ITheme>`
     margin-bottom: 10px;
     color: ${({ theme }) => theme.colors.text};
 `;
 
-export const Table = styled.table<ITheme>`
-    width: 700px;
-    color: ${({ theme }) => theme.colors.textInversion};
+export const Category = styled.h3<ITheme>`
+    margin-bottom: 10px;
+    color: ${({ theme }) => theme.colors.text};
+`;
+
+export const TableForum = styled(Table)`
     border-spacing: 0 5px;
 `;
 

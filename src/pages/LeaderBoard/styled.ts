@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ITheme } from '../../../ui/themes';
 import { Button } from '../../../ui/components/Button';
 import { colors } from '../../../ui/colors';
+import { Table } from '../../../ui/components/Table/Table';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -16,10 +17,8 @@ export const Title = styled.h2<ITheme>`
     color: ${({ theme }) => theme.colors.text};
 `;
 
-export const Table = styled.table<ITheme>`
+export const LeaderTable = styled(Table)`
     border-spacing: 0 10px;
-    width: 700px;
-    color: ${({ theme }) => theme.colors.textInversion};
 `;
 
 export const BackButton = styled(Button)`
