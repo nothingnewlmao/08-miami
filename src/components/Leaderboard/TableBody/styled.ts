@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { colors } from 'ui/colors';
+import { StyledTd, StyledTr } from 'uicomponents/Table/TableElements/TableElements';
 
-export const BodyTr = styled.tr`
+export const BodyTr = styled(StyledTr)`
     background: ${colors.primary};
 `;
 
-export const BodyTd = styled.td`
+export const BodyTd = styled(StyledTd)`
     width: 33%;
-    height: 50px;
+
     &:first-child {
         border-bottom-left-radius: 10px;
         border-top-left-radius: 10px;

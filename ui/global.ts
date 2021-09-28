@@ -18,4 +18,8 @@ export const GlobalStyles = createGlobalStyle<ITheme>`
           color: ${colors.danger};
       }
   }
+
+  html, #root, .app, body {
+    height: 100%;
+}
 `;

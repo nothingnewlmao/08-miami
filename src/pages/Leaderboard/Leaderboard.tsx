@@ -1,19 +1,20 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { TableHead } from 'components/TableHead/TableHead';
-import { TableBody } from 'components/TableBody/TableBody';
+import { fakeElements } from 'pages/LeaderBoard/fakeData';
+import { Wrapper } from 'uicomponents/Wrapper/styled';
+import { TableHead } from 'components/Leaderboard/TableHead/TableHead';
+import { TableBody } from 'components/Leaderboard/TableBody/TableBody';
 import * as Styled from './styled';
-import { fakeElements } from './fakeData';
 
 export const Leaderboard: FC = () => (
-    <Styled.Wrapper>
+    <Wrapper>
         <Styled.Title>LeaderBoard</Styled.Title>
-        <Styled.Table>
+        <Styled.LeaderTable>
             <TableHead />
             <TableBody elements={fakeElements} />
-        </Styled.Table>
+        </Styled.LeaderTable>
         <Styled.BackButton size="l">
             <Link to="/">Домой</Link>
         </Styled.BackButton>
-    </Styled.Wrapper>
+    </Wrapper>
 );

@@ -2,10 +2,11 @@ import React, { FC, useState } from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
-import { Wrapper } from 'pages/Leaderboard/styled';
 import { Link, useHistory } from 'react-router-dom';
 import AuthApi from 'api/Auth/auth';
 import TObjectLiteral from 'types/ObjectLiteral';
+import { Link } from 'react-router-dom';
+import { Wrapper } from 'uicomponents/Wrapper/styled';
 
 export const SignUp: FC = () => {
     const formRef = React.createRef<HTMLFormElement>();

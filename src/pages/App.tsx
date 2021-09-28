@@ -11,10 +11,10 @@ import { themes } from 'ui/themes';
 import { SignUp } from 'pages/SignUp';
 import { Example } from 'pages/Example/Example';
 import { Leaderboard } from 'pages/Leaderboard';
-import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { LoadingPage } from 'pages/LoadingPage';
-import { ErrorMessage } from 'pages/ErrorMessage';
 import { GamePage } from 'pages/GamePage';
+import { Forum } from 'pages/Forum';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
@@ -41,8 +41,8 @@ const App: FC = () => {
                             <Route path="/loading">
                                 <LoadingPage />
                             </Route>
-                            <Route path="/error">
-                                <ErrorMessage />
+                            <Route path="/forum">
+                                <Forum />
                             </Route>
                             <Redirect to="/" />
                         </Switch>

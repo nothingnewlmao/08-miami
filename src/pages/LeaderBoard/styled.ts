@@ -4,13 +4,21 @@ import { Button } from 'uicomponents/Button';
 import { colors } from 'ui/colors';
 import { Table } from 'uicomponents/Table/Table';
 
+export const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+`;
+
 export const Title = styled.h2<ITheme>`
     margin-bottom: 10px;
     color: ${({ theme }) => theme.colors.text};
 `;
 
 export const LeaderTable = styled(Table)`
-    border-spacing: 0 8px;
+    border-spacing: 0 10px;
 `;
 
 export const BackButton = styled(Button)`
