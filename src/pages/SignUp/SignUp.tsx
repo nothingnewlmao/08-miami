@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
-import { Wrapper } from 'pages/Leaderboard/styled';
 import { Link } from 'react-router-dom';
+import { Wrapper } from 'uicomponents/Wrapper/styled';
 
 export const SignUp: FC = () => {
     const ref = React.createRef<HTMLInputElement>();
