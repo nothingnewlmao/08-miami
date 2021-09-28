@@ -5,7 +5,6 @@ import { Button } from 'uicomponents/Button';
 import { Link, useHistory } from 'react-router-dom';
 import AuthApi from 'api/Auth/auth';
 import TObjectLiteral from 'types/ObjectLiteral';
-import { Link } from 'react-router-dom';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 
 export const SignUp: FC = () => {
@@ -69,7 +68,7 @@ export const SignUp: FC = () => {
     const handleSubmit = () => {
         AuthApi.signup(inputsValues)
             .then(() => history.push('/'))
-            .catch(err => setErrorMsg(err.message));
+            .catch((err) => setErrorMsg(err.message));
     };
     return (
         <Wrapper className="sign-up">

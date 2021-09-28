@@ -44,8 +44,7 @@ export const StyledInput = styled.input<ITheme>`
     }
 
     &:focus {
-        border-bottom-color: ${({ theme }) =>
-            theme.colors.inputs.borderHoverColor};
+        border-bottom-color: ${({ theme }) => theme.colors.inputs.borderHoverColor};
 
         & + label {
             font-size: 12px;
