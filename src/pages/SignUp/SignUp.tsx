@@ -68,7 +68,7 @@ export const SignUp: FC = () => {
     const handleSubmit = () => {
         AuthApi.signup(inputsValues)
             .then(() => history.push('/'))
-            .catch((err) => setErrorMsg(err.message));
+            .catch(err => setErrorMsg(err.message));
     };
     return (
         <Wrapper className="sign-up">

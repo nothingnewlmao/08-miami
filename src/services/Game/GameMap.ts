@@ -24,9 +24,9 @@ export class GameMap {
     ): number {
         for (let i = this.mapField.length - 1; i >= 0; i -= 1) {
             if (
-                ballY < containerHeight - (i + 1) * this.blockHeight
-                && ballX >= this.mapField[0][0] * this.blockWidth
-                && ballX <= this.mapField[0][1] * this.blockWidth
+                ballY < containerHeight - (i + 1) * this.blockHeight &&
+                ballX >= this.mapField[0][0] * this.blockWidth &&
+                ballX <= this.mapField[0][1] * this.blockWidth
             ) {
                 return containerHeight - (i + 1) * this.blockHeight;
             }
@@ -64,7 +64,8 @@ export class GameMap {
                 // eslint-disable-next-line no-continue
                 continue;
             }
-            const [leftestBlockNum, rightestBlockInSchemesNum] = this.mapField[i];
+            const [leftestBlockNum, rightestBlockInSchemesNum] =
+                this.mapField[i];
             const rightestBlockNum = Math.min(
                 rightestBlockInSchemesNum,
                 fullBlocksCount,
