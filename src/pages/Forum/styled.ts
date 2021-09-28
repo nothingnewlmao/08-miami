@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ITheme } from '../../../ui/themes';
-import { Button } from '../../../ui/components/Button';
-import { Table } from '../../../ui/components/Table/Table';
+import { ITheme } from 'ui/themes';
+import { Button } from 'ui/components';
+import { Table } from 'uicomponents/Table/Table';
 
 export const Wrapper = styled.div`
     display: flex;
