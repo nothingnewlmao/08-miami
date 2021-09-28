@@ -16,10 +16,10 @@ export const StyledInputWrapper = styled.div<ITheme>`
 
     & label {
         position: absolute;
-        top: -15px;
+        top: -14px;
         left: 0;
         color: ${({ theme }) => theme.colors.inputs.label};
-        margin-bottom: 5px;
+        margin-bottom: 6px;
         transition: all 0.3s ease;
         font-size: 12px;
         z-index: -1;
@@ -27,8 +27,8 @@ export const StyledInputWrapper = styled.div<ITheme>`
 `;
 
 export const StyledInput = styled.input<ITheme>`
-    font-size: 13px;
-    padding-bottom: 7px;
+    font-size: 12px;
+    padding-bottom: 6px;
     box-sizing: border-box;
     outline: none;
     background-image: none;
