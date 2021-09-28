@@ -10,7 +10,7 @@ export const Title = styled.h2<ITheme>`
 `;
 
 export const LeaderTable = styled(Table)`
-    border-spacing: 0 10px;
+    border-spacing: 0 8px;
 `;
 
 export const BackButton = styled(Button)`
