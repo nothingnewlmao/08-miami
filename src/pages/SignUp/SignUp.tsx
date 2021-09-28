@@ -68,7 +68,7 @@ export const SignUp: FC = () => {
     const handleSubmit = () => {
         AuthApi.signup(inputsValues)
             .then(() => history.push('/'))
-            .catch(err => setErrorMsg(err.message));
+            .catch((err) => setErrorMsg(err.message));
     };
     return (
         <Wrapper className="sign-up">
@@ -80,7 +80,7 @@ export const SignUp: FC = () => {
                 </div>
                 <div>
                     <Button view="primaryFlat">
-                        <Link to="/">Уже есть аккаунт</Link>
+                        <Link to="/sign-in">Уже есть аккаунт</Link>
                     </Button>
                 </div>
             </Form>

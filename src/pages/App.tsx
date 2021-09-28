@@ -14,6 +14,7 @@ import { Leaderboard } from 'pages/Leaderboard';
 import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
+import { SignIn } from 'pages/SignIn';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
 const App: FC = () => {
@@ -43,6 +44,9 @@ const App: FC = () => {
                             </Route>
                             <Route path="/forum">
                                 <Forum />
+                            </Route>
+                            <Route path="/sign-in">
+                                <SignIn />
                             </Route>
                             <Redirect to="/" />
                         </Switch>
