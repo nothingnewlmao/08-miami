@@ -13,4 +13,8 @@ export const GlobalStyles = createGlobalStyle<ITheme>`
         height: 100%;
     }
   }
+
+  html, #root, .app, body {
+    height: 100%;
+}
 `;
