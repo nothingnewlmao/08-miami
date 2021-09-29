@@ -15,6 +15,11 @@ import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://ya-praktikum.tech/api/v2/';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.withCredentials = true;
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);

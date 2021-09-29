@@ -3,16 +3,11 @@ import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
 import { Link, useHistory } from 'react-router-dom';
-import AuthApi from 'api/Auth/auth';
 import TObjectLiteral from 'types/ObjectLiteral';
-import { Link } from 'react-router-dom';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
+import axios from 'axios';
 
 export const SignUp: FC = () => {
-    const formRef = React.createRef<HTMLFormElement>();
-    const title = 'Регистрация';
-    const error = '';
-
     const inputs: TObjectLiteral = {
         email: {
             label: 'Почта',
@@ -47,12 +42,13 @@ export const SignUp: FC = () => {
     );
 
     const [inputsValues, setInputsValue] = useState(formData);
-    const [errorMsg, setErrorMsg] = useState(error);
+    const [errorMsg, setErrorMsg] = useState('');
 
     const renderInputs = Object.entries(inputsValues).map(([key, value]) => {
         const { label, type } = inputs[key];
         return (
             <Input
+                key={key}
                 label={label}
                 value={value}
                 name={key}
@@ -67,13 +63,25 @@ export const SignUp: FC = () => {
     const history = useHistory();
 
     const handleSubmit = () => {
-        AuthApi.signup(inputsValues)
-            .then(() => history.push('/'))
-            .catch(err => setErrorMsg(err.message));
+        axios
+            .post('auth/signup', JSON.stringify(inputsValues))
+            .then(() => {
+                history.push('/');
+            })
+            .catch(err => {
+                console.log(err.response);
+                const {
+                    error,
+                    reason
+                } = err.response.data;
+
+                setErrorMsg(`${error}: ${reason}`);
+            });
     };
+
     return (
         <Wrapper className="sign-up">
-            <Form ref={formRef} title={title} handleSubmit={handleSubmit}>
+            <Form title="Регистрация" handleSubmit={handleSubmit}>
                 {renderInputs}
                 {errorMsg ? errorBlock : ''}
                 <div>
