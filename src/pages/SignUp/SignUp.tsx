@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
@@ -62,22 +62,18 @@ export const SignUp: FC = () => {
 
     const history = useHistory();
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
         axios
             .post('auth/signup', JSON.stringify(inputsValues))
             .then(() => {
                 history.push('/');
             })
             .catch(err => {
-                console.log(err.response);
-                const {
-                    error,
-                    reason
-                } = err.response.data;
+                const { error, reason } = err.response.data;
 
                 setErrorMsg(`${error}: ${reason}`);
             });
-    };
+    }, []);
 
     return (
         <Wrapper className="sign-up">
