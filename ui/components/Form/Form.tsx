@@ -39,6 +39,7 @@ export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
 
         const onSubmit = (event: React.SyntheticEvent & { target: any }) => {
             event.preventDefault();
+            
             if (handleSubmit) {
                 handleSubmit();
             }
