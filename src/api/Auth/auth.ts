@@ -10,7 +10,7 @@ const AuthApi = {
             .then(res => {
                 const { error, reason, id } = res;
 
-                if (id === undefined) {
+                if (typeof id === 'undefined') {
                     throw new Error(`${error}: ${reason}`);
                 }
 
