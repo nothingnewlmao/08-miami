@@ -1,4 +1,6 @@
-import React, { FC, useState, useCallback, useMemo } from 'react';
+import React, {
+    FC, useState, useCallback,
+} from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
@@ -7,15 +9,20 @@ import TObjectLiteral from 'types/ObjectLiteral';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 import axios from 'axios';
 
+function useFormFields<T>(initialValues: T) {
+    const [formFields, setFormFields] = useState<T>(initialValues);
+    const createChangeHandler = (key: keyof T) => (
+        e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        const { value } = e.target;
+        setFormFields((prev: T) => ({ ...prev, [key]: value }));
+    };
+    return { formFields, createChangeHandler };
+}
+
 export const SignUp: FC = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const errorBlock = <div className="-error">{errorMsg}</div>;
-
-    const useFormField = (initialValue: string = '') => {
-        const [val, setVal] = useState(initialValue);
-        const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setVal(e.target.value), []);
-        return { val, onChange };
-    };
 
     const inputs: TObjectLiteral = {
         email: {
@@ -46,16 +53,15 @@ export const SignUp: FC = () => {
         },
     };
 
-    const formFields = Object.fromEntries(
-        Object.entries(inputs).map(([key, { value }]) => {
-            const formField = useFormField(value);
-            return [key, formField];
-        })
+    const inputsForSend = Object.fromEntries(
+        Object.entries(inputs).map(([key, { value }]) => [key, value]),
     );
+
+    const { formFields, createChangeHandler } = useFormFields(inputsForSend);
 
     const renderedInputs = Object.entries(inputs).map(([key, v]) => {
         const { label, type } = v;
-        const { val, onChange } = formFields[key];
+        const { val } = formFields[key];
         return (
             <Input
                 key={key}
@@ -63,28 +69,25 @@ export const SignUp: FC = () => {
                 value={val}
                 name={key}
                 type={type}
-                onChange={onChange}
+                onChange={createChangeHandler(key)}
             />
         );
     });
-
-    const formData = useMemo(() => Object.fromEntries(
-        Object.entries(formFields).map(([key, { val }]) => [key, val])), [formFields]);
 
     const history = useHistory();
 
     const handleSubmit = useCallback(() => {
         axios
-            .post('auth/signup', JSON.stringify(formData))
+            .post('auth/signup', JSON.stringify(formFields))
             .then(() => {
                 history.push('/');
             })
-            .catch(err => {
+            .catch((err) => {
                 const { error, reason } = err.response.data;
 
                 setErrorMsg(`${error}: ${reason}`);
             });
-    }, []);
+    }, [formFields]);
 
     return (
         <Wrapper className="sign-up">
