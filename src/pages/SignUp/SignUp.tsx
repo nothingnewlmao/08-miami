@@ -1,16 +1,26 @@
-import React, { FC, useState } from 'react';
+import React, {
+    FC, useState, useCallback,
+} from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
-import { Link, useHistory } from 'react-router-dom';
-import AuthApi from 'api/Auth/auth';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import TObjectLiteral from 'types/ObjectLiteral';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
+import { Error } from 'uicomponents/Error/styled';
+import axios from 'axios';
 
-export const SignUp: FC = () => {
-    const formRef = React.createRef<HTMLFormElement>();
-    const title = 'Регистрация';
-    const error = '';
+function useFormFields<T>(initialValues: T) {
+    const [formFields, setFormFields] = useState<T>(initialValues);
+    const createChangeHandler = (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setFormFields((prev: T) => ({ ...prev, [key]: value }));
+    };
+    return { formFields, createChangeHandler };
+}
+
+const SignUp: FC<RouteComponentProps> = ({ history }) => {
+    const [errorMsg, setErrorMsg] = useState('');
 
     const inputs: TObjectLiteral = {
         email: {
@@ -41,40 +51,45 @@ export const SignUp: FC = () => {
         },
     };
 
-    const formData = Object.fromEntries(
+    const inputsForSend = Object.fromEntries(
         Object.entries(inputs).map(([key, { value }]) => [key, value]),
     );
 
-    const [inputsValues, setInputsValue] = useState(formData);
-    const [errorMsg, setErrorMsg] = useState(error);
+    const { formFields, createChangeHandler } = useFormFields(inputsForSend);
 
-    const renderInputs = Object.entries(inputsValues).map(([key, value]) => {
-        const { label, type } = inputs[key];
+    const renderedInputs = Object.entries(inputs).map(([key, v]) => {
+        const { label, type } = v;
+        const { val } = formFields[key];
         return (
             <Input
+                key={key}
                 label={label}
-                value={value}
+                value={val}
                 name={key}
                 type={type}
-                setInputsValue={setInputsValue}
+                onChange={createChangeHandler(key)}
             />
         );
     });
 
-    const errorBlock = <div className="-error">{errorMsg}</div>;
+    const handleSubmit = useCallback(() => {
+        axios
+            .post('auth/signup', JSON.stringify(formFields))
+            .then(() => {
+                history.push('/');
+            })
+            .catch((err) => {
+                const { error, reason } = err.response.data;
 
-    const history = useHistory();
+                setErrorMsg(`${error}: ${reason}`);
+            });
+    }, [formFields]);
 
-    const handleSubmit = () => {
-        AuthApi.signup(inputsValues)
-            .then(() => history.push('/'))
-            .catch((err) => setErrorMsg(err.message));
-    };
     return (
         <Wrapper className="sign-up">
-            <Form ref={formRef} title={title} handleSubmit={handleSubmit}>
-                {renderInputs}
-                {errorMsg ? errorBlock : ''}
+            <Form title="Регистрация" handleSubmit={handleSubmit}>
+                {renderedInputs}
+                {errorMsg ? <Error>{errorMsg}</Error> : ''}
                 <div>
                     <Button type="submit">Регистрация</Button>
                 </div>
@@ -87,3 +102,5 @@ export const SignUp: FC = () => {
         </Wrapper>
     );
 };
+
+export const SignUpWithRouter = withRouter(SignUp);

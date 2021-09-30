@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
-import { SignUp } from 'pages/SignUp';
+import { SignUpWithRouter } from 'pages/SignUp';
 import { Example } from 'pages/Example/Example';
 import { Leaderboard } from 'pages/Leaderboard';
 import { LoadingPage } from 'pages/LoadingPage';
@@ -16,6 +16,11 @@ import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
 import { SignIn } from 'pages/SignIn';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://ya-praktikum.tech/api/v2/';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.withCredentials = true;
 
 const App: FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(themes.light);
@@ -34,7 +39,7 @@ const App: FC = () => {
                                 <Leaderboard />
                             </Route>
                             <Route path="/sign-up">
-                                <SignUp />
+                                <SignUpWithRouter />
                             </Route>
                             <Route path="/game">
                                 <GamePage />
