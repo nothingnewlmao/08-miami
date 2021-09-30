@@ -1,6 +1,4 @@
-import React, {
-    FC, useState, useCallback,
-} from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
@@ -9,15 +7,7 @@ import TObjectLiteral from 'types/ObjectLiteral';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 import { Error } from 'uicomponents/Error/styled';
 import axios from 'axios';
-
-function useFormFields<T>(initialValues: T) {
-    const [formFields, setFormFields] = useState<T>(initialValues);
-    const createChangeHandler = (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setFormFields((prev: T) => ({ ...prev, [key]: value }));
-    };
-    return { formFields, createChangeHandler };
-}
+import { useFormFields } from 'utils/createFormFields';
 
 const SignUp: FC<RouteComponentProps> = ({ history }) => {
     const [errorMsg, setErrorMsg] = useState('');

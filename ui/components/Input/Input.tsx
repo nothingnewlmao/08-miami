@@ -55,13 +55,7 @@ export const StyledInput = styled.input<ITheme>`
 
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
-        const {
-            children,
-            label = '',
-            name = '',
-            onChange,
-            ...rest
-        } = props;
+        const { children, label = '', name = '', onChange, ...rest } = props;
 
         return (
             <StyledInputWrapper>
