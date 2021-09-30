@@ -4,7 +4,7 @@ import React, {
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import TObjectLiteral from 'types/ObjectLiteral';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 import { Error } from 'uicomponents/Error/styled';
@@ -12,16 +12,14 @@ import axios from 'axios';
 
 function useFormFields<T>(initialValues: T) {
     const [formFields, setFormFields] = useState<T>(initialValues);
-    const createChangeHandler = (key: keyof T) => (
-        e: React.ChangeEvent<HTMLInputElement>,
-    ) => {
+    const createChangeHandler = (key: keyof T) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setFormFields((prev: T) => ({ ...prev, [key]: value }));
     };
     return { formFields, createChangeHandler };
 }
 
-export const SignUp: FC = () => {
+const SignUp: FC<RouteComponentProps> = ({ history }) => {
     const [errorMsg, setErrorMsg] = useState('');
 
     const inputs: TObjectLiteral = {
@@ -74,8 +72,6 @@ export const SignUp: FC = () => {
         );
     });
 
-    const history = useHistory();
-
     const handleSubmit = useCallback(() => {
         axios
             .post('auth/signup', JSON.stringify(formFields))
@@ -106,3 +102,5 @@ export const SignUp: FC = () => {
         </Wrapper>
     );
 };
+
+export const SignUpWithRouter = withRouter(SignUp);
