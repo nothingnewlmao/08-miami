@@ -7,6 +7,7 @@ import { Button } from 'uicomponents/Button';
 import { Link, useHistory } from 'react-router-dom';
 import TObjectLiteral from 'types/ObjectLiteral';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
+import { Error } from 'uicomponents/Error/styled';
 import axios from 'axios';
 
 function useFormFields<T>(initialValues: T) {
@@ -22,7 +23,6 @@ function useFormFields<T>(initialValues: T) {
 
 export const SignUp: FC = () => {
     const [errorMsg, setErrorMsg] = useState('');
-    const errorBlock = <div className="-error">{errorMsg}</div>;
 
     const inputs: TObjectLiteral = {
         email: {
@@ -93,7 +93,7 @@ export const SignUp: FC = () => {
         <Wrapper className="sign-up">
             <Form title="Регистрация" handleSubmit={handleSubmit}>
                 {renderedInputs}
-                {errorMsg ? errorBlock : ''}
+                {errorMsg ? <Error>{errorMsg}</Error> : ''}
                 <div>
                     <Button type="submit">Регистрация</Button>
                 </div>
