@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useMemo } from 'react';
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
@@ -8,6 +8,15 @@ import { Wrapper } from 'uicomponents/Wrapper/styled';
 import axios from 'axios';
 
 export const SignUp: FC = () => {
+    const [errorMsg, setErrorMsg] = useState('');
+    const errorBlock = <div className="-error">{errorMsg}</div>;
+
+    const useFormField = (initialValue: string = '') => {
+        const [val, setVal] = useState(initialValue);
+        const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setVal(e.target.value), []);
+        return { val, onChange };
+    };
+
     const inputs: TObjectLiteral = {
         email: {
             label: 'Почта',
@@ -37,34 +46,36 @@ export const SignUp: FC = () => {
         },
     };
 
-    const formData = Object.fromEntries(
-        Object.entries(inputs).map(([key, { value }]) => [key, value]),
+    const formFields = Object.fromEntries(
+        Object.entries(inputs).map(([key, { value }]) => {
+            const formField = useFormField(value);
+            return [key, formField];
+        })
     );
 
-    const [inputsValues, setInputsValue] = useState(formData);
-    const [errorMsg, setErrorMsg] = useState('');
-
-    const renderInputs = Object.entries(inputsValues).map(([key, value]) => {
-        const { label, type } = inputs[key];
+    const renderedInputs = Object.entries(inputs).map(([key, v]) => {
+        const { label, type } = v;
+        const { val, onChange } = formFields[key];
         return (
             <Input
                 key={key}
                 label={label}
-                value={value}
+                value={val}
                 name={key}
                 type={type}
-                setInputsValue={setInputsValue}
+                onChange={onChange}
             />
         );
     });
 
-    const errorBlock = <div className="-error">{errorMsg}</div>;
+    const formData = useMemo(() => Object.fromEntries(
+        Object.entries(formFields).map(([key, { val }]) => [key, val])), [formFields]);
 
     const history = useHistory();
 
     const handleSubmit = useCallback(() => {
         axios
-            .post('auth/signup', JSON.stringify(inputsValues))
+            .post('auth/signup', JSON.stringify(formData))
             .then(() => {
                 history.push('/');
             })
@@ -78,7 +89,7 @@ export const SignUp: FC = () => {
     return (
         <Wrapper className="sign-up">
             <Form title="Регистрация" handleSubmit={handleSubmit}>
-                {renderInputs}
+                {renderedInputs}
                 {errorMsg ? errorBlock : ''}
                 <div>
                     <Button type="submit">Регистрация</Button>
