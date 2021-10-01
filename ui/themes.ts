@@ -1,4 +1,4 @@
-import { buttonViews } from 'uicomponents/Button/buttonViews';
+import { buttonViews } from 'ui/components/BaseButton/buttonViews';
 import { inputViews } from 'uicomponents/Input/inputViews';
 
 import { colors } from './colors';

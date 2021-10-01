@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
+import { Title } from 'ui/components/Title';
+
 import { colors } from '../../../ui/colors';
-import { Button } from '../../../ui/components';
+import { BaseButton } from '../../../ui/components';
 
 export const Wrapper = styled.div`
     height: 100%;
@@ -18,15 +20,14 @@ export const Container = styled.div`
     align-items: center;
 `;
 
-export const Title = styled.span`
+export const MainTitle = styled(Title)`
     font-size: 46px;
     color: ${colors.white};
     margin-bottom: 100px;
 `;
 
-export const MenuButton = styled(Button)`
+export const MenuButton = styled(BaseButton)`
     width: 200px;
-    color: ${colors.white};
     text-decoration: none;
     background-color: ${colors.primary};
     margin-bottom: 10px;

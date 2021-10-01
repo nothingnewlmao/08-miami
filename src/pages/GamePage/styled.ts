@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 import { colors } from 'ui/colors';
 
-import { Button } from 'uicomponents/Button';
-
 export const Wrapper = styled.div`
     display: flex;
     height: 100vh;
@@ -21,13 +19,4 @@ export const GamePanel = styled.div`
     display: flex;
     align-items: center;
     box-sizing: border-box;
-`;
-
-export const BackButton = styled(Button)`
-    background-color: ${colors.danger};
-
-    & a {
-        text-decoration: none;
-        color: ${colors.white};
-    }
 `;

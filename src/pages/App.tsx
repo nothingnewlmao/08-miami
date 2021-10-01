@@ -16,8 +16,10 @@ import { HomePage } from 'pages/HomePage';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
-import { themes } from 'ui/themes';
 import { GlobalStyles } from 'ui/global';
+import { themes } from 'ui/themes';
+
+import { UserPage } from './UserPage';
 
 const App: FC = () => (
     <ErrorBoundary>
@@ -43,6 +45,9 @@ const App: FC = () => (
                         </Route>
                         <Route path="/forum">
                             <Forum />
+                        </Route>
+                        <Route path="/user">
+                            <UserPage />
                         </Route>
                         <Redirect to="/" />
                     </Switch>
