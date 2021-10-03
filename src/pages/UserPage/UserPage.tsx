@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { Wrapper } from 'uicomponents/Wrapper/styled';
 import { useHistory } from 'react-router-dom';
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
 import { UserInfoTable } from 'components/UserInfo/UserInfoTable';
@@ -65,7 +64,6 @@ export const UserPage: FC = () => {
         <Styled.CustomWrapper>
             <GoBackColumn clickHandler={backTo} />
             {tableDict[activeTable]}
-            <Wrapper className="user-page" />
         </Styled.CustomWrapper>
     );
 };

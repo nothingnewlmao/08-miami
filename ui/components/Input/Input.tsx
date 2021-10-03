@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
+
 import { ITheme } from 'ui/themes';
-import { TStyledInput } from 'uicomponents/Input/types';
 import { colors } from 'ui/colors';
+
+import { TStyledInput } from 'uicomponents/Input/types';
 
 export const StyledInputWrapper = styled.div<ITheme>`
     position: relative;
@@ -62,7 +64,8 @@ export const StyledError = styled.div`
 
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
-        const { children, label = '', ...rest } = props;
+        const { children, label = '', name, ...rest } = props;
+
         return (
             <StyledInputWrapper>
                 <StyledInput
