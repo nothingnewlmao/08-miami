@@ -1,30 +1,71 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
-import { BackButton } from 'ui/components/BackButton';
-import { BaseButton } from 'ui/components';
-import { Link } from 'react-router-dom';
-import { Title } from 'ui/components/Title';
+import { useHistory } from 'react-router-dom';
+import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
+import { UserInfoTable } from 'components/UserInfo/UserInfoTable';
+import { ChangeUserInfoTable } from 'components/UserInfo/ChangeUserInfoTable';
+import { ChangeUserPasswordTable } from 'components/UserInfo/ChangeUserPasswordTable';
+import * as Styled from './styled';
 
-interface IUser {
-    id: string;
-    name: string;
-    record: number;
+export interface IUser {
+    firstName: string;
+    lastName: string;
+    login: string;
+    email: string;
+    phone: string;
 }
 
+type TActiveTableName = 'info' | 'changeInfo' | 'changePassword';
+
 export const UserPage: FC = () => {
+    const [activeTable, setActiveTable] = useState<TActiveTableName>('info');
+
+    const history = useHistory();
+
     const user: IUser = {
-        id: 'user_id_1',
-        name: 'Тот самый пользователь',
-        record: 100500,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@doe.com',
+        login: 'JD',
+        phone: '555-1234',
+    };
+
+    const backTo = () => {
+        switch (activeTable) {
+            case 'changeInfo':
+            case 'changePassword':
+                setActiveTable('info');
+                break;
+            case 'info':
+                history.push('/');
+                break;
+            default:
+                history.push('/');
+        }
+    };
+
+    const tableDict: { [key: string]: JSX.Element } = {
+        info: (
+            <UserInfoTable
+                user={user}
+                changeInfo={() => setActiveTable('changeInfo')}
+                changePassword={() => {
+                    setActiveTable('changePassword');
+                }}
+                quitHandler={() => {}}
+            >
+                Hello
+            </UserInfoTable>
+        ),
+        changeInfo: <ChangeUserInfoTable user={user} saveChanges={() => {}} />,
+        changePassword: <ChangeUserPasswordTable saveChanges={() => {}} />,
     };
 
     return (
-        <Wrapper className="user-page">
-            <Title>Здравствуй, {user.name}</Title>
-            <BaseButton size="s">Выйти</BaseButton>
-            <BackButton size="l">
-                <Link to="/"> Домой </Link>
-            </BackButton>
-        </Wrapper>
+        <Styled.CustomWrapper>
+            <GoBackColumn clickHandler={backTo} />
+            {tableDict[activeTable]}
+            <Wrapper className="user-page" />
+        </Styled.CustomWrapper>
     );
 };
