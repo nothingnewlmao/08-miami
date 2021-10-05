@@ -42,6 +42,7 @@ module.exports = {
             pages: path.resolve(__dirname, 'src/pages/'),
             api: path.resolve(__dirname, 'src/api'),
             services: path.resolve(__dirname, 'src/services/'),
+            utils: path.resolve(__dirname, 'src/utils/'),
         },
     },
     plugins: [

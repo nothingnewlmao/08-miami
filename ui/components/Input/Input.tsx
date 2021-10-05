@@ -15,10 +15,10 @@ export const StyledInputWrapper = styled.div<ITheme>`
 
     & label {
         position: absolute;
-        top: -15px;
+        top: -14px;
         left: 0;
         color: ${({ theme }) => theme.colors.inputs.label};
-        margin-bottom: 5px;
+        margin-bottom: 6px;
         transition: all 0.3s ease;
         font-size: 12px;
         z-index: -1;
@@ -26,8 +26,8 @@ export const StyledInputWrapper = styled.div<ITheme>`
 `;
 
 export const StyledInput = styled.input<ITheme>`
-    font-size: 13px;
-    padding-bottom: 7px;
+    font-size: 12px;
+    padding-bottom: 6px;
     box-sizing: border-box;
     outline: none;
     background-image: none;
@@ -43,7 +43,8 @@ export const StyledInput = styled.input<ITheme>`
     }
 
     &:focus {
-        border-bottom-color: ${({ theme }) => theme.colors.inputs.borderHoverColor};
+        border-bottom-color: ${({ theme }) =>
+            theme.colors.inputs.borderHoverColor};
 
         & + label {
             font-size: 12px;
@@ -54,13 +55,7 @@ export const StyledInput = styled.input<ITheme>`
 
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
-        const {
-            children,
-            label = '',
-            name = '',
-            onChange,
-            ...rest
-        } = props;
+        const { children, label = '', name = '', onChange, ...rest } = props;
 
         return (
             <StyledInputWrapper>

@@ -2,10 +2,9 @@ import React, { FC } from 'react';
 import { Button } from 'uicomponents/Button';
 import { themes } from 'ui/themes';
 import { Input } from 'uicomponents/Input';
+import { TSetThemeCb } from 'pages/Example/types';
 
-export const Example: FC<{ setTheme: (val: typeof themes.light) => void }> = ({
-    setTheme,
-}) => {
+export const Example: FC<TSetThemeCb> = ({ setTheme }) => {
     const changeThemeToLight = () => {
         setTheme(themes.light);
     };

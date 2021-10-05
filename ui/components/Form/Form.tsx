@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { ITheme } from 'ui/themes';
 import { TStyledForm } from 'uicomponents/Form/types';
+import { Error } from 'uicomponents/Error/styled';
 
 export const StyledForm = styled.form<ITheme>`
     padding: 50px 30px 20px;
@@ -23,18 +24,16 @@ export const StyledForm = styled.form<ITheme>`
     & button {
         width: 100%;
     }
-
-    & .-error {
-        text-align: center;
-        margin: 12px;
-        font-size: 13px;
-    }
 `;
 
 export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
     (props, ref) => {
         const {
-            children, title = '', handleSubmit, ...rest
+            children,
+            title = '',
+            error,
+            handleSubmit,
+            ...rest
         } = props;
 
         const onSubmit = (event: React.SyntheticEvent & { target: any }) => {
@@ -49,6 +48,7 @@ export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
             <StyledForm ref={ref} {...rest} onSubmit={onSubmit}>
                 <div className="title">{title}</div>
                 {children}
+                {error ? <Error>{error}</Error> : ''}
             </StyledForm>
         );
     },

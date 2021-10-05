@@ -1,37 +1,18 @@
-import React, { FC, useState, useCallback } from 'react';
-import { Input } from 'uicomponents/Input';
-import { Form } from 'uicomponents/Form';
-import { Button } from 'uicomponents/Button';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { FC, useCallback, useState } from 'react';
 import TObjectLiteral from 'types/ObjectLiteral';
+import { Button, Input } from 'ui/components';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
-import { Error } from 'uicomponents/Error/styled';
-import axios from 'axios';
+import { Form } from 'uicomponents/Form';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { useFormFields } from 'utils/createFormFields';
+import axios from 'axios';
 
-const SignUp: FC<RouteComponentProps> = ({ history }) => {
+const SignIn: FC<RouteComponentProps> = ({ history }) => {
     const [errorMsg, setErrorMsg] = useState('');
 
     const inputs: TObjectLiteral = {
-        email: {
-            label: 'Почта',
-            value: '',
-            type: 'email',
-        },
         login: {
             label: 'Логин',
-            value: '',
-        },
-        first_name: {
-            label: 'Имя',
-            value: '',
-        },
-        second_name: {
-            label: 'Фамилия',
-            value: '',
-        },
-        phone: {
-            label: 'Телефон',
             value: '',
         },
         password: {
@@ -64,7 +45,7 @@ const SignUp: FC<RouteComponentProps> = ({ history }) => {
 
     const handleSubmit = useCallback(() => {
         axios
-            .post('auth/signup', JSON.stringify(formFields))
+            .post('auth/signin', JSON.stringify(formFields))
             .then(() => {
                 history.push('/');
             })
@@ -76,16 +57,19 @@ const SignUp: FC<RouteComponentProps> = ({ history }) => {
     }, [formFields]);
 
     return (
-        <Wrapper className="sign-up">
-            <Form title="Регистрация" handleSubmit={handleSubmit}>
+        <Wrapper>
+            <Form
+                title="Вход"
+                handleSubmit={handleSubmit}
+                error={errorMsg}
+            >
                 {renderedInputs}
-                {errorMsg ? <Error>{errorMsg}</Error> : ''}
                 <div>
-                    <Button type="submit">Регистрация</Button>
+                    <Button type="submit">Вход</Button>
                 </div>
                 <div>
                     <Button view="primaryFlat">
-                        <Link to="/sign-in">Уже есть аккаунт</Link>
+                        <Link to="/sign-up">Нет аккаунта?</Link>
                     </Button>
                 </div>
             </Form>
@@ -93,4 +77,4 @@ const SignUp: FC<RouteComponentProps> = ({ history }) => {
     );
 };
 
-export const SignUpWithRouter = withRouter(SignUp);
+export const SignInWithRouter = withRouter(SignIn);

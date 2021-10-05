@@ -14,6 +14,7 @@ import { Leaderboard } from 'pages/Leaderboard';
 import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
+import { SignInWithRouter } from 'pages/SignIn';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import axios from 'axios';
 
@@ -48,6 +49,9 @@ const App: FC = () => {
                             </Route>
                             <Route path="/forum">
                                 <Forum />
+                            </Route>
+                            <Route path="/sign-in">
+                                <SignInWithRouter />
                             </Route>
                             <Redirect to="/" />
                         </Switch>
