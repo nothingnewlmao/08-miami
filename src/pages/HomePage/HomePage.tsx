@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+
 import * as Styled from './styled';
 
 export const HomePage: FC = () => (

@@ -57,7 +57,54 @@
       }
     ],
     "react/jsx-indent-props": [2, 4],
-    "react/jsx-closing-bracket-location": [2, "tag-aligned"]
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"],
+    "import/order": [
+      "error", {
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal",
+            "position":  "after"
+          },
+          {
+            "pattern": "ui/**",
+            "group": "internal",
+            "position":  "after"
+          },
+          {
+            "pattern": "uicomponents/**",
+            "group": "internal",
+            "position":  "after"
+          },
+          {
+            "pattern": "components/**",
+            "group": "internal",
+            "position":  "after"
+          },
+          {
+            "pattern": "pages/**",
+            "group": "internal",
+            "position":  "after"
+          },
+          {
+            "pattern": "services/**",
+            "group": "internal",
+            "position":  "after"
+          }
+        ],
+        "groups": [
+          "external",
+          "builtin",
+          "internal",
+          "sibling",
+          "parent",
+          "index",
+          "type",
+          "object"
+        ],
+        "newlines-between": "always"
+      }
+    ]
   },
   "parserOptions": {
     "project": "./tsconfig.json"

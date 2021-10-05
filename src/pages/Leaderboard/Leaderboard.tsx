@@ -4,6 +4,7 @@ import { fakeElements } from 'pages/LeaderBoard/fakeData';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 import { TableHead } from 'components/Leaderboard/TableHead/TableHead';
 import { TableBody } from 'components/Leaderboard/TableBody/TableBody';
+
 import * as Styled from './styled';
 
 export const Leaderboard: FC = () => (
