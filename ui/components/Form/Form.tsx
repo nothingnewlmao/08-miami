@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ITheme } from 'ui/themes';
 import { TStyledForm } from 'uicomponents/Form/types';
 import { Error } from 'uicomponents/Error/styled';
@@ -36,13 +36,16 @@ export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
             ...rest
         } = props;
 
-        const onSubmit = (event: React.SyntheticEvent & { target: any }) => {
-            event.preventDefault();
+        const onSubmit = useCallback(
+            (event: React.SyntheticEvent) => {
+                event.preventDefault();
 
-            if (handleSubmit) {
-                handleSubmit();
-            }
-        };
+                if (handleSubmit) {
+                    handleSubmit();
+                }
+            },
+            [handleSubmit],
+        );
 
         return (
             <StyledForm ref={ref} {...rest} onSubmit={onSubmit}>

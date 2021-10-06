@@ -5,7 +5,6 @@ import { Button } from 'uicomponents/Button';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import TObjectLiteral from 'types/ObjectLiteral';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
-import { Error } from 'uicomponents/Error/styled';
 import axios from 'axios';
 import { useFormFields } from 'utils/createFormFields';
 
@@ -77,9 +76,12 @@ const SignUp: FC<RouteComponentProps> = ({ history }) => {
 
     return (
         <Wrapper className="sign-up">
-            <Form title="Регистрация" handleSubmit={handleSubmit}>
+            <Form
+                title="Регистрация"
+                handleSubmit={handleSubmit}
+                error={errorMsg}
+            >
                 {renderedInputs}
-                {errorMsg ? <Error>{errorMsg}</Error> : ''}
                 <div>
                     <Button type="submit">Регистрация</Button>
                 </div>
