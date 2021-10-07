@@ -31,6 +31,8 @@ export const GamePage: FC = () => {
 
     useEffect(() => () => backgroundMusic.pause(), []);
 
+    useEffect(() => () => backgroundMusic.pause(), []);
+
     return (
         <Styled.Wrapper>
             <GameField
