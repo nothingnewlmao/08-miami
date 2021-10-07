@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
 import { UserInfoTable } from 'components/UserInfo/UserInfoTable';
 import { ChangeUserInfoTable } from 'components/UserInfo/ChangeUserInfoTable';
@@ -16,10 +16,8 @@ export interface IUser {
 
 type TActiveTableName = 'info' | 'changeInfo' | 'changePassword';
 
-export const UserPage: FC = () => {
+const UserPage: FC<RouteComponentProps> = ({ history }) => {
     const [activeTable, setActiveTable] = useState<TActiveTableName>('info');
-
-    const history = useHistory();
 
     const user: IUser = {
         firstName: 'John',
@@ -67,3 +65,5 @@ export const UserPage: FC = () => {
         </Styled.CustomWrapper>
     );
 };
+
+export const UserPageWithRouter = withRouter(UserPage);

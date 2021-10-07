@@ -1,3 +1,1 @@
-import { UserPage } from './UserPage';
-
-export { UserPage };
+export { UserPageWithRouter } from './UserPage';

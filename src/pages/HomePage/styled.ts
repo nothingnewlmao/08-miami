@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 import { Title } from 'ui/components/Title';
-
-import { colors } from '../../../ui/colors';
-import { BaseButton } from '../../../ui/components';
+import { colors } from 'ui/colors';
+import { BaseButton } from 'ui/components';
 
 export const Wrapper = styled.div`
     height: 100%;
