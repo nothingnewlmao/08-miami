@@ -1,4 +1,5 @@
 import axios from 'axios';
+import TObjectLiteral from 'types/TObjectLiteral';
 
 const axiosInstance = axios.create({
     baseURL: 'https://ya-praktikum.tech/api/v2/',
@@ -8,4 +9,6 @@ const axiosInstance = axios.create({
     },
 });
 
-export default axiosInstance;
+export const signUp = (data: TObjectLiteral) => axiosInstance.post('auth/signup', JSON.stringify(data));
+
+export const signIn = (data: TObjectLiteral) => axiosInstance.post('auth/signin', JSON.stringify(data));
