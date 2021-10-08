@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Button } from 'uicomponents/Button';
 import { themes } from 'ui/themes';
-import { Input } from 'uicomponents/Input';
 
 export const Example: FC<{ setTheme: (val: typeof themes.light) => void }> = ({
     setTheme,
@@ -22,7 +21,6 @@ export const Example: FC<{ setTheme: (val: typeof themes.light) => void }> = ({
             <Button size="s" view="warning" onClick={changeThemeToBlue}>
                 Голубая тема
             </Button>
-            <Input placeholder="hello" />
         </>
     );
 };

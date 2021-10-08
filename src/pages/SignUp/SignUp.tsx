@@ -1,34 +1,64 @@
 import React, { FC } from 'react';
-import { Input } from 'uicomponents/Input';
-import { Form } from 'uicomponents/Form';
-import { Button } from 'uicomponents/Button';
-import { Link } from 'react-router-dom';
-import { Wrapper } from 'uicomponents/Wrapper/styled';
+import * as Yup from 'yup';
+import { Form, Formik } from 'formik';
+import { Button, Input } from 'ui/components';
+import * as Styled from './styled';
 
-export const SignUp: FC = () => {
-    const ref = React.createRef<HTMLInputElement>();
-    const formRef = React.createRef<HTMLFormElement>();
-    const title = 'Регистрация';
-
-    return (
-        <Wrapper className="sign-up">
-            <Form ref={formRef} title={title}>
-                <Input ref={ref} label="Почта" name="ema!il" />
-                <Input label="Логин" name="login" />
-                <Input label="Имя" name="first_name" />
-                <Input label="Фамилия" name="last_name" />
-                <Input label="Телефон" name="phone" />
-                <Input label="Пароль" type="password" name="password" />
-                <Input label="Пароль (ещё раз)" type="password" />
-                <div>
-                    <Button type="submit">Регистрация</Button>
-                </div>
-                <div>
-                    <Button view="primaryFlat">
-                        <Link to="/">Уже есть аккаунт</Link>
-                    </Button>
-                </div>
-            </Form>
-        </Wrapper>
-    );
+const initialValues = {
+    firstName: 'kdfgkdf',
+    lastName: 'gello',
 };
+
+const SignupSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    lastName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+});
+
+export const SignUp: FC = () => (
+    <Formik
+        enableReinitialize
+        initialValues={initialValues}
+        onSubmit={() => {
+            console.log(1);
+        }}
+        validationSchema={SignupSchema}
+    >
+        {({ errors, touched, values, handleChange }) => (
+            <Form>
+                <Styled.DynamicFormBox>
+                    <Styled.FieldsWrapper>
+                        <Input
+                            label="Имя"
+                            name="firstName"
+                            value={values.firstName}
+                            onChange={handleChange}
+                            errorText={
+                                errors.firstName && touched.firstName
+                                    ? errors.firstName
+                                    : null
+                            }
+                        />
+                        <Input
+                            label="Фамилия"
+                            name="lastName"
+                            value={values.lastName}
+                            onChange={handleChange}
+                            errorText={
+                                errors.lastName && touched.lastName
+                                    ? errors.lastName
+                                    : null
+                            }
+                        />
+                    </Styled.FieldsWrapper>
+                    <Button type="submit">Присоединиться</Button>
+                </Styled.DynamicFormBox>
+            </Form>
+        )}
+    </Formik>
+);

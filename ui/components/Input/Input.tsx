@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import React from 'react';
 import { ITheme } from 'ui/themes';
 import { TStyledInput } from 'uicomponents/Input/types';
+import { colors } from 'ui/colors';
 
 export const StyledInputWrapper = styled.div<ITheme>`
     position: relative;
     margin: 32px 0;
+    font-size: 13px;
 
     & label,
     & input {
@@ -26,7 +28,6 @@ export const StyledInputWrapper = styled.div<ITheme>`
 `;
 
 export const StyledInput = styled.input<ITheme>`
-    font-size: 13px;
     padding-bottom: 7px;
     box-sizing: border-box;
     outline: none;
@@ -53,10 +54,14 @@ export const StyledInput = styled.input<ITheme>`
     }
 `;
 
+export const StyledError = styled.div`
+    color: ${colors.danger};
+    margin-top: 5px;
+`;
+
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
-        const { children, label = '', name, ...rest } = props;
-
+        const { children, label = '', ...rest } = props;
         return (
             <StyledInputWrapper>
                 <StyledInput
@@ -65,7 +70,8 @@ export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
                 >
                     {children}
                 </StyledInput>
-                <label htmlFor={name}>{label}</label>
+                <label htmlFor={rest.name}>{label}</label>
+                <StyledError>{rest.errorText}</StyledError>
             </StyledInputWrapper>
         );
     },
