@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
+
 import { ITheme } from 'ui/themes';
+
 import { TStyledInput } from 'uicomponents/Input/types';
 
 export const StyledInputWrapper = styled.div<ITheme>`

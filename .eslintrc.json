@@ -63,45 +63,36 @@
         "pathGroups": [
           {
             "pattern": "@/**",
-            "group": "internal",
-            "position":  "after"
-          },
-          {
-            "pattern": "ui/**",
-            "group": "internal",
-            "position":  "after"
-          },
-          {
-            "pattern": "uicomponents/**",
-            "group": "internal",
-            "position":  "after"
-          },
-          {
-            "pattern": "components/**",
-            "group": "internal",
+            "group": "external",
             "position":  "after"
           },
           {
             "pattern": "pages/**",
-            "group": "internal",
+            "group": "external",
+            "position":  "after"
+          },
+          {
+            "pattern": "components/**",
+            "group": "external",
             "position":  "after"
           },
           {
             "pattern": "services/**",
-            "group": "internal",
+            "group": "external",
+            "position":  "after"
+          },
+          {
+            "pattern": "ui/**",
+            "group": "external",
+            "position":  "after"
+          },
+          {
+            "pattern": "uicomponents/**",
+            "group": "external",
             "position":  "after"
           }
         ],
-        "groups": [
-          "external",
-          "builtin",
-          "internal",
-          "sibling",
-          "parent",
-          "index",
-          "type",
-          "object"
-        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
         "newlines-between": "always"
       }
     ]
