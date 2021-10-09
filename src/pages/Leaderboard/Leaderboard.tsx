@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+
 import { fakeElements } from 'pages/LeaderBoard/fakeData';
-import { Wrapper } from 'uicomponents/Wrapper/styled';
+
 import { TableHead } from 'components/Leaderboard/TableHead/TableHead';
 import { TableBody } from 'components/Leaderboard/TableBody/TableBody';
+
+import { Wrapper } from 'uicomponents/Wrapper/styled';
 
 import * as Styled from './styled';
 

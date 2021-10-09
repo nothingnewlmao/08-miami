@@ -59,37 +59,38 @@
     "react/jsx-indent-props": [2, 4],
     "react/jsx-closing-bracket-location": [2, "tag-aligned"],
     "import/order": [
-      "error", {
+      "error",
+      {
         "pathGroups": [
           {
             "pattern": "@/**",
             "group": "external",
-            "position":  "after"
+            "position": "after"
           },
           {
             "pattern": "pages/**",
             "group": "external",
-            "position":  "after"
+            "position": "after"
           },
           {
             "pattern": "components/**",
             "group": "external",
-            "position":  "after"
+            "position": "after"
           },
           {
             "pattern": "services/**",
             "group": "external",
-            "position":  "after"
+            "position": "after"
           },
           {
             "pattern": "ui/**",
             "group": "external",
-            "position":  "after"
+            "position": "after"
           },
           {
             "pattern": "uicomponents/**",
             "group": "external",
-            "position":  "after"
+            "position": "after"
           }
         ],
         "pathGroupsExcludedImportTypes": ["builtin"],
