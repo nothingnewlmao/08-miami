@@ -10,7 +10,10 @@ export interface IFormInputProps {
 export interface IInnerFormProps extends TWithoutSubmit {
     title: string;
     fields: IFormInputProps[];
-    handleSubmit: (values: FormikValues, history: RouteComponentProps['history']) => void;
+    handleSubmit: (
+        values: FormikValues,
+        history: RouteComponentProps['history'],
+    ) => void;
 }
 
 type TWithoutSubmit = Omit<FormikConfig<any>, 'onSubmit'>;

@@ -1,14 +1,17 @@
 import React from 'react';
-import {
-    Formik, Form,
-} from 'formik';
+import { Formik, Form } from 'formik';
 import { Button, Input } from 'ui/components';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { IInnerFormProps } from 'uicomponents/Form/types';
 import * as Styled from './styled';
 
 const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
-    fields, title, initialValues, validationSchema, history, handleSubmit,
+    fields,
+    title,
+    initialValues,
+    validationSchema,
+    history,
+    handleSubmit,
 }) => (
     <Formik
         onSubmit={(values) => {
