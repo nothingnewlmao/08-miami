@@ -1,39 +1,60 @@
-import styled from 'styled-components';
 import React from 'react';
-import { ITheme } from 'ui/themes';
-import { TStyledForm } from 'uicomponents/Form/types';
+import { FormikProps } from 'formik';
+import { Button, Input } from 'ui/components';
+import * as Styled from './styled';
 
-export const StyledForm = styled.form<ITheme>`
-    padding: 50px 30px 20px;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    border-radius: 12px;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 340px;
-    margin: 30px auto auto;
-    box-shadow: 0 0 6px #ccc;
-    text-align: left;
+interface IFormValues {
+    ['first_name']: string;
+    ['last_name']: string;
+    login: string;
+    email: string;
+    password: string;
+    phone: string;
+}
 
-    & .title {
-        text-align: center;
-        font-size: 20px;
-    }
+interface ITest {
+    label: string;
+    name: keyof IFormValues;
+}
 
-    & button {
-        width: 100%;
-    }
-`;
+interface IOtherProps {
+    title?: string;
+    fields?: ITest[];
+}
 
-export const Form = React.forwardRef<HTMLFormElement, TStyledForm>(
-    (props, ref) => {
-        const { children, title = '', ...rest } = props;
+export const InnerForm = (props: IOtherProps & FormikProps<IFormValues>) => {
+    const {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleSubmit,
+        title,
+        fields,
+    } = props;
 
-        return (
-            <StyledForm ref={ref} {...rest}>
-                <div className="title">{title}</div>
-                {children}
-            </StyledForm>
-        );
-    },
-);
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <Styled.DynamicFormBox>
+                    <Styled.Title>{title}</Styled.Title>
+                    <Styled.FieldsWrapper>
+                        {fields!.map((el) => (
+                            <Input
+                                key={el.name}
+                                label={el.label}
+                                name={el.name}
+                                value={values[el.name]}
+                                onChange={handleChange}
+                                errorText={errors[el.name] && touched[el.name]
+                                    ? errors[el.name]
+                                    : null}
+                            />
+                        ))}
+                    </Styled.FieldsWrapper>
+                    <Button type="submit">Присоединиться</Button>
+                </Styled.DynamicFormBox>
+            </form>
+        </div>
+    );
+};

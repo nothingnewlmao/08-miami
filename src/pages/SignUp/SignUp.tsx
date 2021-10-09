@@ -1,64 +1,59 @@
-import React, { FC } from 'react';
+// @ts-nocheck
+
 import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
-import { Button, Input } from 'ui/components';
-import * as Styled from './styled';
+import { withFormik } from 'formik';
+import { InnerForm } from 'uicomponents/Form';
+import React from 'react';
 
-const initialValues = {
-    firstName: 'kdfgkdf',
-    lastName: 'gello',
-};
+interface IFormValues {
+    ['first_name']: string;
+    ['last_name']: string;
+    login: string;
+    email: string;
+    password: string;
+    phone: string;
+}
 
-const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    lastName: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-});
+interface IMyFormProps {
+    initialFirstName?: string;
+    initialLastName?: string;
+    initialLogin?: string;
+    initialEmail?: string;
+    initialPassword?: string;
+    initialPhone?: string;
+}
 
-export const SignUp: FC = () => (
-    <Formik
-        enableReinitialize
-        initialValues={initialValues}
-        onSubmit={() => {
-            console.log(1);
-        }}
-        validationSchema={SignupSchema}
-    >
-        {({ errors, touched, values, handleChange }) => (
-            <Form>
-                <Styled.DynamicFormBox>
-                    <Styled.FieldsWrapper>
-                        <Input
-                            label="Имя"
-                            name="firstName"
-                            value={values.firstName}
-                            onChange={handleChange}
-                            errorText={
-                                errors.firstName && touched.firstName
-                                    ? errors.firstName
-                                    : null
-                            }
-                        />
-                        <Input
-                            label="Фамилия"
-                            name="lastName"
-                            value={values.lastName}
-                            onChange={handleChange}
-                            errorText={
-                                errors.lastName && touched.lastName
-                                    ? errors.lastName
-                                    : null
-                            }
-                        />
-                    </Styled.FieldsWrapper>
-                    <Button type="submit">Присоединиться</Button>
-                </Styled.DynamicFormBox>
-            </Form>
-        )}
-    </Formik>
+const SignUp = withFormik<IMyFormProps, IFormValues>({
+    mapPropsToValues: (props) => ({
+        first_name: props.initialFirstName || '',
+        last_name: props.initialLastName || '',
+        login: props.initialLogin || '',
+        email: props.initialEmail || '',
+        password: props.initialPassword || '',
+        phone: props.initialPhone || '',
+    }),
+
+    validationSchema: Yup.object().shape({
+        first_name: Yup.string()
+            .required('Name is required'),
+        last_name: Yup.string().required('Surname is required'),
+        login: Yup.string().required('Login is required'),
+        email: Yup.string().required('Email is required'),
+        password: Yup.string().required('Password is required'),
+        phone: Yup.string().required('Phone is required'),
+    }),
+
+    handleSubmit() {
+        // console.log(props.first_name, props.last_name);
+    },
+})(InnerForm);
+
+export const SignUpWithData = () => (
+    <SignUp
+        title="Регистрация"
+        fields={[{ label: 'Имя', name: 'first_name' }, { label: 'Фамилия', name: 'last_name' },
+            { label: 'Логин', name: 'login' },
+            { label: 'Email', name: 'email' }, { label: 'Пароль', name: 'password' },
+            { label: 'Телефон', name: 'phone' }]}
+    />
 );

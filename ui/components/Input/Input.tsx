@@ -8,6 +8,7 @@ export const StyledInputWrapper = styled.div<ITheme>`
     position: relative;
     margin: 32px 0;
     font-size: 13px;
+    width: 100%;
 
     & label,
     & input {
@@ -44,8 +45,7 @@ export const StyledInput = styled.input<ITheme>`
     }
 
     &:focus {
-        border-bottom-color: ${({ theme }) =>
-            theme.colors.inputs.borderHoverColor};
+        border-bottom-color: ${({ theme }) => theme.colors.inputs.borderHoverColor};
 
         & + label {
             font-size: 12px;

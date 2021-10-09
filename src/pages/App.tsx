@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
-import { SignUp } from 'pages/SignUp';
+import { SignUpWithData } from 'pages/SignUp';
 import { Example } from 'pages/Example/Example';
 import { Leaderboard } from 'pages/Leaderboard';
 import { LoadingPage } from 'pages/LoadingPage';
@@ -33,7 +33,7 @@ const App: FC = () => {
                                 <Leaderboard />
                             </Route>
                             <Route path="/sign-up">
-                                <SignUp />
+                                <SignUpWithData />
                             </Route>
                             <Route path="/game">
                                 <GamePage />
