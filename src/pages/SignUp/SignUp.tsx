@@ -1,59 +1,47 @@
-// @ts-nocheck
-
 import * as Yup from 'yup';
-import { withFormik } from 'formik';
-import { InnerForm } from 'uicomponents/Form';
+import { FormWithRouter } from 'uicomponents/Form';
 import React from 'react';
+import { signUp } from 'api/axios';
+import { FormikValues } from 'formik';
+import { RouteComponentProps } from 'react-router-dom';
 
-interface IFormValues {
-    ['first_name']: string;
-    ['last_name']: string;
-    login: string;
-    email: string;
-    password: string;
-    phone: string;
-}
+const validationSchema = Yup.object().shape({
+    first_name: Yup.string().required('Name is required'),
+    second_name: Yup.string().required('Surname is required'),
+    login: Yup.string().required('Login is required'),
+    email: Yup.string().email().required('Email is required'),
+    password: Yup.string().required('Password is required'),
+    phone: Yup.string().required('Phone is required'),
+});
 
-interface IMyFormProps {
-    initialFirstName?: string;
-    initialLastName?: string;
-    initialLogin?: string;
-    initialEmail?: string;
-    initialPassword?: string;
-    initialPhone?: string;
-}
+const handleSubmit = (values:FormikValues, history:RouteComponentProps['history']) => {
+    signUp(values).then(() => {
+        history.push('/');
+    }).catch((err) => console.log(err));
+};
 
-const SignUp = withFormik<IMyFormProps, IFormValues>({
-    mapPropsToValues: (props) => ({
-        first_name: props.initialFirstName || '',
-        last_name: props.initialLastName || '',
-        login: props.initialLogin || '',
-        email: props.initialEmail || '',
-        password: props.initialPassword || '',
-        phone: props.initialPhone || '',
-    }),
-
-    validationSchema: Yup.object().shape({
-        first_name: Yup.string()
-            .required('Name is required'),
-        last_name: Yup.string().required('Surname is required'),
-        login: Yup.string().required('Login is required'),
-        email: Yup.string().required('Email is required'),
-        password: Yup.string().required('Password is required'),
-        phone: Yup.string().required('Phone is required'),
-    }),
-
-    handleSubmit() {
-        // console.log(props.first_name, props.last_name);
-    },
-})(InnerForm);
+const initialValues = {
+    first_name: '',
+    second_name: '',
+    login: '',
+    email: '',
+    password: '',
+    phone: '',
+};
 
 export const SignUpWithData = () => (
-    <SignUp
+    <FormWithRouter
+        validationSchema={validationSchema}
+        initialValues={initialValues}
+        handleSubmit={handleSubmit}
         title="Регистрация"
-        fields={[{ label: 'Имя', name: 'first_name' }, { label: 'Фамилия', name: 'last_name' },
+        fields={[
+            { label: 'Имя', name: 'first_name' },
+            { label: 'Фамилия', name: 'second_name' },
             { label: 'Логин', name: 'login' },
-            { label: 'Email', name: 'email' }, { label: 'Пароль', name: 'password' },
-            { label: 'Телефон', name: 'phone' }]}
+            { label: 'Email', name: 'email' },
+            { label: 'Пароль', name: 'password', type: 'password' },
+            { label: 'Телефон', name: 'phone' },
+        ]}
     />
 );

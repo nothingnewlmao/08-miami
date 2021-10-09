@@ -1,15 +1,16 @@
-import { FormHTMLAttributes } from 'react';
-import * as Yup from 'yup';
+import { FormikConfig, FormikValues } from 'formik';
+import { RouteComponentProps } from 'react-router-dom';
 
-export interface IStyledForm extends IFormData, FormHTMLAttributes<HTMLElement> {}
-
-interface IValues {
-    firstName: string;
-    lastName: string;
+export interface IFormInputProps {
+    label: string;
+    name: string;
+    type?: string;
 }
 
-interface IFormData {
-    initialValues: IValues,
-    schema: Record<string, Yup.SchemaOf<string | object | boolean>>,
-    onSuccessfulSubmit: (data: Record<string, string>) => void;
+export interface IInnerFormProps extends TWithoutSubmit {
+    title: string;
+    fields: IFormInputProps[];
+    handleSubmit: (values: FormikValues, history: RouteComponentProps['history']) => void;
 }
+
+type TWithoutSubmit = Omit<FormikConfig<any>, 'onSubmit'>;
