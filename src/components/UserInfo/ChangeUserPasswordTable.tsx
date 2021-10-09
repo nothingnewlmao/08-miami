@@ -14,37 +14,33 @@ interface IChangeUserPasswordTableProps {
 export const ChangeUserPasswordTable: FC<IChangeUserPasswordTableProps> = ({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     saveChanges: _saveChanges,
-}) => {
-    const formRef = React.createRef<HTMLFormElement>();
+}) => (
+    <Styled.Container>
+        <form>
+            <Styled.TableWrapper>
+                <Styled.TableRow>
+                    <td>Старый пароль</td>
+                    <td>
+                        <Input label="key" type="password" />
+                    </td>
+                </Styled.TableRow>
+                <Styled.TableRow>
+                    <td>Новый пароль</td>
+                    <td>
+                        <Input label="key" type="password" />
+                    </td>
+                </Styled.TableRow>
+                <Styled.TableRow>
+                    <td>Новый пароль (опять)</td>
+                    <td>
+                        <Input label="key" type="password" />
+                    </td>
+                </Styled.TableRow>
+            </Styled.TableWrapper>
 
-    return (
-        <Styled.Container>
-            <form ref={formRef}>
-                <Styled.TableWrapper>
-                    <Styled.TableRow>
-                        <td>Старый пароль</td>
-                        <td>
-                            <Input label="key" type="password" />
-                        </td>
-                    </Styled.TableRow>
-                    <Styled.TableRow>
-                        <td>Новый пароль</td>
-                        <td>
-                            <Input label="key" type="password" />
-                        </td>
-                    </Styled.TableRow>
-                    <Styled.TableRow>
-                        <td>Новый пароль (опять)</td>
-                        <td>
-                            <Input label="key" type="password" />
-                        </td>
-                    </Styled.TableRow>
-                </Styled.TableWrapper>
-
-                <BaseButton view="primaryFlat" type="submit">
-                    Сохранить данные
-                </BaseButton>
-            </form>
-        </Styled.Container>
-    );
-};
+            <BaseButton view="primaryFlat" type="submit">
+                Сохранить данные
+            </BaseButton>
+        </form>
+    </Styled.Container>
+);

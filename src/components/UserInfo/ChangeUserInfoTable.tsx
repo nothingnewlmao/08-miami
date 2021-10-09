@@ -20,11 +20,9 @@ export const ChangeUserInfoTable: FC<IChangeUserInfoTableProps> = ({
         value,
     ]);
 
-    const formRef = React.createRef<HTMLFormElement>();
-
     return (
         <Styled.Container>
-            <form ref={formRef}>
+            <form>
                 <Styled.TableWrapper>
                     {userEntries.map(([key, value]) => (
                         <Styled.TableRow>
