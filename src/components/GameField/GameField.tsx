@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Game } from 'services/Game';
 import { useHistory } from 'react-router-dom';
+
+import { Game } from 'services/Game';
 
 export interface IGameFieldProps {
     fieldHeight?: number;

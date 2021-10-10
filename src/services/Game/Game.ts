@@ -61,8 +61,7 @@ export class Game {
             right: canvasRef.width + canvasRef.offsetLeft,
         };
 
-        const keydownCallback = (e: KeyboardEvent) =>
-            this.keys.set(e.key, true);
+        const keydownCallback = (e: KeyboardEvent) => this.keys.set(e.key, true);
         const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
         document.body.addEventListener('keydown', keydownCallback);
@@ -83,7 +82,9 @@ export class Game {
     animate() {
         requestAnimationFrame(this.animate.bind(this));
 
-        const { top, right, bottom, left } = this.canvasSides;
+        const {
+            top, right, bottom, left,
+        } = this.canvasSides;
 
         const { x: ballX, y: ballY } = this.ballPosition;
 
@@ -101,9 +102,9 @@ export class Game {
 
         if (this.keys.get('ArrowUp') || this.keys.get('w')) {
             if (
-                this.velY < 0.0001 &&
-                this.velY > -GAMER_SPEED &&
-                closestFloor - ballY < MAX_JUMP_HEIGHT
+                this.velY < 0.0001
+                && this.velY > -GAMER_SPEED
+                && closestFloor - ballY < MAX_JUMP_HEIGHT
             ) {
                 this.velY -= 6;
             }
@@ -146,10 +147,10 @@ export class Game {
     private checkWin(): void {
         const { x, y } = this.ballPosition;
         if (
-            x - GAMER_RAD < this.gameOverPoint.x &&
-            x + GAMER_RAD > this.gameOverPoint.x &&
-            y - GAMER_RAD < this.gameOverPoint.y &&
-            y + GAMER_RAD > this.gameOverPoint.y
+            x - GAMER_RAD < this.gameOverPoint.x
+            && x + GAMER_RAD > this.gameOverPoint.x
+            && y - GAMER_RAD < this.gameOverPoint.y
+            && y + GAMER_RAD > this.gameOverPoint.y
         ) {
             this.gameOverCallback();
         }
@@ -206,7 +207,9 @@ export class Game {
     }
 
     private drawBackground(): void {
-        const { top, right, bottom, left } = this.canvasSides;
+        const {
+            top, right, bottom, left,
+        } = this.canvasSides;
 
         const height = bottom - top;
         const width = right - left;
