@@ -1,35 +1,53 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import React from 'react';
+import { signUp } from 'api/axios';
+import { FormikValues } from 'formik';
+import { RouteComponentProps } from 'react-router-dom';
 
-import { Input } from 'uicomponents/Input';
-import { Form } from 'uicomponents/Form';
-import { Button } from 'uicomponents/Button';
-import { Wrapper } from 'uicomponents/Wrapper/styled';
+import { FormWithRouter } from 'uicomponents/Form';
 
-export const SignUp: FC = () => {
-    const ref = React.createRef<HTMLInputElement>();
-    const formRef = React.createRef<HTMLFormElement>();
-    const title = 'Регистрация';
+const validationSchema = Yup.object().shape({
+    first_name: Yup.string().required('Name is required'),
+    second_name: Yup.string().required('Surname is required'),
+    login: Yup.string().required('Login is required'),
+    email: Yup.string().email().required('Email is required'),
+    password: Yup.string().required('Password is required'),
+    phone: Yup.string().required('Phone is required'),
+});
 
-    return (
-        <Wrapper className="sign-up">
-            <Form ref={formRef} title={title}>
-                <Input ref={ref} label="Почта" name="ema!il" />
-                <Input label="Логин" name="login" />
-                <Input label="Имя" name="first_name" />
-                <Input label="Фамилия" name="last_name" />
-                <Input label="Телефон" name="phone" />
-                <Input label="Пароль" type="password" name="password" />
-                <Input label="Пароль (ещё раз)" type="password" />
-                <div>
-                    <Button type="submit">Регистрация</Button>
-                </div>
-                <div>
-                    <Button view="primaryFlat">
-                        <Link to="/">Уже есть аккаунт</Link>
-                    </Button>
-                </div>
-            </Form>
-        </Wrapper>
-    );
+const handleSubmit = (
+    values: FormikValues,
+    history: RouteComponentProps['history'],
+) => {
+    signUp(values)
+        .then(() => {
+            history.push('/');
+        })
+        .catch((err) => console.log(err));
 };
+
+const initialValues = {
+    first_name: '',
+    second_name: '',
+    login: '',
+    email: '',
+    password: '',
+    phone: '',
+};
+
+export const SignUpWithData = () => (
+    <FormWithRouter
+        validationSchema={validationSchema}
+        initialValues={initialValues}
+        handleSubmit={handleSubmit}
+        title="Регистрация"
+        fields={[
+            { label: 'Имя', name: 'first_name' },
+            { label: 'Фамилия', name: 'second_name' },
+            { label: 'Логин', name: 'login' },
+            { label: 'Email', name: 'email' },
+            { label: 'Пароль', name: 'password', type: 'password' },
+            { label: 'Телефон', name: 'phone' },
+        ]}
+    />
+);
