@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Input } from 'uicomponents/Input';
 import { Form } from 'uicomponents/Form';
 import { Button } from 'uicomponents/Button';
-import { Link } from 'react-router-dom';
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 
 export const SignUp: FC = () => {

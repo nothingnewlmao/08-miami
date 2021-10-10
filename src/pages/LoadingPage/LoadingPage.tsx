@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import * as Styled from './styled';
 
 export const LoadingPage: FC = () => {

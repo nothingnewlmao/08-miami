@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
+
 import { ITheme } from 'ui/themes';
+
 import { TStyledForm } from 'uicomponents/Form/types';
 
 export const StyledForm = styled.form<ITheme>`
