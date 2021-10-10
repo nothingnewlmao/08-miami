@@ -6,15 +6,18 @@ import {
     Switch,
     Redirect,
 } from 'react-router-dom';
-import { GlobalStyles } from 'ui/global';
-import { themes } from 'ui/themes';
+
 import { SignUpWithData } from 'pages/SignUp';
 import { Leaderboard } from 'pages/Leaderboard';
 import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
-import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { HomePage } from 'pages/HomePage';
+
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+
+import { themes } from 'ui/themes';
+import { GlobalStyles } from 'ui/global';
 
 const App: FC = () => (
     <ErrorBoundary>

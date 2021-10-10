@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import * as Styled from './styled';
 
 const headElements = ['Автор', 'Название', 'Дата публикации'];

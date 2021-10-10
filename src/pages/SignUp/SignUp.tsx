@@ -1,9 +1,10 @@
 import * as Yup from 'yup';
-import { FormWithRouter } from 'uicomponents/Form';
 import React from 'react';
 import { signUp } from 'api/axios';
 import { FormikValues } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
+
+import { FormWithRouter } from 'uicomponents/Form';
 
 const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('Name is required'),

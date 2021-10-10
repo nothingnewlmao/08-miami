@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ErrorMessage } from 'pages/ErrorMessage';
+
 import { IErrorBoundaryState, IErrorBoundaryProps } from './types';
 
 class ErrorBoundary extends React.Component<

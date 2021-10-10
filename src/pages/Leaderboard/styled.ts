@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+
 import { ITheme } from 'ui/themes';
-import { Button } from 'uicomponents/Button';
 import { colors } from 'ui/colors';
+
+import { Button } from 'uicomponents/Button';
 import { Table } from 'uicomponents/Table/Table';
 
 export const Wrapper = styled.div`

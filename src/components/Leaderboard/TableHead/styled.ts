@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { StyledTh } from 'uicomponents/Table/TableElements/TableElements';
 
 export const HeadTh = styled(StyledTh)`
