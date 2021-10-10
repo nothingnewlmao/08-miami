@@ -74,7 +74,7 @@ export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
                 >
                     {children}
                 </StyledInput>
-                <label htmlFor={rest.name}>{label}</label>
+                <label htmlFor={name}>{label}</label>
                 <StyledError>{rest.errorText}</StyledError>
             </StyledInputWrapper>
         );
