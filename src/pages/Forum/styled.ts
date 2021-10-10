@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 import { ITheme } from 'ui/themes';
-import { BaseButton } from 'ui/components';
-import { BackButton } from 'ui/components/BackButton';
-
-import { Table } from 'uicomponents/Table/Table';
+import { BackButton, BaseButton, Table } from 'ui/components';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -21,6 +18,7 @@ export const Category = styled.h3<ITheme>`
 
 export const TableForum = styled(Table)`
     border-spacing: 0 5px;
+    width: 700px;
 `;
 
 export const NewPostButton = styled(BaseButton)<ITheme>`

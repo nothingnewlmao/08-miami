@@ -1,9 +1,11 @@
 import React, { FC, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
 import { UserInfoTable } from 'components/UserInfo/UserInfoTable';
 import { ChangeUserInfoTable } from 'components/UserInfo/ChangeUserInfoTable';
 import { ChangeUserPasswordTable } from 'components/UserInfo/ChangeUserPasswordTable';
+
 import * as Styled from './styled';
 
 export interface IUser {

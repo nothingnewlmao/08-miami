@@ -1,6 +1,9 @@
-import { IUser } from 'pages/UserPage/UserPage';
 import React, { FC } from 'react';
+
+import { IUser } from 'pages/UserPage/UserPage';
+
 import { BaseButton } from 'ui/components';
+
 import { UserLabels } from './dictionary';
 import * as Styled from './styled';
 

@@ -7,6 +7,7 @@ import { TableHead } from 'components/Forum/TableHead';
 import { TextEditor } from 'components/Forum/TextEditor';
 
 import { Title } from 'ui/components/Title';
+import { BaseButton } from 'ui/components';
 
 import * as Styled from './styled';
 
@@ -26,13 +27,17 @@ export const Forum: FC = () => {
                 </>
             ))}
             {isOpen ? <TextEditor /> : null}
-            <Styled.NewPostButton size="l" onClick={() => setOpen(!isOpen)}>
+            <BaseButton
+                view="primaryFlat"
+                size="s"
+                onClick={() => setOpen(!isOpen)}
+            >
                 Новый пост
-            </Styled.NewPostButton>
+            </BaseButton>
 
-            <Styled.ForumBackButton size="l">
+            <BaseButton view="primaryFlat" size="s">
                 <Link to="/"> Домой </Link>
-            </Styled.ForumBackButton>
+            </BaseButton>
         </Styled.Wrapper>
     );
 };

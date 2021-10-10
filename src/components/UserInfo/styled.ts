@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { colors } from 'ui/colors';
 import { Wrapper } from 'ui/components/Wrapper/styled';
 

@@ -6,12 +6,12 @@ import { fakeElements } from 'pages/LeaderBoard/fakeData';
 import { TableHead } from 'components/Leaderboard/TableHead/TableHead';
 import { TableBody } from 'components/Leaderboard/TableBody/TableBody';
 
-import { BackButton } from 'ui/components/BackButton';
 import { Title } from 'ui/components/Title';
+import { BaseButton } from 'ui/components';
 
 import { Wrapper } from 'uicomponents/Wrapper/styled';
 
-import * as Styled from './styledComponents';
+import * as Styled from './styled';
 
 export const Leaderboard: FC = () => (
     <Wrapper>
@@ -20,8 +20,8 @@ export const Leaderboard: FC = () => (
             <TableHead />
             <TableBody elements={fakeElements} />
         </Styled.LeaderTable>
-        <BackButton size="l">
+        <BaseButton size="s" view="primaryFlat">
             <Link to="/">Домой</Link>
-        </BackButton>
+        </BaseButton>
     </Wrapper>
 );

@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
+
 import { BaseButton, Input } from 'ui/components';
+
 import * as Styled from './styled';
 
 interface INewPasswordOptions {
