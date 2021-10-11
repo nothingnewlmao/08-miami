@@ -5,7 +5,7 @@
 // eslint-disable-next-line no-restricted-globals
 const sw = self as ServiceWorkerGlobalScope & typeof globalThis;
 
-const CACHE_NAME = 'my-site-cache-v1';
+const CACHE_NAME = 'v1';
 
 const URLS = ['/', '/leaderboard', '/forum', '/sign-up', '/game', '/loading'];
 
