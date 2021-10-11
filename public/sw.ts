@@ -27,8 +27,8 @@ sw.addEventListener('install', (event) => {
 
 sw.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches.match(event.request).then((resp) => (
-            resp
+        caches.match(event.request).then(
+            (resp) => resp
                 || fetch(event.request).then((response) => {
                     const responseClone = response.clone();
                     caches.open(CACHE_NAME).then((cache) => {
@@ -36,17 +36,19 @@ sw.addEventListener('fetch', (event) => {
                     });
 
                     return response;
-                })
-        )),
+                }),
+        ),
     );
 });
 
 sw.addEventListener('activate', (event) => {
     event.waitUntil(
-        caches.keys().then((cacheNames) => Promise.all(
-            cacheNames
-                .filter(() => true)
-                .map((name) => caches.delete(name)),
-        )),
+        caches
+            .keys()
+            .then((cacheNames) => Promise.all(
+                cacheNames
+                    .filter(() => true)
+                    .map((name) => caches.delete(name)),
+            )),
     );
 });
