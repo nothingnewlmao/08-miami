@@ -20,6 +20,8 @@ import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { themes } from 'ui/themes';
 import { GlobalStyles } from 'ui/global';
 
+import { startServiceWorker } from '../../registerServiceWorker';
+
 const App: FC = () => (
     <ErrorBoundary>
         <Router>
@@ -57,3 +59,5 @@ const App: FC = () => (
 );
 
 export default App;
+
+startServiceWorker();

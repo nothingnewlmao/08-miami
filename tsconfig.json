@@ -36,7 +36,8 @@
     "./src/**/*.ts*",
     "./ui/**/*.ts*",
     "./webpack.config.js",
-    "./prettier.config.js"
+    "./prettier.config.js",
+    "./public/*.ts"
   ],
-  "exclude": ["**/*.js"]
+  "exclude": ["**/*.js", "*.js"]
 }

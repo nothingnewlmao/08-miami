@@ -8,7 +8,7 @@
       "single",
       { "avoidEscape": true, "allowTemplateLiterals": false }
     ],
-    "max-len": [2, 120],
+    "max-len": [2, 140],
     "max-params": [2, 3],
     "object-curly-spacing": [2, "always"],
     "indent": ["error", 4],
