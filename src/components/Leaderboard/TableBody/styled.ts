@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { colors } from 'ui/colors';
+
 import {
     StyledTd,
     StyledTr,

@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
+
 import { ITheme } from 'ui/themes';
-import { TStyledInput } from 'uicomponents/Input/types';
 import { colors } from 'ui/colors';
+
+import { TStyledInput } from 'uicomponents/Input/types';
 
 export const StyledInputWrapper = styled.div<ITheme>`
     position: relative;
@@ -45,8 +47,7 @@ export const StyledInput = styled.input<ITheme>`
     }
 
     &:focus {
-        border-bottom-color: ${({ theme }) =>
-            theme.colors.inputs.borderHoverColor};
+        border-bottom-color: ${({ theme }) => theme.colors.inputs.borderHoverColor};
 
         & + label {
             font-size: 12px;
