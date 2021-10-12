@@ -1,21 +1,25 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Game } from 'services/Game';
 
 export interface IGameFieldProps {
-    fieldHeight?: number;
-    fieldWidth?: number;
+    heightOffset?: number;
+    widthOffset?: number;
+    endTime: number;
+    setScore: (score: number) => void;
 }
 
 export const GameField: React.FC<IGameFieldProps> = ({
-    fieldHeight = window.innerHeight,
-    fieldWidth = window.innerWidth,
+    heightOffset = 0,
+    widthOffset = 0,
+    endTime,
+    setScore,
 }: IGameFieldProps) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
     const history = useHistory();
 
-    React.useEffect(() => {
+    useEffect(() => {
         const canvasElem = canvasRef.current;
 
         if (canvasElem) {
@@ -24,14 +28,12 @@ export const GameField: React.FC<IGameFieldProps> = ({
             const game = new Game({
                 canvasRef: canvasElem,
                 initPoint: {
-                    x: 100,
-                    y: 100,
-                },
-                gameOverPoint: {
-                    x: fieldWidth - 50,
-                    y: fieldHeight - 50,
+                    x: 0,
+                    y: 0,
                 },
                 gameOverCallback,
+                endTime,
+                setScore,
             });
             game.start();
 
@@ -43,5 +45,11 @@ export const GameField: React.FC<IGameFieldProps> = ({
         return () => {};
     }, [canvasRef]);
 
-    return <canvas ref={canvasRef} height={fieldHeight} width={fieldWidth} />;
+    return (
+        <canvas
+            ref={canvasRef}
+            height={window.innerHeight - heightOffset}
+            width={window.innerWidth - widthOffset}
+        />
+    );
 };

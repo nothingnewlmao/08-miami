@@ -1,20 +1,82 @@
+import { PERFECT_ONE } from './contants';
+import { IPoint } from './types';
+
 export class GameMap {
     ctx: CanvasRenderingContext2D;
 
-    static blockHeight = 25;
+    blockHeight: number = PERFECT_ONE;
 
-    static blockLineWidth = 1;
+    blockLineWidth = 1;
 
-    mapField: number[][] = [[0, Infinity]];
+    blockWidth: number = PERFECT_ONE;
 
-    blockWidth = 25;
+    mapField: number[][] = [
+        [0, 75],
+        [],
+        [],
+        [20, 30],
+        [],
+        [32, 38],
+        [40, 75],
+        [],
+        [],
+        [10, 45],
+        [],
+        [],
+        [10, 25],
+        [],
+        [],
+        [19, 40],
+        [],
+        [11, 19],
+    ];
 
-    blockHeight = GameMap.blockHeight;
-
-    blockLineWidth = GameMap.blockLineWidth;
+    blocksCount = 0;
 
     constructor(ctx: CanvasRenderingContext2D) {
         this.ctx = ctx;
+
+        this.blocksCount = this.mapField.reduce(
+            (acc, interval) =>
+                acc + (interval.length ? interval[1] - interval[0] : 0),
+            0,
+        );
+    }
+
+    randomBlock(): number {
+        return Date.now() % this.blocksCount;
+    }
+
+    findBlockCoordinates(): IPoint {
+        const blockNum = this.randomBlock();
+
+        let prevBlocksCount = 0;
+        let blockCountInRow = 0;
+        let heightLevel = 0;
+
+        for (let i = 0; i < this.mapField.length; i += 1) {
+            if (this.mapField[i].length === 0) {
+                continue;
+            }
+            if (
+                prevBlocksCount + this.mapField[i][1] > blockNum &&
+                prevBlocksCount + this.mapField[i][0] < blockNum
+            ) {
+                blockCountInRow = blockNum - prevBlocksCount;
+                heightLevel = i;
+                break;
+            } else {
+                prevBlocksCount += this.mapField[i][1] - this.mapField[i][0];
+            }
+        }
+
+        return {
+            x: blockCountInRow * PERFECT_ONE + PERFECT_ONE / 2,
+            y:
+                window.innerHeight -
+                (heightLevel + 1) * PERFECT_ONE -
+                PERFECT_ONE * 4,
+        };
     }
 
     closestFloor(
@@ -22,11 +84,12 @@ export class GameMap {
         ballY: number,
         containerHeight: number,
     ): number {
+        this.randomBlock();
         for (let i = this.mapField.length - 1; i >= 0; i -= 1) {
             if (
-                ballY < containerHeight - (i + 1) * this.blockHeight
-                && ballX >= this.mapField[0][0] * this.blockWidth
-                && ballX <= this.mapField[0][1] * this.blockWidth
+                ballY < containerHeight - (i + 1) * this.blockHeight &&
+                ballX >= this.mapField[i][0] * this.blockWidth &&
+                ballX <= this.mapField[i][1] * this.blockWidth
             ) {
                 return containerHeight - (i + 1) * this.blockHeight;
             }
@@ -64,7 +127,8 @@ export class GameMap {
                 // eslint-disable-next-line no-continue
                 continue;
             }
-            const [leftestBlockNum, rightestBlockInSchemesNum] = this.mapField[i];
+            const [leftestBlockNum, rightestBlockInSchemesNum] =
+                this.mapField[i];
             const rightestBlockNum = Math.min(
                 rightestBlockInSchemesNum,
                 fullBlocksCount,
