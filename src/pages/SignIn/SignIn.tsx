@@ -9,13 +9,10 @@ import { resetPending, setPending } from 'store/userProfile/slice';
 
 import { FormWithRouter } from 'uicomponents/Form';
 
-const validationSchema = Yup.object()
-    .shape({
-        login: Yup.string()
-            .required('Введите логин'),
-        password: Yup.string()
-            .required('Введите пароль'),
-    });
+const validationSchema = Yup.object().shape({
+    login: Yup.string().required('Введите логин'),
+    password: Yup.string().required('Введите пароль'),
+});
 
 const initialValues = {
     login: '',
