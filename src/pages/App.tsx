@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import {
     BrowserRouter as Router,
+    Redirect,
     Route,
     Switch,
-    Redirect,
 } from 'react-router-dom';
 
 import { SignUpWithData } from 'pages/SignUp';
@@ -13,6 +13,7 @@ import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
 import { HomePage } from 'pages/HomePage';
+import { SignInWithData } from 'pages/SignIn';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
@@ -34,6 +35,9 @@ const App: FC = () => (
                         </Route>
                         <Route path="/sign-up">
                             <SignUpWithData />
+                        </Route>
+                        <Route path="/sign-in">
+                            <SignInWithData />
                         </Route>
                         <Route path="/game">
                             <GamePage />
