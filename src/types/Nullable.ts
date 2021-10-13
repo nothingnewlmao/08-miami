@@ -1,1 +1,2 @@
-export type TNullable<T> = T | null;
+type TNullable<T> = T | null;
+export default TNullable;

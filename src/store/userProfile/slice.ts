@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { TNullable } from 'types/Nullable';
 import { createSlice } from '@reduxjs/toolkit';
+import TNullable from 'types/Nullable';
+import TObjectLiteral from 'types/TObjectLiteral';
 
 type TUserProfile = {
     data: {
@@ -11,8 +12,6 @@ type TUserProfile = {
         phone: TNullable<string>;
     };
     pending: boolean;
-    loaded: boolean;
-    failed: boolean;
     error: TNullable<string>;
 };
 
