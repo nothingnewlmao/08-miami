@@ -19,9 +19,9 @@ import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 
-import { UserPageWithRouter } from './UserPage';
-
 import { startServiceWorker } from '../../registerServiceWorker';
+
+import { UserPageWithRouter } from './UserPage';
 
 const App: FC = () => (
     <ErrorBoundary>

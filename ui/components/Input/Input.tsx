@@ -63,7 +63,9 @@ export const StyledError = styled.div`
 
 export const Input = React.forwardRef<HTMLInputElement, TStyledInput>(
     ({ ...props }, ref) => {
-        const { children, label = '', name, ...rest } = props;
+        const {
+            children, label = '', name, ...rest
+        } = props;
 
         return (
             <StyledInputWrapper>

@@ -17,7 +17,7 @@ export const Forum: FC = () => {
         <Styled.Wrapper>
             <Title>Форум</Title>
 
-            {fakeElements.map(el => (
+            {fakeElements.map((el) => (
                 <>
                     <Styled.Category>{el.title}</Styled.Category>
                     <Styled.TableForum>

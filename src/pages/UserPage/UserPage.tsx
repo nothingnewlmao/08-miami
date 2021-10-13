@@ -31,15 +31,15 @@ const UserPage: FC<RouteComponentProps> = ({ history }) => {
 
     const backTo = () => {
         switch (activeTable) {
-            case 'changeInfo':
-            case 'changePassword':
-                setActiveTable('info');
-                break;
-            case 'info':
-                history.push('/');
-                break;
-            default:
-                history.push('/');
+        case 'changeInfo':
+        case 'changePassword':
+            setActiveTable('info');
+            break;
+        case 'info':
+            history.push('/');
+            break;
+        default:
+            history.push('/');
         }
     };
 

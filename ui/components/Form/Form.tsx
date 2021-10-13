@@ -17,18 +17,20 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
     handleSubmit,
 }) => (
     <Formik
-        onSubmit={values => {
+        onSubmit={(values) => {
             handleSubmit(values, history);
         }}
         initialValues={initialValues}
         validationSchema={validationSchema}
     >
-        {({ values, errors, touched, handleChange }) => (
+        {({
+            values, errors, touched, handleChange,
+        }) => (
             <Form>
                 <Styled.DynamicFormBox>
                     <Styled.Title>{title}</Styled.Title>
                     <Styled.FieldsWrapper>
-                        {fields!.map(el => (
+                        {fields!.map((el) => (
                             <Input
                                 key={el.name}
                                 label={el.label}
