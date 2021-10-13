@@ -19,16 +19,14 @@ import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 
-import { startServiceWorker } from '../../registerServiceWorker';
-
 import { UserPageWithRouter } from './UserPage';
 
 const App: FC = () => (
-    <ErrorBoundary>
-        <Router>
-            <div className="app">
-                <ThemeProvider theme={themes.light}>
-                    <GlobalStyles />
+    <ThemeProvider theme={themes.light}>
+        <GlobalStyles />
+        <ErrorBoundary>
+            <Router>
+                <div className="app">
                     <Switch>
                         <Route exact path="/">
                             <HomePage />
@@ -53,12 +51,10 @@ const App: FC = () => (
                         </Route>
                         <Redirect to="/" />
                     </Switch>
-                </ThemeProvider>
-            </div>
-        </Router>
-    </ErrorBoundary>
+                </div>
+            </Router>
+        </ErrorBoundary>
+    </ThemeProvider>
 );
 
 export default App;
-
-startServiceWorker();
