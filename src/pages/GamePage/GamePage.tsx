@@ -5,7 +5,7 @@ import { GameField } from 'components/GameField/GameField';
 
 import { backgroundMusic } from 'services/BackgroundMusic/BackgroundMusic';
 
-import { Button } from 'ui/components';
+import { BackButton, BaseButton } from 'ui/components';
 
 import * as Styled from './styled';
 
@@ -20,12 +20,12 @@ export const GamePage: FC = () => {
         <Styled.Wrapper>
             <GameField fieldHeight={gameHeight} fieldWidth={gameWidth} />
             <Styled.GamePanel>
-                <Styled.BackButton size="s">
+                <BackButton size="s">
                     <Link to="/">На главную страницу</Link>
-                </Styled.BackButton>
-                <Button onClick={() => backgroundMusic.toggleMusic()}>
+                </BackButton>
+                <BaseButton onClick={() => backgroundMusic.toggleMusic()}>
                     Toggle music
-                </Button>
+                </BaseButton>
             </Styled.GamePanel>
         </Styled.Wrapper>
     );

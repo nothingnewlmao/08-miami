@@ -10,7 +10,7 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "es2017", "webworker"],
     "moduleResolution": "node",
     "importHelpers": true,
     "strict": true,
