@@ -9,5 +9,6 @@ ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
+    // @ts-ignore
     document.getElementById('root'),
 );

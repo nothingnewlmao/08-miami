@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { Button, Input } from 'ui/components';
+import { Button, Input, StyledError } from 'ui/components';
 
 import { IInnerFormProps } from 'uicomponents/Form/types';
 
@@ -15,6 +15,7 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
     validationSchema,
     history,
     handleSubmit,
+    errorText,
 }) => (
     <Formik
         onSubmit={(values) => {
@@ -47,6 +48,7 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
                         ))}
                     </Styled.FieldsWrapper>
                     <Button type="submit">Присоединиться</Button>
+                    <StyledError>{errorText}</StyledError>
                 </Styled.DynamicFormBox>
             </Form>
         )}

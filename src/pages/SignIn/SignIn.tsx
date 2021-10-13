@@ -1,11 +1,8 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { signIn } from 'api/axios';
 import { FormikValues } from 'formik';
-import { RouteComponentProps } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
-import { resetPending, setPending } from 'store/userProfile/slice';
+import { useSelector, useDispatch } from 'react-redux';
+import { TRootState } from 'store';
 
 import { FormWithRouter } from 'uicomponents/Form';
 
@@ -32,21 +29,11 @@ const fields = [
 ];
 
 export const SignInWithData = () => {
-    const dispatch = useDispatch();
+    const errorText = useSelector((state: TRootState) => state.user.error);
 
-    const handleSubmit = (
-        values: FormikValues,
-        history: RouteComponentProps['history'],
-    ) => {
-        dispatch(setPending());
-        signIn(values)
-            .then(() => {
-                history.push('/');
-            })
-            .catch((err) => console.log(err))
-            .finally(() => {
-                dispatch(resetPending());
-            });
+    const dispatch = useDispatch();
+    const handleSubmit = (values: FormikValues) => {
+        dispatch({ type: 'SIGN_IN', payload: values });
     };
 
     return (
@@ -56,6 +43,7 @@ export const SignInWithData = () => {
             title="Вход"
             fields={fields}
             initialValues={initialValues}
+            errorText={errorText}
         />
     );
 };

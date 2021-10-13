@@ -1,5 +1,6 @@
 import { FormikConfig, FormikValues } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
+import { TNullable } from 'types/Nullable';
 
 export interface IFormInputProps {
     label: string;
@@ -14,6 +15,7 @@ export interface IInnerFormProps extends TWithoutSubmit {
         values: FormikValues,
         history: RouteComponentProps['history'],
     ) => void;
+    errorText?: TNullable<string>;
 }
 
 type TWithoutSubmit = Omit<FormikConfig<any>, 'onSubmit'>;

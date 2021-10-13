@@ -13,6 +13,7 @@ type TUserProfile = {
     pending: boolean;
     loaded: boolean;
     failed: boolean;
+    error: TNullable<string>;
 };
 
 const initialState: TUserProfile = {
@@ -24,8 +25,9 @@ const initialState: TUserProfile = {
         phone: '',
     },
     pending: false,
-    failed: false,
     loaded: false,
+    failed: false,
+    error: null,
 };
 
 const userSlice = createSlice({
@@ -38,9 +40,36 @@ const userSlice = createSlice({
         resetPending(state) {
             state.pending = false;
         },
+        setSuccess(state) {
+            state.loaded = true;
+        },
+        resetSuccess(state) {
+            state.loaded = false;
+        },
+        setFailed(state) {
+            state.failed = true;
+        },
+        resetFailed(state) {
+            state.failed = false;
+        },
+        setError(state, action) {
+            state.error = action.payload;
+        },
+        resetError(state) {
+            state.error = null;
+        },
     },
 });
 
-export const { setPending, resetPending } = userSlice.actions;
+export const {
+    setPending,
+    resetPending,
+    setSuccess,
+    resetSuccess,
+    setFailed,
+    resetFailed,
+    setError,
+    resetError,
+} = userSlice.actions;
 
 export default userSlice.reducer;
