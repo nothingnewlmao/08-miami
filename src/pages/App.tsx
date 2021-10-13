@@ -16,8 +16,10 @@ import { HomePage } from 'pages/HomePage';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
-import { themes } from 'ui/themes';
 import { GlobalStyles } from 'ui/global';
+import { themes } from 'ui/themes';
+
+import { UserPageWithRouter } from './UserPage';
 
 import { startServiceWorker } from '../../registerServiceWorker';
 
@@ -45,6 +47,9 @@ const App: FC = () => (
                         </Route>
                         <Route path="/forum">
                             <Forum />
+                        </Route>
+                        <Route path="/user">
+                            <UserPageWithRouter />
                         </Route>
                         <Redirect to="/" />
                     </Switch>

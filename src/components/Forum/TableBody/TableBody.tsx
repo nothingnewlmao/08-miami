@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
 
+import { StyledTr } from 'ui/components';
+
 import * as Styled from './styled';
 import { ITableBodyProps } from './types';
 
 export const TableBody: FC<ITableBodyProps> = ({ elements }) => (
     <tbody>
-        {elements.map((el) => (
-            <Styled.BodyTr key={el.id}>
-                <Styled.BodyTd>{el.name}</Styled.BodyTd>
+        {elements.map(el => (
+            <StyledTr key={el.id}>
                 <Styled.BodyTd>{el.title}</Styled.BodyTd>
+                <Styled.BodyTd>{el.name}</Styled.BodyTd>
                 <Styled.BodyTd>{el.date}</Styled.BodyTd>
-            </Styled.BodyTr>
+            </StyledTr>
         ))}
     </tbody>
 );

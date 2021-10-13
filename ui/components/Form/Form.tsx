@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { Button, Input } from 'ui/components';
+import { BaseButton, Input } from 'ui/components';
 
 import { IInnerFormProps } from 'uicomponents/Form/types';
 
@@ -17,20 +17,18 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
     handleSubmit,
 }) => (
     <Formik
-        onSubmit={(values) => {
+        onSubmit={values => {
             handleSubmit(values, history);
         }}
         initialValues={initialValues}
         validationSchema={validationSchema}
     >
-        {({
-            values, errors, touched, handleChange,
-        }) => (
+        {({ values, errors, touched, handleChange }) => (
             <Form>
                 <Styled.DynamicFormBox>
                     <Styled.Title>{title}</Styled.Title>
                     <Styled.FieldsWrapper>
-                        {fields!.map((el) => (
+                        {fields!.map(el => (
                             <Input
                                 key={el.name}
                                 label={el.label}
@@ -46,7 +44,7 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
                             />
                         ))}
                     </Styled.FieldsWrapper>
-                    <Button type="submit">Присоединиться</Button>
+                    <BaseButton type="submit">Присоединиться</BaseButton>
                 </Styled.DynamicFormBox>
             </Form>
         )}
