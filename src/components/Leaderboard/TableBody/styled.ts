@@ -8,7 +8,7 @@ import {
 } from 'uicomponents/Table/TableElements/TableElements';
 
 export const BodyTr = styled(StyledTr)`
-    background: ${colors.primary};
+    background: ${colors.white};
 `;
 
 export const BodyTd = styled(StyledTd)`

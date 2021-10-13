@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 import { ITheme } from 'ui/themes';
-import { Button } from 'ui/components';
-
-import { Table } from 'uicomponents/Table/Table';
+import { BackButton, BaseButton, Table } from 'ui/components';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -13,11 +11,6 @@ export const Wrapper = styled.div`
     text-align: center;
 `;
 
-export const Title = styled.h1<ITheme>`
-    margin-bottom: 10px;
-    color: ${({ theme }) => theme.colors.text};
-`;
-
 export const Category = styled.h3<ITheme>`
     margin-bottom: 10px;
     color: ${({ theme }) => theme.colors.text};
@@ -25,8 +18,13 @@ export const Category = styled.h3<ITheme>`
 
 export const TableForum = styled(Table)`
     border-spacing: 0 5px;
+    width: 700px;
 `;
 
-export const NewPostButton = styled(Button)<ITheme>`
+export const NewPostButton = styled(BaseButton)<ITheme>`
     color: ${({ theme }) => theme.colors.textInversion};
+`;
+
+export const ForumBackButton = styled(BackButton)<ITheme>`
+    margin-top: 5px;
 `;

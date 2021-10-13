@@ -1,0 +1,1 @@
+export { UserPageWithRouter } from './UserPage';
