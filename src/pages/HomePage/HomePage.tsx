@@ -6,9 +6,12 @@ import * as Styled from './styled';
 export const HomePage: FC = () => (
     <Styled.Wrapper>
         <Styled.Container>
-            <Styled.Title>Bounce: Returning</Styled.Title>
+            <Styled.MainTitle>Bounce: Returning</Styled.MainTitle>
             <Styled.MenuButton>
                 <Link to="/loading">Играть</Link>
+            </Styled.MenuButton>
+            <Styled.MenuButton>
+                <Link to="/user"> Игрок </Link>
             </Styled.MenuButton>
             <Styled.MenuButton>
                 <Link to="/leaderboard">Таблица рекордов</Link>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { Button, Input, StyledError } from 'ui/components';
+import { BaseButton, Input, StyledError } from 'ui/components';
 
 import { IInnerFormProps } from 'uicomponents/Form/types';
 
@@ -47,7 +47,7 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
                             />
                         ))}
                     </Styled.FieldsWrapper>
-                    <Button type="submit">Присоединиться</Button>
+                    <BaseButton type="submit">Присоединиться</BaseButton>
                     <StyledError>{errorText}</StyledError>
                 </Styled.DynamicFormBox>
             </Form>

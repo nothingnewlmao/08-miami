@@ -42,7 +42,7 @@ export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
     }
 `;
 
-export const Button = React.forwardRef<
+export const BaseButton = React.forwardRef<
     HTMLButtonElement | HTMLAnchorElement,
     IButtonProps
 >(({ ...props }, ref) => {

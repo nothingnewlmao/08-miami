@@ -17,10 +17,12 @@ import { SignInWithData } from 'pages/SignIn';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
-import { themes } from 'ui/themes';
 import { GlobalStyles } from 'ui/global';
+import { themes } from 'ui/themes';
 
 import { startServiceWorker } from '../../registerServiceWorker';
+
+import { UserPageWithRouter } from './UserPage';
 
 const App: FC = () => (
     <ErrorBoundary>
@@ -49,6 +51,9 @@ const App: FC = () => (
                         </Route>
                         <Route path="/forum">
                             <Forum />
+                        </Route>
+                        <Route path="/user">
+                            <UserPageWithRouter />
                         </Route>
                         <Redirect to="/" />
                     </Switch>
