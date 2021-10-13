@@ -1,34 +1,21 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { signIn } from 'api/axios';
 
-import {
-    resetError,
-    resetFailed,
-    resetPending,
-    resetSuccess,
-    setError,
-    setFailed,
-    setPending,
-    setSuccess,
-} from 'store/userProfile/slice';
+import { dataFailed, dataFetching, dataLoaded } from 'store/userProfile/slice';
 
 function* signInRequest(action: any) {
-    yield put(resetSuccess());
-    yield put(resetFailed());
-    yield put(resetError());
-
+    yield put(dataFetching());
     const { payload } = action;
-    yield put(setPending());
 
     try {
         yield call(signIn, payload);
-        yield put(setSuccess());
+
+        const { login } = payload;
+        yield put(dataLoaded({ login }));
     } catch (e: any) {
-        yield put(setFailed());
         const { reason } = e.response.data;
-        yield put(setError(reason));
+        yield put(dataFailed(reason));
     }
-    yield put(resetPending());
 }
 
 function* signInSaga() {
