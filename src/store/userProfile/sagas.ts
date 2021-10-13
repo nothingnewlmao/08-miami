@@ -19,7 +19,7 @@ function* signInRequest(action: any) {
 }
 
 function* signInSaga() {
-    yield takeEvery('SIGN_IN', signInRequest);
+    yield takeEvery('signIn', signInRequest);
 }
 
 export default signInSaga;

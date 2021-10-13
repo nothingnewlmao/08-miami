@@ -33,7 +33,7 @@ export const SignInWithData = () => {
 
     const dispatch = useDispatch();
     const handleSubmit = (values: FormikValues) => {
-        dispatch({ type: 'SIGN_IN', payload: values });
+        dispatch({ type: 'signIn', payload: values });
     };
 
     return (
