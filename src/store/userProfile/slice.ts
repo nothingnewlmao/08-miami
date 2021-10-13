@@ -10,13 +10,7 @@ type TUserProfile = {
 };
 
 const initialState: TUserProfile = {
-    data: {
-        first_name: '',
-        second_name: '',
-        login: '',
-        email: '',
-        phone: '',
-    },
+    data: null,
     pending: false,
     error: null,
 };

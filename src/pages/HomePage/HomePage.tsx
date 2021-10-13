@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { logOut } from 'api/axios';
 
 import * as Styled from './styled';
+
+const handleLogOutClick = () => {
+    logOut();
+};
 
 export const HomePage: FC = () => (
     <Styled.Wrapper>
@@ -18,6 +23,9 @@ export const HomePage: FC = () => (
             </Styled.MenuButton>
             <Styled.MenuButton>
                 <Link to="/forum">Форум</Link>
+            </Styled.MenuButton>
+            <Styled.MenuButton onClick={() => handleLogOutClick()}>
+                <Link to="/sign-in">Выйти</Link>
             </Styled.MenuButton>
         </Styled.Container>
     </Styled.Wrapper>
