@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-site-cache-v1';
+const CACHE_NAME = 'v1';
 
 const URLS = ['/', '/leaderboard', '/forum', '/sign-up', '/game', '/loading', '/bundle.js'];
 
