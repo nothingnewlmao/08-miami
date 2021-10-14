@@ -1,9 +1,6 @@
-declare let self: ServiceWorkerGlobalScope;
-export {};
-
 const CACHE_NAME = 'v1';
 
-const URLS = ['/', '/leaderboard', '/forum', '/sign-up', '/game', '/loading'];
+const URLS = ['/', '/leaderboard', '/forum', '/sign-up', '/game', '/loading', '/bundle.js'];
 
 self.addEventListener('install', (event) => {
     console.log('install');
@@ -21,21 +18,13 @@ self.addEventListener('install', (event) => {
     );
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', function (event) {
     event.respondWith(
-        caches.match(event.request).then(
-            (resp) => resp
-                || fetch(event.request).then((response) => {
-                    const responseClone = response.clone();
-                    caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, responseClone);
-                    });
-
-                    return response;
-                }),
-        ),
-    );
-});
+        fetch(event.request).catch(function() {
+            return caches.match(event.request)
+        })
+    )
+})
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(
