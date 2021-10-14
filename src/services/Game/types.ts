@@ -13,6 +13,7 @@ export interface IPoint {
 export interface IGameProps {
     initPoint: IPoint;
     canvasRef: HTMLCanvasElement;
-    gameOverPoint: IPoint;
     gameOverCallback: (points?: number) => void;
+    endTime: number;
+    setScore: (score: number) => void;
 }
