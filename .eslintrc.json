@@ -1,7 +1,7 @@
 {
   "extends": ["prettier", "airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["prettier", "@typescript-eslint"],
+  "plugins": ["prettier", "@typescript-eslint", "react-hooks"],
   "rules": {
     "quotes": [
       "error",
@@ -102,7 +102,9 @@
         "pathGroupsExcludedImportTypes": ["builtin"],
         "newlines-between": "always"
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "parserOptions": {
     "project": "./tsconfig.json"
