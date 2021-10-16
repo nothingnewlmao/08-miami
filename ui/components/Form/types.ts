@@ -1,6 +1,6 @@
 import { FormikConfig, FormikValues } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
-import { TNullable } from 'types/Nullable';
+import TNullable from 'types/Nullable';
 
 export interface IFormInputProps {
     label: string;
