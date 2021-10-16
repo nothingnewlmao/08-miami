@@ -29,7 +29,7 @@ const fields = [
 ];
 
 export const SignInWithData = () => {
-    const errorText = useSelector((state: TRootState) => state.user.error);
+    const errorText = useSelector((state: TRootState) => state.auth.error);
 
     const dispatch = useDispatch();
     const handleSubmit = (values: FormikValues) => {
