@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { GameField } from 'components/GameField/GameField';
@@ -11,14 +11,33 @@ import * as Styled from './styled';
 
 export const GamePage: FC = () => {
     const panelHeight = 60;
-    const gameHeight = window.innerHeight - panelHeight;
-    const gameWidth = window.innerWidth;
+
+    const endTimeSeconds = 50;
+
+    const endTime = Date.now() + 1000 * endTimeSeconds;
+
+    const [time, setTime] = useState(Math.floor((endTime - Date.now()) / 1000));
+
+    const [score, setScore] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(Math.floor((endTime - Date.now()) / 1000));
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
 
     useEffect(() => () => backgroundMusic.pause(), []);
 
     return (
         <Styled.Wrapper>
-            <GameField fieldHeight={gameHeight} fieldWidth={gameWidth} />
+            <GameField
+                heightOffset={panelHeight}
+                endTime={endTime}
+                setScore={setScore}
+            />
             <Styled.GamePanel>
                 <BackButton size="s">
                     <Link to="/">На главную страницу</Link>
@@ -26,6 +45,9 @@ export const GamePage: FC = () => {
                 <BaseButton onClick={() => backgroundMusic.toggleMusic()}>
                     Toggle music
                 </BaseButton>
+
+                <Styled.Timer>{time}</Styled.Timer>
+                <Styled.Timer>{score} points</Styled.Timer>
             </Styled.GamePanel>
         </Styled.Wrapper>
     );
