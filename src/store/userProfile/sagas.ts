@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { signIn } from 'api/axios';
+import { signIn } from 'api/authApi';
 
 import { dataFailed, dataFetching, dataLoaded } from 'store/userProfile/slice';
 
