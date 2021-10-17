@@ -4,6 +4,8 @@ import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { TRootState } from 'store';
 
+import ActionTypes from 'store/userProfile/actionTypes';
+
 import { FormWithRouter } from 'uicomponents/Form';
 
 const validationSchema = Yup.object().shape({
@@ -33,7 +35,7 @@ export const SignInWithData = () => {
 
     const dispatch = useDispatch();
     const handleSubmit = (values: FormikValues) => {
-        dispatch({ type: 'signIn', payload: values });
+        dispatch({ type: ActionTypes.SignIn, payload: values });
     };
 
     return (
