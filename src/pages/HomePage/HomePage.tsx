@@ -1,11 +1,19 @@
 import React, { FC, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { logOut } from 'api/authApi';
 
 import * as Styled from './styled';
 
 export const HomePage: FC = () => {
-    const handleLogOutClick = useCallback(logOut, []);
+    const history = useHistory();
+
+    const LogOut: any = () => {
+        logOut().then(() => {
+            history.push('/sign-in');
+        });
+    };
+
+    const handleLogOutClick = useCallback(LogOut, []);
 
     return (
         <Styled.Wrapper>
@@ -24,7 +32,7 @@ export const HomePage: FC = () => {
                     <Link to="/forum">Форум</Link>
                 </Styled.MenuButton>
                 <Styled.MenuButton onClick={handleLogOutClick}>
-                    <Link to="/sign-in">Выйти</Link>
+                    Выйти
                 </Styled.MenuButton>
             </Styled.Container>
         </Styled.Wrapper>
