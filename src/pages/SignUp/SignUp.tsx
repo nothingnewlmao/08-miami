@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import React from 'react';
-import { signUp } from 'api/axios';
+import { signUp } from 'api/authApi';
 import { FormikValues } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
 
