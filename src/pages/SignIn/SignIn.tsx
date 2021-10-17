@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { TRootState } from 'store';
@@ -8,10 +7,7 @@ import ActionTypes from 'store/userProfile/actionTypes';
 
 import { FormWithRouter } from 'uicomponents/Form';
 
-const validationSchema = Yup.object().shape({
-    login: Yup.string().required('Введите логин'),
-    password: Yup.string().required('Введите пароль'),
-});
+import validationSchema from './validationSchema';
 
 const initialValues = {
     login: '',
