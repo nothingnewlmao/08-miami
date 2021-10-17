@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { TRootState } from 'store';
 
 function useIsLoggedIn() {
-    const isLoggedIn = useSelector((state: TRootState) => state.auth.isLoggedIn);
+    const isLoggedIn = useSelector(
+        (state: TRootState) => state.auth.isLoggedIn,
+    );
     const history = useHistory();
 
     useEffect(() => {
