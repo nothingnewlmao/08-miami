@@ -5,6 +5,7 @@ import {
     Redirect,
     Route,
     Switch,
+    useHistory,
 } from 'react-router-dom';
 
 import { SignUpWithData } from 'pages/SignUp';
@@ -14,51 +15,58 @@ import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
 import { HomePage } from 'pages/HomePage';
 import { SignInWithData } from 'pages/SignIn';
+import { UserPageWithRouter } from 'pages/UserPage';
+import useIsLoggedIn from 'pages/SignIn/useIsLoggedIn';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 
-import { UserPageWithRouter } from './UserPage';
+const App: FC = () => {
+    useIsLoggedIn();
 
-const App: FC = () => (
-    <ThemeProvider theme={themes.light}>
-        <GlobalStyles />
-        <ErrorBoundary>
-            <Router>
-                <div className="app">
-                    <Switch>
-                        <Route exact path="/">
-                            <HomePage />
-                        </Route>
-                        <Route path="/leaderboard">
-                            <Leaderboard />
-                        </Route>
-                        <Route path="/sign-up">
-                            <SignUpWithData />
-                        </Route>
-                        <Route path="/sign-in">
-                            <SignInWithData />
-                        </Route>
-                        <Route path="/game">
-                            <GamePage />
-                        </Route>
-                        <Route path="/loading">
-                            <LoadingPage />
-                        </Route>
-                        <Route path="/forum">
-                            <Forum />
-                        </Route>
-                        <Route path="/user">
-                            <UserPageWithRouter />
-                        </Route>
-                        <Redirect to="/" />
-                    </Switch>
-                </div>
-            </Router>
-        </ErrorBoundary>
-    </ThemeProvider>
-);
+    const history = useHistory();
+    history.push('/game');
+
+    return (
+        <ThemeProvider theme={themes.light}>
+            <GlobalStyles />
+            <ErrorBoundary>
+                <Router>
+                    <div className="app">
+                        <Switch>
+                            <Route exact path="/">
+                                <HomePage />
+                            </Route>
+                            <Route path="/leaderboard">
+                                <Leaderboard />
+                            </Route>
+                            <Route path="/sign-up">
+                                <SignUpWithData />
+                            </Route>
+                            <Route path="/sign-in">
+                                <SignInWithData />
+                            </Route>
+                            <Route path="/game">
+                                <GamePage />
+                            </Route>
+                            <Route path="/loading">
+                                <LoadingPage />
+                            </Route>
+                            <Route path="/forum">
+                                <Forum />
+                            </Route>
+                            <Route path="/user">
+                                <UserPageWithRouter />
+                            </Route>
+                            <Redirect to="/" />
+                        </Switch>
+                    </div>
+                </Router>
+            </ErrorBoundary>
+        </ThemeProvider>
+    );
+};
 
 export default App;
