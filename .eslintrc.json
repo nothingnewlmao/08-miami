@@ -69,6 +69,11 @@
             "position": "after"
           },
           {
+            "pattern": "store/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
             "pattern": "pages/**",
             "group": "external",
             "position": "after"

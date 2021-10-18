@@ -1,19 +1,11 @@
-import * as Yup from 'yup';
 import React from 'react';
-import { signUp } from 'api/axios';
+import { signUp } from 'api/authApi';
 import { FormikValues } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { FormWithRouter } from 'uicomponents/Form';
 
-const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required('Name is required'),
-    second_name: Yup.string().required('Surname is required'),
-    login: Yup.string().required('Login is required'),
-    email: Yup.string().email().required('Email is required'),
-    password: Yup.string().required('Password is required'),
-    phone: Yup.string().required('Phone is required'),
-});
+import validationSchema from './validationSchema';
 
 const handleSubmit = (
     values: FormikValues,
