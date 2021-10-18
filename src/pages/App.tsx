@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { ConnectedRouter } from 'connected-react-router';
 import {
-    BrowserRouter as Router,
     Redirect,
     Route,
     Switch,
@@ -17,6 +17,8 @@ import { SignInWithData } from 'pages/SignIn';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
+import history from 'utils/history';
+
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 
@@ -26,7 +28,7 @@ const App: FC = () => (
     <ThemeProvider theme={themes.light}>
         <GlobalStyles />
         <ErrorBoundary>
-            <Router>
+            <ConnectedRouter history={history}>
                 <div className="app">
                     <Switch>
                         <Route exact path="/">
@@ -56,7 +58,7 @@ const App: FC = () => (
                         <Redirect to="/" />
                     </Switch>
                 </div>
-            </Router>
+            </ConnectedRouter>
         </ErrorBoundary>
     </ThemeProvider>
 );

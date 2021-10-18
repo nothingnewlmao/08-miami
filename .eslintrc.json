@@ -89,6 +89,11 @@
             "position": "after"
           },
           {
+            "pattern": "utils/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
             "pattern": "ui/**",
             "group": "external",
             "position": "after"
