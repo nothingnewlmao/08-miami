@@ -1,19 +1,14 @@
-import React, { FC, useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { logOut } from 'api/authApi';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import ActionTypes from 'store/auth/actionTypes';
 
 import * as Styled from './styled';
 
 export const HomePage: FC = () => {
-    const history = useHistory();
-
-    const LogOut: any = () => {
-        logOut().then(() => {
-            history.push('/sign-in');
-        });
-    };
-
-    const handleLogOutClick = useCallback(LogOut, []);
+    const dispatch = useDispatch();
+    const handleLogOutClick = () => dispatch({ type: ActionTypes.LogOut });
 
     return (
         <Styled.Wrapper>

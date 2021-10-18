@@ -42,6 +42,19 @@ const authStore = createSlice({
             state.pending = false;
             state.error = action.payload;
         },
+        signupFetching(state) {
+            state.pending = true;
+            state.error = null;
+        },
+        signUpLoaded(state) {
+            state.pending = false;
+            state.isLoggedIn = true;
+            state.error = null;
+        },
+        signUpFailed(state, action) {
+            state.pending = false;
+            state.error = action.payload;
+        },
     },
 });
 
@@ -52,6 +65,9 @@ export const {
     logOutFetching,
     logOutLoaded,
     logOutFailed,
+    signupFetching,
+    signUpLoaded,
+    signUpFailed,
 } = authStore.actions;
 
 export default authStore.reducer;
