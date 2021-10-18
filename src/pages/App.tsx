@@ -14,6 +14,7 @@ import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
 import { HomePage } from 'pages/HomePage';
 import { SignInWithData } from 'pages/SignIn';
+import { UserPageWithRouter } from 'pages/UserPage';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
@@ -21,8 +22,6 @@ import history from 'utils/history';
 
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
-
-import { UserPageWithRouter } from './UserPage';
 
 const App: FC = () => (
     <ThemeProvider theme={themes.light}>

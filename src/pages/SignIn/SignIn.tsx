@@ -3,7 +3,7 @@ import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { TRootState } from 'store';
 
-import ActionTypes from 'store/userProfile/actionTypes';
+import ActionTypes from 'store/auth/actionTypes';
 
 import { FormWithRouter } from 'uicomponents/Form';
 
@@ -27,7 +27,7 @@ const fields = [
 ];
 
 export const SignInWithData = () => {
-    const errorText = useSelector((state: TRootState) => state.user.error);
+    const errorText = useSelector((state: TRootState) => state.auth.error);
 
     const dispatch = useDispatch();
     const handleSubmit = (values: FormikValues) => {

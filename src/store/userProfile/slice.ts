@@ -1,13 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import TNullable from 'types/Nullable';
-import TObjectLiteral from 'types/TObjectLiteral';
-
-type TUserProfile = {
-    data: TNullable<TObjectLiteral>;
-    pending: boolean;
-    error: TNullable<string>;
-};
+import TUserProfile from 'types/userProfile/TUserProfile';
 
 const initialState: TUserProfile = {
     data: null,
