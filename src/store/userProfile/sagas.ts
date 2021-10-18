@@ -12,9 +12,11 @@ function* signInRequest(action: any) {
         yield call(signIn, payload);
 
         const { login } = payload;
+        
         yield put(dataLoaded({ login }));
     } catch (e: any) {
         const { reason } = e.response.data;
+        
         yield put(dataFailed(reason));
     }
 }
