@@ -9,7 +9,8 @@ import {
     signUpLoaded,
     signUpFailed,
     logOutFetching,
-    logOutLoaded, logOutFailed,
+    logOutLoaded,
+    logOutFailed,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
 
