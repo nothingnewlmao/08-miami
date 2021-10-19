@@ -37,8 +37,7 @@ export class GameMap {
         this.ctx = ctx;
 
         this.blocksCount = this.mapField.reduce(
-            (acc, interval) =>
-                acc + (interval.length ? interval[1] - interval[0] : 0),
+            (acc, interval) => acc + (interval.length ? interval[1] - interval[0] : 0),
             0,
         );
     }
@@ -56,11 +55,12 @@ export class GameMap {
 
         for (let i = 0; i < this.mapField.length; i += 1) {
             if (this.mapField[i].length === 0) {
+                // eslint-disable-next-line no-continue
                 continue;
             }
             if (
-                prevBlocksCount + this.mapField[i][1] > blockNum &&
-                prevBlocksCount + this.mapField[i][0] < blockNum
+                prevBlocksCount + this.mapField[i][1] > blockNum
+                && prevBlocksCount + this.mapField[i][0] < blockNum
             ) {
                 blockCountInRow = blockNum - prevBlocksCount;
                 heightLevel = i;
@@ -73,9 +73,9 @@ export class GameMap {
         return {
             x: blockCountInRow * PERFECT_ONE + PERFECT_ONE / 2,
             y:
-                window.innerHeight -
-                (heightLevel + 1) * PERFECT_ONE -
-                PERFECT_ONE * 4,
+                window.innerHeight
+                - (heightLevel + 1) * PERFECT_ONE
+                - PERFECT_ONE * 4,
         };
     }
 
@@ -87,9 +87,9 @@ export class GameMap {
         this.randomBlock();
         for (let i = this.mapField.length - 1; i >= 0; i -= 1) {
             if (
-                ballY < containerHeight - (i + 1) * this.blockHeight &&
-                ballX >= this.mapField[i][0] * this.blockWidth &&
-                ballX <= this.mapField[i][1] * this.blockWidth
+                ballY < containerHeight - (i + 1) * this.blockHeight
+                && ballX >= this.mapField[i][0] * this.blockWidth
+                && ballX <= this.mapField[i][1] * this.blockWidth
             ) {
                 return containerHeight - (i + 1) * this.blockHeight;
             }
@@ -127,8 +127,7 @@ export class GameMap {
                 // eslint-disable-next-line no-continue
                 continue;
             }
-            const [leftestBlockNum, rightestBlockInSchemesNum] =
-                this.mapField[i];
+            const [leftestBlockNum, rightestBlockInSchemesNum] = this.mapField[i];
             const rightestBlockNum = Math.min(
                 rightestBlockInSchemesNum,
                 fullBlocksCount,

@@ -27,7 +27,9 @@
       "components/*": ["./src/components/*"],
       "pages/*": ["./src/pages/*"],
       "services/*": ["./src/services/*"],
-      "api/*": ["./src/api/*"]
+      "api/*": ["./src/api/*"],
+      "store/*": ["./src/store/*"],
+      "utils/*": ["./src/utils/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
