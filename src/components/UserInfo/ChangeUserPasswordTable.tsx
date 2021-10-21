@@ -1,48 +1,51 @@
 import React, { FC } from 'react';
+import { FormikValues } from 'formik';
 
-import { BaseButton, Input } from 'ui/components';
+import validationSchema from 'pages/SignUp/validationSchema';
+
+import { FormWithRouter } from 'ui/components/Form';
 
 import * as Styled from './styled';
 
-interface INewPasswordOptions {
-    password: string;
-    passwordAgain: string;
-}
+const initialValues = {
+    oldPassword: '',
+    newPassword: '',
+    newPasswordAgain: '',
+};
+
+const fields = [
+    {
+        label: 'Старый пароль',
+        name: 'oldPassword',
+        type: 'password',
+    },
+    {
+        label: 'Новый пароль',
+        name: 'newPassword',
+        type: 'password',
+    },
+    {
+        label: 'Новый пароль (ещё раз)',
+        name: 'newPasswordAgain',
+        type: 'password',
+    },
+];
 
 interface IChangeUserPasswordTableProps {
-    saveChanges: (options: INewPasswordOptions) => void;
+    submit: (values: FormikValues) => void;
 }
 
 export const ChangeUserPasswordTable: FC<IChangeUserPasswordTableProps> = ({
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    saveChanges: _saveChanges,
+    submit,
 }) => (
     <Styled.Container>
-        <form>
-            <Styled.TableWrapper>
-                <Styled.TableRow>
-                    <td>Старый пароль</td>
-                    <td>
-                        <Input label="key" type="password" />
-                    </td>
-                </Styled.TableRow>
-                <Styled.TableRow>
-                    <td>Новый пароль</td>
-                    <td>
-                        <Input label="key" type="password" />
-                    </td>
-                </Styled.TableRow>
-                <Styled.TableRow>
-                    <td>Новый пароль (опять)</td>
-                    <td>
-                        <Input label="key" type="password" />
-                    </td>
-                </Styled.TableRow>
-            </Styled.TableWrapper>
-
-            <BaseButton view="primaryFlat" type="submit">
-                Сохранить данные
-            </BaseButton>
-        </form>
+        <FormWithRouter
+            validationSchema={validationSchema}
+            initialValues={initialValues}
+            handleSubmit={submit}
+            title="Смена пароля"
+            fields={fields}
+            buttonLabel="Сменить пароль"
+        />
     </Styled.Container>
 );

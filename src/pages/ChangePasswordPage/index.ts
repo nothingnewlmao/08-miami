@@ -1,0 +1,1 @@
+export { ChangePasswordPageWithRouter } from './ChangePasswordPage';

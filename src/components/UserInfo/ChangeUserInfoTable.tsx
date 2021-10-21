@@ -1,46 +1,50 @@
 import React, { FC } from 'react';
+import { FormikValues } from 'formik';
 
-import { IUser } from 'pages/UserPage/UserPage';
+import { FormWithRouter } from 'ui/components/Form';
 
-import { BaseButton, Input } from 'ui/components';
-
-import { UserLabels } from './dictionary';
 import * as Styled from './styled';
+import { TUserInfo } from './dictionary';
+
+const fields = [
+    {
+        label: 'Имя',
+        name: 'first_name',
+    },
+    {
+        label: 'Фамилия',
+        name: 'second_name',
+    },
+    {
+        label: 'Почта',
+        name: 'email',
+    },
+    {
+        label: 'Отображаемое имя',
+        name: 'display_name',
+    },
+    {
+        label: 'Телефонный номер',
+        name: 'phone',
+    },
+];
 
 interface IChangeUserInfoTableProps {
-    user: IUser;
-    saveChanges: (user: IUser) => void;
+    initValues: TUserInfo;
+    submit: (values: FormikValues) => void;
 }
 
 export const ChangeUserInfoTable: FC<IChangeUserInfoTableProps> = ({
-    user,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    saveChanges: _saveChanges,
-}) => {
-    const userEntries = Object.entries(user).map(([key, value]) => [
-        // @ts-ignore
-        UserLabels[key],
-        value,
-    ]);
-
-    return (
-        <Styled.Container>
-            <form>
-                <Styled.TableWrapper>
-                    {userEntries.map(([key, value]) => (
-                        <Styled.TableRow>
-                            <td>{key}</td>
-                            <td>
-                                <Input label="key" value={value} />
-                            </td>
-                        </Styled.TableRow>
-                    ))}
-                </Styled.TableWrapper>
-
-                <BaseButton view="primaryFlat" type="submit">
-                    Сохранить данные
-                </BaseButton>
-            </form>
-        </Styled.Container>
-    );
-};
+    initValues,
+    submit,
+}) => (
+    <Styled.Container>
+        <FormWithRouter
+            initialValues={initValues}
+            handleSubmit={submit}
+            title="Смена данные"
+            fields={fields}
+            buttonLabel="Сменить данные"
+        />
+    </Styled.Container>
+);

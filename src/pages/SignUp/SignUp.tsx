@@ -19,9 +19,7 @@ const initialValues = {
 
 export const SignUpWithData = () => {
     const dispatch = useDispatch();
-    const handleSubmit = (
-        values: FormikValues,
-    ) => {
+    const handleSubmit = (values: FormikValues) => {
         dispatch({ type: ActionTypes.SignUp, payload: values });
     };
 

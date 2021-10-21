@@ -1,9 +1,8 @@
 import IDataStatus from 'types/IDataStatus';
-import TNullable from 'types/TNullable';
-import TObjectLiteral from 'types/TObjectLiteral';
+import { IUser } from 'types/IUser';
 
 interface IUserProfile extends IDataStatus {
-    data: TNullable<TObjectLiteral>;
+    userInfo: IUser | null;
 }
 
 type TUserProfile = IUserProfile;

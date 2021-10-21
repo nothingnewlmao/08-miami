@@ -1,47 +1,50 @@
 import React, { FC } from 'react';
-
-import { IUser } from 'pages/UserPage/UserPage';
+import { Link } from 'react-router-dom';
 
 import { BaseButton } from 'ui/components';
 
-import { UserLabels } from './dictionary';
+import { TUserInfo, UserLabels } from './dictionary';
 import * as Styled from './styled';
 
 interface IUserInfoTableProps {
-    user: IUser;
-    changeInfo: () => void;
-    changePassword: () => void;
+    user: TUserInfo | null;
+    changeInfoLink: string;
+    changePasswordLink: string;
     quitHandler: () => void;
 }
 
 export const UserInfoTable: FC<IUserInfoTableProps> = ({
     user,
-    changeInfo,
-    changePassword,
+    changeInfoLink,
+    changePasswordLink,
     quitHandler,
 }) => {
-    const userEntries = Object.entries(user).map(([key, value]) => [
-        // @ts-ignore
-        UserLabels[key],
-        value,
-    ]);
+    const userEntries = user
+        && Object.entries(user).map(([key, value]) => [
+            // @ts-ignore
+            UserLabels[key],
+            value,
+        ]);
 
     return (
         <Styled.Container>
             <Styled.TableWrapper>
-                {userEntries.map(([key, value]) => (
-                    <Styled.TableRow>
-                        <td>{key}</td>
-                        <td>{value}</td>
-                    </Styled.TableRow>
-                ))}
+                <tbody>
+                    {userEntries
+                        && userEntries.map(([key, value]) => (
+                            <Styled.TableRow key={key}>
+                                <td>{key}</td>
+                                <td>{value}</td>
+                            </Styled.TableRow>
+                        ))}
+                </tbody>
             </Styled.TableWrapper>
 
-            <BaseButton view="primaryFlat" onClick={changeInfo}>
-                Изменить данные
+            <BaseButton view="primaryFlat">
+                <Link to={changeInfoLink}>Изменить данные</Link>
             </BaseButton>
-            <BaseButton view="primaryFlat" onClick={changePassword}>
-                Изменить пароль
+            <BaseButton view="primaryFlat">
+                <Link to={changePasswordLink}>Изменить пароль</Link>
             </BaseButton>
             <BaseButton view="dangerFlat" onClick={quitHandler}>
                 Выйти

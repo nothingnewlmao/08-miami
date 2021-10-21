@@ -1,11 +1,13 @@
-import { IUser } from 'pages/UserPage/UserPage';
+import { IUser } from 'types/IUser';
 
-type TUserKeys = keyof IUser;
+export type TUserInfo = Omit<IUser, 'avatar' | 'id' | 'login'>;
+
+export type TUserKeys = keyof TUserInfo;
 
 export const UserLabels: { [key in TUserKeys]: string } = {
-    firstName: 'Имя',
-    lastName: 'Фамилия',
+    first_name: 'Имя',
+    second_name: 'Фамилия',
     email: 'Почта',
-    login: 'Логин',
     phone: 'Телефонный номер',
+    display_name: 'Отображаемое имя',
 };
