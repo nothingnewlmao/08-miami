@@ -6,8 +6,7 @@ import {
     logOutSaga,
     CurrentUserSaga,
 } from 'store/auth/sagas';
-
-import { changeInfoSaga, changePasswordSaga } from './userProfile/sagas';
+import { changeInfoSaga, changePasswordSaga } from 'store/userProfile/sagas';
 
 export default function* rootSaga() {
     yield all([

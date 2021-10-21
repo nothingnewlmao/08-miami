@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import TUserProfile from 'types/userProfile/TUserProfile';
+import TUserProfile from 'types/TUserProfile';
 
 const initialState: TUserProfile = {
     userInfo: null,

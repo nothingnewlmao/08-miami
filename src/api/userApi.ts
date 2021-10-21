@@ -18,7 +18,7 @@ class UserApi {
     }
 
     getUser(id: number) {
-        axiosInstance.post(`${UserUrls.GetUser}${id}`);
+        axiosInstance.get(`${UserUrls.GetUser}${id}`);
     }
 }
 

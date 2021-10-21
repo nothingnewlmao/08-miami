@@ -7,7 +7,7 @@ import ActionTypes from 'store/auth/actionTypes';
 import { selectUserProfileInfo } from 'store/userProfile/selectors';
 
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
-import { UserInfoTable } from 'components/UserInfo/UserInfoTable';
+import { UserInfoTable } from 'components/UserInfoTable/UserInfoTable';
 
 import * as Styled from './styled';
 

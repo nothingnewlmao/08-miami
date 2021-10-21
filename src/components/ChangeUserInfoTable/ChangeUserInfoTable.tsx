@@ -3,31 +3,11 @@ import { FormikValues } from 'formik';
 
 import { FormWithRouter } from 'ui/components/Form';
 
-import * as Styled from './styled';
-import { TUserInfo } from './dictionary';
+import * as Styled from '../UserInfoTable/styled';
+import { TUserInfo } from '../../types/TUserInfo';
 
-const fields = [
-    {
-        label: 'Имя',
-        name: 'first_name',
-    },
-    {
-        label: 'Фамилия',
-        name: 'second_name',
-    },
-    {
-        label: 'Почта',
-        name: 'email',
-    },
-    {
-        label: 'Отображаемое имя',
-        name: 'display_name',
-    },
-    {
-        label: 'Телефонный номер',
-        name: 'phone',
-    },
-];
+import validationSchema from './validationSchema';
+import { fields } from './fields';
 
 interface IChangeUserInfoTableProps {
     initValues: TUserInfo;
@@ -41,6 +21,7 @@ export const ChangeUserInfoTable: FC<IChangeUserInfoTableProps> = ({
     <Styled.Container>
         <FormWithRouter
             initialValues={initValues}
+            validationSchema={validationSchema}
             handleSubmit={submit}
             title="Смена данные"
             fields={fields}

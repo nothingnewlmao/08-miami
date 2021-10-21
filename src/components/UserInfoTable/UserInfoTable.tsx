@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { TUserInfo } from 'types/TUserInfo';
 
 import { BaseButton } from 'ui/components';
 
-import { TUserInfo, UserLabels } from './dictionary';
+import { userLabels } from './labels';
 import * as Styled from './styled';
 
 interface IUserInfoTableProps {
@@ -19,10 +20,11 @@ export const UserInfoTable: FC<IUserInfoTableProps> = ({
     changePasswordLink,
     quitHandler,
 }) => {
-    const userEntries = user
-        && Object.entries(user).map(([key, value]) => [
+    const userEntries =
+        user &&
+        Object.entries(user).map(([key, value]) => [
             // @ts-ignore
-            UserLabels[key],
+            userLabels[key],
             value,
         ]);
 
@@ -30,8 +32,8 @@ export const UserInfoTable: FC<IUserInfoTableProps> = ({
         <Styled.Container>
             <Styled.TableWrapper>
                 <tbody>
-                    {userEntries
-                        && userEntries.map(([key, value]) => (
+                    {userEntries &&
+                        userEntries.map(([key, value]) => (
                             <Styled.TableRow key={key}>
                                 <td>{key}</td>
                                 <td>{value}</td>

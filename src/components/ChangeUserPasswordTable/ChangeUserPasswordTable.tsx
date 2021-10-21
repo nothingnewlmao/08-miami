@@ -1,35 +1,12 @@
 import React, { FC } from 'react';
 import { FormikValues } from 'formik';
 
-import validationSchema from 'pages/SignUp/validationSchema';
-
 import { FormWithRouter } from 'ui/components/Form';
 
-import * as Styled from './styled';
+import * as Styled from '../UserInfoTable/styled';
 
-const initialValues = {
-    oldPassword: '',
-    newPassword: '',
-    newPasswordAgain: '',
-};
-
-const fields = [
-    {
-        label: 'Старый пароль',
-        name: 'oldPassword',
-        type: 'password',
-    },
-    {
-        label: 'Новый пароль',
-        name: 'newPassword',
-        type: 'password',
-    },
-    {
-        label: 'Новый пароль (ещё раз)',
-        name: 'newPasswordAgain',
-        type: 'password',
-    },
-];
+import validationSchema from './validationSchema';
+import { fields, initialValues } from './fields';
 
 interface IChangeUserPasswordTableProps {
     submit: (values: FormikValues) => void;

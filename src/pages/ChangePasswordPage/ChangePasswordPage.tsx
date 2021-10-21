@@ -6,7 +6,7 @@ import { FormikValues } from 'formik';
 import ActionTypes from 'store/userProfile/actionTypes';
 
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
-import { ChangeUserPasswordTable } from 'components/UserInfo/ChangeUserPasswordTable';
+import { ChangeUserPasswordTable } from 'components/ChangeUserPasswordTable/ChangeUserPasswordTable';
 
 import * as Styled from './styled';
 

@@ -1,7 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-    getCurrentUser, logOut, signIn, signUp,
-} from 'api/authApi';
+import { getCurrentUser, logOut, signIn, signUp } from 'api/authApi';
 import TObjectLiteral from 'types/TObjectLiteral';
 
 import {
@@ -19,6 +17,7 @@ import ActionTypes from 'store/auth/actionTypes';
 import { setUserData } from 'store/userProfile/slice';
 
 import history from 'utils/history';
+import { mapApiUserToIUser } from 'utils/mapApiUserToUser';
 
 function* signInRequest(action: any) {
     yield put(logInFetching());
@@ -81,7 +80,7 @@ function* CurrentUserRequest() {
     try {
         const response: TObjectLiteral = yield call(getCurrentUser);
 
-        yield put(setUserData(response.data));
+        yield put(setUserData(mapApiUserToIUser(response.data)));
     } catch (e: any) {
         const { reason = null } = e.response.data;
         console.log('reason :>> ', reason);

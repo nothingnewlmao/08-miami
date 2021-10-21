@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormikValues } from 'formik';
+import { TUserInfo } from 'types/TUserInfo';
 
 import ActionTypes from 'store/userProfile/actionTypes';
 import {
@@ -10,8 +11,7 @@ import {
 } from 'store/userProfile/selectors';
 
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
-import { ChangeUserInfoTable } from 'components/UserInfo/ChangeUserInfoTable';
-import { TUserInfo } from 'components/UserInfo/dictionary';
+import { ChangeUserInfoTable } from 'components/ChangeUserInfoTable/ChangeUserInfoTable';
 
 import * as Styled from './styled';
 

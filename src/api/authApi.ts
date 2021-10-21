@@ -8,9 +8,11 @@ enum AuthUrls {
     GetUser = 'auth/user',
 }
 
-export const signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
+export const signUp = (data: TObjectLiteral) =>
+    axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
 
-export const signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
+export const signIn = (data: TObjectLiteral) =>
+    axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
 
 export const logOut = () => axiosInstance.post(AuthUrls.LogOut);
 
