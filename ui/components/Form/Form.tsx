@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { BaseButton, Input, StyledError } from 'ui/components';
 
@@ -8,18 +7,17 @@ import { IInnerFormProps } from 'uicomponents/Form/types';
 
 import * as Styled from './styled';
 
-const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
+export const InnerForm: React.FC<IInnerFormProps> = ({
     fields,
     title,
     initialValues,
     validationSchema,
-    history,
     handleSubmit,
     errorText,
 }) => (
     <Formik
         onSubmit={(values) => {
-            handleSubmit(values, history);
+            handleSubmit(values);
         }}
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -54,5 +52,3 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
         )}
     </Formik>
 );
-
-export const FormWithRouter = withRouter(InnerForm);

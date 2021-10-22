@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { FormWithRouter } from 'uicomponents/Form';
+import { InnerForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -19,14 +19,12 @@ const initialValues = {
 
 export const SignUpWithData = () => {
     const dispatch = useDispatch();
-    const handleSubmit = (
-        values: FormikValues,
-    ) => {
+    const handleSubmit = (values: FormikValues) => {
         dispatch({ type: ActionTypes.SignUp, payload: values });
     };
 
     return (
-        <FormWithRouter
+        <InnerForm
             validationSchema={validationSchema}
             initialValues={initialValues}
             handleSubmit={handleSubmit}

@@ -5,7 +5,7 @@ import { TRootState } from 'store';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { FormWithRouter } from 'uicomponents/Form';
+import { InnerForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -35,7 +35,7 @@ export const SignInWithData = () => {
     };
 
     return (
-        <FormWithRouter
+        <InnerForm
             validationSchema={validationSchema}
             handleSubmit={handleSubmit}
             title="Вход"
