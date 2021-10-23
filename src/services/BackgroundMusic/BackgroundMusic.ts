@@ -1,33 +1,85 @@
 const soundfile = require('../../assets/audio/backgroundMusic2.wav');
+const impulsefile = require('../../assets/audio/RightGlassTriangle.wav');
 
 class BackgroundMusic {
-    audio: HTMLAudioElement;
-
     private audioPaused: boolean = true;
 
+    context;
+
+    buffer: any;
+
+    impulseBuffer: any;
+
+    source: any;
+
+    destination: any;
+
     constructor() {
-        this.audio = new Audio(soundfile.default);
-        this.audio.loop = true;
-        this.audio.crossOrigin = 'anonymous';
+        this.context = new window.AudioContext();
+
+        this.fetchMusic(soundfile.default, this.decodeMainBuffer);
+        this.fetchMusic(impulsefile.default, this.decodeImpulseBuffer);
+    }
+
+    play(): void {
+        this.source = this.context.createBufferSource();
+
+        this.source.buffer = this.buffer;
+
+        this.destination = this.context.destination;
+
+        const convolverNode = this.context.createConvolver();
+
+        convolverNode.buffer = this.impulseBuffer;
+
+        convolverNode.connect(this.destination);
+        this.source.connect(convolverNode);
+
+        this.source.start(0);
+
+        this.audioPaused = false;
+    }
+
+    stop() {
+        this.source.stop(0);
+
+        this.audioPaused = true;
     }
 
     toggleMusic(): void {
         if (this.audioPaused) {
             this.play();
         } else {
-            this.pause();
+            this.stop();
         }
     }
 
-    play(): void {
-        this.audio.currentTime = 0;
-        this.audio.play();
-        this.audioPaused = false;
+    fetchMusic(
+        url: string | URL,
+        decodeCallback: (buffer: AudioBuffer) => void,
+    ) {
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+        request.onload = () => {
+            // декодируем бинарный ответ
+            this.context.decodeAudioData(
+                request.response,
+                decodeCallback.bind(this),
+                e => {
+                    console.log('Error decoding file', e);
+                },
+            );
+        };
+        request.send();
     }
 
-    pause(): void {
-        this.audio.pause();
-        this.audioPaused = true;
+    decodeMainBuffer(buffer: AudioBuffer): void {
+        this.buffer = buffer;
+    }
+
+    decodeImpulseBuffer(buffer: AudioBuffer): void {
+        this.impulseBuffer = buffer;
     }
 }
 
