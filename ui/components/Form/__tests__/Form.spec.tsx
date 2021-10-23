@@ -1,6 +1,10 @@
 import 'jsdom-global/register';
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import {
+    render,
+    cleanup,
+    fireEvent,
+} from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 import { themes } from 'ui/themes';
@@ -30,7 +34,7 @@ const createRTLInstance = () => {
         <ThemeProvider theme={light}>
             <Form
                 title="Вход"
-                handleSubmit={() => {}}
+                handleSubmit={() => ''}
                 fields={fields}
                 initialValues={initialValues}
             />
@@ -45,12 +49,13 @@ afterEach(() => {
 });
 
 describe('Form tests', () => {
-    it('Should show error on inputs if they are empty', () => {
+    it('Should ???', async () => {
         const { getByText, getByLabelText } = createRTLInstance();
         const input = getByLabelText('Логин');
         const submitBtn = getByText('Присоединиться');
 
         callback.mockClear();
+
         fireEvent.click(submitBtn);
 
         console.log(input);
