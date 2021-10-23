@@ -16,7 +16,7 @@ const UserPage: FC<RouteComponentProps> = ({ history }) => {
 
     const user = useSelector(selectUserProfileInfo);
 
-    const backHome = () => history.push('/');
+    const goBackHome = () => history.push('/');
 
     const logOut = useCallback(() => {
         dispatch({ type: ActionTypes.LogOut });
@@ -24,7 +24,7 @@ const UserPage: FC<RouteComponentProps> = ({ history }) => {
 
     return (
         <Styled.CustomWrapper>
-            <GoBackColumn clickHandler={backHome} />
+            <GoBackColumn clickHandler={goBackHome} />
             <UserInfoTable
                 user={user ?? ({} as IUser)}
                 changeInfoLink="/change-info"

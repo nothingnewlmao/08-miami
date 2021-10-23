@@ -87,6 +87,6 @@ function* CurrentUserRequest() {
     }
 }
 
-export function* CurrentUserSaga() {
+export function* currentUserSaga() {
     yield takeEvery(ActionTypes.GetUser, CurrentUserRequest);
 }

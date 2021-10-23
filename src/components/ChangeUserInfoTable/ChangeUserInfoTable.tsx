@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { FormikValues } from 'formik';
+import { TUserInfo } from 'types/TUserInfo';
+
+import * as Styled from 'components/UserInfoTable/styled';
 
 import { FormWithRouter } from 'ui/components/Form';
-
-import * as Styled from '../UserInfoTable/styled';
-import { TUserInfo } from '../../types/TUserInfo';
 
 import validationSchema from './validationSchema';
 import { fields } from './fields';

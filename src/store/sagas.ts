@@ -4,7 +4,7 @@ import {
     signInSaga,
     signUpSaga,
     logOutSaga,
-    CurrentUserSaga,
+    currentUserSaga,
 } from 'store/auth/sagas';
 import { changeInfoSaga, changePasswordSaga } from 'store/userProfile/sagas';
 
@@ -15,6 +15,6 @@ export default function* rootSaga() {
         logOutSaga(),
         changeInfoSaga(),
         changePasswordSaga(),
-        CurrentUserSaga(),
+        currentUserSaga(),
     ]);
 }

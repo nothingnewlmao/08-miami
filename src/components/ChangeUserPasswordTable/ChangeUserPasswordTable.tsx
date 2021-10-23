@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { FormikValues } from 'formik';
 
-import { FormWithRouter } from 'ui/components/Form';
+import * as Styled from 'components/UserInfoTable/styled';
 
-import * as Styled from '../UserInfoTable/styled';
+import { FormWithRouter } from 'ui/components/Form';
 
 import validationSchema from './validationSchema';
 import { fields, initialValues } from './fields';
