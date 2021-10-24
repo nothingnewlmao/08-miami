@@ -20,8 +20,9 @@ export const UserInfoTable: FC<IUserInfoTableProps> = ({
     changePasswordLink,
     quitHandler,
 }) => {
-    const userEntries = user
-        && Object.entries(user).map(([key, value]) => [
+    const userEntries =
+        user &&
+        Object.entries(user).map(([key, value]) => [
             // @ts-ignore
             userLabels[key],
             value,
@@ -31,8 +32,8 @@ export const UserInfoTable: FC<IUserInfoTableProps> = ({
         <Styled.Container>
             <Styled.TableWrapper>
                 <tbody>
-                    {userEntries
-                        && userEntries.map(([key, value]) => (
+                    {userEntries &&
+                        userEntries.map(([key, value]) => (
                             <Styled.TableRow key={key}>
                                 <td>{key}</td>
                                 <td>{value}</td>

@@ -60,13 +60,13 @@ const App: FC = () => {
                             <Route path="/forum">
                                 <Forum />
                             </Route>
-                            <Route path="/user">
+                            <Route exact path="/user">
                                 <UserPageWithRouter />
                             </Route>
-                            <Route path="/change-password">
+                            <Route path="/user/change-password">
                                 <ChangePasswordPageWithRouter />
                             </Route>
-                            <Route path="/change-info">
+                            <Route path="/user/change-info">
                                 <ChangeUserInfoPageWithRouter />
                             </Route>
                             <Redirect to="/" />

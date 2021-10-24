@@ -27,8 +27,8 @@ const UserPage: FC<RouteComponentProps> = ({ history }) => {
             <GoBackColumn clickHandler={goBackHome} />
             <UserInfoTable
                 user={user ?? ({} as IUser)}
-                changeInfoLink="/change-info"
-                changePasswordLink="/change-password"
+                changeInfoLink="/user/change-info"
+                changePasswordLink="/user/change-password"
                 quitHandler={logOut}
             >
                 Hello
