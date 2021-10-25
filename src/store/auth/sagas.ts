@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { logOut, signIn, signUp } from 'api/authApi';
+import AuthApi from 'api/authApi';
 
 import {
     logInFetching,
@@ -16,12 +16,12 @@ import ActionTypes from 'store/auth/actionTypes';
 
 import history from 'utils/history';
 
-function* signInRequest(action: any) {
+export function* signInRequest(action: any) {
     yield put(logInFetching());
     const { payload } = action;
 
     try {
-        yield call(signIn, payload);
+        yield call(AuthApi.signIn, payload);
 
         yield put(logInLoaded());
         yield call([history, history.push], '/');
@@ -40,7 +40,7 @@ function* signUpRequest(action: any) {
     const { payload } = action;
 
     try {
-        yield call(signUp, payload);
+        yield call(AuthApi.signUp, payload);
 
         yield put(signUpLoaded());
         yield call([history, history.push], '/');
@@ -58,7 +58,7 @@ function* logOutRequest() {
     yield put(logOutFetching());
 
     try {
-        yield call(logOut);
+        yield call(AuthApi.logOut);
 
         yield put(logOutLoaded());
         yield call([history, history.push], '/sign-in');
