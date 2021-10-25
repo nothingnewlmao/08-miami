@@ -7,10 +7,10 @@ enum AuthUrls {
     LogOut = 'auth/logout',
 }
 
-export default class AuthApi {
-    static signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
+const AuthApi = {
+    signUp: (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data)),
+    signIn: (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data)),
+    logOut: () => axiosInstance.post(AuthUrls.LogOut),
+};
 
-    static signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
-
-    static logOut = () => axiosInstance.post(AuthUrls.LogOut);
-}
+export default AuthApi;
