@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Is equal to snapshot 1`] = `
+<form
+  action="#"
+  onReset={[Function]}
+  onSubmit={[Function]}
+>
+  <div
+    className="sc-pGacB hfruWC"
+  >
+    <h1
+      className="sc-kEjbQP bXatqG"
+    >
+      Title
+    </h1>
+    <div
+      className="sc-jrAFXE XiYva"
+    >
+      <div
+        className="sc-gsTEea cKwXyU"
+      >
+        <input
+          className="sc-dlfnuX hnVzCV"
+          id="form-input-login"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <label
+          htmlFor="form-input-login"
+        >
+          Логин
+        </label>
+        <div
+          className="sc-hKgJUU kYByEP"
+        />
+      </div>
+      <div
+        className="sc-gsTEea cKwXyU"
+      >
+        <input
+          className="sc-dlfnuX hnVzCV"
+          id="form-input-password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+        <label
+          htmlFor="form-input-password"
+        >
+          Пароль
+        </label>
+        <div
+          className="sc-hKgJUU kYByEP"
+        />
+      </div>
+    </div>
+    <button
+      className="sc-bdfBQB eRsREP"
+      type="submit"
+    >
+      Присоединиться
+    </button>
+    <div
+      className="sc-hKgJUU kYByEP"
+    />
+  </div>
+</form>
+`;
