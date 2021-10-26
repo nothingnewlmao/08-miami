@@ -23,6 +23,7 @@ export const UserInfoTable: FC<IUserInfoTableProps> = ({
     const userEntries =
         user &&
         Object.entries(user).map(([key, value]) => [
+            // обращаемся к свойству с помощью литерала
             // @ts-ignore
             userLabels[key],
             value,

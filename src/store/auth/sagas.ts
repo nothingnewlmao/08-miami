@@ -66,6 +66,7 @@ function* logOutRequest() {
         yield put(logOutLoaded());
     } catch (e: any) {
         const { reason = null } = e.response.data;
+
         yield put(logOutFailed(reason));
     } finally {
         yield call([history, history.push], '/sign-in');
@@ -76,7 +77,7 @@ export function* logOutSaga() {
     yield takeEvery(ActionTypes.LogOut, logOutRequest);
 }
 
-function* CurrentUserRequest() {
+function* currentUserRequest() {
     try {
         const response: TObjectLiteral = yield call(getCurrentUser);
 
@@ -88,5 +89,5 @@ function* CurrentUserRequest() {
 }
 
 export function* currentUserSaga() {
-    yield takeEvery(ActionTypes.GetUser, CurrentUserRequest);
+    yield takeEvery(ActionTypes.GetUser, currentUserRequest);
 }
