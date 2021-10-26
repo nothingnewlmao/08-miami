@@ -1,5 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { getCurrentUser, logOut, signIn, signUp } from 'api/authApi';
+import {
+    getCurrentUser, logOut, signIn, signUp,
+} from 'api/authApi';
 import TObjectLiteral from 'types/TObjectLiteral';
 
 import {
