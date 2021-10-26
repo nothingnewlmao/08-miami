@@ -1,5 +1,5 @@
-const soundfile = require('../../assets/audio/backgroundMusic2.wav');
-const impulsefile = require('../../assets/audio/RightGlassTriangle.wav');
+const soundFile = require('../../assets/audio/backgroundMusic2.wav');
+const impulseFile = require('../../assets/audio/RightGlassTriangle.wav');
 
 class BackgroundMusic {
     private audioPaused: boolean = true;
@@ -17,8 +17,8 @@ class BackgroundMusic {
     constructor() {
         this.context = new window.AudioContext();
 
-        this.fetchMusic(soundfile.default, this.decodeMainBuffer);
-        this.fetchMusic(impulsefile.default, this.decodeImpulseBuffer);
+        this.fetchMusic(soundFile.default, this.decodeMainBuffer);
+        this.fetchMusic(impulseFile.default, this.decodeImpulseBuffer);
     }
 
     play(): void {
@@ -59,8 +59,10 @@ class BackgroundMusic {
         decodeCallback: (buffer: AudioBuffer) => void,
     ) {
         const request = new XMLHttpRequest();
+
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
+
         request.onload = () => {
             // декодируем бинарный ответ
             this.context.decodeAudioData(
