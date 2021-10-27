@@ -49,14 +49,14 @@ describe('Form', () => {
          * тестирование отправки данных по нажатию кнопки нецелесообразно,
          * так как это, по сути, тестирование сайд-эффекта саги
          *
-         * тестирование отображения ошибок пустого поля в форме после нажатия на кнопку отправить
+         * тестирование отображения ошибок пустого поля в форме после нажатия на кнопку "отправить"
          * так же не целесообразно, так как это тестирование рендера ошибки у инпута
          */
         const createRTLInstance = () => render(template());
 
-        const { getByText, getByLabelText } = createRTLInstance();
+        const { getByRole, getByLabelText } = createRTLInstance();
         const input = getByLabelText('Логин');
-        const submitBtn = getByText('Присоединиться');
+        const submitBtn = getByRole('button');
 
         callback.mockClear();
 
