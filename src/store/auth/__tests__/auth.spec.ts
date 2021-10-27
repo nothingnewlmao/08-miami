@@ -23,10 +23,10 @@ class XHRError extends Error {
 describe('Auth Sagas', () => {
     describe('Sign In saga', () => {
         it('should be on root path if success', () => {
-            const fakeResponse = 'ok';
+            const mockResponse = 'ok';
 
             return expectSaga(signInRequest, AuthApi)
-                .provide([[matchers.call.fn(AuthApi.signIn), fakeResponse]])
+                .provide([[matchers.call.fn(AuthApi.signIn), mockResponse]])
                 .put(logInLoaded())
                 .run();
         });

@@ -3,4 +3,5 @@
 **/*.min.js
 /node_modules
 /*.js
+/*.ts
 /public/sw.js
