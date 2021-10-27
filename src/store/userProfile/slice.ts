@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import TUserProfile from 'types/userProfile/TUserProfile';
+import TUserProfile from 'types/TUserProfile';
 
 const initialState: TUserProfile = {
-    data: null,
+    userInfo: null,
     pending: false,
     error: null,
 };
@@ -13,23 +13,21 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         dataFetching(state) {
-            state.data = null;
             state.pending = true;
             state.error = null;
         },
-        dataLoaded(state, action) {
-            state.pending = false;
-            state.error = null;
-            state.data = action.payload;
-        },
         dataFailed(state, action) {
             state.pending = false;
-            state.data = null;
             state.error = action.payload;
+        },
+        setUserData(state, action) {
+            state.pending = false;
+            state.error = null;
+            state.userInfo = action.payload;
         },
     },
 });
 
-export const { dataFetching, dataLoaded, dataFailed } = userSlice.actions;
+export const { dataFetching, setUserData, dataFailed } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -16,6 +16,7 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
     history,
     handleSubmit,
     errorText,
+    buttonLabel = 'Присоединиться',
 }) => (
     <Formik
         onSubmit={(values) => {
@@ -47,7 +48,7 @@ const InnerForm: React.FC<IInnerFormProps & RouteComponentProps> = ({
                             />
                         ))}
                     </Styled.FieldsWrapper>
-                    <BaseButton type="submit">Присоединиться</BaseButton>
+                    <BaseButton type="submit">{buttonLabel}</BaseButton>
                     <StyledError>{errorText}</StyledError>
                 </Styled.DynamicFormBox>
             </Form>
