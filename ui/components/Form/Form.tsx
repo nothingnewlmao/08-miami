@@ -14,6 +14,7 @@ export const UIForm: React.FC<IUIFormProps> = ({
     validationSchema,
     handleSubmit,
     errorText,
+    buttonLabel = 'Присоединиться',
 }) => (
     <Formik
         onSubmit={handleSubmit}
@@ -43,7 +44,7 @@ export const UIForm: React.FC<IUIFormProps> = ({
                             />
                         ))}
                     </Styled.FieldsWrapper>
-                    <BaseButton type="submit">Присоединиться</BaseButton>
+                    <BaseButton type="submit">{buttonLabel}</BaseButton>
                     <StyledError>{errorText}</StyledError>
                 </Styled.DynamicFormBox>
             </Form>

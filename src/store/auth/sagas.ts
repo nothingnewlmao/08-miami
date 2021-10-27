@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import AuthApi from 'api/authApi';
+import TObjectLiteral from 'types/TObjectLiteral';
 
 import {
     logInFetching,
@@ -13,8 +14,10 @@ import {
     logOutFailed,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
+import { setUserData } from 'store/userProfile/slice';
 
 import history from 'utils/history';
+import { mapApiUserToIUser } from 'utils/mapApiUserToUser';
 
 export function* signInRequest(action: any) {
     yield put(logInFetching());
@@ -61,13 +64,30 @@ function* logOutRequest() {
         yield call(AuthApi.logOut);
 
         yield put(logOutLoaded());
-        yield call([history, history.push], '/sign-in');
     } catch (e: any) {
         const { reason = null } = e.response.data;
+
         yield put(logOutFailed(reason));
+    } finally {
+        yield call([history, history.push], '/sign-in');
     }
 }
 
 export function* logOutSaga() {
     yield takeEvery(ActionTypes.LogOut, logOutRequest);
+}
+
+function* currentUserRequest() {
+    try {
+        const response: TObjectLiteral = yield call(AuthApi.getCurrentUser);
+
+        yield put(setUserData(mapApiUserToIUser(response.data)));
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+        console.log('reason :>> ', reason);
+    }
+}
+
+export function* currentUserSaga() {
+    yield takeEvery(ActionTypes.GetUser, currentUserRequest);
 }

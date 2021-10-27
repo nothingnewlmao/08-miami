@@ -5,12 +5,19 @@ enum AuthUrls {
     SignUp = 'auth/signup',
     SignIn = 'auth/signin',
     LogOut = 'auth/logout',
+    GetUser = 'auth/user',
 }
 
-const AuthApi = {
-    signUp: (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data)),
-    signIn: (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data)),
-    logOut: () => axiosInstance.post(AuthUrls.LogOut),
-};
+class AuthApi {
+    signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
 
-export default AuthApi;
+    signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
+
+    logOut = () => axiosInstance.post(AuthUrls.LogOut);
+
+    getCurrentUser = () => axiosInstance.get(AuthUrls.GetUser);
+}
+
+const authApi = new AuthApi();
+
+export default authApi;

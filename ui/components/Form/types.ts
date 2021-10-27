@@ -14,6 +14,7 @@ export interface IUIFormProps extends TWithoutSubmit {
     handleSubmit: (values: FormikValues) => void;
     errorText?: TNullable<string>;
     validationSchema?: TObjectLiteral;
+    buttonLabel?: string;
 }
 
 type TWithoutSubmit = Omit<FormikConfig<any>, 'onSubmit'>;
