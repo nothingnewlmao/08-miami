@@ -12,6 +12,7 @@ class XHRError extends Error {
 
     constructor(text: string) {
         super();
+
         this.response = {
             data: {
                 reason: text,
