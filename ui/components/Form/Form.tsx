@@ -16,9 +16,7 @@ export const InnerForm: React.FC<IInnerFormProps> = ({
     errorText,
 }) => (
     <Formik
-        onSubmit={(values) => {
-            handleSubmit(values);
-        }}
+        onSubmit={handleSubmit}
         initialValues={initialValues}
         validationSchema={validationSchema}
     >
