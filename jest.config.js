@@ -15,4 +15,5 @@ module.exports = {
         '^store/(.*)$': '<rootDir>/src/store/$1',
         '^utils/(.*)$': '<rootDir>/src/utils/$1',
     },
+    clearMocks: true
 };
