@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { TRootState } from 'store';
@@ -30,14 +30,15 @@ export const SignInWithData = () => {
     const errorText = useSelector((state: TRootState) => state.auth.error);
 
     const dispatch = useDispatch();
-    const handleSubmit = (values: FormikValues) => {
+
+    const memoizedHandleSubmit = useCallback((values: FormikValues) => {
         dispatch({ type: ActionTypes.SignIn, payload: values });
-    };
+    }, []);
 
     return (
         <UIForm
             validationSchema={validationSchema}
-            handleSubmit={handleSubmit}
+            handleSubmit={memoizedHandleSubmit}
             title="Вход"
             fields={fields}
             initialValues={initialValues}
