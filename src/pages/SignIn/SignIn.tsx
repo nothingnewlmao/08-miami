@@ -5,7 +5,7 @@ import { TRootState } from 'store';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { UIForm } from 'uicomponents/Form';
+import { FormWithRouter } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -36,7 +36,7 @@ export const SignInWithData = () => {
     }, []);
 
     return (
-        <UIForm
+        <FormWithRouter
             validationSchema={validationSchema}
             handleSubmit={memoizedHandleSubmit}
             title="Вход"
