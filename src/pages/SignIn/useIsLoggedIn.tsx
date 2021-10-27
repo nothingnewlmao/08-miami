@@ -6,6 +6,9 @@ import history from 'utils/history';
 
 function useIsLoggedIn() {
     const isLoggedIn = useSelector(
+        // todo: при рефреше страниц будет отправляться запрос getUserIn
+        //  по результатам этого запроса обновлять стейт isloggedIn и исходя из этого решать,
+        //  показывать ли контент или редиректить на логин
         (state: TRootState) => state.auth.isLoggedIn,
     );
 
