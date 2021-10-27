@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { InnerForm } from 'uicomponents/Form';
+import { UIForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -25,7 +25,7 @@ export const SignUpWithData = () => {
     };
 
     return (
-        <InnerForm
+        <UIForm
             validationSchema={validationSchema}
             initialValues={initialValues}
             handleSubmit={handleSubmit}

@@ -8,7 +8,7 @@ export interface IFormInputProps {
     type?: string;
 }
 
-export interface IInnerFormProps extends TWithoutSubmit {
+export interface IUIFormProps extends TWithoutSubmit {
     title: string;
     fields: IFormInputProps[];
     handleSubmit: (values: FormikValues) => void;

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import renderer from 'react-test-renderer';
 
 import { themes } from 'ui/themes';
-import { InnerForm as Form } from 'ui/components/Form';
+import { UIForm as Form } from 'ui/components/Form';
 
 const { light } = themes;
 

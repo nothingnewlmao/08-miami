@@ -3,11 +3,11 @@ import { Formik, Form } from 'formik';
 
 import { BaseButton, Input, StyledError } from 'ui/components';
 
-import { IInnerFormProps } from 'uicomponents/Form/types';
+import { IUIFormProps } from 'uicomponents/Form/types';
 
 import * as Styled from './styled';
 
-export const InnerForm: React.FC<IInnerFormProps> = ({
+export const UIForm: React.FC<IUIFormProps> = ({
     fields,
     title,
     initialValues,
