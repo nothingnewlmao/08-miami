@@ -14,6 +14,7 @@ import { Forum } from 'pages/Forum';
 import { HomePage } from 'pages/HomePage';
 import { SignInWithData } from 'pages/SignIn';
 import { UserPageWithRouter } from 'pages/UserPage';
+import useIsLoggedIn from 'pages/SignIn/useIsLoggedIn';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
@@ -26,6 +27,8 @@ import { ChangePasswordPageWithRouter } from './ChangePasswordPage';
 import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
 
 const App: FC = () => {
+    useIsLoggedIn();
+  
     const dispatch = useDispatch();
 
     useEffect(() => {
