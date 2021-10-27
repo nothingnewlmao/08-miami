@@ -1,69 +1,38 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { IUser } from 'types/IUser';
+
+import ActionTypes from 'store/auth/actionTypes';
+import { selectUserProfileInfo } from 'store/userProfile/selectors';
 
 import { GoBackColumn } from 'components/GoBackColumn/GoBackColumn';
-import { UserInfoTable } from 'components/UserInfo/UserInfoTable';
-import { ChangeUserInfoTable } from 'components/UserInfo/ChangeUserInfoTable';
-import { ChangeUserPasswordTable } from 'components/UserInfo/ChangeUserPasswordTable';
+import { UserInfoTable } from 'components/UserInfoTable/UserInfoTable';
 
 import * as Styled from './styled';
 
-export interface IUser {
-    firstName: string;
-    lastName: string;
-    login: string;
-    email: string;
-    phone: string;
-}
-
-type TActiveTableName = 'info' | 'changeInfo' | 'changePassword';
-
 const UserPage: FC<RouteComponentProps> = ({ history }) => {
-    const [activeTable, setActiveTable] = useState<TActiveTableName>('info');
+    const dispatch = useDispatch();
 
-    const user: IUser = {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@doe.com',
-        login: 'JD',
-        phone: '555-1234',
-    };
+    const user = useSelector(selectUserProfileInfo);
 
-    const backTo = () => {
-        switch (activeTable) {
-        case 'changeInfo':
-        case 'changePassword':
-            setActiveTable('info');
-            break;
-        case 'info':
-            history.push('/');
-            break;
-        default:
-            history.push('/');
-        }
-    };
+    const goBackHome = () => history.push('/');
 
-    const tableDict: { [key: string]: JSX.Element } = {
-        info: (
-            <UserInfoTable
-                user={user}
-                changeInfo={() => setActiveTable('changeInfo')}
-                changePassword={() => {
-                    setActiveTable('changePassword');
-                }}
-                quitHandler={() => {}}
-            >
-                Hello
-            </UserInfoTable>
-        ),
-        changeInfo: <ChangeUserInfoTable user={user} saveChanges={() => {}} />,
-        changePassword: <ChangeUserPasswordTable saveChanges={() => {}} />,
-    };
+    const logOut = useCallback(() => {
+        dispatch({ type: ActionTypes.LogOut });
+    }, [dispatch]);
 
     return (
         <Styled.CustomWrapper>
-            <GoBackColumn clickHandler={backTo} />
-            {tableDict[activeTable]}
+            <GoBackColumn clickHandler={goBackHome} />
+            <UserInfoTable
+                user={user ?? ({} as IUser)}
+                changeInfoLink="/user/change-info"
+                changePasswordLink="/user/change-password"
+                quitHandler={logOut}
+            >
+                Hello
+            </UserInfoTable>
         </Styled.CustomWrapper>
     );
 };

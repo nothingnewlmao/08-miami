@@ -3,7 +3,7 @@ export function startServiceWorker() {
         window.addEventListener('load', () => {
             navigator.serviceWorker
                 .register('/sw.js')
-                .then((registration) => {
+                .then(registration => {
                     console.log(
                         'ServiceWorker registration successful with scope: ',
                         registration.scope,

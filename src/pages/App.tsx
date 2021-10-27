@@ -1,7 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
 import { Leaderboard } from 'pages/Leaderboard';
@@ -20,8 +23,17 @@ import history from 'utils/history';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 
+import { ChangePasswordPageWithRouter } from './ChangePasswordPage';
+import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
+
 const App: FC = () => {
     useIsLoggedIn();
+  
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: ActionTypes.GetUser });
+    }, []);
 
     return (
         <ThemeProvider theme={themes.light}>
@@ -51,8 +63,14 @@ const App: FC = () => {
                             <Route path="/forum">
                                 <Forum />
                             </Route>
-                            <Route path="/user">
+                            <Route exact path="/user">
                                 <UserPageWithRouter />
+                            </Route>
+                            <Route path="/user/change-password">
+                                <ChangePasswordPageWithRouter />
+                            </Route>
+                            <Route path="/user/change-info">
+                                <ChangeUserInfoPageWithRouter />
                             </Route>
                             <Redirect to="/" />
                         </Switch>
