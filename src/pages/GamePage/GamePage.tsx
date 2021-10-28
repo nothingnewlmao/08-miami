@@ -12,7 +12,7 @@ import * as Styled from './styled';
 export const GamePage: FC = () => {
     const panelHeight = 60;
 
-    const endTimeSeconds = 50;
+    const endTimeSeconds = 10;
 
     const endTime = Date.now() + 1000 * endTimeSeconds;
 
