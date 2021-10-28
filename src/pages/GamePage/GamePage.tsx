@@ -29,7 +29,11 @@ export const GamePage: FC = () => {
         };
     }, []);
 
-    useEffect(() => () => backgroundMusic.pause(), []);
+    useEffect(() => {
+        backgroundMusic.play();
+
+        return () => backgroundMusic.stop();
+    }, []);
 
     return (
         <Styled.Wrapper>
@@ -45,7 +49,6 @@ export const GamePage: FC = () => {
                 <BaseButton onClick={() => backgroundMusic.toggleMusic()}>
                     Toggle music
                 </BaseButton>
-
                 <Styled.Timer>{time}</Styled.Timer>
                 <Styled.Timer>{score} points</Styled.Timer>
             </Styled.GamePanel>

@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import TAuthStatus from 'types/auth/TAuthStatus';
+import TAuthStatus from 'types/TAuthStatus';
 
 const initialState: TAuthStatus = {
     isLoggedIn: false,

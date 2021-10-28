@@ -16,6 +16,7 @@ export interface IInnerFormProps extends TWithoutSubmit {
         history: RouteComponentProps['history'],
     ) => void;
     errorText?: TNullable<string>;
+    buttonLabel?: string;
 }
 
 type TWithoutSubmit = Omit<FormikConfig<any>, 'onSubmit'>;
