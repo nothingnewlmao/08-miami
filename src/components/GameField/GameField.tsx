@@ -28,20 +28,18 @@ export const GameField: React.FC<IGameFieldProps> = ({
             const gameOverCallback = () => {
                 const newData = {
                     miami7: 2,
-
                 };
                 const requestData = {
                     data: newData,
                     ratingFieldName: 'miami7',
                     teamName: 'miami7',
                 };
-                addLeaderboard(requestData)
-                    .catch((err: AxiosError) => {
-                        if (err.response?.status === 401) {
-                            // history.push('/login');
-                            console.log('err');
-                        }
-                    });
+                addLeaderboard(requestData).catch((err: AxiosError) => {
+                    if (err.response?.status === 401) {
+                        // history.push('/login');
+                        console.log('err');
+                    }
+                });
                 history.push('/leaderboard');
             };
 

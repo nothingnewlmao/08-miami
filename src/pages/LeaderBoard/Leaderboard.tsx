@@ -15,21 +15,27 @@ import { Wrapper } from 'uicomponents/Wrapper/styled';
 import * as Styled from './styled';
 
 type TColumnType = {
-    key?: number,
-    name: string,
-    points: number,
-    date: string,
-    country: string
+    key?: number;
+    name: string;
+    points: number;
+    date: string;
+    country: string;
 };
 
 export const Leaderboard: FC = () => {
     const [elements, setElements] = React.useState(null);
     React.useEffect(() => {
-        teamLeaderboard().then((response) => {
-            const newData = response.data.map((data, index): TColumnType => ({ key: index, ...data.data }));
-            setElements(newData);
-            console.log(newData);
-        })
+        teamLeaderboard()
+            .then((response) => {
+                const newData = response.data.map(
+                    (data, index): TColumnType => ({
+                        key: index,
+                        ...data.data,
+                    }),
+                );
+                setElements(newData);
+                console.log(newData);
+            })
             .catch((err: AxiosError) => {
                 if (err.response?.status === 401) {
                     console.log('err');
