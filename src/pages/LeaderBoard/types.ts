@@ -1,5 +1,5 @@
 export interface ILeadersProps {
-    id: number;
+    miami7: number;
     name: string;
     points: number;
 }

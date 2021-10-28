@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { addLeaderboard } from 'api/leaderboardApi';
-import { AxiosError } from 'axios';
 
 import { Game } from 'services/Game';
 
@@ -26,20 +24,6 @@ export const GameField: React.FC<IGameFieldProps> = ({
 
         if (canvasElem) {
             const gameOverCallback = () => {
-                const newData = {
-                    miami7: 2,
-                };
-                const requestData = {
-                    data: newData,
-                    ratingFieldName: 'miami7',
-                    teamName: 'miami7',
-                };
-                addLeaderboard(requestData).catch((err: AxiosError) => {
-                    if (err.response?.status === 401) {
-                        // history.push('/login');
-                        console.log('err');
-                    }
-                });
                 history.push('/leaderboard');
             };
 
