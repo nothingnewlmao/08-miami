@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { FormWithRouter } from 'uicomponents/Form';
+import { UIForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -28,7 +28,7 @@ export const SignUpWithData = () => {
     );
 
     return (
-        <FormWithRouter
+        <UIForm
             validationSchema={validationSchema}
             initialValues={initialValues}
             handleSubmit={memoizedHandleSubmit}
