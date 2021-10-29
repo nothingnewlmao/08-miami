@@ -3,3 +3,9 @@ export interface ILeadersProps {
     name: string;
     points: number;
 }
+
+export interface IDataProps {
+    data: ILeadersProps[];
+    ratingFieldName: string;
+    teamName: 'miami';
+}

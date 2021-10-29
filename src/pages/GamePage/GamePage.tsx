@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { addLeaderboard, teamLeaderboard } from 'api/leaderboardApi';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
 
@@ -46,8 +46,7 @@ export const GamePage: FC = () => {
 
     useEffect(() => {
         teamLeaderboard()
-            .then((response) => {
-                // @ts-ignore
+            .then((response:AxiosResponse<any>) => {
                 setOldPoints(response.data[0].data.points);
             })
             .catch((err: AxiosError) => {
