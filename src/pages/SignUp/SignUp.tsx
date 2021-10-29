@@ -20,9 +20,12 @@ const initialValues = {
 export const SignUpWithData = () => {
     const dispatch = useDispatch();
 
-    const memoizedHandleSubmit = useCallback(((values: FormikValues) => {
-        dispatch({ type: ActionTypes.SignUp, payload: values });
-    }), [dispatch]);
+    const memoizedHandleSubmit = useCallback(
+        (values: FormikValues) => {
+            dispatch({ type: ActionTypes.SignUp, payload: values });
+        },
+        [dispatch],
+    );
 
     return (
         <FormWithRouter

@@ -31,9 +31,12 @@ export const SignInWithData = () => {
 
     const dispatch = useDispatch();
 
-    const memoizedHandleSubmit = useCallback((values: FormikValues) => {
-        dispatch({ type: ActionTypes.SignIn, payload: values });
-    }, [dispatch]);
+    const memoizedHandleSubmit = useCallback(
+        (values: FormikValues) => {
+            dispatch({ type: ActionTypes.SignIn, payload: values });
+        },
+        [dispatch],
+    );
 
     return (
         <FormWithRouter
