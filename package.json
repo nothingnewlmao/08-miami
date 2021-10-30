@@ -6,10 +6,11 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
+    "prettier": "prettier --write .",
     "lint:eslint": "eslint . --fix",
     "lint": "npm-run-all prettier lint:*",
-    "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
