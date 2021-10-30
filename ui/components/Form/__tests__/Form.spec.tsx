@@ -44,11 +44,10 @@ describe('Form', () => {
             </ThemeProvider>,
         );
 
-        // @ts-ignore
-        // говорит, что value нет у HTMLElement
-        const loginFieldValue: HTMLInputElement = screen.getByLabelText(
-            fields[0].label,
-        ).value;
+        const loginFieldValue: HTMLInputElement = screen
+            // @ts-ignore
+            // говорит, что value нет у HTMLElement
+            .getByLabelText(fields[0].label).value;
 
         expect(loginFieldValue).toEqual(initialValues.login);
     });
