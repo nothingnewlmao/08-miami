@@ -1,73 +1,55 @@
 import 'jsdom-global/register';
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import renderer from 'react-test-renderer';
 
 import { themes } from 'ui/themes';
-import { FormWithRouter as Form } from 'ui/components/Form';
+import { UIForm as Form } from 'ui/components/Form';
 
 const { light } = themes;
-
-const initialValues = {
-    login: '',
-    password: '',
-};
-
-const fields = [
-    {
-        label: 'Логин',
-        name: 'login',
-    },
-    {
-        label: 'Пароль',
-        name: 'password',
-        type: 'password',
-    },
-];
-
-const template = () => (
-    <ThemeProvider theme={light}>
-        <Form
-            title="Title"
-            handleSubmit={() => ''}
-            fields={fields}
-            initialValues={initialValues}
-        />
-    </ThemeProvider>
-);
-
-const callback = jest.fn();
 
 afterEach(() => {
     cleanup();
 });
 
 describe('Form', () => {
-    it('Should ???', async () => {
-        /**
-         * тестирование отправки данных по нажатию кнопки нецелесообразно,
-         * так как это, по сути, тестирование сайд-эффекта саги
-         *
-         * тестирование отображения ошибок пустого поля в форме после нажатия на кнопку "отправить"
-         * так же не целесообразно, так как это тестирование рендера ошибки у инпута
-         */
-        const createRTLInstance = () => render(template());
+    it('should render initial values in inputs ', async () => {
+        const initialValues = {
+            login: 'admin',
+            password: 'somepassword',
+        };
 
-        const { getByRole, getByLabelText } = createRTLInstance();
-        const input = getByLabelText('Логин');
-        const submitBtn = getByRole('button');
+        const fields = [
+            {
+                label: 'Логин',
+                name: 'login',
+            },
+            {
+                label: 'Пароль',
+                name: 'password',
+                type: 'password',
+            },
+        ];
 
-        callback.mockClear();
+        const mockHandle = jest.fn();
 
-        fireEvent.click(submitBtn);
+        render(
+            <ThemeProvider theme={light}>
+                <Form
+                    handleSubmit={mockHandle}
+                    fields={fields}
+                    initialValues={initialValues}
+                    title="Some title"
+                />
+            </ThemeProvider>,
+        );
 
-        console.log(input);
-    });
+        // @ts-ignore
+        // говорит, что value нет у HTMLElement
+        const loginFieldValue: HTMLInputElement = screen.getByLabelText(
+            fields[0].label,
+        ).value;
 
-    it('Is equal to snapshot', () => {
-        const tree = renderer.create(template()).toJSON();
-
-        expect(tree).toMatchSnapshot();
+        expect(loginFieldValue).toEqual(initialValues.login);
     });
 });
