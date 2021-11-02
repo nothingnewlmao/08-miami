@@ -19,10 +19,12 @@ export const Leaderboard: FC = () => {
     const [elements, setElements] = React.useState(null);
     React.useEffect(() => {
         teamLeaderboard()
-            .then((response: AxiosResponse<any>) => {
-                const newData = response.data.map((data: IDataProps) => ({
-                    ...data.data,
-                }));
+            .then((response:AxiosResponse<any>) => {
+                const newData = response.data.map(
+                    (data:IDataProps) => ({
+                        ...data.data,
+                    }),
+                );
                 setElements(newData);
             })
             .catch((err: AxiosError) => {

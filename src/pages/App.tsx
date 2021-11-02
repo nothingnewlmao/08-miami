@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
-import { Leaderboard } from 'pages/Leaderboard';
+import { Leaderboard } from 'pages/LeaderBoard';
 import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
