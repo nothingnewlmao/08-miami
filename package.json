@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve",
+    "start": "npm run build && npm run server",
     "build": "webpack",
+    "server": "node app.js",
+    "dev": "webpack serve",
     "lint:eslint": "eslint . --fix",
     "lint": "npm-run-all prettier lint:*",
     "prettier": "prettier --write .",
