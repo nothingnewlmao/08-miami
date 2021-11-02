@@ -1,5 +1,11 @@
 export interface ILeadersProps {
-    id: number;
+    miami7: number;
     name: string;
     points: number;
+}
+
+export interface IDataProps {
+    data: ILeadersProps[];
+    ratingFieldName: string;
+    teamName: 'miami';
 }
