@@ -68,7 +68,7 @@ class BackgroundMusic {
             this.context.decodeAudioData(
                 request.response,
                 decodeCallback.bind(this),
-                e => {
+                (e) => {
                     console.log('Error decoding file', e);
                 },
             );

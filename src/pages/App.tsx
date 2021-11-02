@@ -28,7 +28,7 @@ import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
 
 const App: FC = () => {
     useIsLoggedIn();
-  
+
     const dispatch = useDispatch();
 
     useEffect(() => {

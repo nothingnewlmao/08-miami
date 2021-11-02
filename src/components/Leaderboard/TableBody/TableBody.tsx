@@ -8,7 +8,7 @@ export const TableBody: FC<ITableBodyProps> = ({ elements }) => {
     return (
         <tbody>
             {sorted.map((el, index) => (
-                <Styled.BodyTr key={el.id}>
+                <Styled.BodyTr key={el.miami7}>
                     <Styled.BodyTd>{index + 1}</Styled.BodyTd>
                     <Styled.BodyTd>{el.name}</Styled.BodyTd>
                     <Styled.BodyTd>{el.points}</Styled.BodyTd>

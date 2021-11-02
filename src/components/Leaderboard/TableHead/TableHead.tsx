@@ -9,8 +9,8 @@ const headElements = ['Позиция', 'Имя', 'Очки'];
 export const TableHead: FC = () => (
     <thead>
         <StyledTr>
-            {headElements.map((el) => (
-                <Styled.HeadTh>{el}</Styled.HeadTh>
+            {headElements.map((el, index) => (
+                <Styled.HeadTh key={index.toString()}>{el}</Styled.HeadTh>
             ))}
         </StyledTr>
     </thead>
