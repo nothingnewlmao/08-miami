@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { TRootState } from 'store';
 
 import ActionTypes from 'store/auth/actionTypes';
+
+import { BaseButton } from 'ui/components';
 
 import { FormWithRouter } from 'uicomponents/Form';
 
@@ -34,14 +36,21 @@ export const SignInWithData = () => {
         dispatch({ type: ActionTypes.SignIn, payload: values });
     };
 
+    const handleOAuth = useCallback(() => {
+        dispatch({ type: ActionTypes.OauthServiceId });
+    }, [dispatch]);
+
     return (
-        <FormWithRouter
-            validationSchema={validationSchema}
-            handleSubmit={handleSubmit}
-            title="Вход"
-            fields={fields}
-            initialValues={initialValues}
-            errorText={errorText}
-        />
+        <>
+            <FormWithRouter
+                validationSchema={validationSchema}
+                handleSubmit={handleSubmit}
+                title="Вход"
+                fields={fields}
+                initialValues={initialValues}
+                errorText={errorText}
+            />
+            <BaseButton onClick={handleOAuth}>Войти через Yandex</BaseButton>
+        </>
     );
 };
