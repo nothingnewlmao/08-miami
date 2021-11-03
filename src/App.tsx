@@ -15,6 +15,8 @@ import { HomePage } from 'pages/HomePage';
 import { SignInWithData } from 'pages/SignIn';
 import { UserPageWithRouter } from 'pages/UserPage';
 import useIsLoggedIn from 'pages/SignIn/useIsLoggedIn';
+import { ChangePasswordPageWithRouter } from 'pages/ChangePasswordPage';
+import { ChangeUserInfoPageWithRouter } from 'pages/ChangeUserInfoPage';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
@@ -22,9 +24,6 @@ import history from 'utils/history';
 
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
-
-import { ChangePasswordPageWithRouter } from './ChangePasswordPage';
-import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
 
 const App: FC = () => {
     useIsLoggedIn();
