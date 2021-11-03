@@ -1,7 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-    getCurrentUser, logOut, signIn, signUp,
-} from 'api/authApi';
+import AuthApi from 'api/authApi';
 import TObjectLiteral from 'types/TObjectLiteral';
 
 import {
@@ -14,6 +12,8 @@ import {
     logOutFetching,
     logOutLoaded,
     logOutFailed,
+    oAuthCodeLoaded,
+    oAuthCodeFailed,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
 import { setUserData } from 'store/userProfile/slice';
@@ -26,7 +26,7 @@ function* signInRequest(action: any) {
     const { payload } = action;
 
     try {
-        yield call(signIn, payload);
+        yield call(AuthApi.signIn, payload);
 
         yield put(logInLoaded());
         yield call([history, history.push], '/');
@@ -45,7 +45,7 @@ function* signUpRequest(action: any) {
     const { payload } = action;
 
     try {
-        yield call(signUp, payload);
+        yield call(AuthApi.signUp, payload);
 
         yield put(signUpLoaded());
         yield call([history, history.push], '/');
@@ -63,7 +63,7 @@ function* logOutRequest() {
     yield put(logOutFetching());
 
     try {
-        yield call(logOut);
+        yield call(AuthApi.logOut);
 
         yield put(logOutLoaded());
     } catch (e: any) {
@@ -81,7 +81,7 @@ export function* logOutSaga() {
 
 function* currentUserRequest() {
     try {
-        const response: TObjectLiteral = yield call(getCurrentUser);
+        const response: TObjectLiteral = yield call(AuthApi.getCurrentUser);
 
         yield put(setUserData(mapApiUserToIUser(response.data)));
     } catch (e: any) {
@@ -92,4 +92,20 @@ function* currentUserRequest() {
 
 export function* currentUserSaga() {
     yield takeEvery(ActionTypes.GetUser, currentUserRequest);
+}
+
+function* oAuthServiceIdRequest() {
+    try {
+        const response: TObjectLiteral = yield call(AuthApi.getOAuthServiceId);
+
+        yield put(oAuthCodeLoaded(response.data));
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+        yield put(oAuthCodeFailed(reason));
+        console.log('reason : ', reason);
+    }
+}
+
+export function* oAuthServiceIdSaga() {
+    yield takeEvery(ActionTypes.OauthServiceId, oAuthServiceIdRequest);
 }

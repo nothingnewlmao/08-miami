@@ -6,6 +6,7 @@ const initialState: TAuthStatus = {
     isLoggedIn: false,
     pending: false,
     error: null,
+    oAuthCode: null,
 };
 
 const authStore = createSlice({
@@ -55,6 +56,13 @@ const authStore = createSlice({
             state.pending = false;
             state.error = action.payload;
         },
+        oAuthCodeLoaded(state, action) {
+            state.oAuthCode = action.payload;
+        },
+        oAuthCodeFailed(state, action) {
+            state.oAuthCode = null;
+            state.error = action.payload;
+        },
     },
 });
 
@@ -68,6 +76,8 @@ export const {
     signupFetching,
     signUpLoaded,
     signUpFailed,
+    oAuthCodeLoaded,
+    oAuthCodeFailed,
 } = authStore.actions;
 
 export default authStore.reducer;
