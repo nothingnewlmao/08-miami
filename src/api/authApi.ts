@@ -6,12 +6,31 @@ enum AuthUrls {
     SignIn = 'auth/signin',
     LogOut = 'auth/logout',
     GetUser = 'auth/user',
+    OauthSignIn = 'oauth/yandex',
+    GetOauthServiceId = 'oauth/yandex/service-id',
 }
 
-export const signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
+class AuthApi {
+    signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
 
-export const signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
+    signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
 
-export const logOut = () => axiosInstance.post(AuthUrls.LogOut);
+    logOut = () => axiosInstance.post(AuthUrls.LogOut);
 
-export const getCurrentUser = () => axiosInstance.get(AuthUrls.GetUser);
+    getCurrentUser = () => axiosInstance.get(AuthUrls.GetUser);
+
+    getOAuthServiceId = () => axiosInstance.get(AuthUrls.GetOauthServiceId, {
+        params: {
+            redirect_uri: process.env.REDIRECT_URI,
+        },
+    });
+
+    oAuthSignIn = (client_id: string) => axiosInstance.post(AuthUrls.OauthSignIn, {
+        client_id,
+        redirect_uri: process.env.REDIRECT_URI,
+    });
+}
+
+const authApi = new AuthApi();
+
+export default authApi;
