@@ -26,7 +26,7 @@ const UserPage: FC<RouteComponentProps> = ({ history }) => {
         <Styled.CustomWrapper>
             <GoBackColumn clickHandler={goBackHome} />
             <UserInfoTable
-                user={user ? user : ({} as IUser)}
+                user={user || ({} as IUser)}
                 changeInfoLink="/user/change-info"
                 changePasswordLink="/user/change-password"
                 quitHandler={logOut}

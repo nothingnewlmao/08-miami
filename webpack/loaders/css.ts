@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const { IS_DEV } = require('../env');
 
 export default {

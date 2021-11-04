@@ -10,6 +10,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 let Editor: any;
 
 if (!isServer) {
+    // eslint-disable-next-line no-return-assign
     import('react-draft-wysiwyg').then(m => (Editor = m.Editor));
 }
 
