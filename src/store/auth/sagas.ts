@@ -99,7 +99,10 @@ function* oAuthSignInRequest() {
             AuthApi.getOAuthServiceId,
         );
         const { service_id: serviceId } = serviceIdRes.data;
-        const codeRes: TObjectLiteral = yield call(AuthApi.authorizeApp, serviceId);
+        const codeRes: TObjectLiteral = yield call(
+            AuthApi.authorizeApp,
+            serviceId,
+        );
         const code: string = codeRes.data;
         console.log(code);
 

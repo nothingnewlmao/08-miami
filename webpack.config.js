@@ -66,6 +66,6 @@ module.exports = {
         compress: true,
         hot: true,
         historyApiFallback: true,
-        host: 'local.ya-praktikum.tech'
+        host: 'local.ya-praktikum.tech',
     },
 };
