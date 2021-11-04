@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import TUserProfile from 'types/TUserProfile';
 
-const initialState: TUserProfile = {
+export const initialState: TUserProfile = {
     userInfo: null,
     pending: false,
     error: null,

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormikValues } from 'formik';
 import { TUserInfo } from 'types/TUserInfo';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import ActionTypes from 'store/userProfile/actionTypes';
 import {
@@ -36,7 +36,7 @@ const ChangeUserInfoPage: FC<RouteComponentProps> = ({ history }) => {
             <GoBackColumn clickHandler={backToUserInfo} />
             {initValues && (
                 <ChangeUserInfoTable
-                    initValues={initValues ?? ({} as TUserInfo)}
+                    initValues={initValues || ({} as TUserInfo)}
                     submit={submit}
                 />
             )}

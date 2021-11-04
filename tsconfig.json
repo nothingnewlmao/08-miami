@@ -3,8 +3,9 @@
     "outDir": "./dist",
     "target": "es2019",
     "declaration": false,
-    "module": "esnext",
+    "module": "commonjs",
     "strictNullChecks": true,
+    "resolveJsonModule": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -37,7 +38,7 @@
   "include": [
     "./src/**/*.ts*",
     "./ui/**/*.ts*",
-    "./webpack.config.js",
+    "./webpack.config.ts",
     "./prettier.config.js",
     "./public/*.ts"
   ],

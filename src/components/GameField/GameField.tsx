@@ -22,10 +22,8 @@ export const GameField: React.FC<IGameFieldProps> = ({
     useEffect(() => {
         const canvasElem = canvasRef.current;
 
-        if (canvasElem) {
-            const gameOverCallback = () => {
-                history.push('/leaderboard');
-            };
+        if (canvasElem && window) {
+            const gameOverCallback = () => history.push('/leaderboard');
 
             const game = new Game({
                 canvasRef: canvasElem,

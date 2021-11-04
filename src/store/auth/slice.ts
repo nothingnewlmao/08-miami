@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import TAuthStatus from 'types/TAuthStatus';
 
-const initialState: TAuthStatus = {
+export const initialState: TAuthStatus = {
     isLoggedIn: false,
     pending: false,
     error: null,
