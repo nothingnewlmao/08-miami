@@ -12,6 +12,7 @@
     "prepare": "husky install",
     "start:webpack": "webpack --mode=development --watch",
     "start:server": "nodemon index.js --watch dist/server.js",
+    "start-ssr": "NODE_ENV=development npm-run-all --print-label --parallel start:*",
     "clean": "rimraf dist"
   },
   "repository": {

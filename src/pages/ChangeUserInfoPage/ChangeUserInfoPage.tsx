@@ -36,7 +36,7 @@ const ChangeUserInfoPage: FC<RouteComponentProps> = ({ history }) => {
             <GoBackColumn clickHandler={backToUserInfo} />
             {initValues && (
                 <ChangeUserInfoTable
-                    initValues={initValues ?? ({} as TUserInfo)}
+                    initValues={initValues || ({} as TUserInfo)}
                     submit={submit}
                 />
             )}
