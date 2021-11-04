@@ -7,7 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Helmet, { HelmetData } from 'react-helmet';
 import { ChunkExtractor } from '@loadable/server';
 import { StyleSheetManager, ServerStyleSheet } from 'styled-components';
-import { StaticRouter } from 'react-router';
+import { StaticRouter, StaticRouterContext } from 'react-router';
 
 import rootSaga from 'store/sagas';
 import { IState } from 'store/types';
