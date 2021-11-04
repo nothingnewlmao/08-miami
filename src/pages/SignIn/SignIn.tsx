@@ -37,7 +37,7 @@ export const SignInWithData = () => {
     };
 
     const handleOAuth = useCallback(() => {
-        dispatch({ type: ActionTypes.OauthServiceId });
+        dispatch({ type: ActionTypes.OauthSignin });
     }, [dispatch]);
 
     return (

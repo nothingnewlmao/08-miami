@@ -12,8 +12,6 @@ import {
     logOutFetching,
     logOutLoaded,
     logOutFailed,
-    oAuthCodeLoaded,
-    oAuthCodeFailed,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
 import { setUserData } from 'store/userProfile/slice';
@@ -94,18 +92,25 @@ export function* currentUserSaga() {
     yield takeEvery(ActionTypes.GetUser, currentUserRequest);
 }
 
-function* oAuthServiceIdRequest() {
+function* oAuthSignInRequest() {
     try {
-        const response: TObjectLiteral = yield call(AuthApi.getOAuthServiceId);
+        yield put(logInFetching());
+        const serviceIdRes: TObjectLiteral = yield call(
+            AuthApi.getOAuthServiceId,
+        );
+        const { service_id: serviceId } = serviceIdRes.data;
+        const codeRes: TObjectLiteral = yield call(AuthApi.authorizeApp, serviceId);
+        const code: string = codeRes.data;
+        console.log(code);
 
-        yield put(oAuthCodeLoaded(response.data));
+        yield call(AuthApi.oAuthSignIn, code);
+        yield put(logInLoaded());
     } catch (e: any) {
         const { reason = null } = e.response.data;
-        yield put(oAuthCodeFailed(reason));
-        console.log('reason : ', reason);
+        yield put(logInFailed(reason));
     }
 }
 
-export function* oAuthServiceIdSaga() {
-    yield takeEvery(ActionTypes.OauthServiceId, oAuthServiceIdRequest);
+export function* oAuthSignInSaga() {
+    yield takeEvery(ActionTypes.OauthSignIn, oAuthSignInRequest);
 }
