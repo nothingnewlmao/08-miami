@@ -87,6 +87,8 @@ function* currentUserRequest() {
     } catch (e: any) {
         const { reason = null } = e.response.data;
         console.log('reason :>> ', reason);
+
+        yield call([history, history.push], '/sign-in');
     }
 }
 

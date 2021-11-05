@@ -1,10 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
-import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
 import { Leaderboard } from 'pages/Leaderboard';
@@ -28,12 +25,6 @@ import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
 
 const App: FC = () => {
     useIsLoggedIn();
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch({ type: ActionTypes.GetUser });
-    }, []);
 
     return (
         <ThemeProvider theme={themes.light}>
