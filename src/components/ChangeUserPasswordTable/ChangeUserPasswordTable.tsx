@@ -3,7 +3,7 @@ import { FormikValues } from 'formik';
 
 import * as Styled from 'components/UserInfoTable/styled';
 
-import { FormWithRouter } from 'ui/components/Form';
+import { UIForm } from 'ui/components/Form';
 
 import validationSchema from './validationSchema';
 import { fields, initialValues } from './fields';
@@ -16,7 +16,7 @@ export const ChangeUserPasswordTable: FC<IChangeUserPasswordTableProps> = ({
     submit,
 }) => (
     <Styled.Container>
-        <FormWithRouter
+        <UIForm
             validationSchema={validationSchema}
             initialValues={initialValues}
             handleSubmit={submit}

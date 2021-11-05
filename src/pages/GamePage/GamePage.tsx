@@ -46,7 +46,7 @@ export const GamePage: FC = () => {
 
     useEffect(() => {
         teamLeaderboard()
-            .then((response:AxiosResponse<any>) => {
+            .then((response: AxiosResponse<any>) => {
                 setOldPoints(response.data[0].data.points);
             })
             .catch((err: AxiosError) => {
