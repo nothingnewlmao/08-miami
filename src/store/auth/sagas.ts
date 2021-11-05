@@ -95,19 +95,20 @@ export function* currentUserSaga() {
 function* oAuthSignInRequest() {
     try {
         yield put(logInFetching());
+
         const serviceIdRes: TObjectLiteral = yield call(
             AuthApi.getOAuthServiceId,
         );
-        const { service_id: serviceId } = serviceIdRes.data;
-        const codeRes: TObjectLiteral = yield call(
-            AuthApi.authorizeApp,
-            serviceId,
-        );
-        const code: string = codeRes.data;
-        console.log(code);
 
-        yield call(AuthApi.oAuthSignIn, code);
-        yield put(logInLoaded());
+        const { service_id: serviceId } = serviceIdRes.data;
+
+        yield call([
+            window,
+            () => {
+                // eslint-disable-next-line max-len
+                window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId}&redirect_uri=${process.env.REDIRECT_URI}`;
+            },
+        ]);
     } catch (e: any) {
         const { reason = null } = e.response.data;
         yield put(logInFailed(reason));
