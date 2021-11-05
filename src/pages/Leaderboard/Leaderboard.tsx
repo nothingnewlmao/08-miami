@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { teamLeaderboard } from 'api/leaderboardApi';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -16,13 +16,15 @@ import { Wrapper } from 'uicomponents/Wrapper/styled';
 import * as Styled from './styled';
 
 export const Leaderboard: FC = () => {
-    const [elements, setElements] = useState(null);
-    useEffect(() => {
+    const [elements, setElements] = React.useState(null);
+    React.useEffect(() => {
         teamLeaderboard()
-            .then((response: AxiosResponse<any>) => {
-                const newData = response.data.map((data: IDataProps) => ({
-                    ...data.data,
-                }));
+            .then((response:AxiosResponse<any>) => {
+                const newData = response.data.map(
+                    (data:IDataProps) => ({
+                        ...data.data,
+                    }),
+                );
                 setElements(newData);
             })
             .catch((err: AxiosError) => {
