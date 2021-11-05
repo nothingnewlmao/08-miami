@@ -64,6 +64,7 @@ module.exports = {
         },
         watchFiles: ['src/**/*.ts*', 'src/**/*.js*'],
         compress: true,
+        port: 3000,
         hot: true,
         historyApiFallback: true,
         host: 'local.ya-praktikum.tech',
