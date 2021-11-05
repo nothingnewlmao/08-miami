@@ -33,7 +33,7 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch({ type: ActionTypes.GetUser });
-    }, []);
+    }, [dispatch]);
 
     return (
         <ThemeProvider theme={themes.light}>
