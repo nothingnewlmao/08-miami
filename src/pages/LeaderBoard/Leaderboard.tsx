@@ -33,6 +33,7 @@ export const Leaderboard: FC = () => {
                 }
             });
     }, []);
+    
     return (
         <Wrapper>
             <Title>LeaderBoard</Title>
