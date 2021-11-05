@@ -12,6 +12,7 @@ import {
     logOutFetching,
     logOutLoaded,
     logOutFailed,
+    setOAuthServiceId,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
 import { setUserData } from 'store/userProfile/slice';
@@ -101,6 +102,8 @@ function* oAuthSignInRequest() {
         );
 
         const { service_id: serviceId } = serviceIdRes.data;
+
+        yield put(setOAuthServiceId(serviceId));
 
         yield call([
             window,

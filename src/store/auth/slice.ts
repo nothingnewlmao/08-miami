@@ -6,6 +6,7 @@ const initialState: TAuthStatus = {
     isLoggedIn: false,
     pending: false,
     error: null,
+    serviceId: null,
 };
 
 const authStore = createSlice({
@@ -55,6 +56,12 @@ const authStore = createSlice({
             state.pending = false;
             state.error = action.payload;
         },
+        setOAuthServiceId(state, action) {
+            state.serviceId = action.payload;
+        },
+        resetOAuthServiceId(state) {
+            state.serviceId = null;
+        },
     },
 });
 
@@ -68,6 +75,8 @@ export const {
     signupFetching,
     signUpLoaded,
     signUpFailed,
+    setOAuthServiceId,
+    resetOAuthServiceId,
 } = authStore.actions;
 
 export default authStore.reducer;
