@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { TRootState } from 'store';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { FormWithRouter } from 'uicomponents/Form';
+import { UIForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -30,14 +30,18 @@ export const SignInWithData = () => {
     const errorText = useSelector((state: TRootState) => state.auth.error);
 
     const dispatch = useDispatch();
-    const handleSubmit = (values: FormikValues) => {
-        dispatch({ type: ActionTypes.SignIn, payload: values });
-    };
+
+    const memoizedHandleSubmit = useCallback(
+        (values: FormikValues) => {
+            dispatch({ type: ActionTypes.SignIn, payload: values });
+        },
+        [dispatch],
+    );
 
     return (
-        <FormWithRouter
+        <UIForm
             validationSchema={validationSchema}
-            handleSubmit={handleSubmit}
+            handleSubmit={memoizedHandleSubmit}
             title="Вход"
             fields={fields}
             initialValues={initialValues}

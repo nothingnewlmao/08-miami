@@ -1,6 +1,6 @@
 import { FormikConfig, FormikValues } from 'formik';
-import { RouteComponentProps } from 'react-router-dom';
 import TNullable from 'types/TNullable';
+import TObjectLiteral from 'types/TObjectLiteral';
 
 export interface IFormInputProps {
     label: string;
@@ -8,14 +8,12 @@ export interface IFormInputProps {
     type?: string;
 }
 
-export interface IInnerFormProps extends TWithoutSubmit {
+export interface IUIFormProps extends TWithoutSubmit {
     title: string;
     fields: IFormInputProps[];
-    handleSubmit: (
-        values: FormikValues,
-        history: RouteComponentProps['history'],
-    ) => void;
+    handleSubmit: (values: FormikValues) => void;
     errorText?: TNullable<string>;
+    validationSchema?: TObjectLiteral;
     buttonLabel?: string;
 }
 
