@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormikValues } from 'formik';
 import { useDispatch } from 'react-redux';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import { FormWithRouter } from 'uicomponents/Form';
+import { UIForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -19,15 +19,19 @@ const initialValues = {
 
 export const SignUpWithData = () => {
     const dispatch = useDispatch();
-    const handleSubmit = (values: FormikValues) => {
-        dispatch({ type: ActionTypes.SignUp, payload: values });
-    };
+
+    const memoizedHandleSubmit = useCallback(
+        (values: FormikValues) => {
+            dispatch({ type: ActionTypes.SignUp, payload: values });
+        },
+        [dispatch],
+    );
 
     return (
-        <FormWithRouter
+        <UIForm
             validationSchema={validationSchema}
             initialValues={initialValues}
-            handleSubmit={handleSubmit}
+            handleSubmit={memoizedHandleSubmit}
             title="Регистрация"
             fields={[
                 { label: 'Имя', name: 'first_name' },

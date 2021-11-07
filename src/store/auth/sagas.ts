@@ -20,7 +20,7 @@ import { setUserData } from 'store/userProfile/slice';
 import history from 'utils/history';
 import { mapApiUserToIUser } from 'utils/mapApiUserToUser';
 
-function* signInRequest(action: any) {
+export function* signInRequest(action: any) {
     yield put(logInFetching());
     const { payload } = action;
 
@@ -85,7 +85,17 @@ function* currentUserRequest() {
         yield put(setUserData(mapApiUserToIUser(response.data)));
     } catch (e: any) {
         const { reason = null } = e.response.data;
+
+        const { pathname } = history.location;
+        const unAuthPages = pathname === '/sign-up' || pathname === '/sign-in';
+
         console.log('reason :>> ', reason);
+
+        if (unAuthPages) {
+            return;
+        }
+
+        yield call([history, history.push], '/sign-in');
     }
 }
 

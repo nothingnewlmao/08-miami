@@ -1,10 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
-import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
 import { Leaderboard } from 'pages/LeaderBoard';
@@ -16,6 +13,8 @@ import { SignInWithData } from 'pages/SignIn';
 import { UserPageWithRouter } from 'pages/UserPage';
 import useIsLoggedIn from 'pages/SignIn/useIsLoggedIn';
 import useOAuthCode from 'pages/SignIn/useOAuthCode';
+import { ChangePasswordPageWithRouter } from 'pages/ChangePasswordPage';
+import { ChangeUserInfoPageWithRouter } from 'pages/ChangeUserInfoPage';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
@@ -24,18 +23,9 @@ import history from 'utils/history';
 import { GlobalStyles } from 'ui/global';
 import { themes } from 'ui/themes';
 
-import { ChangePasswordPageWithRouter } from './ChangePasswordPage';
-import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
-
 const App: FC = () => {
     useOAuthCode();
     useIsLoggedIn();
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch({ type: ActionTypes.GetUser });
-    }, [dispatch]);
 
     return (
         <ThemeProvider theme={themes.light}>

@@ -7,7 +7,7 @@ import ActionTypes from 'store/auth/actionTypes';
 
 import { BaseButton } from 'ui/components';
 
-import { FormWithRouter } from 'uicomponents/Form';
+import { UIForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
 
@@ -32,9 +32,13 @@ export const SignInWithData = () => {
     const errorText = useSelector((state: TRootState) => state.auth.error);
 
     const dispatch = useDispatch();
-    const handleSubmit = (values: FormikValues) => {
-        dispatch({ type: ActionTypes.SignIn, payload: values });
-    };
+
+    const memoizedHandleSubmit = useCallback(
+        (values: FormikValues) => {
+            dispatch({ type: ActionTypes.SignIn, payload: values });
+        },
+        [dispatch],
+    );
 
     const handleOAuth = useCallback(() => {
         dispatch({ type: ActionTypes.OauthSignIn });
@@ -42,9 +46,9 @@ export const SignInWithData = () => {
 
     return (
         <>
-            <FormWithRouter
+            <UIForm
                 validationSchema={validationSchema}
-                handleSubmit={handleSubmit}
+                handleSubmit={memoizedHandleSubmit}
                 title="Вход"
                 fields={fields}
                 initialValues={initialValues}

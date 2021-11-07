@@ -4,7 +4,7 @@ import { TUserInfo } from 'types/TUserInfo';
 
 import * as Styled from 'components/UserInfoTable/styled';
 
-import { FormWithRouter } from 'ui/components/Form';
+import { UIForm } from 'ui/components/Form';
 
 import validationSchema from './validationSchema';
 import { fields } from './fields';
@@ -19,7 +19,7 @@ export const ChangeUserInfoTable: FC<IChangeUserInfoTableProps> = ({
     submit,
 }) => (
     <Styled.Container>
-        <FormWithRouter
+        <UIForm
             initialValues={initValues}
             validationSchema={validationSchema}
             handleSubmit={submit}
