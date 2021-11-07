@@ -11,38 +11,33 @@ enum AuthUrls {
 }
 
 class AuthApi {
-    signUp = (data: TObjectLiteral) =>
-        axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
+    signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
 
-    signIn = (data: TObjectLiteral) =>
-        axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
+    signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
 
     logOut = () => axiosInstance.post(AuthUrls.LogOut);
 
     getCurrentUser = () => axiosInstance.get(AuthUrls.GetUser);
 
-    getOAuthServiceId = () =>
-        axiosInstance.get(AuthUrls.GetOauthServiceId, {
-            params: {
-                redirect_uri: process.env.REDIRECT_URI,
-            },
-        });
+    getOAuthServiceId = () => axiosInstance.get(AuthUrls.GetOauthServiceId, {
+        params: {
+            redirect_uri: process.env.REDIRECT_URI,
+        },
+    });
 
     // @ts-ignore : почему-то считает, что process.env.OAUTH_URL — undefined
-    authorizeApp = (client_id: string) =>
-        axiosInstance.get(process.env.OAUTH_URL, {
-            params: {
-                response_type: 'code',
-                redirect_uri: process.env.REDIRECT_URI,
-                client_id,
-            },
-        });
-
-    oAuthSignIn = (client_id: string) =>
-        axiosInstance.post(AuthUrls.OauthSignIn, {
-            client_id,
+    authorizeApp = (client_id: string) => axiosInstance.get(process.env.OAUTH_URL, {
+        params: {
+            response_type: 'code',
             redirect_uri: process.env.REDIRECT_URI,
-        });
+            client_id,
+        },
+    });
+
+    oAuthSignIn = (client_id: string) => axiosInstance.post(AuthUrls.OauthSignIn, {
+        client_id,
+        redirect_uri: process.env.REDIRECT_URI,
+    });
 }
 
 const authApi = new AuthApi();
