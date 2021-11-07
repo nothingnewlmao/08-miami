@@ -10,16 +10,16 @@ const URLS = [
     '/bundle.js',
 ];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
     console.log('install');
     event.waitUntil(
         caches
             .open(CACHE_NAME)
-            .then(cache => {
+            .then((cache) => {
                 console.log('Opened cache');
                 return cache.addAll(URLS);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
                 throw err;
             }),
@@ -34,15 +34,15 @@ self.addEventListener('fetch', function (event) {
     );
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches
             .keys()
-            .then(cacheNames =>
+            .then((cacheNames) =>
                 Promise.all(
                     cacheNames
                         .filter(() => true)
-                        .map(name => caches.delete(name)),
+                        .map((name) => caches.delete(name)),
                 ),
             ),
     );
