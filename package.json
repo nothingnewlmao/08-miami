@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && npm run server",
+    "start": "webpack serve",
     "build": "webpack",
     "server": "node app.js",
-    "dev": "webpack serve",
+    "prettier": "prettier --write .",
     "lint:eslint": "eslint . --fix",
     "lint": "npm-run-all prettier lint:*",
-    "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",

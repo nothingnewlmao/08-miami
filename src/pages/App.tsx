@@ -15,6 +15,7 @@ import { HomePage } from 'pages/HomePage';
 import { SignInWithData } from 'pages/SignIn';
 import { UserPageWithRouter } from 'pages/UserPage';
 import useIsLoggedIn from 'pages/SignIn/useIsLoggedIn';
+import useOAuthCode from 'pages/SignIn/useOAuthCode';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
@@ -27,6 +28,7 @@ import { ChangePasswordPageWithRouter } from './ChangePasswordPage';
 import { ChangeUserInfoPageWithRouter } from './ChangeUserInfoPage';
 
 const App: FC = () => {
+    useOAuthCode();
     useIsLoggedIn();
 
     const dispatch = useDispatch();
