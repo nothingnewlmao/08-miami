@@ -84,7 +84,15 @@ function* currentUserRequest() {
         yield put(setUserData(mapApiUserToIUser(response.data)));
     } catch (e: any) {
         const { reason = null } = e.response.data;
+
+        const { pathname } = history.location;
+        const unAuthPages = pathname === '/sign-up' || pathname === '/sign-in';
+
         console.log('reason :>> ', reason);
+
+        if (unAuthPages) {
+            return;
+        }
 
         yield call([history, history.push], '/sign-in');
     }
