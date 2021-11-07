@@ -4,6 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { SignUpWithData } from 'pages/SignUp';
+import { Leaderboard } from 'pages/LeaderBoard';
 import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
@@ -33,6 +34,9 @@ const App: FC = () => {
                         <Switch>
                             <Route exact path="/">
                                 <HomePage />
+                            </Route>
+                            <Route path="/leaderboard">
+                                <Leaderboard />
                             </Route>
                             <Route path="/sign-up">
                                 <SignUpWithData />
