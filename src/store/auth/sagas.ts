@@ -103,7 +103,7 @@ export function* currentUserSaga() {
     yield takeEvery(ActionTypes.GetUser, currentUserRequest);
 }
 
-function* oAuthSignInRequest() {
+function* oAuthSignInCodeRequest() {
     try {
         yield put(logInFetching());
 
@@ -129,5 +129,5 @@ function* oAuthSignInRequest() {
 }
 
 export function* oAuthSignInSaga() {
-    yield takeEvery(ActionTypes.OauthSignIn, oAuthSignInRequest);
+    yield takeEvery(ActionTypes.OauthSignIn, oAuthSignInCodeRequest);
 }
