@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { Provider as ReduxProvider } from 'react-redux';
 import Helmet, { HelmetData } from 'react-helmet';
 import { ChunkExtractor } from '@loadable/server';
-import { StyleSheetManager, ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import { StaticRouter, StaticRouterContext } from 'react-router';
 
 import rootSaga from 'store/sagas';
@@ -47,19 +47,19 @@ function getHtml({
                 href="https://fonts.googleapis.com/icon?family=Material+Icons"
                 rel="stylesheet"
             />
+            ${styleTags}
             ${styles}
             ${helmetData.title.toString()}
             ${helmetData.meta.toString()}
+            ${scriptTags}
             ${linkTags}
-            ${styleTags}
-        </head>
-        <body>
+            </head>
+            <body>
             <div id="root">${reactHtml}</div>
             <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
             </script>
-            ${scriptTags}
-        </body>
+            </body>
         </html>
     `;
 }
