@@ -11,7 +11,8 @@ function useOAuthCode() {
     useEffect(() => {
         if (isFromOAuth) {
             const code = search.replace(fromOAuth, '');
-            authApi.getToken(code)
+            authApi
+                .getToken(code)
                 .then((response) => {
                     console.log(response);
                 })
