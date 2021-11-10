@@ -85,9 +85,10 @@ export default (req: Request, res: Response) => {
             </ReduxProvider>,
         );
 
+        const reactHtml = renderToString(jsx);
+
         const styles = sheet.getStyleTags();
 
-        const reactHtml = renderToString(jsx);
         const reduxState = store.getState();
         const helmetData = Helmet.renderStatic();
 

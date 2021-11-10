@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { isServer } from 'store/rootStore';
+
 import { Game } from 'services/Game';
 
 export interface IGameFieldProps {
-    heightOffset?: number;
-    widthOffset?: number;
+    fieldHeight?: number;
+    fieldWidth?: number;
     endTime: number;
     setScore: (score: number) => void;
 }
 
 export const GameField: React.FC<IGameFieldProps> = ({
-    heightOffset = 0,
-    widthOffset = 0,
+    fieldHeight = 0,
+    fieldWidth = 0,
     endTime,
     setScore,
 }: IGameFieldProps) => {
@@ -22,7 +24,7 @@ export const GameField: React.FC<IGameFieldProps> = ({
     useEffect(() => {
         const canvasElem = canvasRef.current;
 
-        if (canvasElem && window) {
+        if (canvasElem && !isServer) {
             const gameOverCallback = () => history.push('/leaderboard');
 
             const game = new Game({
@@ -45,11 +47,5 @@ export const GameField: React.FC<IGameFieldProps> = ({
         return () => {};
     }, [canvasRef]);
 
-    return (
-        <canvas
-            ref={canvasRef}
-            height={window.innerHeight - heightOffset}
-            width={window.innerWidth - widthOffset}
-        />
-    );
+    return <canvas ref={canvasRef} height={fieldHeight} width={fieldWidth} />;
 };
