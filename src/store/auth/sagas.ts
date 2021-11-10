@@ -14,7 +14,12 @@ import {
     logOutFailed,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
-import { setUserData } from 'store/userProfile/slice';
+import {
+    dataFetching,
+    setUserData,
+    dataFailed,
+    resetUserData,
+} from 'store/userProfile/slice';
 
 import history from 'utils/history';
 import { mapApiUserToIUser } from 'utils/mapApiUserToUser';
@@ -64,6 +69,7 @@ function* logOutRequest() {
         yield call(AuthApi.logOut);
 
         yield put(logOutLoaded());
+        yield put(resetUserData());
     } catch (e: any) {
         const { reason = null } = e.response.data;
 
@@ -78,6 +84,8 @@ export function* logOutSaga() {
 }
 
 function* currentUserRequest() {
+    yield put(dataFetching());
+
     try {
         const response: TObjectLiteral = yield call(AuthApi.getCurrentUser);
 
@@ -85,16 +93,7 @@ function* currentUserRequest() {
     } catch (e: any) {
         const { reason = null } = e.response.data;
 
-        const { pathname } = history.location;
-        const unAuthPages = pathname === '/sign-up' || pathname === '/sign-in';
-
-        console.log('reason :>> ', reason);
-
-        if (unAuthPages) {
-            return;
-        }
-
-        yield call([history, history.push], '/sign-in');
+        yield put(dataFailed(reason));
     }
 }
 
