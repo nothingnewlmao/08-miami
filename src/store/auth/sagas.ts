@@ -115,11 +115,12 @@ function* oAuthSignInCodeRequest() {
 
         yield put(setOAuthServiceId(serviceId));
 
+        const getAppCodeLink = `${process.env.GET_APP_CODE}&client_id=${serviceId}&redirect_uri=${process.env.REDIRECT_URI}`;
+
         yield call([
             window,
             () => {
-                // eslint-disable-next-line max-len
-                window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId}&redirect_uri=${process.env.REDIRECT_URI}`;
+                window.location.href = getAppCodeLink;
             },
         ]);
     } catch (e: any) {
