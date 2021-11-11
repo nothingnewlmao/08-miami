@@ -8,6 +8,7 @@ import { IUIFormProps } from 'uicomponents/Form/types';
 import * as Styled from './styled';
 
 export const UIForm: React.FC<IUIFormProps> = ({
+    children,
     fields,
     title,
     initialValues,
@@ -46,6 +47,7 @@ export const UIForm: React.FC<IUIFormProps> = ({
                     </Styled.FieldsWrapper>
                     <BaseButton type="submit">{buttonLabel}</BaseButton>
                     <StyledError>{errorText}</StyledError>
+                    {children}
                 </Styled.DynamicFormBox>
             </Form>
         )}

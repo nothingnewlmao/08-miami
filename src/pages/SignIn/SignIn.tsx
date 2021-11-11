@@ -45,18 +45,17 @@ export const SignInWithData = () => {
     }, [dispatch]);
 
     return (
-        <>
-            <UIForm
-                validationSchema={validationSchema}
-                handleSubmit={memoizedHandleSubmit}
-                title="Вход"
-                fields={fields}
-                initialValues={initialValues}
-                errorText={errorText}
-            />
+        <UIForm
+            validationSchema={validationSchema}
+            handleSubmit={memoizedHandleSubmit}
+            title="Вход"
+            fields={fields}
+            initialValues={initialValues}
+            errorText={errorText}
+        >
             <BaseButton onClick={memoizedHandleOAuth}>
-                Войти через Yandex
+                    Войти через Yandex
             </BaseButton>
-        </>
+        </UIForm>
     );
 };
