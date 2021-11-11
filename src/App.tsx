@@ -35,15 +35,15 @@ const App: FC = () => {
         dispatch({ type: ActionTypes.GetUser });
     }, [dispatch]);
 
-    const getUserInfoPending = useSelector(selectUserPending);
-
-    const forPending = getUserInfoPending ? 'pending' : '';
-
     const ProtectedUser = ProtectedRoute(UserPageWithRouter);
     const ProtectedChangeInfo = ProtectedRoute(ChangeUserInfoPageWithRouter);
     const ProtectedChangePassword = ProtectedRoute(
         ChangePasswordPageWithRouter,
     );
+
+    const getUserInfoPending = useSelector(selectUserPending);
+
+    const forPending = getUserInfoPending ? 'pending' : '';
 
     return (
         <ThemeProvider theme={themes.light}>

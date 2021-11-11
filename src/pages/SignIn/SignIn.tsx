@@ -40,8 +40,8 @@ export const SignInWithData = () => {
         [dispatch],
     );
 
-    const handleOAuth = useCallback(() => {
-        dispatch({ type: ActionTypes.OauthSignIn });
+    const memoizedHandleOAuth = useCallback(() => {
+        dispatch({ type: ActionTypes.GetAuthSignInCode });
     }, [dispatch]);
 
     return (
@@ -54,7 +54,9 @@ export const SignInWithData = () => {
                 initialValues={initialValues}
                 errorText={errorText}
             />
-            <BaseButton onClick={handleOAuth}>Войти через Yandex</BaseButton>
+            <BaseButton onClick={memoizedHandleOAuth}>
+                Войти через Yandex
+            </BaseButton>
         </>
     );
 };

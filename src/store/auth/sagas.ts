@@ -129,5 +129,5 @@ function* oAuthSignInCodeRequest() {
 }
 
 export function* oAuthSignInSaga() {
-    yield takeEvery(ActionTypes.OauthSignIn, oAuthSignInCodeRequest);
+    yield takeEvery(ActionTypes.GetAuthSignInCode, oAuthSignInCodeRequest);
 }

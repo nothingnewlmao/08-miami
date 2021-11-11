@@ -3,7 +3,7 @@ enum ActionTypes {
     SignUp = 'signUp',
     LogOut = 'logOut',
     GetUser = 'getUser',
-    OauthSignIn = 'oAuthSignIn',
+    GetAuthSignInCode = 'getAuthSignInCode',
 }
 
 export default ActionTypes;
