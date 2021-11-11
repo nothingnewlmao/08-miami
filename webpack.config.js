@@ -49,6 +49,7 @@ module.exports = {
             api: path.resolve(__dirname, 'src/api/'),
             store: path.resolve(__dirname, 'src/store/'),
             utils: path.resolve(__dirname, 'src/utils/'),
+            types: path.resolve(__dirname, 'src/types/'),
         },
     },
     plugins: [
