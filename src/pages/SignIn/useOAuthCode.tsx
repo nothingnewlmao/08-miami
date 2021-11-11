@@ -25,7 +25,7 @@ function useOAuthCode() {
                     console.log(err.response);
                 });
         }
-    }, [fromOAuth, isFromOAuth, search]);
+    }, [dispatch, fromOAuth, isFromOAuth, search]);
 }
 
 export default useOAuthCode;
