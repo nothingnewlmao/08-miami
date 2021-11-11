@@ -54,7 +54,7 @@ export const SignInWithData = () => {
             errorText={errorText}
         >
             <BaseButton onClick={memoizedHandleOAuth}>
-                    Войти через Yandex
+                Войти через Yandex
             </BaseButton>
         </UIForm>
     );
