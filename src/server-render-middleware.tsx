@@ -116,11 +116,5 @@ export default (req: Request, res: Response) => {
             throw err;
         });
 
-    const dataRequirements: (Promise<void> | void)[] = [];
-
-    return Promise.all(dataRequirements)
-        .then(() => store.close())
-        .catch(err => {
-            throw err;
-        });
+    store.close();
 };
