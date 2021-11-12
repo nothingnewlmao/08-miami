@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { configureStore } from 'store/rootStore';
 import { IState } from 'store/types';
 
-import App from 'pages/App';
+import App from './App';
 
 // eslint-disable-next-line no-underscore-dangle
 const { store, history } = configureStore(window.__INITIAL_STATE__);

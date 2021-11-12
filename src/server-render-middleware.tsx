@@ -12,8 +12,7 @@ import { StaticRouter, StaticRouterContext } from 'react-router';
 import rootSaga from 'store/sagas';
 import { IState } from 'store/types';
 
-import App from 'pages/App';
-
+import App from './App';
 import { configureStore } from './store/rootStore';
 import { getInitialState } from './store/getInitialState';
 
@@ -112,7 +111,7 @@ export default (req: Request, res: Response) => {
         .runSaga(rootSaga)
         .toPromise()
         .then(() => renderApp())
-        .catch(err => {
+        .catch((err) => {
             throw err;
         });
 
