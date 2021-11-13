@@ -4,8 +4,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import AT from 'store/leaderboard/actionTypes';
-import ActionTypes from 'store/auth/actionTypes';
+import ActionTypesLeaderboard from 'store/leaderboard/actionTypes';
+import ActionTypesUser from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
 import { Leaderboard } from 'pages/LeaderBoard';
@@ -32,8 +32,8 @@ const App: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({ type: ActionTypes.GetUser });
-        dispatch({ type: AT.GetLeaderboard });
+        dispatch({ type: ActionTypesUser.GetUser });
+        dispatch({ type: ActionTypesLeaderboard.GetLeaderboard });
     }, []);
 
     return (
