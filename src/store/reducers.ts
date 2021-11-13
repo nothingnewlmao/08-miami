@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router';
 
 import userReducer from 'store/userProfile/slice';
 import authReducer from 'store/auth/slice';
+import leaderboardReducer from 'store/leaderboard/slice';
 
 import history from 'utils/history';
 
@@ -10,4 +11,5 @@ export default combineReducers({
     router: connectRouter(history),
     user: userReducer,
     auth: authReducer,
+    leaderboard: leaderboardReducer,
 });

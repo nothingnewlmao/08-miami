@@ -4,6 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import AT from 'store/leaderboard/actionTypes';
 import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
@@ -32,6 +33,7 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch({ type: ActionTypes.GetUser });
+        dispatch({ type: AT.GetLeaderboard });
     }, []);
 
     return (
