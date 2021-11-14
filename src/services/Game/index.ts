@@ -1,4 +1,4 @@
 import { Game } from './Game';
-import { GameMap } from './GameMap';
+import { GameMap } from './services/GameMap';
 
 export { Game, GameMap };

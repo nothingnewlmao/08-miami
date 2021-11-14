@@ -1,51 +1,100 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { isServer } from 'store/rootStore';
 
 import { Game } from 'services/Game';
+import { GameConstants } from 'services/Game/contants';
+import { LVLs } from 'services/Game/lvls';
 
 export interface IGameFieldProps {
-    fieldHeight?: number;
-    fieldWidth?: number;
-    endTime: number;
+    heightOffset?: number;
+    widthOffset?: number;
     setScore: (score: number) => void;
+    lvlNumber: number;
 }
 
 export const GameField: React.FC<IGameFieldProps> = ({
-    fieldHeight = 0,
-    fieldWidth = 0,
-    endTime,
     setScore,
+    lvlNumber,
 }: IGameFieldProps) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
     const history = useHistory();
 
+    const [height, setHeight] = useState(
+        Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].length),
+    );
+
+    const [width, setWidth] = useState(
+        Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber][0].length),
+    );
+
     useEffect(() => {
         const canvasElem = canvasRef.current;
 
+        const updateSize = () => {
+            setWidth(
+                Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].length),
+            );
+            setHeight(
+                Math.floor(
+                    GameConstants.PERFECT_ONE * LVLs[lvlNumber][0].length,
+                ),
+            );
+        };
+
         if (canvasElem && !isServer) {
-            const gameOverCallback = () => history.push('/leaderboard');
+            const gameOverCallback = () => {
+                history.push('/leaderboard');
+            };
 
             const game = new Game({
                 canvasRef: canvasElem,
-                initPoint: {
-                    x: 0,
-                    y: 0,
+                initBlock: {
+                    xNum: 1,
+                    yNum: 1,
                 },
                 gameOverCallback,
-                endTime,
                 setScore,
+                lvlNum: lvlNumber,
             });
             game.start();
 
             return () => {
                 game.unsubscribeKeysCallback();
+
+                window.addEventListener('resize', updateSize);
             };
         }
 
-        return () => {};
+        return () => {
+            window.removeEventListener('resize', updateSize);
+        };
     }, [canvasRef]);
 
-    return <canvas ref={canvasRef} height={fieldHeight} width={fieldWidth} />;
+    return (
+        <div
+            style={{
+                display: 'flex',
+                height: 'calc(100% - 60px)',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+        >
+            <div
+                style={{
+                    backgroundColor: 'white',
+                    height: `${Math.floor(
+                        GameConstants.PERFECT_ONE * LVLs[lvlNumber].length,
+                    )}px`,
+                    width: `${Math.floor(
+                        GameConstants.PERFECT_ONE * LVLs[lvlNumber][0].length,
+                    )}px`,
+                    border: '1px solid #111E6C',
+                }}
+            >
+                <canvas ref={canvasRef} height={height} width={width} />
+            </div>
+        </div>
+    );
 };

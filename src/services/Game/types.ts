@@ -11,9 +11,9 @@ export interface IPoint {
 }
 
 export interface IGameProps {
-    initPoint: IPoint;
+    initBlock: { xNum: number; yNum: number };
     canvasRef: HTMLCanvasElement;
     gameOverCallback: (points?: number) => void;
-    endTime: number;
+    lvlNum: number;
     setScore: (score: number) => void;
 }
