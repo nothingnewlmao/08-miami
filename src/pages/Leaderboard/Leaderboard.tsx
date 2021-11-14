@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { teamLeaderboard } from 'api/leaderboardApi';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { IDataProps } from 'pages/LeaderBoard/types';
+import { IDataProps } from 'pages/Leaderboard/types';
 
 import { TableHead } from 'components/Leaderboard/TableHead/TableHead';
 import { TableBody } from 'components/Leaderboard/TableBody/TableBody';

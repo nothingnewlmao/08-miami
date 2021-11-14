@@ -12,4 +12,4 @@ RUN npm install
 COPY --from=build /var/www/dist /dist
 COPY --from=build /var/www/app.js ./app.js
 EXPOSE 3000
-CMD ["npm", "run", "server"]
+CMD ["npm", "run", "start"]

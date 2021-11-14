@@ -2,6 +2,8 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 
 import { configureStore } from 'store/rootStore';
 import { IState } from 'store/types';
@@ -19,10 +21,14 @@ declare global {
     }
 }
 
+const persistor = persistStore(store);
+
 ReactDOM.hydrate(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <App />
+            <PersistGate persistor={persistor}>
+                <App />
+            </PersistGate>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root'),
