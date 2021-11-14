@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FormikValues } from 'formik';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import ActionTypes from 'store/userProfile/actionTypes';
 

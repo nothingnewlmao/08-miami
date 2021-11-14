@@ -1,6 +1,10 @@
+import { isServer } from 'store/rootStore';
+
 export const DISCRET_WIDTH_SIZE = 75;
 
-export const PERFECT_ONE = window.innerWidth / DISCRET_WIDTH_SIZE;
+const innerWidth = isServer ? 1000 : window.innerWidth;
+
+export const PERFECT_ONE = innerWidth / DISCRET_WIDTH_SIZE;
 
 // movement
 export const LEFT_RIGHT_SPEED_BUST = PERFECT_ONE / 8;

@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { addLeaderboard, teamLeaderboard } from 'api/leaderboardApi';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
+import { isServer } from 'store/rootStore';
 
 import { GameField } from 'components/GameField/GameField';
 
@@ -28,6 +29,15 @@ export const GamePage: FC = () => {
     const [oldPoints, setOldPoints] = useState(0);
 
     const user = useSelector(selectCurrentUser);
+
+    const history = useHistory();
+
+    if (isServer) {
+        history.push('/');
+    }
+
+    const fieldHeight = isServer ? 0 : window.innerHeight - panelHeight;
+    const fieldWidth = isServer ? 0 : window.innerWidth;
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -79,7 +89,8 @@ export const GamePage: FC = () => {
     return (
         <Styled.Wrapper>
             <GameField
-                heightOffset={panelHeight}
+                fieldHeight={fieldHeight}
+                fieldWidth={fieldWidth}
                 endTime={endTime}
                 setScore={setScore}
             />
