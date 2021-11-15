@@ -19,8 +19,8 @@ import { ChangePasswordPageWithRouter } from 'pages/ChangePasswordPage';
 import { ChangeUserInfoPageWithRouter } from 'pages/ChangeUserInfoPage';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
 
-import ProtectedRoute from 'utils/hocs/protectedRoute';
 import history from 'utils/history';
 
 import { GlobalStyles } from 'ui/global';
@@ -33,12 +33,6 @@ const App: FC = () => {
     }, [dispatch]);
 
     const isPending = useSelector(selectUserPending);
-
-    const ProtectedUser = ProtectedRoute(UserPageWithRouter);
-    const ProtectedChangeInfo = ProtectedRoute(ChangeUserInfoPageWithRouter);
-    const ProtectedChangePassword = ProtectedRoute(
-        ChangePasswordPageWithRouter,
-    );
 
     return (
         <ThemeProvider theme={themes.light}>
@@ -71,14 +65,14 @@ const App: FC = () => {
                                 <Route path="/forum">
                                     <Forum />
                                 </Route>
-                                <Route exact path="/user">
-                                    <ProtectedUser />
-                                </Route>
-                                <Route path="/user/change-password">
-                                    <ProtectedChangePassword />
-                                </Route>
+                                <ProtectedRoute exact path="/user">
+                                    <UserPageWithRouter />
+                                </ProtectedRoute>
+                                <ProtectedRoute path="/user/change-password">
+                                    <ChangePasswordPageWithRouter />
+                                </ProtectedRoute>
                                 <Route path="/user/change-info">
-                                    <ProtectedChangeInfo />
+                                    <ChangeUserInfoPageWithRouter />
                                 </Route>
                                 <Redirect to="/" />
                             </Switch>
