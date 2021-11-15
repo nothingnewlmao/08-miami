@@ -1,12 +1,11 @@
 import { useEffect, useMemo } from 'react';
-import authApi from 'api/authApi';
 import { useDispatch } from 'react-redux';
 
 import ActionTypes from 'store/auth/actionTypes';
 
 import history from 'utils/history';
 
-function useOAuthCode() {
+function useOAuth() {
     const fromOAuth = useMemo(() => /^\?code=/, []);
     const { search = '' } = history.location;
     const isFromOAuth = fromOAuth.test(search);
@@ -16,16 +15,9 @@ function useOAuthCode() {
     useEffect(() => {
         if (isFromOAuth) {
             const code = search.replace(fromOAuth, '');
-            authApi
-                .getToken(code)
-                .then(() => {
-                    dispatch({ type: ActionTypes.GetUser });
-                })
-                .catch((err) => {
-                    console.log(err.response);
-                });
+            dispatch({ type: ActionTypes.GetToken, payload: code });
         }
     }, [dispatch, fromOAuth, isFromOAuth, search]);
 }
 
-export default useOAuthCode;
+export default useOAuth;

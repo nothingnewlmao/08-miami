@@ -130,10 +130,26 @@ function* oAuthSignInCodeRequest() {
         ]);
     } catch (e: any) {
         const { reason = null } = e.response.data;
+
         yield put(logInFailed(reason));
     }
 }
 
 export function* oAuthSignInSaga() {
     yield takeEvery(ActionTypes.GetAuthSignInCode, oAuthSignInCodeRequest);
+}
+
+function* getToken(action: any) {
+    try {
+        yield call(AuthApi.getToken, action.payload);
+
+        yield call(currentUserRequest);
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+        yield put(logInFailed(reason));
+    }
+}
+
+export function* getTokenSaga() {
+    yield takeEvery(ActionTypes.GetToken, getToken);
 }

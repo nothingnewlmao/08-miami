@@ -4,6 +4,7 @@ enum ActionTypes {
     LogOut = 'logOut',
     GetUser = 'getUser',
     GetAuthSignInCode = 'getAuthSignInCode',
+    GetToken = 'getToken',
 }
 
 export default ActionTypes;
