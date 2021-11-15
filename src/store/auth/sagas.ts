@@ -24,44 +24,6 @@ import {
 import history from 'utils/history';
 import { mapApiUserToIUser } from 'utils/mapApiUserToUser';
 
-export function* signInRequest(action: any) {
-    yield put(logInFetching());
-    const { payload } = action;
-
-    try {
-        yield call(AuthApi.signIn, payload);
-
-        yield put(logInLoaded());
-        yield call([history, history.push], '/');
-    } catch (e: any) {
-        const { reason = null } = e.response.data;
-        yield put(logInFailed(reason));
-    }
-}
-
-export function* signInSaga() {
-    yield takeEvery(ActionTypes.SignIn, signInRequest);
-}
-
-function* signUpRequest(action: any) {
-    yield put(signupFetching());
-    const { payload } = action;
-
-    try {
-        yield call(AuthApi.signUp, payload);
-
-        yield put(signUpLoaded());
-        yield call([history, history.push], '/');
-    } catch (e: any) {
-        const { reason = null } = e.response.data;
-        yield put(signUpFailed(reason));
-    }
-}
-
-export function* signUpSaga() {
-    yield takeEvery(ActionTypes.SignUp, signUpRequest);
-}
-
 function* logOutRequest() {
     yield put(logOutFetching());
 
@@ -99,4 +61,48 @@ function* currentUserRequest() {
 
 export function* currentUserSaga() {
     yield takeEvery(ActionTypes.GetUser, currentUserRequest);
+}
+
+function* signUpRequest(action: any) {
+    yield put(signupFetching());
+    const { payload } = action;
+
+    try {
+        yield call(AuthApi.signUp, payload);
+
+        yield put(signUpLoaded());
+
+        yield call(currentUserRequest);
+
+        yield call([history, history.push], '/');
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+        yield put(signUpFailed(reason));
+    }
+}
+
+export function* signUpSaga() {
+    yield takeEvery(ActionTypes.SignUp, signUpRequest);
+}
+
+export function* signInRequest(action: any) {
+    yield put(logInFetching());
+    const { payload } = action;
+
+    try {
+        yield call(AuthApi.signIn, payload);
+
+        yield put(logInLoaded());
+
+        yield call(currentUserRequest);
+
+        yield call([history, history.push], '/');
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+        yield put(logInFailed(reason));
+    }
+}
+
+export function* signInSaga() {
+    yield takeEvery(ActionTypes.SignIn, signInRequest);
 }

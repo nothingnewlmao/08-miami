@@ -6,7 +6,7 @@ import { selectLogInFailed } from 'store/userProfile/selectors';
 
 import history from 'utils/history';
 
-const ProtectedRoute = (WrappedComponent: ComponentType<TObjectLiteral>) => function Comp(props: TObjectLiteral) {
+const ProtectedRoute = (WrappedComponent: ComponentType<TObjectLiteral>) => function Component(props: TObjectLiteral) {
     const { pathname } = history.location;
 
     const logInFailed = useSelector(selectLogInFailed);

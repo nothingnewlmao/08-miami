@@ -8,7 +8,7 @@ import { selectUserPending } from 'store/userProfile/selectors';
 import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
-import { Leaderboard } from 'pages/LeaderBoard';
+import { Leaderboard } from 'pages/Leaderboard';
 import { LoadingPage } from 'pages/LoadingPage';
 import { GamePage } from 'pages/GamePage';
 import { Forum } from 'pages/Forum';
@@ -32,13 +32,11 @@ const App: FC = () => {
         dispatch({ type: ActionTypes.GetUser });
     }, [dispatch]);
 
-    const getUserInfoPending = useSelector(selectUserPending);
-
-    const forPending = getUserInfoPending ? 'pending' : '';
+    const isPending = useSelector(selectUserPending);
 
     const ProtectedUser = ProtectedRoute(UserPageWithRouter);
     const ProtectedChangeInfo = ProtectedRoute(ChangeUserInfoPageWithRouter);
-    const ProtectedChangepassword = ProtectedRoute(
+    const ProtectedChangePassword = ProtectedRoute(
         ChangePasswordPageWithRouter,
     );
 
@@ -48,7 +46,7 @@ const App: FC = () => {
             <ErrorBoundary>
                 <ConnectedRouter history={history}>
                     <div className="app">
-                        {forPending ? (
+                        {isPending ? (
                             'pending'
                         ) : (
                             <Switch>
@@ -77,7 +75,7 @@ const App: FC = () => {
                                     <ProtectedUser />
                                 </Route>
                                 <Route path="/user/change-password">
-                                    <ProtectedChangepassword />
+                                    <ProtectedChangePassword />
                                 </Route>
                                 <Route path="/user/change-info">
                                     <ProtectedChangeInfo />
