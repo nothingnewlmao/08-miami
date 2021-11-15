@@ -1,4 +1,4 @@
-export const DISCRET_WIDTH_SIZE = 40;
+export const DISCRET_WIDTH_SIZE = 70;
 
 export const GAMER_RAD_MODIFIER = 0.9;
 
@@ -21,7 +21,7 @@ export const MAX_GAMER_SPEED = GameConstants.PERFECT_ONE / 4;
 export const JUMP_VELOCITY = GameConstants.PERFECT_ONE / 80;
 export const JUMP_BUST_LIMIT = 14;
 export const JUMP_VELOCITY_MODIFICATOR = GameConstants.PERFECT_ONE / 70;
-export const FALLING_COEF = 1.05;
+export const FALLING_COEF = 1.95;
 
 // ball sizes
 
