@@ -9,9 +9,11 @@ enum AuthUrls {
 }
 
 class AuthApi {
-    signUp = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
+    signUp = (data: TObjectLiteral) =>
+        axiosInstance.post(AuthUrls.SignUp, JSON.stringify(data));
 
-    signIn = (data: TObjectLiteral) => axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
+    signIn = (data: TObjectLiteral) =>
+        axiosInstance.post(AuthUrls.SignIn, JSON.stringify(data));
 
     logOut = () => axiosInstance.post(AuthUrls.LogOut);
 

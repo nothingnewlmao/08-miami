@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
+
+import { isServer } from 'store/rootStore';
 
 import * as Styled from './styled';
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+let Editor: any;
+
+if (!isServer) {
+    // eslint-disable-next-line no-return-assign
+    import('react-draft-wysiwyg').then(m => (Editor = m.Editor));
+}
 
 export const TextEditor = () => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -14,7 +23,12 @@ export const TextEditor = () => {
 
     return (
         <Styled.Wrapper>
-            <Editor editorState={editorState} onEditorStateChange={onChange} />
+            {Editor && (
+                <Editor
+                    editorState={editorState}
+                    onEditorStateChange={onChange}
+                />
+            )}
         </Styled.Wrapper>
     );
 };

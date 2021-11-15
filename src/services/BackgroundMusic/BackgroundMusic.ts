@@ -1,3 +1,5 @@
+import { isServer } from 'store/rootStore';
+
 const soundFile = require('../../assets/audio/backgroundMusic2.wav');
 const impulseFile = require('../../assets/audio/RightGlassTriangle.wav');
 
@@ -15,29 +17,33 @@ class BackgroundMusic {
     destination: any;
 
     constructor() {
-        this.context = new window.AudioContext();
+        if (!isServer) {
+            this.context = new window.AudioContext();
+        }
 
         this.fetchMusic(soundFile.default, this.decodeMainBuffer);
         this.fetchMusic(impulseFile.default, this.decodeImpulseBuffer);
     }
 
     play(): void {
-        this.source = this.context.createBufferSource();
+        if (this.context) {
+            this.source = this.context.createBufferSource();
 
-        this.source.buffer = this.buffer;
+            this.source.buffer = this.buffer;
 
-        this.destination = this.context.destination;
+            this.destination = this.context.destination;
 
-        const convolverNode = this.context.createConvolver();
+            const convolverNode = this.context.createConvolver();
 
-        convolverNode.buffer = this.impulseBuffer;
+            convolverNode.buffer = this.impulseBuffer;
 
-        convolverNode.connect(this.destination);
-        this.source.connect(convolverNode);
+            convolverNode.connect(this.destination);
+            this.source.connect(convolverNode);
 
-        this.source.start(0);
+            this.source.start(0);
 
-        this.audioPaused = false;
+            this.audioPaused = false;
+        }
     }
 
     stop() {
@@ -58,22 +64,26 @@ class BackgroundMusic {
         url: string | URL,
         decodeCallback: (buffer: AudioBuffer) => void,
     ) {
-        const request = new XMLHttpRequest();
+        if (!isServer) {
+            const request = new XMLHttpRequest();
 
-        request.open('GET', url, true);
-        request.responseType = 'arraybuffer';
+            request.open('GET', url, true);
+            request.responseType = 'arraybuffer';
 
-        request.onload = () => {
-            // декодируем бинарный ответ
-            this.context.decodeAudioData(
-                request.response,
-                decodeCallback.bind(this),
-                (e) => {
-                    console.log('Error decoding file', e);
-                },
-            );
-        };
-        request.send();
+            request.onload = () => {
+                // декодируем бинарный ответ
+                if (this.context) {
+                    this.context.decodeAudioData(
+                        request.response,
+                        decodeCallback.bind(this),
+                        (e) => {
+                            console.log('Error decoding file', e);
+                        },
+                    );
+                }
+            };
+            request.send();
+        }
     }
 
     decodeMainBuffer(buffer: AudioBuffer): void {
