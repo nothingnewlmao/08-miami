@@ -21,6 +21,6 @@ export const selectUserProfileInfo = (state: TRootState): TUserInfo | null => {
 
 export const selectUserPending = (state: TRootState) => userStateSelector(state)?.pending;
 
-export const selectIsLoggedIn = (state: TRootState) => userStateSelector(state)?.loaded;
+export const selectIsLoggedIn = (state: TRootState) => userStateSelector(state)?.userInfo;
 
 export const selectLogInFailed = (state: TRootState) => userStateSelector(state)?.error;

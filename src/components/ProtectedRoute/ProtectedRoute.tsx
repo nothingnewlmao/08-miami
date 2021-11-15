@@ -17,9 +17,5 @@ export const ProtectedRoute: FC<RouteProps> = ({ children, ...props }) => {
         }
     }, [history, logInFailed, pathname]);
 
-    return (
-        <Route {...props}>
-            {children}
-        </Route>
-    );
+    return <Route {...props}>{children}</Route>;
 };

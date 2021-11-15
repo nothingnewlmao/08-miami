@@ -6,7 +6,6 @@ const initialState: TUserProfile = {
     userInfo: null,
     pending: false,
     error: null,
-    loaded: false,
 };
 
 const userSlice = createSlice({
@@ -16,23 +15,19 @@ const userSlice = createSlice({
         dataFetching(state) {
             state.pending = true;
             state.error = null;
-            state.loaded = false;
         },
         dataFailed(state, action) {
             state.pending = false;
             state.error = action.payload;
-            state.loaded = false;
         },
         setUserData(state, action) {
             state.pending = false;
             state.error = null;
-            state.loaded = true;
             state.userInfo = action.payload;
         },
         resetUserData(state) {
             state.pending = false;
             state.error = null;
-            state.loaded = false;
             state.userInfo = null;
         },
     },
