@@ -5,6 +5,8 @@ import { TRootState } from 'store';
 
 import ActionTypes from 'store/auth/actionTypes';
 
+import { BaseButton } from 'ui/components';
+
 import { UIForm } from 'uicomponents/Form';
 
 import validationSchema from './validationSchema';
@@ -38,6 +40,10 @@ export const SignInWithData = () => {
         [dispatch],
     );
 
+    const memoizedHandleOAuth = useCallback(() => {
+        dispatch({ type: ActionTypes.GetAuthSignInCode });
+    }, [dispatch]);
+
     return (
         <UIForm
             validationSchema={validationSchema}
@@ -46,6 +52,10 @@ export const SignInWithData = () => {
             fields={fields}
             initialValues={initialValues}
             errorText={errorText}
-        />
+        >
+            <BaseButton onClick={memoizedHandleOAuth}>
+                Войти через Yandex
+            </BaseButton>
+        </UIForm>
     );
 };

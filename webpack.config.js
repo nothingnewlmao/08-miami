@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     mode: 'development',
@@ -52,6 +53,7 @@ module.exports = {
         },
     },
     plugins: [
+        new Dotenv(),
         new HtmlWebpackPlugin({
             template: './www/index.html',
             title: 'Bounce Game :)',
@@ -61,7 +63,12 @@ module.exports = {
         static: {
             directory: path.join(__dirname, 'public'),
         },
-        watchFiles: ['src/**/*.ts*', 'src/**/*.js*'],
+        watchFiles: [
+            'src/**/*.ts*',
+            'src/**/*.js*',
+            'ui/**/*.ts',
+            'ui/**/*.tsx',
+        ],
         compress: true,
         port: 3000,
         hot: true,

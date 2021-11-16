@@ -12,6 +12,7 @@ import {
     logOutFetching,
     logOutLoaded,
     logOutFailed,
+    setOAuthServiceId,
 } from 'store/auth/slice';
 import ActionTypes from 'store/auth/actionTypes';
 import {
@@ -105,4 +106,50 @@ export function* signInRequest(action: any) {
 
 export function* signInSaga() {
     yield takeEvery(ActionTypes.SignIn, signInRequest);
+}
+
+function* oAuthSignInCodeRequest() {
+    try {
+        yield put(logInFetching());
+
+        const serviceIdRes: TObjectLiteral = yield call(
+            AuthApi.getOAuthServiceId,
+        );
+
+        const { service_id: serviceId } = serviceIdRes.data;
+
+        yield put(setOAuthServiceId(serviceId));
+
+        const getAppCodeLink = `${process.env.GET_APP_CODE}&client_id=${serviceId}&redirect_uri=${process.env.REDIRECT_URI}`;
+
+        yield call([
+            window,
+            () => {
+                window.location.href = getAppCodeLink;
+            },
+        ]);
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+
+        yield put(logInFailed(reason));
+    }
+}
+
+export function* oAuthSignInSaga() {
+    yield takeEvery(ActionTypes.GetAuthSignInCode, oAuthSignInCodeRequest);
+}
+
+function* getToken(action: any) {
+    try {
+        yield call(AuthApi.getToken, action.payload);
+
+        yield call(currentUserRequest);
+    } catch (e: any) {
+        const { reason = null } = e.response.data;
+        yield put(logInFailed(reason));
+    }
+}
+
+export function* getTokenSaga() {
+    yield takeEvery(ActionTypes.GetToken, getToken);
 }
