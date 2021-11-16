@@ -1,23 +1,24 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import ActionTypes from 'store/auth/actionTypes';
 
-import history from 'utils/history';
+const FROM_OAUTH_REGEXP = /^\?code=/;
 
 function useOAuth() {
-    const fromOAuth = useMemo(() => /^\?code=/, []);
+    const history = useHistory();
     const { search = '' } = history.location;
-    const isFromOAuth = fromOAuth.test(search);
+    const isFromOAuth = FROM_OAUTH_REGEXP.test(search);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (isFromOAuth) {
-            const code = search.replace(fromOAuth, '');
+            const code = search.replace(FROM_OAUTH_REGEXP, '');
             dispatch({ type: ActionTypes.GetToken, payload: code });
         }
-    }, [dispatch, fromOAuth, isFromOAuth, search]);
+    }, [dispatch, isFromOAuth, search]);
 }
 
 export default useOAuth;
