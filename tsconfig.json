@@ -31,7 +31,8 @@
       "api/*": ["./src/api/*"],
       "assets/*": ["./src/assets/*"],
       "store/*": ["./src/store/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "types/*": ["./src/types/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },

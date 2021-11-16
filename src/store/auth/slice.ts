@@ -1,11 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import TAuthStatus from 'types/TAuthStatus';
 
-export const initialState: TAuthStatus = {
-    isLoggedIn: false,
+export const initialState = {
     pending: false,
     error: null,
+    serviceId: null,
 };
 
 const authStore = createSlice({
@@ -18,11 +17,9 @@ const authStore = createSlice({
         },
         logInLoaded(state) {
             state.pending = false;
-            state.isLoggedIn = true;
             state.error = null;
         },
         logInFailed(state, action) {
-            state.isLoggedIn = false;
             state.pending = false;
 
             const { payload = null } = action;
@@ -35,7 +32,6 @@ const authStore = createSlice({
         },
         logOutLoaded(state) {
             state.pending = false;
-            state.isLoggedIn = false;
             state.error = null;
         },
         logOutFailed(state, action) {
@@ -48,12 +44,17 @@ const authStore = createSlice({
         },
         signUpLoaded(state) {
             state.pending = false;
-            state.isLoggedIn = true;
             state.error = null;
         },
         signUpFailed(state, action) {
             state.pending = false;
             state.error = action.payload;
+        },
+        setOAuthServiceId(state, action) {
+            state.serviceId = action.payload;
+        },
+        resetOAuthServiceId(state) {
+            state.serviceId = null;
         },
     },
 });
@@ -68,6 +69,8 @@ export const {
     signupFetching,
     signUpLoaded,
     signUpFailed,
+    setOAuthServiceId,
+    resetOAuthServiceId,
 } = authStore.actions;
 
 export default authStore.reducer;

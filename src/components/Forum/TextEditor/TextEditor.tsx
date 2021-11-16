@@ -11,7 +11,7 @@ let Editor: any;
 
 if (!isServer) {
     // eslint-disable-next-line no-return-assign
-    import('react-draft-wysiwyg').then(m => (Editor = m.Editor));
+    import('react-draft-wysiwyg').then((m) => (Editor = m.Editor));
 }
 
 export const TextEditor = () => {

@@ -25,9 +25,16 @@ const userSlice = createSlice({
             state.error = null;
             state.userInfo = action.payload;
         },
+        resetUserData(state) {
+            state.pending = false;
+            state.error = null;
+            state.userInfo = null;
+        },
     },
 });
 
-export const { dataFetching, setUserData, dataFailed } = userSlice.actions;
+export const {
+    dataFetching, setUserData, dataFailed, resetUserData,
+} = userSlice.actions;
 
 export default userSlice.reducer;

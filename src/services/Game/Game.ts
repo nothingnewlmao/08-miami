@@ -74,8 +74,7 @@ export class Game {
             right: canvasRef.width + canvasRef.offsetLeft,
         };
 
-        const keydownCallback = (e: KeyboardEvent) =>
-            this.keys.set(e.key, true);
+        const keydownCallback = (e: KeyboardEvent) => this.keys.set(e.key, true);
 
         const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
@@ -99,16 +98,18 @@ export class Game {
     animate() {
         requestAnimationFrame(this.animate.bind(this));
 
-        const { top, right, bottom, left } = this.canvasSides;
+        const {
+            top, right, bottom, left,
+        } = this.canvasSides;
 
         const { x: ballX, y: ballY } = this.ballPosition;
 
         const closestFloor = this.map.closestFloor(ballX, ballY, bottom - top);
 
         if (
-            this.velY < MAX_GAMER_SPEED &&
-            this.jumpBust === 0 &&
-            ballY < closestFloor - GAMER_RAD
+            this.velY < MAX_GAMER_SPEED
+            && this.jumpBust === 0
+            && ballY < closestFloor - GAMER_RAD
         ) {
             this.velY += 2;
         }
@@ -121,10 +122,10 @@ export class Game {
 
         if (this.keys.get('ArrowUp') || this.keys.get('w')) {
             if (
-                this.velY > 0 &&
-                this.velY < 0.0001 &&
-                this.velY > -MAX_GAMER_SPEED &&
-                this.jumpBust === 0
+                this.velY > 0
+                && this.velY < 0.0001
+                && this.velY > -MAX_GAMER_SPEED
+                && this.jumpBust === 0
             ) {
                 this.velY -= JUMP_VELOCITY;
                 this.jumpBust = JUMP_BUST_LIMIT;
@@ -139,8 +140,8 @@ export class Game {
 
         if (this.jumpBust > 0) {
             this.jumpBust -= 1;
-            this.ballPosition.y +=
-                this.velY * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+            this.ballPosition.y
+                += this.velY * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
         } else {
             this.velY *= FALLING_COEF;
             this.ballPosition.y += this.velY;
@@ -183,8 +184,8 @@ export class Game {
     private checkCoinGetted(): void {
         const { x, y } = this.ballPosition;
         if (
-            isInRange(this.currentCoinCoords.x, x - GAMER_RAD, x + GAMER_RAD) &&
-            isInRange(this.currentCoinCoords.y, y - GAMER_RAD, y + GAMER_RAD)
+            isInRange(this.currentCoinCoords.x, x - GAMER_RAD, x + GAMER_RAD)
+            && isInRange(this.currentCoinCoords.y, y - GAMER_RAD, y + GAMER_RAD)
         ) {
             this.score += 10;
             this.setScore(this.score);
@@ -243,7 +244,9 @@ export class Game {
     }
 
     private drawBackground(): void {
-        const { top, right, bottom, left } = this.canvasSides;
+        const {
+            top, right, bottom, left,
+        } = this.canvasSides;
 
         const height = bottom - top;
         const width = right - left;
