@@ -1,3 +1,5 @@
+import TObjectLiteral from 'types/TObjectLiteral';
+
 export interface ISides {
     left: number;
     right: number;
@@ -10,10 +12,26 @@ export interface IPoint {
     y: number;
 }
 
+export type TLvlCreaser = '+' | '-';
+
+export type TLvlOuterCallback = (
+    lvlNum: number,
+    richedKeys: TObjectLiteral,
+    newInitPoint: IPoint,
+) => void;
+
 export interface IGameProps {
-    initBlock: { xNum: number; yNum: number };
+    initBlock: IPoint;
     canvasRef: HTMLCanvasElement;
-    gameOverCallback: (points?: number) => void;
+    lvlOuterCallback: TLvlOuterCallback;
     lvlNum: number;
     setScore: (score: number) => void;
+    richedKeys: TObjectLiteral;
+    gameHeight: number;
+    gameWidth: number;
+}
+
+export interface IGameSessionProps {
+    lvlNum: number;
+    richedKeys: TObjectLiteral;
 }

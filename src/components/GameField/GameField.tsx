@@ -1,76 +1,89 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import TObjectLiteral from 'types/TObjectLiteral';
 
+import ActionTypes from 'store/game/actionTypes';
 import { isServer } from 'store/rootStore';
 
 import { Game } from 'services/Game';
 import { GameConstants } from 'services/Game/contants';
 import { LVLs } from 'services/Game/lvls';
+import { IPoint, TLvlOuterCallback } from 'services/Game/types';
 
 export interface IGameFieldProps {
-    heightOffset?: number;
-    widthOffset?: number;
     setScore: (score: number) => void;
     lvlNumber: number;
+    richedKeys: TObjectLiteral;
+    initPoint: IPoint;
 }
 
 export const GameField: React.FC<IGameFieldProps> = ({
     setScore,
     lvlNumber,
+    richedKeys: richedKeysObject,
+    initPoint: newInitPoint,
 }: IGameFieldProps) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
-    const history = useHistory();
+    const dispatch = useDispatch();
 
     const [height, setHeight] = useState(
-        Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].length),
+        Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].map.length),
     );
 
     const [width, setWidth] = useState(
-        Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber][0].length),
+        Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].map[0].length),
     );
 
     useEffect(() => {
         const canvasElem = canvasRef.current;
 
-        const updateSize = () => {
-            setWidth(
-                Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].length),
-            );
-            setHeight(
-                Math.floor(
-                    GameConstants.PERFECT_ONE * LVLs[lvlNumber][0].length,
-                ),
-            );
-        };
+        setHeight(
+            Math.floor(GameConstants.PERFECT_ONE * LVLs[lvlNumber].map.length),
+        );
+
+        setWidth(
+            Math.floor(
+                GameConstants.PERFECT_ONE * LVLs[lvlNumber].map[0].length,
+            ),
+        );
 
         if (canvasElem && !isServer) {
-            const gameOverCallback = () => {
-                history.push('/leaderboard');
+            const lvlOuterCallback: TLvlOuterCallback = (
+                lvlNum: number,
+                richedKeys: TObjectLiteral,
+                initPoint: IPoint,
+            ) => {
+                dispatch({
+                    type: ActionTypes.UpdateGameProps,
+                    payload: {
+                        lvlNum,
+                        richedKeys,
+                        initPoint,
+                    },
+                });
             };
 
             const game = new Game({
                 canvasRef: canvasElem,
-                initBlock: {
-                    xNum: 1,
-                    yNum: 1,
-                },
-                gameOverCallback,
+                initBlock: newInitPoint,
+                lvlOuterCallback,
                 setScore,
                 lvlNum: lvlNumber,
+                richedKeys: richedKeysObject,
+                gameHeight:
+                    LVLs[lvlNumber].map.length * GameConstants.PERFECT_ONE,
+                gameWidth:
+                    LVLs[lvlNumber].map[0].length * GameConstants.PERFECT_ONE,
             });
             game.start();
 
             return () => {
                 game.unsubscribeKeysCallback();
-
-                window.addEventListener('resize', updateSize);
             };
         }
 
-        return () => {
-            window.removeEventListener('resize', updateSize);
-        };
-    }, [canvasRef]);
+        return () => {};
+    }, [lvlNumber]);
 
     return (
         <div
@@ -85,10 +98,11 @@ export const GameField: React.FC<IGameFieldProps> = ({
                 style={{
                     backgroundColor: 'white',
                     height: `${Math.floor(
-                        GameConstants.PERFECT_ONE * LVLs[lvlNumber].length,
+                        GameConstants.PERFECT_ONE * LVLs[lvlNumber].map.length,
                     )}px`,
                     width: `${Math.floor(
-                        GameConstants.PERFECT_ONE * LVLs[lvlNumber][0].length,
+                        GameConstants.PERFECT_ONE *
+                            LVLs[lvlNumber].map[0].length,
                     )}px`,
                     border: '1px solid #111E6C',
                 }}

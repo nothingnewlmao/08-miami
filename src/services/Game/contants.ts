@@ -1,4 +1,4 @@
-export const DISCRET_WIDTH_SIZE = 70;
+export const DISCRET_WIDTH_SIZE = 50;
 
 export const GAMER_RAD_MODIFIER = 0.9;
 

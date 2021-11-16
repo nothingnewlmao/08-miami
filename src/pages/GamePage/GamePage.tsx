@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { addLeaderboard, teamLeaderboard } from 'api/leaderboardApi';
-import { AxiosError, AxiosResponse } from 'axios';
+import { teamLeaderboard, addLeaderboard } from 'api/leaderboardApi';
+import { AxiosResponse, AxiosError } from 'axios';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
 import { isServer } from 'store/rootStore';
+import { gameStateSelector } from 'store/game/selectors';
 
 import { GameField } from 'components/GameField/GameField';
 
@@ -16,11 +17,11 @@ import { BackButton, BaseButton } from 'ui/components';
 import * as Styled from './styled';
 
 export const GamePage: FC = () => {
-    const panelHeight = 60;
-
     const [score, setScore] = useState(0);
 
     const [oldPoints, setOldPoints] = useState(0);
+
+    const gameProps = useSelector(gameStateSelector);
 
     const user = useSelector(selectCurrentUser);
 
@@ -46,6 +47,8 @@ export const GamePage: FC = () => {
                     console.log('err');
                 }
             });
+
+        return () => {};
     }, []);
 
     useEffect(() => {
@@ -66,14 +69,17 @@ export const GamePage: FC = () => {
                 }
             });
         }
+
+        return () => {};
     }, [score]);
 
     return (
         <Styled.Wrapper>
             <GameField
-                heightOffset={panelHeight}
+                richedKeys={gameProps.richedKeys}
                 setScore={setScore}
-                lvlNumber={1}
+                lvlNumber={gameProps.lvlNum}
+                initPoint={gameProps.initPoint}
             />
             <Styled.GamePanel>
                 <BackButton size="s">
