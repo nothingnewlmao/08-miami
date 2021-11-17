@@ -10,6 +10,6 @@ FROM node:12.18.0
 COPY --from=build /var/www/package.json ./package.json
 RUN npm install
 COPY --from=build /var/www/dist /dist
-COPY --from=build /var/www/app.js ./app.js
+COPY --from=build /var/www/index.js ./index.js
 EXPOSE 3000
-CMD ["npm", "run", "server"]
+CMD ["npm", "run", "start"]

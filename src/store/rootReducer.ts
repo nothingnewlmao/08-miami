@@ -7,8 +7,9 @@ import authReducer from 'store/auth/slice';
 
 import { IState } from './types';
 
-export default (history: History) => combineReducers<IState>({
-    router: connectRouter(history),
-    user: userReducer,
-    auth: authReducer,
-});
+export default (history: History) =>
+    combineReducers<IState>({
+        router: connectRouter(history),
+        user: userReducer,
+        auth: authReducer,
+    });

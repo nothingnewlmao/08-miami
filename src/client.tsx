@@ -9,7 +9,10 @@ import { IState } from 'store/types';
 import App from './App';
 
 // eslint-disable-next-line no-underscore-dangle
-const { store, history } = configureStore(window.__INITIAL_STATE__);
+const { store, history } = configureStore(
+    // eslint-disable-next-line no-underscore-dangle
+    window.__INITIAL_STATE__,
+);
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/naming-convention
