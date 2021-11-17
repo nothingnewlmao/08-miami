@@ -2,8 +2,6 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
 
 import { configureStore } from 'store/rootStore';
 import { IState } from 'store/types';
@@ -11,7 +9,10 @@ import { IState } from 'store/types';
 import App from './App';
 
 // eslint-disable-next-line no-underscore-dangle
-const { store, history } = configureStore(window.__INITIAL_STATE__);
+const { store, history } = configureStore(
+    // eslint-disable-next-line no-underscore-dangle
+    window.__INITIAL_STATE__,
+);
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -21,14 +22,10 @@ declare global {
     }
 }
 
-const persistor = persistStore(store);
-
 ReactDOM.hydrate(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <PersistGate persistor={persistor}>
-                <App />
-            </PersistGate>
+            <App />
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root'),

@@ -51,6 +51,9 @@ const config: Configuration = {
         new MiniCssExtractPlugin({ filename: '[name].css' }),
         // Plugin для HMR
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        }),
         new LoadablePlugin(),
         new CircularDependencyPlugin({
             // `onStart` is called before the cycle detection starts

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Configuration, WebpackError } from 'webpack';
+import webpack, { Configuration, WebpackError } from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
@@ -68,6 +68,9 @@ const config: Configuration = {
             onEnd() {
                 console.log('end detecting webpack modules cycles');
             },
+        }),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
         }),
     ],
 
