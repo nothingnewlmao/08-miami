@@ -55,9 +55,7 @@ export class ObjectsDrawer {
     }
 
     public drawBackground(canvasSides: ISides): void {
-        const {
-            top, right, bottom, left,
-        } = canvasSides;
+        const { top, right, bottom, left } = canvasSides;
 
         const height = bottom - top;
         const width = right - left;
@@ -128,109 +126,82 @@ export class ObjectsDrawer {
                 const block = lvl[j];
 
                 switch (block) {
-                case '0':
-                    break;
-                case '1':
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                    );
-                    break;
-                case 'a': {
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                        'yellow',
-                        'darkgray',
-                        richedKeys.a ? 'orange' : undefined,
-                    );
-                    break;
-                }
-                case 'A': {
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                        'yellow',
-                        richedKeys.a ? 'yellow' : 'gray',
-                    );
-                    break;
-                }
-                case 'b': {
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                        'tomato',
-                        'gray',
-                        richedKeys.b ? 'purple' : undefined,
-                    );
-                    break;
-                }
-                case 'B': {
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                        'tomato',
-                        richedKeys.b ? 'tomato' : 'purple',
-                    );
-                    break;
-                }
-                case 'c': {
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                        '#90ee90',
-                        'gray',
-                        richedKeys.c ? 'green' : undefined,
-                    );
-                    break;
-                }
-                case 'C': {
-                    this.drawBlock(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                        '#90ee90',
-                        richedKeys.c ? '#90ee90' : 'green',
-                    );
-                    break;
-                }
-                case '+':
-                case '-':
-                    this.drawGate(
-                        j * GameConstants.PERFECT_ONE,
-                        i * GameConstants.PERFECT_ONE,
-                    );
-                    break;
-                default:
-                    break;
+                    case '0':
+                        break;
+                    case '1':
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                        );
+                        break;
+                    case 'a': {
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                            'yellow',
+                            'darkgray',
+                            richedKeys.a ? 'orange' : undefined,
+                        );
+                        break;
+                    }
+                    case 'A': {
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                            'yellow',
+                            richedKeys.a ? 'yellow' : 'gray',
+                        );
+                        break;
+                    }
+                    case 'b': {
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                            'tomato',
+                            'gray',
+                            richedKeys.b ? 'purple' : undefined,
+                        );
+                        break;
+                    }
+                    case 'B': {
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                            'tomato',
+                            richedKeys.b ? 'tomato' : 'purple',
+                        );
+                        break;
+                    }
+                    case 'c': {
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                            '#90ee90',
+                            'gray',
+                            richedKeys.c ? 'green' : undefined,
+                        );
+                        break;
+                    }
+                    case 'C': {
+                        this.drawBlock(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                            '#90ee90',
+                            richedKeys.c ? '#90ee90' : 'green',
+                        );
+                        break;
+                    }
+                    case '+':
+                    case '-':
+                        this.drawGate(
+                            j * GameConstants.PERFECT_ONE,
+                            i * GameConstants.PERFECT_ONE,
+                        );
+                        break;
+                    default:
+                        break;
                 }
             }
         }
     }
-
-    // private drawCoin(): void {
-    //     const { x, y } = this.currentCoinCoords;
-
-    //     this.ctx.beginPath();
-    //     this.ctx.ellipse(x, y, COIN_RAD_X, COIN_RAD_Y, 0, 0, 2 * Math.PI);
-    //     this.ctx.fillStyle = '#ffd700';
-    //     this.ctx.fill();
-    //     this.ctx.closePath();
-
-    //     this.ctx.beginPath();
-    //     this.ctx.ellipse(x, y, COIN_RAD_X, COIN_RAD_Y, 0, 0, 2 * Math.PI);
-    //     this.ctx.strokeStyle = '#ffa500';
-    //     this.ctx.stroke();
-    //     this.ctx.closePath();
-    // }
-
-    // private checkCoinGetted(): void {
-    //     const { x, y } = this.ballPosition;
-    //     if (
-    //         isInRange(this.currentCoinCoords.x, x - GAMER_RAD, x + GAMER_RAD) &&
-    //         isInRange(this.currentCoinCoords.y, y - GAMER_RAD, y + GAMER_RAD)
-    //     ) {
-    //         this.score += 10;
-    //         this.setScore(this.score);
-    //     }
-    // }
 }
