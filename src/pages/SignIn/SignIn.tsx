@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { TRootState } from 'store';
 
+import { TRootState } from 'store/types';
 import ActionTypes from 'store/auth/actionTypes';
 
 import { BaseButton } from 'ui/components';

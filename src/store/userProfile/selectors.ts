@@ -1,5 +1,6 @@
-import { TRootState } from 'store';
 import { TUserInfo } from 'types/TUserInfo';
+
+import { TRootState } from 'store/types';
 
 const userStateSelector = (state: TRootState) => state.user;
 
