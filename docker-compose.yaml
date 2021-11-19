@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+    game:
+        build:
+            context:
+                .
+        ports:
+            -   "3000:3000"
+        volumes:
+            -   ./dist:/var/www/dist
