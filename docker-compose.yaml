@@ -1,11 +1,10 @@
-version: "3"
+version: '3'
 
 services:
     game:
         build:
-            context:
-                .
+            context: .
         ports:
-            -   "3000:3000"
+            - '3000:3000'
         volumes:
-            -   ./dist:/var/www/dist
+            - ./dist:/var/www/dist
