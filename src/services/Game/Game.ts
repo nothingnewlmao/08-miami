@@ -92,8 +92,7 @@ export class Game {
             right: gameWidth,
         };
 
-        const keydownCallback = (e: KeyboardEvent) =>
-            this.keys.set(e.key, true);
+        const keydownCallback = (e: KeyboardEvent) => this.keys.set(e.key, true);
 
         const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
@@ -120,10 +119,9 @@ export class Game {
     moveToNextLvl(gateSymbol: TLvlCreaser) {
         cancelAnimationFrame(this.animationCallbackId);
         const moveValue = gateSymbol === '+' ? 1 : -1;
-        const initPoint =
-            gateSymbol === '+'
-                ? LVLs[this.lvlNum + moveValue].entryPointA
-                : LVLs[this.lvlNum + moveValue].entryPointB;
+        const initPoint = gateSymbol === '+'
+            ? LVLs[this.lvlNum + moveValue].entryPointA
+            : LVLs[this.lvlNum + moveValue].entryPointB;
         this.lvlOuterCallback(
             this.lvlNum + moveValue,
             this.richedKeys,
@@ -136,7 +134,9 @@ export class Game {
             this.animate.bind(this),
         );
 
-        const { top, right, bottom, left } = this.canvasSides;
+        const {
+            top, right, bottom, left,
+        } = this.canvasSides;
 
         const { x: ballX, y: ballY } = this.ballPosition;
 
@@ -165,9 +165,9 @@ export class Game {
         }
 
         if (
-            this.velY < MAX_GAMER_SPEED &&
-            this.jumpBust === 0 &&
-            isBallCanFall
+            this.velY < MAX_GAMER_SPEED
+            && this.jumpBust === 0
+            && isBallCanFall
         ) {
             this.velY += 2;
         }
@@ -181,10 +181,10 @@ export class Game {
         if (this.keys.get('ArrowUp') || this.keys.get('w')) {
             if (this.ballMovementChecker.isBallCanJump(ballX, ballY)) {
                 if (
-                    this.velY >= 0 &&
-                    this.velY > -MAX_GAMER_SPEED &&
-                    this.jumpBust === 0 &&
-                    !isBallCanFall
+                    this.velY >= 0
+                    && this.velY > -MAX_GAMER_SPEED
+                    && this.jumpBust === 0
+                    && !isBallCanFall
                 ) {
                     this.velY = -JUMP_VELOCITY;
                     this.jumpBust = JUMP_BUST_LIMIT;
@@ -200,13 +200,13 @@ export class Game {
 
         if (this.jumpBust > 0) {
             this.jumpBust -= 1;
-            this.ballPosition.y -=
-                Math.abs(this.velY) *
-                (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+            this.ballPosition.y
+                -= Math.abs(this.velY)
+                * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
             if (this.ballMovementChecker.isBallStuckInTopWall(ballX, ballY)) {
-                this.ballPosition.y +=
-                    Math.abs(this.velY) *
-                    (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+                this.ballPosition.y
+                    += Math.abs(this.velY)
+                    * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
                 this.jumpBust = 0;
                 this.velY = 1.5;
             }
@@ -220,8 +220,7 @@ export class Game {
                 if (typeof this.richedKeys[pressedBlock] === 'undefined') {
                     this.richedKeys[pressedBlock] = true;
                 } else {
-                    this.richedKeys[pressedBlock] =
-                        !this.richedKeys[pressedBlock];
+                    this.richedKeys[pressedBlock] = !this.richedKeys[pressedBlock];
                 }
             }
 
@@ -243,8 +242,8 @@ export class Game {
                 this.ballPosition.x += 2 * this.velX;
             } else {
                 this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
-                        GameConstants.PERFECT_ONE,
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
+                        * GameConstants.PERFECT_ONE,
                 );
             }
         } else if (!isBallCanGoLeft) {
@@ -253,18 +252,17 @@ export class Game {
                 this.ballPosition.x += 2 * this.velX;
             } else {
                 this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
-                        GameConstants.PERFECT_ONE,
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
+                        * GameConstants.PERFECT_ONE,
                 );
             }
         }
 
         if (!isBallCanFall && this.velY < 0.0000001) {
-            this.ballPosition.y =
-                Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE) *
-                    GameConstants.PERFECT_ONE +
-                GameConstants.PERFECT_ONE -
-                2 * GAMER_RAD;
+            this.ballPosition.y = Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE)
+                    * GameConstants.PERFECT_ONE
+                + GameConstants.PERFECT_ONE
+                - 2 * GAMER_RAD;
         }
 
         this.ctx.clearRect(left, top, right - left, bottom - top);

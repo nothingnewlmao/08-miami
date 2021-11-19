@@ -18,7 +18,7 @@ export class BallMovementChecker {
 
     public emptyBlocks = ['0', '-', '+'];
 
-    public filledBlock = ['1', 'a', 'b', 'c', 'A'];
+    public filledBlock = ['1', 'a', 'b', 'c', 'A', 'B', 'C'];
 
     checkNextLvlRiched(ballX: number, ballY: number): TLvlCreaser | null {
         const ballCenterX = ballX + GameConstants.GAMER_DIAMETR / 2;
@@ -57,10 +57,10 @@ export class BallMovementChecker {
         );
 
         if (
-            blockValue.toLowerCase() !== blockValue.toUpperCase() &&
-            blockValue.toLowerCase() === blockValue &&
-            Number.isNaN(parseInt(blockValue, 10)) &&
-            velY !== 0
+            blockValue.toLowerCase() !== blockValue.toUpperCase()
+            && blockValue.toLowerCase() === blockValue
+            && Number.isNaN(parseInt(blockValue, 10))
+            && velY !== 0
         ) {
             this.convertCurrentBlockType(blockValue.toLocaleUpperCase());
 
@@ -84,9 +84,8 @@ export class BallMovementChecker {
             (ballX + GameConstants.GAMER_DIAMETR) / GameConstants.PERFECT_ONE,
         );
 
-        const result =
-            this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX)) &&
-            this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
+        const result = this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX))
+            && this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
 
         return result;
     }
@@ -104,9 +103,8 @@ export class BallMovementChecker {
             (ballX + GameConstants.GAMER_DIAMETR) / GameConstants.PERFECT_ONE,
         );
 
-        const result =
-            this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX)) &&
-            this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
+        const result = this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX))
+            && this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
 
         return result;
     }
@@ -117,8 +115,7 @@ export class BallMovementChecker {
         // eslint-disable-next-line no-param-reassign
         ballY = Math.round(ballY * 100000000) / 100000000;
 
-        const underBallBlockY =
-            Math.floor(ballY / GameConstants.PERFECT_ONE) - 1;
+        const underBallBlockY = Math.floor(ballY / GameConstants.PERFECT_ONE) - 1;
 
         const underBallBlockX = Math.floor(ballX / GameConstants.PERFECT_ONE);
 
@@ -136,12 +133,11 @@ export class BallMovementChecker {
         ballY = Math.round(ballY * 100000000) / 100000000;
 
         const ballMiddleY = Math.round(
-            (ballY + GameConstants.GAMER_DIAMETR / 3) /
-                GameConstants.PERFECT_ONE,
+            (ballY + GameConstants.GAMER_DIAMETR / 3)
+                / GameConstants.PERFECT_ONE,
         );
 
-        const leftBallX =
-            Math.ceil((ballX - 3) / GameConstants.PERFECT_ONE) - 1;
+        const leftBallX = Math.ceil((ballX - 3) / GameConstants.PERFECT_ONE) - 1;
 
         const result = this.emptyBlocks.includes(
             this.map[ballMiddleY].charAt(leftBallX),
@@ -174,15 +170,14 @@ export class BallMovementChecker {
         ballY = Math.round(ballY * 100000000) / 100000000;
 
         const ballMiddleY = Math.round(
-            (ballY + GameConstants.GAMER_DIAMETR / 3) /
-                GameConstants.PERFECT_ONE,
+            (ballY + GameConstants.GAMER_DIAMETR / 3)
+                / GameConstants.PERFECT_ONE,
         );
 
-        const rightBallX =
-            Math.ceil(
-                (ballX + GameConstants.GAMER_DIAMETR + 3) /
-                    GameConstants.PERFECT_ONE,
-            ) - 1;
+        const rightBallX = Math.ceil(
+            (ballX + GameConstants.GAMER_DIAMETR + 3)
+                    / GameConstants.PERFECT_ONE,
+        ) - 1;
 
         const result = this.emptyBlocks.includes(
             this.map[ballMiddleY].charAt(rightBallX),
