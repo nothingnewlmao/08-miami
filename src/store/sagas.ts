@@ -9,6 +9,7 @@ import {
     getTokenSaga,
 } from 'store/auth/sagas';
 import { changeInfoSaga, changePasswordSaga } from 'store/userProfile/sagas';
+import { changeLeaderboardSaga, getLeaderboardSaga } from 'store/leaderboard/sagas';
 
 export default function* rootSaga() {
     yield all([
@@ -20,5 +21,7 @@ export default function* rootSaga() {
         currentUserSaga(),
         oAuthSignInSaga(),
         getTokenSaga(),
+        changeLeaderboardSaga(),
+        getLeaderboardSaga(),
     ]);
 }

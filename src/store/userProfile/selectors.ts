@@ -1,11 +1,12 @@
-import { TRootState } from 'store';
 import { TUserInfo } from 'types/TUserInfo';
 
-const userStateSelector = (state: TRootState) => state.user;
+import { IState } from 'store/types';
 
-export const selectCurrentUser = (state: TRootState) => userStateSelector(state).userInfo;
+const userStateSelector = (state: IState) => state.user;
 
-export const selectUserProfileInfo = (state: TRootState): TUserInfo | null => {
+export const selectCurrentUser = (state: IState) => userStateSelector(state).userInfo;
+
+export const selectUserProfileInfo = (state: IState): TUserInfo | null => {
     const user = selectCurrentUser(state);
 
     if (user !== null && typeof user !== 'undefined') {
@@ -19,8 +20,8 @@ export const selectUserProfileInfo = (state: TRootState): TUserInfo | null => {
     return null;
 };
 
-export const selectUserPending = (state: TRootState) => userStateSelector(state)?.pending;
+export const selectUserPending = (state: IState) => userStateSelector(state)?.pending;
 
-export const selectIsLoggedIn = (state: TRootState) => userStateSelector(state)?.userInfo;
+export const selectIsLoggedIn = (state: IState) => userStateSelector(state)?.userInfo;
 
-export const selectLogInFailed = (state: TRootState) => userStateSelector(state)?.error;
+export const selectLogInFailed = (state: IState) => userStateSelector(state)?.error;
