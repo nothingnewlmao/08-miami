@@ -10,6 +10,8 @@ import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
 import jsLoader from './loaders/js';
 
+const Dotenv = require('dotenv-webpack');
+
 const config: Configuration = {
     name: 'server',
     target: 'node',
@@ -51,6 +53,7 @@ const config: Configuration = {
     },
 
     plugins: [
+        new Dotenv(),
         new CircularDependencyPlugin({
             // `onStart` is called before the cycle detection starts
             onStart() {
