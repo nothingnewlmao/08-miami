@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 
 import { selectUserPending } from 'store/userProfile/selectors';
-import ActionTypes from 'store/auth/actionTypes';
+import ActionTypesLeaderboard from 'store/leaderboard/actionTypes';
+import ActionTypesUser from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';
 import { Leaderboard } from 'pages/Leaderboard';
@@ -29,11 +30,12 @@ const App: FC = () => {
     useOAuth();
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch({ type: ActionTypes.GetUser });
-    }, [dispatch]);
 
     const isPending = useSelector(selectUserPending);
+    useEffect(() => {
+        dispatch({ type: ActionTypesUser.GetUser });
+        dispatch({ type: ActionTypesLeaderboard.GetLeaderboard });
+    }, [dispatch]);
 
     return (
         <ThemeProvider theme={themes.light}>
