@@ -50,7 +50,9 @@ const config: Configuration = {
         plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     },
     plugins: [
-        new Dotenv(),
+        new Dotenv({
+            expand: true,
+        }),
         new MiniCssExtractPlugin({ filename: '[name].css' }),
         // Plugin для HMR
         new webpack.HotModuleReplacementPlugin(),

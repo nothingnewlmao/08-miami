@@ -53,7 +53,9 @@ const config: Configuration = {
     },
 
     plugins: [
-        new Dotenv(),
+        new Dotenv({
+            expand: true,
+        }),
         new CircularDependencyPlugin({
             // `onStart` is called before the cycle detection starts
             onStart() {
