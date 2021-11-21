@@ -48,6 +48,7 @@ const config: Configuration = {
             api: path.resolve(__dirname, 'src/api/'),
             store: path.resolve(__dirname, 'src/store/'),
             utils: path.resolve(__dirname, 'src/utils/'),
+            models: path.resolve(__dirname, 'src/models/'),
         },
         plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     },
