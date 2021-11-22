@@ -42,7 +42,7 @@ export const LVLs: TGameLvl[] = [
 
     {
         entryPointA: { x: 3, y: 2 },
-        entryPointB: { x: 36, y: 2 },
+        entryPointB: { x: 28, y: 2 },
         map: [
             '1111111111111111111111111111111',
             '10000000000000000000000C0000001',

@@ -43,6 +43,10 @@ export class Game {
 
     private lvlNum: number;
 
+    //
+    // Чтобы шарик прыгал плавно, при прыжке задаётся количество кадров и
+    // с каждым кадром он перемещается на некоторое расстояние по Y
+    //
     private jumpBust = 0;
 
     lvlOuterCallback: TLvlOuterCallback;
@@ -90,7 +94,8 @@ export class Game {
             right: gameWidth,
         };
 
-        const keydownCallback = (e: KeyboardEvent) => this.keys.set(e.key, true);
+        const keydownCallback = (e: KeyboardEvent) =>
+            this.keys.set(e.key, true);
 
         const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
@@ -119,9 +124,10 @@ export class Game {
 
         const moveValue = gateSymbol === LvlCreaser.Forward ? 1 : -1;
 
-        const initPoint = gateSymbol === LvlCreaser.Forward
-            ? LVLs[this.lvlNum + moveValue].entryPointA
-            : LVLs[this.lvlNum + moveValue].entryPointB;
+        const initPoint =
+            gateSymbol === LvlCreaser.Forward
+                ? LVLs[this.lvlNum + moveValue].entryPointA
+                : LVLs[this.lvlNum + moveValue].entryPointB;
 
         this.lvlOuterCallback(
             this.lvlNum + moveValue,
@@ -135,9 +141,7 @@ export class Game {
             this.animate.bind(this),
         );
 
-        const {
-            top, right, bottom, left,
-        } = this.canvasSides;
+        const { top, right, bottom, left } = this.canvasSides;
 
         const { x: ballX, y: ballY } = this.ballPosition;
 
@@ -163,9 +167,9 @@ export class Game {
         }
 
         if (
-            this.velY < MAX_PLAYER_SPEED
-            && this.jumpBust === 0
-            && ballCanFall
+            this.velY < MAX_PLAYER_SPEED &&
+            this.jumpBust === 0 &&
+            ballCanFall
         ) {
             this.velY += 2;
         }
@@ -178,13 +182,15 @@ export class Game {
 
         if (this.keys.get('ArrowUp') || this.keys.get('w')) {
             if (
-                this.ballMovementChecker.isBallCanJump(ballX, ballY)
-                && this.velY >= 0
-                && this.velY > -MAX_PLAYER_SPEED
-                && this.jumpBust === 0
-                && !ballCanFall
+                this.ballMovementChecker.isBallCanJump(ballX, ballY) &&
+                this.velY >= 0 &&
+                this.velY > -MAX_PLAYER_SPEED &&
+                this.jumpBust === 0 &&
+                !ballCanFall
             ) {
                 this.velY = -JUMP_VELOCITY;
+
+                // "заряжаем" количество кадров для перемещения вверх
                 this.jumpBust = JUMP_BUST_LIMIT;
             }
         }
@@ -195,16 +201,71 @@ export class Game {
             }
         }
 
+        this.handelMovementOfY(ballX, ballY);
+
+        this.velX *= FADING_COEF;
+
+        this.ballPosition.x += this.velX;
+
+        if (!isBallCanGoRight) {
+            if (this.ballMovementChecker.isBallStuckInRightWall(ballX, ballY)) {
+                this.velX = -this.velX;
+                this.ballPosition.x += 2 * this.velX;
+            } else {
+                this.ballPosition.x = Math.ceil(
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
+                        GameConstants.PERFECT_ONE,
+                );
+            }
+        } else if (!isBallCanGoLeft) {
+            if (this.ballMovementChecker.isBallStuckInLeftWall(ballX, ballY)) {
+                this.velX = -this.velX;
+                this.ballPosition.x += 2 * this.velX;
+            } else {
+                this.ballPosition.x = Math.ceil(
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
+                        GameConstants.PERFECT_ONE,
+                );
+            }
+        }
+
+        if (!ballCanFall && this.velY < 0.0000001) {
+            this.ballPosition.y =
+                Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE) *
+                    GameConstants.PERFECT_ONE +
+                GameConstants.PERFECT_ONE -
+                2 * PLAYER_RAD;
+        }
+
+        this.ctx.clearRect(left, top, right - left, bottom - top);
+        this.objectsDrawer.drawBackground(this.canvasSides);
+
+        this.objectsDrawer.drawMap(this.reachedKeys);
+        this.objectsDrawer.drawBall(this.ballPosition);
+    }
+
+    private handelMovementOfY(ballX: number, ballY: number): void {
+        // Если "запал" движения вверх не кончился:
         if (this.jumpBust > 0) {
             this.jumpBust -= 1;
-            this.ballPosition.y
-                -= Math.abs(this.velY)
-                * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+
+            // Двигаемся вверх причем, с каждым кадром медленнее,
+            // т.к. jumpBust с каждым кдром меньше
+            this.ballPosition.y -=
+                Math.abs(this.velY) *
+                (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+
+            // Если пересекли блок сверху (застряли в нем)
             if (this.ballMovementChecker.isBallStuckInTopWall(ballX, ballY)) {
-                this.ballPosition.y
-                    += Math.abs(this.velY)
-                    * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+                // Возвращаемся, чтобы не пересекать блок сверху
+                this.ballPosition.y +=
+                    Math.abs(this.velY) *
+                    (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+
+                // "заряд" прыжка обнуляем
                 this.jumpBust = 0;
+
+                // задаем скорость падение вниз
                 this.velY = 1.5;
             }
         } else {
@@ -217,7 +278,8 @@ export class Game {
                 if (typeof this.reachedKeys[pressedBlock] === 'undefined') {
                     this.reachedKeys[pressedBlock] = true;
                 } else {
-                    this.reachedKeys[pressedBlock] = !this.reachedKeys[pressedBlock];
+                    this.reachedKeys[pressedBlock] =
+                        !this.reachedKeys[pressedBlock];
                 }
             }
 
@@ -228,44 +290,5 @@ export class Game {
                 this.velY = 0;
             }
         }
-
-        this.velX *= FADING_COEF;
-
-        this.ballPosition.x += this.velX;
-
-        if (!isBallCanGoRight) {
-            if (this.ballMovementChecker.isBallStuckInRightWall(ballX, ballY)) {
-                this.velX = -this.velX;
-                this.ballPosition.x += 2 * this.velX;
-            } else {
-                this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
-                        * GameConstants.PERFECT_ONE,
-                );
-            }
-        } else if (!isBallCanGoLeft) {
-            if (this.ballMovementChecker.isBallStuckInLeftWall(ballX, ballY)) {
-                this.velX = -this.velX;
-                this.ballPosition.x += 2 * this.velX;
-            } else {
-                this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
-                        * GameConstants.PERFECT_ONE,
-                );
-            }
-        }
-
-        if (!ballCanFall && this.velY < 0.0000001) {
-            this.ballPosition.y = Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE)
-                    * GameConstants.PERFECT_ONE
-                + GameConstants.PERFECT_ONE
-                - 2 * PLAYER_RAD;
-        }
-
-        this.ctx.clearRect(left, top, right - left, bottom - top);
-        this.objectsDrawer.drawBackground(this.canvasSides);
-
-        this.objectsDrawer.drawMap(this.reachedKeys);
-        this.objectsDrawer.drawBall(this.ballPosition);
     }
 }
