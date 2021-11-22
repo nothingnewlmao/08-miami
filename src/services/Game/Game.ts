@@ -158,7 +158,7 @@ export class Game {
             ballY,
         );
 
-        if (isNextLvlReached !== null) {
+        if (isNextLvlReached) {
             this.moveToNextLvl(isNextLvlReached);
         }
 
@@ -213,7 +213,7 @@ export class Game {
                 ballY,
                 this.velY,
             );
-            if (pressedBlock !== null) {
+            if (pressedBlock) {
                 if (typeof this.reachedKeys[pressedBlock] === 'undefined') {
                     this.reachedKeys[pressedBlock] = true;
                 } else {
