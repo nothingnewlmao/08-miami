@@ -1,9 +1,9 @@
 import TObjectLiteral from 'types/TObjectLiteral';
 
 import {
-    GAMER_RAD,
-    GAMER_INNER_COEF,
-    GAMER_BLICK_COEF,
+    PLAYER_RAD,
+    PLAYER_INNER_COEF,
+    PLAYER_BLICK_COEF,
     GameConstants,
 } from '../contants';
 import { IPoint, ISides } from '../types';
@@ -24,7 +24,13 @@ export class ObjectsDrawer {
         const { x, y } = ballPosition;
 
         this.ctx.beginPath();
-        this.ctx.arc(x + GAMER_RAD, y + GAMER_RAD, GAMER_RAD, 0, 2 * Math.PI);
+        this.ctx.arc(
+            x + PLAYER_RAD,
+            y + PLAYER_RAD,
+            PLAYER_RAD,
+            0,
+            2 * Math.PI,
+        );
         this.ctx.fillStyle = '#5f96b3';
         this.ctx.fill();
         this.ctx.closePath();
@@ -32,9 +38,9 @@ export class ObjectsDrawer {
         this.ctx.beginPath();
         this.ctx.fillStyle = '#487288';
         this.ctx.arc(
-            x + GAMER_RAD + GAMER_RAD / GAMER_INNER_COEF[0],
-            y + GAMER_RAD + GAMER_RAD / GAMER_INNER_COEF[1],
-            GAMER_RAD / GAMER_INNER_COEF[2],
+            x + PLAYER_RAD + PLAYER_RAD / PLAYER_INNER_COEF[0],
+            y + PLAYER_RAD + PLAYER_RAD / PLAYER_INNER_COEF[1],
+            PLAYER_RAD / PLAYER_INNER_COEF[2],
             0,
             2 * Math.PI,
         );
@@ -44,9 +50,9 @@ export class ObjectsDrawer {
         this.ctx.beginPath();
         this.ctx.fillStyle = '#ead5db';
         this.ctx.arc(
-            x + GAMER_RAD + GAMER_RAD / GAMER_BLICK_COEF[0],
-            y + GAMER_RAD + GAMER_RAD / GAMER_BLICK_COEF[1],
-            GAMER_RAD * GAMER_BLICK_COEF[2],
+            x + PLAYER_RAD + PLAYER_RAD / PLAYER_BLICK_COEF[0],
+            y + PLAYER_RAD + PLAYER_RAD / PLAYER_BLICK_COEF[1],
+            PLAYER_RAD * PLAYER_BLICK_COEF[2],
             -2,
             1,
         );
@@ -117,7 +123,7 @@ export class ObjectsDrawer {
         this.ctx.closePath();
     }
 
-    drawMap(richedKeys: TObjectLiteral): void {
+    drawMap(reachedKeys: TObjectLiteral): void {
         // lvl of drawing
         for (let i = 0; i < this.mapField.length; i += 1) {
             const lvl = this.mapField[i];
@@ -140,7 +146,7 @@ export class ObjectsDrawer {
                             i * GameConstants.PERFECT_ONE,
                             'yellow',
                             'darkgray',
-                            richedKeys.a ? 'orange' : undefined,
+                            reachedKeys.a ? 'orange' : undefined,
                         );
                         break;
                     }
@@ -149,7 +155,7 @@ export class ObjectsDrawer {
                             j * GameConstants.PERFECT_ONE,
                             i * GameConstants.PERFECT_ONE,
                             'yellow',
-                            richedKeys.a ? 'yellow' : 'gray',
+                            reachedKeys.a ? 'yellow' : 'gray',
                         );
                         break;
                     }
@@ -159,7 +165,7 @@ export class ObjectsDrawer {
                             i * GameConstants.PERFECT_ONE,
                             'tomato',
                             'gray',
-                            richedKeys.b ? 'purple' : undefined,
+                            reachedKeys.b ? 'purple' : undefined,
                         );
                         break;
                     }
@@ -168,7 +174,7 @@ export class ObjectsDrawer {
                             j * GameConstants.PERFECT_ONE,
                             i * GameConstants.PERFECT_ONE,
                             'tomato',
-                            richedKeys.b ? 'tomato' : 'purple',
+                            reachedKeys.b ? 'tomato' : 'purple',
                         );
                         break;
                     }
@@ -178,7 +184,7 @@ export class ObjectsDrawer {
                             i * GameConstants.PERFECT_ONE,
                             '#90ee90',
                             'gray',
-                            richedKeys.c ? 'green' : undefined,
+                            reachedKeys.c ? 'green' : undefined,
                         );
                         break;
                     }
@@ -187,7 +193,7 @@ export class ObjectsDrawer {
                             j * GameConstants.PERFECT_ONE,
                             i * GameConstants.PERFECT_ONE,
                             '#90ee90',
-                            richedKeys.c ? '#90ee90' : 'green',
+                            reachedKeys.c ? '#90ee90' : 'green',
                         );
                         break;
                     }

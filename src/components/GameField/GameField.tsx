@@ -13,14 +13,14 @@ import { IPoint, TLvlOuterCallback } from 'services/Game/types';
 export interface IGameFieldProps {
     setScore: (score: number) => void;
     lvlNumber: number;
-    richedKeys: TObjectLiteral;
+    reachedKeys: TObjectLiteral;
     initPoint: IPoint;
 }
 
 export const GameField: React.FC<IGameFieldProps> = ({
     setScore,
     lvlNumber,
-    richedKeys: richedKeysObject,
+    reachedKeys: reachedKeysObject,
     initPoint: newInitPoint,
 }: IGameFieldProps) => {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
@@ -50,14 +50,14 @@ export const GameField: React.FC<IGameFieldProps> = ({
         if (canvasElem && !isServer) {
             const lvlOuterCallback: TLvlOuterCallback = (
                 lvlNum: number,
-                richedKeys: TObjectLiteral,
+                reachedKeys: TObjectLiteral,
                 initPoint: IPoint,
             ) => {
                 dispatch({
                     type: ActionTypes.UpdateGameProps,
                     payload: {
                         lvlNum,
-                        richedKeys,
+                        reachedKeys,
                         initPoint,
                     },
                 });
@@ -69,7 +69,7 @@ export const GameField: React.FC<IGameFieldProps> = ({
                 lvlOuterCallback,
                 setScore,
                 lvlNum: lvlNumber,
-                richedKeys: richedKeysObject,
+                reachedKeys: reachedKeysObject,
                 gameHeight:
                     LVLs[lvlNumber].map.length * GameConstants.PERFECT_ONE,
                 gameWidth:
@@ -101,8 +101,8 @@ export const GameField: React.FC<IGameFieldProps> = ({
                         GameConstants.PERFECT_ONE * LVLs[lvlNumber].map.length,
                     )}px`,
                     width: `${Math.floor(
-                        GameConstants.PERFECT_ONE
-                            * LVLs[lvlNumber].map[0].length,
+                        GameConstants.PERFECT_ONE *
+                            LVLs[lvlNumber].map[0].length,
                     )}px`,
                     border: '1px solid #111E6C',
                 }}

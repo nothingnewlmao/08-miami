@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { RoutePath } from 'RoutePath';
 
 import { setGameProps } from 'store/game/slice';
 
@@ -11,20 +12,26 @@ import * as Styled from './styled';
 export const LoadingPage: FC = () => {
     const history = useHistory();
 
+    const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(
             setGameProps({
                 lvlNum: 0,
-                richedKeys: {},
+                reachedKeys: {},
                 initPoint: LVLs[0].entryPointA,
             }),
         );
 
-        const timer = setTimeout(() => history.push('/game'), 2500);
+        setTimer(setTimeout(() => history.push(RoutePath.Game), 2500));
 
-        return () => clearTimeout(timer);
+        return () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+        };
     }, []);
 
     return (

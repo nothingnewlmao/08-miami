@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { teamLeaderboard, addLeaderboard } from 'api/leaderboardApi';
 import { AxiosResponse, AxiosError } from 'axios';
+import { RoutePath } from 'RoutePath';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
 import { isServer } from 'store/rootStore';
@@ -28,7 +29,7 @@ export const GamePage: FC = () => {
     const history = useHistory();
 
     if (isServer) {
-        history.push('/');
+        history.push(RoutePath.Home);
     }
 
     useEffect(() => {
@@ -76,7 +77,7 @@ export const GamePage: FC = () => {
     return (
         <Styled.Wrapper>
             <GameField
-                richedKeys={gameProps.richedKeys}
+                reachedKeys={gameProps.reachedKeys}
                 setScore={setScore}
                 lvlNumber={gameProps.lvlNum}
                 initPoint={gameProps.initPoint}

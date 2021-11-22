@@ -1,28 +1,27 @@
 import TObjectLiteral from 'types/TObjectLiteral';
 
 import { GameConstants } from '../contants';
-import { TLvlCreaser } from '../types';
 
 export class BallMovementChecker {
     map: string[];
 
-    constructor(map: string[], richedKeys: TObjectLiteral) {
+    constructor(map: string[], reachedKeys: TObjectLiteral) {
         this.map = map;
 
-        Object.entries(richedKeys).forEach(([key, value]) => {
+        Object.entries(reachedKeys).forEach(([key, value]) => {
             if (value) {
-                this.convertCurrentBlockType(key.toUpperCase());
+                this.toggleCurrentBlockType(key.toUpperCase());
             }
         });
     }
 
     public emptyBlocks = ['0', '-', '+'];
 
-    public filledBlock = ['1', 'a', 'b', 'c', 'A', 'B', 'C'];
+    public filledBlocks = ['1', 'a', 'b', 'c', 'A', 'B', 'C'];
 
-    checkNextLvlRiched(ballX: number, ballY: number): TLvlCreaser | null {
-        const ballCenterX = ballX + GameConstants.GAMER_DIAMETR / 2;
-        const ballCenterY = ballY + GameConstants.GAMER_DIAMETR / 2;
+    checkNextLvlReached(ballX: number, ballY: number): string | false {
+        const ballCenterX = ballX + GameConstants.PLAYER_DIAMETER / 2;
+        const ballCenterY = ballY + GameConstants.PLAYER_DIAMETER / 2;
 
         const blockX = Math.floor(ballCenterX / GameConstants.PERFECT_ONE);
         const blockY = Math.floor(ballCenterY / GameConstants.PERFECT_ONE);
@@ -33,12 +32,12 @@ export class BallMovementChecker {
             return blockValue;
         }
 
-        return null;
+        return false;
     }
 
     getBlockUnderBallValue(ballX: number, ballY: number): string {
-        const ballCenterX = ballX + GameConstants.GAMER_DIAMETR / 2;
-        const ballCenterY = ballY + GameConstants.GAMER_DIAMETR;
+        const ballCenterX = ballX + GameConstants.PLAYER_DIAMETER / 2;
+        const ballCenterY = ballY + GameConstants.PLAYER_DIAMETER;
 
         const blockX = Math.floor(ballCenterX / GameConstants.PERFECT_ONE);
         const blockY = Math.floor(ballCenterY / GameConstants.PERFECT_ONE);
@@ -50,74 +49,67 @@ export class BallMovementChecker {
         ballX: number,
         ballY: number,
         velY: number,
-    ): string | null {
+    ): string | false {
         const blockValue = this.getBlockUnderBallValue(
             ballX,
-            ballY + GameConstants.GAMER_DIAMETR / 4,
+            ballY + GameConstants.PLAYER_DIAMETER / 4,
         );
 
         if (
-            blockValue.toLowerCase() !== blockValue.toUpperCase()
-            && blockValue.toLowerCase() === blockValue
-            && Number.isNaN(parseInt(blockValue, 10))
-            && velY !== 0
+            blockValue.toLowerCase() !== blockValue.toUpperCase() &&
+            blockValue.toLowerCase() === blockValue &&
+            Number.isNaN(parseInt(blockValue, 10)) &&
+            velY !== 0
         ) {
-            this.convertCurrentBlockType(blockValue.toLocaleUpperCase());
+            this.toggleCurrentBlockType(blockValue.toLocaleUpperCase());
 
             return blockValue;
         }
 
-        return null;
+        return false;
     }
 
-    isBallCanFall(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+    ballCanFall(ballX: number, ballY: number): boolean {
+        const { x, y } = this.normalize2D(ballX, ballY);
 
-        const ballBottomY = ballY + GameConstants.GAMER_DIAMETR;
+        const ballBottomY = y + GameConstants.PLAYER_DIAMETER;
         const yLvl1 = Math.floor((ballBottomY + 3) / GameConstants.PERFECT_ONE);
 
-        const leftBlockX = Math.floor(ballX / GameConstants.PERFECT_ONE);
+        const leftBlockX = Math.floor(x / GameConstants.PERFECT_ONE);
         const rightBlockX = Math.floor(
-            (ballX + GameConstants.GAMER_DIAMETR) / GameConstants.PERFECT_ONE,
+            (x + GameConstants.PLAYER_DIAMETER) / GameConstants.PERFECT_ONE,
         );
 
-        const result = this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX))
-            && this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
+        const result =
+            this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX)) &&
+            this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
 
         return result;
     }
 
     isBallCanJump(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+        const { x, y } = this.normalize2D(ballX, ballY);
 
-        const yLvl1 = Math.floor(ballY / GameConstants.PERFECT_ONE) - 1;
+        const yLvl1 = Math.floor(y / GameConstants.PERFECT_ONE) - 1;
 
-        const leftBlockX = Math.floor(ballX / GameConstants.PERFECT_ONE);
+        const leftBlockX = Math.floor(x / GameConstants.PERFECT_ONE);
         const rightBlockX = Math.floor(
-            (ballX + GameConstants.GAMER_DIAMETR) / GameConstants.PERFECT_ONE,
+            (x + GameConstants.PLAYER_DIAMETER) / GameConstants.PERFECT_ONE,
         );
 
-        const result = this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX))
-            && this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
+        const result =
+            this.emptyBlocks.includes(this.map[yLvl1].charAt(leftBlockX)) &&
+            this.emptyBlocks.includes(this.map[yLvl1].charAt(rightBlockX));
 
         return result;
     }
 
     isBallStuckInTopWall(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+        const { x, y } = this.normalize2D(ballX, ballY);
 
-        const underBallBlockY = Math.floor(ballY / GameConstants.PERFECT_ONE) - 1;
+        const underBallBlockY = Math.floor(y / GameConstants.PERFECT_ONE) - 1;
 
-        const underBallBlockX = Math.floor(ballX / GameConstants.PERFECT_ONE);
+        const underBallBlockX = Math.floor(x / GameConstants.PERFECT_ONE);
 
         const result = !this.emptyBlocks.includes(
             this.map[underBallBlockY].charAt(underBallBlockX),
@@ -127,17 +119,13 @@ export class BallMovementChecker {
     }
 
     isBallCanGoLeft(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+        const { x, y } = this.normalize2D(ballX, ballY);
 
         const ballMiddleY = Math.round(
-            (ballY + GameConstants.GAMER_DIAMETR / 3)
-                / GameConstants.PERFECT_ONE,
+            (y + GameConstants.PLAYER_DIAMETER / 3) / GameConstants.PERFECT_ONE,
         );
 
-        const leftBallX = Math.ceil((ballX - 3) / GameConstants.PERFECT_ONE) - 1;
+        const leftBallX = Math.ceil((x - 3) / GameConstants.PERFECT_ONE) - 1;
 
         const result = this.emptyBlocks.includes(
             this.map[ballMiddleY].charAt(leftBallX),
@@ -147,14 +135,11 @@ export class BallMovementChecker {
     }
 
     isBallStuckInLeftWall(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+        const { x, y } = this.normalize2D(ballX, ballY);
 
-        const ballCurrentBlockY = Math.floor(ballY / GameConstants.PERFECT_ONE);
+        const ballCurrentBlockY = Math.floor(y / GameConstants.PERFECT_ONE);
 
-        const ballCurrentBlockX = Math.floor(ballX / GameConstants.PERFECT_ONE);
+        const ballCurrentBlockX = Math.floor(x / GameConstants.PERFECT_ONE);
 
         const result = !this.emptyBlocks.includes(
             this.map[ballCurrentBlockY].charAt(ballCurrentBlockX),
@@ -164,20 +149,17 @@ export class BallMovementChecker {
     }
 
     isBallCanGoRight(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+        const { x, y } = this.normalize2D(ballX, ballY);
 
         const ballMiddleY = Math.round(
-            (ballY + GameConstants.GAMER_DIAMETR / 3)
-                / GameConstants.PERFECT_ONE,
+            (y + GameConstants.PLAYER_DIAMETER / 3) / GameConstants.PERFECT_ONE,
         );
 
-        const rightBallX = Math.ceil(
-            (ballX + GameConstants.GAMER_DIAMETR + 3)
-                    / GameConstants.PERFECT_ONE,
-        ) - 1;
+        const rightBallX =
+            Math.ceil(
+                (x + GameConstants.PLAYER_DIAMETER + 3) /
+                    GameConstants.PERFECT_ONE,
+            ) - 1;
 
         const result = this.emptyBlocks.includes(
             this.map[ballMiddleY].charAt(rightBallX),
@@ -187,15 +169,12 @@ export class BallMovementChecker {
     }
 
     isBallStuckInRightWall(ballX: number, ballY: number): boolean {
-        // eslint-disable-next-line no-param-reassign
-        ballX = Math.round(ballX * 100000000) / 100000000;
-        // eslint-disable-next-line no-param-reassign
-        ballY = Math.round(ballY * 100000000) / 100000000;
+        const { x, y } = this.normalize2D(ballX, ballY);
 
-        const ballCurrentBlockY = Math.floor(ballY / GameConstants.PERFECT_ONE);
+        const ballCurrentBlockY = Math.floor(y / GameConstants.PERFECT_ONE);
 
         const ballCurrentBlockX = Math.floor(
-            (ballX + GameConstants.GAMER_DIAMETR) / GameConstants.PERFECT_ONE,
+            (x + GameConstants.PLAYER_DIAMETER) / GameConstants.PERFECT_ONE,
         );
 
         const result = !this.emptyBlocks.includes(
@@ -205,17 +184,29 @@ export class BallMovementChecker {
         return result;
     }
 
-    private convertCurrentBlockType(blockSymbol: string): void {
+    private toggleCurrentBlockType(blockSymbol: string): void {
         if (this.emptyBlocks.includes(blockSymbol)) {
             this.emptyBlocks = this.emptyBlocks.filter(
                 (i) => i !== blockSymbol,
             );
-            this.filledBlock.push(blockSymbol);
+            this.filledBlocks.push(blockSymbol);
         } else {
-            this.filledBlock = this.filledBlock.filter(
+            this.filledBlocks = this.filledBlocks.filter(
                 (i) => i !== blockSymbol,
             );
             this.emptyBlocks.push(blockSymbol);
         }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    private normalizeCoordinate(z: number): number {
+        return Math.round(z * 100000000) / 100000000;
+    }
+
+    private normalize2D(x: number, y: number): { x: number; y: number } {
+        return {
+            x: this.normalizeCoordinate(x),
+            y: this.normalizeCoordinate(y),
+        };
     }
 }

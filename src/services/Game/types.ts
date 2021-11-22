@@ -12,11 +12,14 @@ export interface IPoint {
     y: number;
 }
 
-export type TLvlCreaser = '+' | '-';
+export enum LvlCreaser {
+    Back = '-',
+    Forward = '+',
+}
 
 export type TLvlOuterCallback = (
     lvlNum: number,
-    richedKeys: TObjectLiteral,
+    reachedKeys: TObjectLiteral,
     newInitPoint: IPoint,
 ) => void;
 
@@ -26,12 +29,12 @@ export interface IGameProps {
     lvlOuterCallback: TLvlOuterCallback;
     lvlNum: number;
     setScore: (score: number) => void;
-    richedKeys: TObjectLiteral;
+    reachedKeys: TObjectLiteral;
     gameHeight: number;
     gameWidth: number;
 }
 
 export interface IGameSessionProps {
     lvlNum: number;
-    richedKeys: TObjectLiteral;
+    reachedKeys: TObjectLiteral;
 }

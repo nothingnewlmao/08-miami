@@ -2,8 +2,8 @@ import TObjectLiteral from 'types/TObjectLiteral';
 
 import { BallMovementChecker } from './services/BallMovementChecker';
 import {
-    MAX_GAMER_SPEED,
-    GAMER_RAD,
+    MAX_PLAYER_SPEED,
+    PLAYER_RAD,
     FALLING_COEF,
     FADING_COEF,
     LEFT_RIGHT_SPEED_BUST,
@@ -19,7 +19,7 @@ import {
     ISides,
     IGameProps,
     TLvlOuterCallback,
-    TLvlCreaser,
+    LvlCreaser,
 } from './types';
 
 export class Game {
@@ -39,7 +39,7 @@ export class Game {
 
     private canvasSides: ISides;
 
-    private richedKeys: TObjectLiteral;
+    private reachedKeys: TObjectLiteral;
 
     private lvlNum: number;
 
@@ -59,19 +59,17 @@ export class Game {
         lvlOuterCallback,
         setScore,
         lvlNum,
-        richedKeys,
+        reachedKeys,
         gameHeight,
         gameWidth,
     }: IGameProps) {
         const context = canvasRef.getContext('2d');
 
-        console.log('new game');
-
         this.setScore = setScore;
 
         this.lvlOuterCallback = lvlOuterCallback;
 
-        this.richedKeys = { ...richedKeys };
+        this.reachedKeys = { ...reachedKeys };
 
         this.lvlNum = lvlNum;
 
@@ -92,7 +90,8 @@ export class Game {
             right: gameWidth,
         };
 
-        const keydownCallback = (e: KeyboardEvent) => this.keys.set(e.key, true);
+        const keydownCallback = (e: KeyboardEvent) =>
+            this.keys.set(e.key, true);
 
         const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
@@ -108,7 +107,7 @@ export class Game {
 
         this.ballMovementChecker = new BallMovementChecker(
             LVLs[lvlNum].map,
-            richedKeys,
+            reachedKeys,
         );
     }
 
@@ -116,15 +115,19 @@ export class Game {
         this.animate();
     }
 
-    moveToNextLvl(gateSymbol: TLvlCreaser) {
+    moveToNextLvl(gateSymbol: string) {
         cancelAnimationFrame(this.animationCallbackId);
-        const moveValue = gateSymbol === '+' ? 1 : -1;
-        const initPoint = gateSymbol === '+'
-            ? LVLs[this.lvlNum + moveValue].entryPointA
-            : LVLs[this.lvlNum + moveValue].entryPointB;
+
+        const moveValue = gateSymbol === LvlCreaser.Forward ? 1 : -1;
+
+        const initPoint =
+            gateSymbol === LvlCreaser.Forward
+                ? LVLs[this.lvlNum + moveValue].entryPointA
+                : LVLs[this.lvlNum + moveValue].entryPointB;
+
         this.lvlOuterCallback(
             this.lvlNum + moveValue,
-            this.richedKeys,
+            this.reachedKeys,
             initPoint,
         );
     }
@@ -134,16 +137,11 @@ export class Game {
             this.animate.bind(this),
         );
 
-        const {
-            top, right, bottom, left,
-        } = this.canvasSides;
+        const { top, right, bottom, left } = this.canvasSides;
 
         const { x: ballX, y: ballY } = this.ballPosition;
 
-        const isBallCanFall = this.ballMovementChecker.isBallCanFall(
-            ballX,
-            ballY,
-        );
+        const ballCanFall = this.ballMovementChecker.ballCanFall(ballX, ballY);
 
         const isBallCanGoLeft = this.ballMovementChecker.isBallCanGoLeft(
             ballX,
@@ -155,58 +153,57 @@ export class Game {
             ballY,
         );
 
-        const isNextLvlRiched = this.ballMovementChecker.checkNextLvlRiched(
+        const isNextLvlReached = this.ballMovementChecker.checkNextLvlReached(
             ballX,
             ballY,
         );
 
-        if (isNextLvlRiched !== null) {
-            this.moveToNextLvl(isNextLvlRiched);
+        if (isNextLvlReached !== null) {
+            this.moveToNextLvl(isNextLvlReached);
         }
 
         if (
-            this.velY < MAX_GAMER_SPEED
-            && this.jumpBust === 0
-            && isBallCanFall
+            this.velY < MAX_PLAYER_SPEED &&
+            this.jumpBust === 0 &&
+            ballCanFall
         ) {
             this.velY += 2;
         }
 
         if (this.keys.get('ArrowRight') || this.keys.get('d')) {
-            if (this.velX < MAX_GAMER_SPEED) {
+            if (this.velX < MAX_PLAYER_SPEED) {
                 this.velX += +LEFT_RIGHT_SPEED_BUST;
             }
         }
 
         if (this.keys.get('ArrowUp') || this.keys.get('w')) {
-            if (this.ballMovementChecker.isBallCanJump(ballX, ballY)) {
-                if (
-                    this.velY >= 0
-                    && this.velY > -MAX_GAMER_SPEED
-                    && this.jumpBust === 0
-                    && !isBallCanFall
-                ) {
-                    this.velY = -JUMP_VELOCITY;
-                    this.jumpBust = JUMP_BUST_LIMIT;
-                }
+            if (
+                this.ballMovementChecker.isBallCanJump(ballX, ballY) &&
+                this.velY >= 0 &&
+                this.velY > -MAX_PLAYER_SPEED &&
+                this.jumpBust === 0 &&
+                !ballCanFall
+            ) {
+                this.velY = -JUMP_VELOCITY;
+                this.jumpBust = JUMP_BUST_LIMIT;
             }
         }
 
         if (this.keys.get('ArrowLeft') || this.keys.get('a')) {
-            if (this.velX > -MAX_GAMER_SPEED) {
+            if (this.velX > -MAX_PLAYER_SPEED) {
                 this.velX -= LEFT_RIGHT_SPEED_BUST;
             }
         }
 
         if (this.jumpBust > 0) {
             this.jumpBust -= 1;
-            this.ballPosition.y
-                -= Math.abs(this.velY)
-                * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+            this.ballPosition.y -=
+                Math.abs(this.velY) *
+                (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
             if (this.ballMovementChecker.isBallStuckInTopWall(ballX, ballY)) {
-                this.ballPosition.y
-                    += Math.abs(this.velY)
-                    * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+                this.ballPosition.y +=
+                    Math.abs(this.velY) *
+                    (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
                 this.jumpBust = 0;
                 this.velY = 1.5;
             }
@@ -217,10 +214,11 @@ export class Game {
                 this.velY,
             );
             if (pressedBlock !== null) {
-                if (typeof this.richedKeys[pressedBlock] === 'undefined') {
-                    this.richedKeys[pressedBlock] = true;
+                if (typeof this.reachedKeys[pressedBlock] === 'undefined') {
+                    this.reachedKeys[pressedBlock] = true;
                 } else {
-                    this.richedKeys[pressedBlock] = !this.richedKeys[pressedBlock];
+                    this.reachedKeys[pressedBlock] =
+                        !this.reachedKeys[pressedBlock];
                 }
             }
 
@@ -242,8 +240,8 @@ export class Game {
                 this.ballPosition.x += 2 * this.velX;
             } else {
                 this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
-                        * GameConstants.PERFECT_ONE,
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
+                        GameConstants.PERFECT_ONE,
                 );
             }
         } else if (!isBallCanGoLeft) {
@@ -252,25 +250,24 @@ export class Game {
                 this.ballPosition.x += 2 * this.velX;
             } else {
                 this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
-                        * GameConstants.PERFECT_ONE,
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
+                        GameConstants.PERFECT_ONE,
                 );
             }
         }
 
-        if (!isBallCanFall && this.velY < 0.0000001) {
-            this.ballPosition.y = Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE)
-                    * GameConstants.PERFECT_ONE
-                + GameConstants.PERFECT_ONE
-                - 2 * GAMER_RAD;
+        if (!ballCanFall && this.velY < 0.0000001) {
+            this.ballPosition.y =
+                Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE) *
+                    GameConstants.PERFECT_ONE +
+                GameConstants.PERFECT_ONE -
+                2 * PLAYER_RAD;
         }
 
         this.ctx.clearRect(left, top, right - left, bottom - top);
         this.objectsDrawer.drawBackground(this.canvasSides);
 
-        // this.drawPortal();
-
-        this.objectsDrawer.drawMap(this.richedKeys);
+        this.objectsDrawer.drawMap(this.reachedKeys);
         this.objectsDrawer.drawBall(this.ballPosition);
     }
 }
