@@ -9,8 +9,6 @@ services:
         depends_on:
             - postrgres
         env_file: ./.env
-        volumes:
-            - ./dist:/var/www/dist
         restart: always
         networks:
             - awesome

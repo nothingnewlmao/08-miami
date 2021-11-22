@@ -9,7 +9,7 @@ import { BaseButton } from 'ui/components';
 
 import { UIForm } from 'uicomponents/Form';
 
-import { dispatchOrmUserActions } from 'models/User/actions';
+import { dispatchOrmUserActions } from 'models/User/controllers';
 
 import validationSchema from './validationSchema';
 
