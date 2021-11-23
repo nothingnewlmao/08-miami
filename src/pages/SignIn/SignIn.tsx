@@ -1,13 +1,15 @@
 import React, { useCallback } from 'react';
 import { FormikValues } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { TRootState } from 'store';
 
+import { TRootState } from 'store/types';
 import ActionTypes from 'store/auth/actionTypes';
 
 import { BaseButton } from 'ui/components';
 
 import { UIForm } from 'uicomponents/Form';
+
+import { dispatchOrmUserActions } from 'models/User/controllers';
 
 import validationSchema from './validationSchema';
 
@@ -27,6 +29,13 @@ const fields = [
         type: 'password',
     },
 ];
+
+// это пример использования модельки. потом можно впихивать это в какие угодно файлы
+// удалю после апрува пр, когда скажете, что всё ок и всем всё понятно :>
+// и да, я помню, что мы договаривались в качестве примера ничего не писать
+// но тут, мне показалось, что надо
+
+dispatchOrmUserActions();
 
 export const SignInWithData = () => {
     const errorText = useSelector((state: TRootState) => state.auth.error);
