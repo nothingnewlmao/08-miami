@@ -10,6 +10,8 @@ import {
 } from 'store/auth/sagas';
 import { changeInfoSaga, changePasswordSaga } from 'store/userProfile/sagas';
 
+import { updateGameProps } from './game/sagas';
+
 export default function* rootSaga() {
     yield all([
         signInSaga(),
@@ -20,5 +22,6 @@ export default function* rootSaga() {
         currentUserSaga(),
         oAuthSignInSaga(),
         getTokenSaga(),
+        updateGameProps(),
     ]);
 }
