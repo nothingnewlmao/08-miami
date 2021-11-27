@@ -6,6 +6,7 @@ import { AxiosResponse, AxiosError } from 'axios';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
 import { gameStateSelector } from 'store/game/selectors';
+import { isServer } from 'store/rootStore';
 
 import { GameField } from 'components/GameField/GameField';
 import { GameHelper } from 'components/GameHelper/GameHelper';
@@ -23,6 +24,8 @@ export const GamePage: FC = () => {
 
     const [helperOpened, setHelperState] = useState(false);
 
+    const [fullscreenOpened, setFullscreenState] = useState(false);
+
     const gameProps = useSelector(gameStateSelector);
 
     const user = useSelector(selectCurrentUser);
@@ -38,6 +41,18 @@ export const GamePage: FC = () => {
 
         return () => backgroundMusic.stop();
     }, []);
+
+    const toggleFullscreen = () => {
+        if (!isServer) {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                setFullscreenState(true);
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+                setFullscreenState(false);
+            }
+        }
+    };
 
     useEffect(() => {
         teamLeaderboard()
@@ -91,8 +106,11 @@ export const GamePage: FC = () => {
                 <BaseButton onClick={() => backgroundMusic.toggleMusic()}>
                     Вкл/выкл музыку
                 </BaseButton>
-                <BaseButton onClick={() => setHelperState(true)}>
-                    Открыть подсказки
+                <BaseButton onClick={() => setHelperState(!helperOpened)}>
+                    {helperOpened ? 'Закрыть' : 'Открыть'} подсказки
+                </BaseButton>
+                <BaseButton onClick={() => toggleFullscreen()}>
+                    {!fullscreenOpened ? 'На весь экран' : 'Свернуть'}
                 </BaseButton>
             </Styled.GamePanel>
             <Styled.Timer>{score} points</Styled.Timer>

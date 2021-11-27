@@ -95,8 +95,7 @@ export class Game {
             right: gameWidth,
         };
 
-        const keydownCallback = (e: KeyboardEvent) =>
-            this.keys.set(e.key, true);
+        const keydownCallback = (e: KeyboardEvent) => this.keys.set(e.key, true);
 
         const keyupCallback = (e: KeyboardEvent) => this.keys.set(e.key, false);
 
@@ -125,10 +124,9 @@ export class Game {
 
         const moveValue = gateSymbol === LvlCreaser.Forward ? 1 : -1;
 
-        const initPoint =
-            gateSymbol === LvlCreaser.Forward
-                ? LVLs[this.lvlNum + moveValue].entryPointA
-                : LVLs[this.lvlNum + moveValue].entryPointB;
+        const initPoint = gateSymbol === LvlCreaser.Forward
+            ? LVLs[this.lvlNum + moveValue].entryPointA
+            : LVLs[this.lvlNum + moveValue].entryPointB;
 
         this.lvlOuterCallback(
             this.lvlNum + moveValue,
@@ -148,14 +146,15 @@ export class Game {
         const gamepad = navigator.getGamepads()[0];
 
         if (gamepad) {
-            gamepadMovementX =
-                Math.abs(gamepad?.axes[0]) > GAMEPAD_MOVEMENT_THRESHOLD
-                    ? gamepad?.axes[0]
-                    : null;
+            gamepadMovementX = Math.abs(gamepad?.axes[0]) > GAMEPAD_MOVEMENT_THRESHOLD
+                ? gamepad?.axes[0]
+                : null;
             gamepadJump = gamepad?.buttons[0].pressed;
         }
 
-        const { top, right, bottom, left } = this.canvasSides;
+        const {
+            top, right, bottom, left,
+        } = this.canvasSides;
 
         const { x: ballX, y: ballY } = this.ballPosition;
 
@@ -181,17 +180,17 @@ export class Game {
         }
 
         if (
-            this.velY < MAX_PLAYER_SPEED &&
-            this.jumpBust === 0 &&
-            ballCanFall
+            this.velY < MAX_PLAYER_SPEED
+            && this.jumpBust === 0
+            && ballCanFall
         ) {
             this.velY += 2;
         }
 
         if (
-            this.keys.get('ArrowRight') ||
-            this.keys.get('d') ||
-            (gamepadMovementX && gamepadMovementX > GAMEPAD_MOVEMENT_THRESHOLD)
+            this.keys.get('ArrowRight')
+            || this.keys.get('d')
+            || (gamepadMovementX && gamepadMovementX > GAMEPAD_MOVEMENT_THRESHOLD)
         ) {
             if (this.velX < MAX_PLAYER_SPEED) {
                 this.velX += +LEFT_RIGHT_SPEED_BUST;
@@ -200,11 +199,11 @@ export class Game {
 
         if (this.keys.get('ArrowUp') || this.keys.get('w') || gamepadJump) {
             if (
-                this.ballMovementChecker.isBallCanJump(ballX, ballY) &&
-                this.velY >= 0 &&
-                this.velY > -MAX_PLAYER_SPEED &&
-                this.jumpBust === 0 &&
-                !ballCanFall
+                this.ballMovementChecker.isBallCanJump(ballX, ballY)
+                && this.velY >= 0
+                && this.velY > -MAX_PLAYER_SPEED
+                && this.jumpBust === 0
+                && !ballCanFall
             ) {
                 this.velY = -JUMP_VELOCITY;
 
@@ -214,9 +213,9 @@ export class Game {
         }
 
         if (
-            this.keys.get('ArrowLeft') ||
-            this.keys.get('a') ||
-            (gamepadMovementX && gamepadMovementX < -GAMEPAD_MOVEMENT_THRESHOLD)
+            this.keys.get('ArrowLeft')
+            || this.keys.get('a')
+            || (gamepadMovementX && gamepadMovementX < -GAMEPAD_MOVEMENT_THRESHOLD)
         ) {
             if (this.velX > -MAX_PLAYER_SPEED) {
                 this.velX -= LEFT_RIGHT_SPEED_BUST;
@@ -235,8 +234,8 @@ export class Game {
                 this.ballPosition.x += 2 * this.velX;
             } else {
                 this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
-                        GameConstants.PERFECT_ONE,
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
+                        * GameConstants.PERFECT_ONE,
                 );
             }
         } else if (!isBallCanGoLeft) {
@@ -245,18 +244,17 @@ export class Game {
                 this.ballPosition.x += 2 * this.velX;
             } else {
                 this.ballPosition.x = Math.ceil(
-                    (this.ballPosition.x / GameConstants.PERFECT_ONE) *
-                        GameConstants.PERFECT_ONE,
+                    (this.ballPosition.x / GameConstants.PERFECT_ONE)
+                        * GameConstants.PERFECT_ONE,
                 );
             }
         }
 
         if (!ballCanFall && this.velY < 0.0000001) {
-            this.ballPosition.y =
-                Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE) *
-                    GameConstants.PERFECT_ONE +
-                GameConstants.PERFECT_ONE -
-                2 * PLAYER_RAD;
+            this.ballPosition.y = Math.floor(this.ballPosition.y / GameConstants.PERFECT_ONE)
+                    * GameConstants.PERFECT_ONE
+                + GameConstants.PERFECT_ONE
+                - 2 * PLAYER_RAD;
         }
 
         this.ctx.clearRect(left, top, right - left, bottom - top);
@@ -273,16 +271,16 @@ export class Game {
 
             // Двигаемся вверх причем, с каждым кадром медленнее,
             // т.к. jumpBust с каждым кдром меньше
-            this.ballPosition.y -=
-                Math.abs(this.velY) *
-                (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+            this.ballPosition.y
+                -= Math.abs(this.velY)
+                * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
 
             // Если пересекли блок сверху (застряли в нем)
             if (this.ballMovementChecker.isBallStuckInTopWall(ballX, ballY)) {
                 // Возвращаемся, чтобы не пересекать блок сверху
-                this.ballPosition.y +=
-                    Math.abs(this.velY) *
-                    (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
+                this.ballPosition.y
+                    += Math.abs(this.velY)
+                    * (this.jumpBust + JUMP_VELOCITY_MODIFICATOR);
 
                 // "заряд" прыжка обнуляем
                 this.jumpBust = 0;
@@ -300,8 +298,7 @@ export class Game {
                 if (typeof this.reachedKeys[pressedBlock] === 'undefined') {
                     this.reachedKeys[pressedBlock] = true;
                 } else {
-                    this.reachedKeys[pressedBlock] =
-                        !this.reachedKeys[pressedBlock];
+                    this.reachedKeys[pressedBlock] = !this.reachedKeys[pressedBlock];
                 }
             }
 
