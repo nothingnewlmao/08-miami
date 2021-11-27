@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { teamLeaderboard, addLeaderboard } from 'api/leaderboardApi';
 import { AxiosResponse, AxiosError } from 'axios';
+import { RoutePath } from 'RoutePath';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
 import { gameStateSelector } from 'store/game/selectors';
