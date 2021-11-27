@@ -1,15 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { teamLeaderboard, addLeaderboard } from 'api/leaderboardApi';
 import { AxiosResponse, AxiosError } from 'axios';
-import { RoutePath } from 'RoutePath';
 
 import { selectCurrentUser } from 'store/userProfile/selectors';
-import { isServer } from 'store/rootStore';
 import { gameStateSelector } from 'store/game/selectors';
 
 import { GameField } from 'components/GameField/GameField';
+import { GameHelper } from 'components/GameHelper/GameHelper';
 
 import { backgroundMusic } from 'services/BackgroundMusic/BackgroundMusic';
 
@@ -21,6 +20,8 @@ export const GamePage: FC = () => {
     const [score, setScore] = useState(0);
 
     const [oldPoints, setOldPoints] = useState(0);
+
+    const [helperOpened, setHelperState] = useState(false);
 
     const gameProps = useSelector(gameStateSelector);
 
@@ -82,15 +83,23 @@ export const GamePage: FC = () => {
                 lvlNumber={gameProps.lvlNum}
                 initPoint={gameProps.initPoint}
             />
+
             <Styled.GamePanel>
                 <BackButton size="s">
                     <Link to="/">На главную страницу</Link>
                 </BackButton>
                 <BaseButton onClick={() => backgroundMusic.toggleMusic()}>
-                    Toggle music
+                    Вкл/выкл музыку
                 </BaseButton>
-                <Styled.Timer>{score} points</Styled.Timer>
+                <BaseButton onClick={() => setHelperState(true)}>
+                    Открыть подсказки
+                </BaseButton>
             </Styled.GamePanel>
+            <Styled.Timer>{score} points</Styled.Timer>
+
+            {helperOpened && (
+                <GameHelper onClose={() => setHelperState(false)} />
+            )}
         </Styled.Wrapper>
     );
 };
