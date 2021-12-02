@@ -23,18 +23,22 @@ export async function getUsersByFirstName(firstName: string) {
 }
 
 export function dispatchOrmUserActions() {
-    dbConnect().then(async () => {
-        await createUser('Alex', 'Ivanov');
+    dbConnect()
+        .then(async () => {
+            await createUser('Alex', 'Ivanov');
 
-        const users = await getUsersByFirstName('Alex');
-        if (!users.length) {
-            throw new Error('Not found');
-        }
+            const users = await getUsersByFirstName('Alex');
+            if (!users.length) {
+                throw new Error('Not found');
+            }
 
-        const { id } = users[0];
-        await updateUserById(id, { firstName: 'Ivan', lastName: 'Ivanov' });
+            const { id } = users[0];
+            await updateUserById(id, { firstName: 'Ivan', lastName: 'Ivanov' });
 
-        const foundUser = await getUserById(id);
-        console.log('found user: ', foundUser);
-    });
+            const foundUser = await getUserById(id);
+            console.log('found user: ', foundUser);
+        })
+        .catch((e) => {
+            console.log(`creating user error: ${e}`);
+        });
 }
