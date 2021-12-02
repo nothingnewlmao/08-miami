@@ -1,27 +1,24 @@
 import * as express from 'express';
 
 import { dispatchOrmUserActions } from 'models/User/controllers';
+import { dispatchOrmMsgActions } from 'models/Message/controllers';
+import { dispatchOrmTopicActions } from 'models/Topic/controllers';
 
 const router = express.Router();
 
-router.get('/orm-actions', (_, res) => {
-    // это пример использования модельки. потом можно впихивать это в какие угодно файлы
-    // удалю после апрува пр, когда скажете, что всё ок и всем всё понятно :>
-    // и да, я помню, что мы договаривались в качестве примера ничего не писать
-    // но тут, мне показалось, что надо
-
-    // это пример использования модельки. потом можно впихивать это в какие угодно файлы
-    // удалю после апрува пр, когда скажете, что всё ок и всем всё понятно :>
-    // и да, я помню, что мы договаривались в качестве примера ничего не писать
-    // но тут, мне показалось, что надо
-
+router.get('/users', (_, res) => {
     dispatchOrmUserActions();
-
-    res.send("orm-actions' response");
+    res.send('users');
 });
 
 router.get('/topics', (_, res) => {
+    dispatchOrmTopicActions();
     res.send('topics');
+});
+
+router.get('/messages', (_, res) => {
+    dispatchOrmMsgActions();
+    res.send('messages');
 });
 
 export default router;
