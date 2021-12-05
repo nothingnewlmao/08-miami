@@ -9,6 +9,7 @@ interface ILinkProps {
 
 export interface IViewProps<V = keyof typeof buttonViews.light> {
     view?: V;
+    disa?: boolean;
 }
 export interface ISizeProps<S = keyof typeof sizes> {
     size?: S;

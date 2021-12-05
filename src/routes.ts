@@ -1,27 +1,33 @@
 import * as express from 'express';
 
-import { dispatchOrmUserActions } from 'models/User/controllers';
+import {
+    findTheme,
+    updateUserThemeById,
+} from 'models/UserTheme/controllers';
+import { createUser } from 'models/User/controllers';
 
 const router = express.Router();
 
-router.get('/orm-actions', (_, res) => {
-    // это пример использования модельки. потом можно впихивать это в какие угодно файлы
-    // удалю после апрува пр, когда скажете, что всё ок и всем всё понятно :>
-    // и да, я помню, что мы договаривались в качестве примера ничего не писать
-    // но тут, мне показалось, что надо
-
-    // это пример использования модельки. потом можно впихивать это в какие угодно файлы
-    // удалю после апрува пр, когда скажете, что всё ок и всем всё понятно :>
-    // и да, я помню, что мы договаривались в качестве примера ничего не писать
-    // но тут, мне показалось, что надо
-
-    dispatchOrmUserActions();
-
-    res.send("orm-actions' response");
+router.post('/user-theme', (req, res) => {
+    const data = req.body;
+    console.log(data);
+    findTheme(64).then((el) => res.json(el));
 });
 
-router.get('/topics', (_, res) => {
-    res.send('topics');
+router.post('/add-user', (req, res) => {
+    const data = req.body;
+    console.log('user', data);
+
+    createUser('Mr', 'Brown'); // { ...data }
+
+    res.sendStatus(200);
+});
+
+router.post('/change-theme', (req, res) => {
+    const data = req.body;
+    console.log(data);
+    updateUserThemeById(1, { theme: 'light' });
+    res.sendStatus(200);
 });
 
 export default router;

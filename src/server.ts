@@ -6,6 +6,7 @@ import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
 import routes from 'routes';
+import { dbConnect } from 'initSequelize';
 
 import config from '../webpack/client.config';
 
@@ -24,6 +25,10 @@ function getWebpackMiddlewares(): RequestHandler[] {
         hotMiddleware(compiler, { path: '/__webpack_hmr' }),
     ];
 }
+
+(async function () {
+    await dbConnect();
+}());
 
 const app = express();
 

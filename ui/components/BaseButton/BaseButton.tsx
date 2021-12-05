@@ -29,6 +29,15 @@ export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
     &:focus {
         outline: none;
     }
+    
+    &:disabled {
+        background-color: gray;
+    }
+
+    &:disabled:hover {
+        background-color: gray;
+        color: black;
+    }
 
     &:hover {
         cursor: pointer;

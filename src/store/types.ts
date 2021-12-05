@@ -17,5 +17,3 @@ export type TAppStore = Store & {
 };
 
 export type TRootState = ReturnType<typeof store.getState>;
-
-export type TStoreDispatch = typeof store.dispatch;
