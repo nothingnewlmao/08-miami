@@ -8,9 +8,10 @@ import gameReducer from 'store/game/slice';
 
 import { IState } from './types';
 
-export default (history: History) => combineReducers<IState>({
-    router: connectRouter(history),
-    user: userReducer,
-    auth: authReducer,
-    game: gameReducer,
-});
+export default (history: History) =>
+    combineReducers<IState>({
+        router: connectRouter(history),
+        user: userReducer,
+        auth: authReducer,
+        game: gameReducer,
+    });
