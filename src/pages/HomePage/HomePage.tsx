@@ -1,6 +1,4 @@
-import React, {
-    FC, useCallback,
-} from 'react';
+import React, { FC, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -36,8 +34,18 @@ export const HomePage: FC = () => {
             <Styled.Container>
                 <h2>Текущая тема</h2>
                 <ul>
-                    <BaseButton onClick={changeToLight} disabled={user ? user.theme === 'light' : false}>Светлая</BaseButton>
-                    <BaseButton onClick={changeToBlue} disabled={user ? user.theme === 'sea' : false}>Морская</BaseButton>
+                    <BaseButton
+                        onClick={changeToLight}
+                        disabled={user ? user.theme === 'light' : false}
+                    >
+                        Светлая
+                    </BaseButton>
+                    <BaseButton
+                        onClick={changeToBlue}
+                        disabled={user ? user.theme === 'sea' : false}
+                    >
+                        Морская
+                    </BaseButton>
                 </ul>
                 <Styled.MainTitle>Bounce: Returning</Styled.MainTitle>
                 <Styled.MenuButton>

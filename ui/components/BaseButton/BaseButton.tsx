@@ -29,7 +29,7 @@ export const StyledButton = styled.button<ITheme & IViewProps & ISizeProps>`
     &:focus {
         outline: none;
     }
-    
+
     &:disabled {
         background-color: gray;
     }

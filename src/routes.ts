@@ -1,9 +1,6 @@
 import * as express from 'express';
 
-import {
-    findTheme,
-    updateUserThemeById,
-} from 'models/UserTheme/controllers';
+import { findTheme, updateUserThemeById } from 'models/UserTheme/controllers';
 import { createUser } from 'models/User/controllers';
 
 const router = express.Router();

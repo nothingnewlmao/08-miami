@@ -4,7 +4,10 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 
-import { selectCurrentUser, selectUserPending } from 'store/userProfile/selectors';
+import {
+    selectCurrentUser,
+    selectUserPending,
+} from 'store/userProfile/selectors';
 import ActionTypes from 'store/auth/actionTypes';
 
 import { SignUpWithData } from 'pages/SignUp';

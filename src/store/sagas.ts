@@ -8,7 +8,11 @@ import {
     oAuthSignInSaga,
     getTokenSaga,
 } from 'store/auth/sagas';
-import { changeInfoSaga, changePasswordSaga, changeThemeSaga } from 'store/userProfile/sagas';
+import {
+    changeInfoSaga,
+    changePasswordSaga,
+    changeThemeSaga,
+} from 'store/userProfile/sagas';
 
 export default function* rootSaga() {
     yield all([

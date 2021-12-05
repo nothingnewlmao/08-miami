@@ -52,9 +52,19 @@ function* currentUserRequest() {
     try {
         const response: TObjectLiteral = yield call(AuthApi.getCurrentUser);
         console.log(response.data.id);
-        const theme: TObjectLiteral = yield call(AuthApi.getCurrentUserTheme, response.data.id);
+        const theme: TObjectLiteral = yield call(
+            AuthApi.getCurrentUserTheme,
+            response.data.id,
+        );
 
-        yield put(setUserData(mapApiUserToIUser({ ...response.data, theme: theme.data.theme })));
+        yield put(
+            setUserData(
+                mapApiUserToIUser({
+                    ...response.data,
+                    theme: theme.data.theme,
+                }),
+            ),
+        );
     } catch (e: any) {
         const { reason = null } = e.response.data;
 
