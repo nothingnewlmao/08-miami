@@ -1,29 +1,37 @@
 import * as express from 'express';
 
-import { findTheme, updateUserThemeById } from 'models/UserTheme/controllers';
+import {
+    createTheme,
+    findTheme,
+    updateUserThemeById,
+} from 'models/UserTheme/controllers';
 import { createUser } from 'models/User/controllers';
 
 const router = express.Router();
 
 router.post('/user-theme', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    findTheme(64).then((el) => res.json(el));
+    const { userid } = req.body;
+
+    findTheme(userid.toString())
+        .then((el) => res.json(el))
+        .catch(() => res.sendStatus(400));
 });
 
-router.post('/add-user', (req, res) => {
-    const data = req.body;
-    console.log('user', data);
+router.post('/add-user', async (req, res) => {
+    const { first_name, second_name, login, email, phone, identifier } =
+        req.body;
 
-    createUser('Mr', 'Brown'); // { ...data }
+    await createUser(first_name, second_name, login, email, phone, identifier);
+    await createTheme('light', identifier);
 
-    res.sendStatus(200);
+    await res.sendStatus(200);
 });
 
-router.post('/change-theme', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    updateUserThemeById(1, { theme: 'light' });
+router.post('/change-theme', async (req, res) => {
+    const { theme, id } = req.body;
+    const userTheme = await findTheme(id.toString());
+    console.log('hello', userTheme);
+    updateUserThemeById(userTheme!.id, { theme });
     res.sendStatus(200);
 });
 

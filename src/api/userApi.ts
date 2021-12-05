@@ -6,7 +6,6 @@ enum UserUrls {
     ChangePassword = 'user/password',
     ChangeInfo = 'user/profile',
     GetUser = 'user/',
-    GetUserTheme = 'user-theme/',
     ChangeTheme = 'change-theme/',
 }
 
@@ -19,15 +18,8 @@ class UserApi {
         axiosInstance.put(UserUrls.ChangeInfo, JSON.stringify(data));
     }
 
-    getUser(id: number) {
-        axiosInstance.get(`${UserUrls.GetUser}${id}`);
-    }
-
-    getUserTheme() {
-        axiosApiInstance.get(`${UserUrls.GetUserTheme}`);
-    }
-
-    changeTheme = (data: string) => axiosApiInstance.post(UserUrls.ChangeTheme, data);
+    changeTheme = (data: string) =>
+        axiosApiInstance.post(UserUrls.ChangeTheme, JSON.stringify(data));
 }
 
 export const userApi = new UserApi();

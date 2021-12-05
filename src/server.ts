@@ -1,5 +1,5 @@
 import path from 'path';
-
+var bodyParser = require('body-parser');
 import express, { RequestHandler } from 'express';
 import 'babel-polyfill';
 import webpack from 'webpack';
@@ -26,13 +26,10 @@ function getWebpackMiddlewares(): RequestHandler[] {
     ];
 }
 
-(async function () {
-    await dbConnect();
-}());
+dbConnect();
 
 const app = express();
-
-app.use('/api', routes);
+app.use(bodyParser.json()).use('/api', routes);
 
 // Отдаём статику приложения
 app.use(express.static(path.resolve(__dirname, '../dist')));

@@ -1,9 +1,19 @@
 import { User } from 'initSequelize';
 
-export async function createUser(firstName: string, lastName: string) {
-    return User.create({ firstName, lastName });
-}
-
-export async function getUserById(id: number) {
-    return User.findOne({ where: { id } });
+export async function createUser(
+    firstName: string,
+    secondName: string,
+    login: string,
+    email: string,
+    phone: string,
+    identifier: number,
+) {
+    return User.create({
+        firstName,
+        secondName,
+        login,
+        email,
+        phone,
+        identifier,
+    });
 }

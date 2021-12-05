@@ -18,7 +18,10 @@ export const HomePage: FC = () => {
             type: ActionTypes.ChangeInfo,
             payload: { ...user, theme: 'light' },
         });
-        dispatch({ type: ActionTypes.ChangeTheme, payload: 'light' });
+        dispatch({
+            type: ActionTypes.ChangeTheme,
+            payload: { ...user, theme: 'light' },
+        });
     }, [dispatch]);
 
     const changeToBlue = useCallback(() => {
@@ -26,27 +29,15 @@ export const HomePage: FC = () => {
             type: ActionTypes.ChangeInfo,
             payload: { ...user, theme: 'sea' },
         });
-        dispatch({ type: ActionTypes.ChangeTheme, payload: 'sea' });
+        dispatch({
+            type: ActionTypes.ChangeTheme,
+            payload: { ...user, theme: 'sea' },
+        });
     }, [dispatch]);
 
     return (
         <Styled.Wrapper>
             <Styled.Container>
-                <h2>Текущая тема</h2>
-                <ul>
-                    <BaseButton
-                        onClick={changeToLight}
-                        disabled={user ? user.theme === 'light' : false}
-                    >
-                        Светлая
-                    </BaseButton>
-                    <BaseButton
-                        onClick={changeToBlue}
-                        disabled={user ? user.theme === 'sea' : false}
-                    >
-                        Морская
-                    </BaseButton>
-                </ul>
                 <Styled.MainTitle>Bounce: Returning</Styled.MainTitle>
                 <Styled.MenuButton>
                     <Link to="/loading">Играть</Link>
@@ -60,6 +51,21 @@ export const HomePage: FC = () => {
                 <Styled.MenuButton>
                     <Link to="/forum">Форум</Link>
                 </Styled.MenuButton>
+                <h5>Выбор темы</h5>
+                <Styled.ThemeWrapper>
+                    <Styled.Button
+                        onClick={changeToLight}
+                        disabled={user ? user.theme === 'light' : false}
+                    >
+                        Светлая
+                    </Styled.Button>
+                    <Styled.Button
+                        onClick={changeToBlue}
+                        disabled={user ? user.theme === 'sea' : false}
+                    >
+                        Морская
+                    </Styled.Button>
+                </Styled.ThemeWrapper>
             </Styled.Container>
         </Styled.Wrapper>
     );

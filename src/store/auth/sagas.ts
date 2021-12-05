@@ -52,7 +52,7 @@ function* currentUserRequest() {
 
     try {
         const response: TObjectLiteral = yield call(AuthApi.getCurrentUser);
-        console.log(response.data.id);
+
         const theme: TObjectLiteral = yield call(
             AuthApi.getCurrentUserTheme,
             response.data.id,
@@ -82,12 +82,15 @@ function* signUpRequest(action: any) {
     const { payload } = action;
 
     try {
-        yield call(AuthApi.signUp, payload);
-
+        const response: TObjectLiteral = yield call(AuthApi.signUp, payload);
         yield put(signUpLoaded());
 
         yield call(currentUserRequest);
-        yield call(AuthApi.addCurrentUserToDb, { ...payload, theme: 'light' });
+        yield call(AuthApi.addCurrentUserToDb, {
+            ...payload,
+            theme: 'light',
+            identifier: response.data.id,
+        });
 
         yield call([history, history.push], RoutePath.Home);
     } catch (e: any) {

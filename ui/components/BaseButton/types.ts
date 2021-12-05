@@ -19,6 +19,7 @@ interface ICustomProps extends ISizeProps, IViewProps {}
 
 export interface IAllContentProps extends ICustomProps {
     children?: React.ReactNode;
+    disabled: boolean;
 }
 
 export interface IButtonProps
